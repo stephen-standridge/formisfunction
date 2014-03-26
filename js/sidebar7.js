@@ -45,6 +45,9 @@ function animationHunter() {
 		this.makeAnimationObjects();
 		/*thanks, Phrogz*/
 	}
+	////make sure all this is now routed correctly////
+	////this will be necessary to actually create the object grouping structure.
+	////this will also be necessary to create the controller.
 	this.makeAnimationObjects = function() {
 		/* this function makes the animation Objects that the animation 
 		trigger refers to know what and when to fire every object
@@ -436,12 +439,13 @@ function createAnimation(func){
 	var animationTypes = {
 	///need this switch board to point to a function of creating the object, it doesn't now and
 	///new oneshot() creates 
-		'oneshot' : function(args) {new oneshot(args)},
-		'chained' : function(args) {new chained(args)},
-		'repeatable' : function(args) {new repeatable(args)}
+		'oneshot' : function(animationProperties) {return new oneshot(animationProperties)},
+		'chained' : function(animationProperties) {return new chained(animationProperties)},
+		'repeatable' : function(animationProperties) {return new repeatable(animationProperties)}
 	}
 	
-
+	///every time I have to use this pattern, it's because javascript is wrapping the 
+	///array of arguments in an object that's position 0 is an array. fucking javascript.
 	for(var argus in arguments[0]) {
 		args.add(argus, arguments[0][argus]);
 	}
@@ -453,31 +457,174 @@ function createAnimation(func){
 	var objectName = typeToSet.toString();
 
 	var object = animationTypes[objectName](args);
+	///success, victory is yours today. Now the objects correctly create themself
+	///with all arguments. The only tasks left for you down here are:
+	/////creating a group of functions to determine base values based on arguments
+	/////hooking up the validation to the object creation properly (with class methods!)
+	/////dividing the object into moving parts.
+	/////particularizing the arguments by comparing the children against the parent.
+	console.log(object);
 
 	return object;
 }
 
 	function TemporalPattern(temporalArgs) {
-		this.duration = 0;
-		this.currentStage = 0;
-		this.stages = 0;
-		this.animHandler = 'particular';
-		this.animSync = 'concerted';
-		this.order = 'forward';
-		this.permanence = 'persist';
-		this.division = 'linear';
-		this.repeat = 'none';
-		this.mix = 'default';
-		this.dom = null;
-		this.measures = 1;
+		this.actualArgs = new SpecialArray();
+		for(var argus in arguments[0]) {
+			this.actualArgs.add(argus, arguments[0][argus]);
+		}
+		this.duration = this.actualArgs.contains('duration') ? this.actualArgs['duration'][0] : 0;
+			this.actualArgs.remove('duration');
+		this.currentMeasure = this.actualArgs.contains('measureStart') ? this.actualArgs['measureStart'][0] : 0;
+			this.actualArgs.remove('measureStart');
+		this.measures = this.actualArgs.contains('measures') ? this.actualArgs['measures'][0] : 1;
+			this.actualArgs.remove('measures');
+		this.anim = this.actualArgs.contains('anim') ? this.actualArgs['anim'] : 'particular';
+			this.actualArgs.remove('anim');
+		this.sync = this.actualArgs.contains('sync') ? this.actualArgs['sync'][0] : 'concerted';
+			this.actualArgs.remove('sync');
+		this.order = this.actualArgs.contains('order') ? this.actualArgs['order'][0] : 'forward';
+			this.actualArgs.remove('order');
+		this.permanence = this.actualArgs.contains('permanence') ? this.actualArgs['permanence'][0] : 0;
+			this.actualArgs.remove('permanence');
+		this.division = this.actualArgs.contains('division') ? this.actualArgs['division'][0] : 'linear';
+			this.actualArgs.remove('division');
+		this.repeat = this.actualArgs.contains('repeat') ? this.actualArgs['repeat'][0] : 0;
+			this.actualArgs.remove('repeat');
+		this.dom = this.actualArgs.contains('dom') ? this.actualArgs['dom'] : null;
+			this.actualArgs.remove('dom');
 		this.active = false;
-		this.typeArgs = temporalArgs;
+		this.typeArgs = this.actualArgs;
 		///need to filter through all these presets then pass the rest to the individual animation///
 		///this will probably require shifting the validation from the oneshot to here////
 	}
 	
 		TemporalPattern.prototype.fire = function(){};
 		TemporalPattern.prototype.calculate = function(){};
+		TemporalPattern.prototype.gather = function(){
+			var typeElems = document.getElementsByClassName(this.type);
+    		var colorElems = document.getElementsByClassName(this.color);
+    		var returnedElems = [];
+    		var checkedElems = [];
+    		for (var j in colorElems) {
+        		checkedElems[colorElems[j]] = colorElems[j];
+      		}
+     		for (var i in typeElems) {
+        		if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
+        	    	if(this.lineId == false) {
+        	    		var tempClass = typeElems[i].className.baseVal.split(" ")[2];
+        	    		if(typeof returnedElems[tempClass] == 'undefined') {
+        	    	 	 returnedElems[tempClass] = [];
+        	    	 	 returnedElems[tempClass].push(typeElems[i]);
+        	    		}else {
+        	    	  	returnedElems[tempClass].push(typeElems[i]);
+        	    		}
+        	    	}else {
+        	    	  	returnedElems.push(typeElems[i]);
+        	    	}
+       			}
+     		}
+    		this.elems = returnedElems;
+		};
+		TemporalPattern.prototype.particularize = function(){
+		var lengths = [];
+			for(var paths in this.elems) {
+				////cycle through all the elements that are tagged to the animation///
+				///determine if each one is a path, a stop, or a shape///
+				///set particle variables thusly.
+				
+				if(this.elems[paths].tagName.toLowerCase() == 'path') {
+					///dot vs trail vs degradeable vs length
+					var length = this.elems[paths].getTotalLength();
+					lengths.push(length);
+					this.elems[paths].temporality = this.elems[paths].className.baseVal.split(" ")[1];
+					this.elems[paths].style.strokeDasharray = length + ' ' + length;
+					this.elems[paths].style.strokeDashoffset = length;
+					this.elems[paths].totallength = this.elems[paths].getTotalLength();
+					this.elems[paths].style.opacity = 1;
+				}else if(this.elems[paths].tagName.toLowerCase() == 'stop') {
+					
+				}
+				////these variables control the element's life from the animation type to the animation stage to how it degrades///
+				////should these values be set by their container or by the individual?///
+				////what happens when the delay types are granularly decided?///
+				////maybe have a class fallback or "if" statement controlling if the animation is granular or not////
+				////this would mean that the classname positioning would not be an accurate way to query this setting////
+				////data-type might be necessary////
+				this.elems[paths].degradeDelayType = this.elems[paths].className.baseVal.split(" ")[3];
+				this.elems[paths].degradeDurationType = this.elems[paths].className.baseVal.split(" ")[4];
+				this.elems[paths].finished = 'first'; 
+				this.elems[paths].halfLife;
+				this.elems[paths].getParticleDetails = function() {
+					this.tempSpecifications = this.className.baseVal.split(" ");
+					this.specifications = []
+					for(var specification in this.tempSpecifications) {
+						this.specifications[this.tempSpecification[specification].split("_")[0]].push(this.tempSpecification[specification].split("_")[1]);
+					}
+				}
+				this.elems[paths].setHalfLife = function(halfLifeTimeMaster, position, quantity) {
+					////problem: they don't know their delay.
+					///the most optimal solution will not have a 'delay' time
+					///it will switch the particle on or off at the right time.
+					///two times: delay (till start, not a count, an integer
+					///second time is duration
+					///this will allow for a "delay" or "simultaneous" "triplet" "alternate" "etc" approach to the animations
+					
+					///start time and duration////
+					 if(this.degradeType == 'parabolic') {
+					 		//parabolic disperse where delay = 0, all happen simultaneous and slow down
+					 				// collect where delay = master - duration
+					 				// centered where delay is half of collect duration
+					 				// intermitten where it is perpetually "on" delay = 'false'
+							var parabolaOne = 0;	
+							var parabolaTwo = 1;	
+							var parabolaThree = 2;
+						for(i = 0; i<position; i++) {
+	    					parabolaThree = parabolaOne + parabolaTwo;
+	    					parabolaOne = parabolaTwo;
+	    					parabolaTwo = parabolaThree;
+	    				}
+	    				this.halfLife = halfLifeTimeMaster/parabolaOne;
+						////this should be a simple formula that adds a self-contained timer to the element in an n=n+n function
+					}else if(this.degradeType == 'linear') {
+						///
+						////this should be a simple formula that sets the timer to an n = n + delay fashion.
+					}else if(this.degradeType == 'exponential') {
+						////this should be a simple n = n*n+delay fashion
+					if(this.degradeType == 'reverseLinear') {
+					
+					}else if(this.degradeType == 'reverseExponential') {
+					
+					}
+				}
+				this.elems[paths].check = function() {	
+					/* change required */
+					/// have to have a stage controller that does not rely on properties but on internal timings.
+					if(this.finished == 'first') {
+						var useable = parseInt(this.style.strokeDashoffset.substring(0, this.style.strokeDashoffset.length - 2));
+						if(useable < 0){
+							this.finished = 'second'; 
+						}
+					}else if(this.finished == 'second') {
+						if(this.opacity < 0) {
+							this.finished = 'third';
+						}
+					}else if(this.finished == 'third') {
+							
+					}
+				}
+				this.elems[paths].reset = function() {
+					if(this.tagName.toLowerCase() == 'path') {
+						this.style.strokeDashoffset = length;
+						this.style.opacity = 1;
+					}else if(this.tagName.toLowerCase() == 'stop') {
+					
+					}
+					this.finished = 'first';
+				}
+			}
+					
+			} };
 
 
 	oneshot.prototype = new TemporalPattern();
@@ -644,17 +791,11 @@ function createAnimation(func){
 
 	chained.prototype = new TemporalPattern();
 	function chained(chainedArguments){
-	this.duration = duration;
-	this.currentStage = 0;
 	this.prevStage = -1;
-	this.stages = stages;
-	this.stageLength = (this.duration/this.stages);
+	this.measureLength = 0; ///dependent on division type///
 	this.local_initial = new Date().getTime();
-	this.delay = delay;
-	this.active = active;
-	this.direction = direction;
-	this.color = color;
-	this.type = type;
+	this.delay = 0;///do I need delay?///
+	this.type = 'chained';
 	this.elems = [];
 	///the compost holds the previous stage of the animation, which allows it to deteriorate during the next stage
 	this.compost =[];
@@ -715,160 +856,25 @@ function createAnimation(func){
 	repeatable.prototype = new TemporalPattern();
 	function repeatable(repeatableArguments){
 		TemporalPattern.call(this, repeatableArguments);
-		console.log(this.duration);
 	///do a for var in args to get all properties///
 	///need to skip over helper methods/////////////
 	/////object properties/////
-		this.delay;
+		this.measureLength = 0; ///dependent on division type///
+		this.local_initial = new Date().getTime();
+		this.delay = 0;///do I need delay?///
+		this.type = 'repeatable';
  		this.local_initial = new Date().getTime();
-		this.type;
 		this.elems = [];
 		this.initialAsyncTimer = new Date().getTime()
-		this.currentAsync = Date.now() - this.initial;
+		this.currentAsync = Date.now() - this.initialAsyncTimer;
 		this.individTime = this.duration/this.elems.length;
- 		this.lineId;
  		
  		
     /////object methods//////
- 		this.gather = function() {
-    		var typeElems = document.getElementsByClassName(this.type);
-    		var colorElems = document.getElementsByClassName(this.color);
-    		var returnedElems = [];
-    		var checkedElems = [];
-    		for (var j in colorElems) {
-        		checkedElems[colorElems[j]] = colorElems[j];
-      		}
-     		for (var i in typeElems) {
-        		if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
-        	    	if(this.lineId == false) {
-        	    		var tempClass = typeElems[i].className.baseVal.split(" ")[2];
-        	    		if(typeof returnedElems[tempClass] == 'undefined') {
-        	    	 	 returnedElems[tempClass] = [];
-        	    	 	 returnedElems[tempClass].push(typeElems[i]);
-        	    		}else {
-        	    	  	returnedElems[tempClass].push(typeElems[i]);
-        	    		}
-        	    	}else {
-        	    	  	returnedElems.push(typeElems[i]);
-        	    	}
-       			}
-     		}
-    		this.elems = returnedElems;
-  		}
-  		this.checkElem = function(elementToCheck, arrayToCheck){
-  			for(var individual in arrayToCheck) {
-				if(arrayToCheck[individual] == elementToCheck) {
-					return true;
-				} else {
-					continue;
-				}
-			}
-		  }
-		this.particularize = function() {
-			var lengths = [];
-			for(var paths in this.elems) {
-				////cycle through all the elements that are tagged to the animation///
-				///determine if each one is a path, a stop, or a shape///
-				///set particle variables thusly.
-				
-				if(this.elems[paths].tagName.toLowerCase() == 'path') {
-					///dot vs trail vs degradeable vs length
-					var length = this.elems[paths].getTotalLength();
-					lengths.push(length);
-					this.elems[paths].temporality = this.elems[paths].className.baseVal.split(" ")[1];
-					this.elems[paths].style.strokeDasharray = length + ' ' + length;
-					this.elems[paths].style.strokeDashoffset = length;
-					this.elems[paths].totallength = this.elems[paths].getTotalLength();
-					this.elems[paths].style.opacity = 1;
-				}else if(this.elems[paths].tagName.toLowerCase() == 'stop') {
-					
-				}
-				////these variables control the element's life from the animation type to the animation stage to how it degrades///
-				////should these values be set by their container or by the individual?///
-				////what happens when the delay types are granularly decided?///
-				////maybe have a class fallback or "if" statement controlling if the animation is granular or not////
-				////this would mean that the classname positioning would not be an accurate way to query this setting////
-				////data-type might be necessary////
-				this.elems[paths].degradeDelayType = this.elems[paths].className.baseVal.split(" ")[3];
-				this.elems[paths].degradeDurationType = this.elems[paths].className.baseVal.split(" ")[4];
-				this.elems[paths].finished = 'first'; 
-				this.elems[paths].halfLife;
-				this.elems[paths].getParticleDetails = function() {
-					this.tempSpecifications = this.className.baseVal.split(" ");
-					this.specifications = []
-					for(var specification in this.tempSpecifications) {
-						this.specifications[this.tempSpecification[specification].split("_")[0]].push(this.tempSpecification[specification].split("_")[1]);
-					}
-				}
-				this.elems[paths].setHalfLife = function(halfLifeTimeMaster, position, quantity) {
-					////problem: they don't know their delay.
-					///the most optimal solution will not have a 'delay' time
-					///it will switch the particle on or off at the right time.
-					///two times: delay (till start, not a count, an integer
-					///second time is duration
-					///this will allow for a "delay" or "simultaneous" "triplet" "alternate" "etc" approach to the animations
-					
-					///start time and duration////
-					 if(this.degradeType == 'parabolic') {
-					 		//parabolic disperse where delay = 0, all happen simultaneous and slow down
-					 				// collect where delay = master - duration
-					 				// centered where delay is half of collect duration
-					 				// intermitten where it is perpetually "on" delay = 'false'
-							var parabolaOne = 0;	
-							var parabolaTwo = 1;	
-							var parabolaThree = 2;
-						for(i = 0; i<position; i++) {
-	    					parabolaThree = parabolaOne + parabolaTwo;
-	    					parabolaOne = parabolaTwo;
-	    					parabolaTwo = parabolaThree;
-	    				}
-	    				this.halfLife = halfLifeTimeMaster/parabolaOne;
-						////this should be a simple formula that adds a self-contained timer to the element in an n=n+n function
-					}else if(this.degradeType == 'linear') {
-						///
-						////this should be a simple formula that sets the timer to an n = n + delay fashion.
-					}else if(this.degradeType == 'exponential') {
-						////this should be a simple n = n*n+delay fashion
-					if(this.degradeType == 'reverseLinear') {
-					
-					}else if(this.degradeType == 'reverseExponential') {
-					
-					}
-				}
-				this.elems[paths].check = function() {	
-					/* change required */
-					/// have to have a stage controller that does not rely on properties but on internal timings.
-					if(this.finished == 'first') {
-						var useable = parseInt(this.style.strokeDashoffset.substring(0, this.style.strokeDashoffset.length - 2));
-						if(useable < 0){
-							this.finished = 'second'; 
-						}
-					}else if(this.finished == 'second') {
-						if(this.opacity < 0) {
-							this.finished = 'third';
-						}
-					}else if(this.finished == 'third') {
-							
-					}
-				}
-				this.elems[paths].reset = function() {
-					if(this.tagName.toLowerCase() == 'path') {
-						this.style.strokeDashoffset = length;
-						this.style.opacity = 1;
-					}else if(this.tagName.toLowerCase() == 'stop') {
-					
-					}
-					this.finished = 'first';
-				}
-			}
-					
-			} 
-			this.gatherElements = function() {
-				
-			}
+ 
 			
-	}	
-	}
+	};	
+	
 			repeatable.prototype.fire = function() {};
 			repeatable.prototype.calculate = function() {};
 	/*var repeatable = function(duration, delay, active, times, direction, lines, color, type) {
@@ -1536,21 +1542,19 @@ window.SpecialArray = (function() {
         var stringValue = Object.prototype.toString.call( value );
         return( stringValue.toLowerCase() === "[object array]" );
     };
-    SpecialArray.prototype = {
-    	add: function(key, value) {
-			this[key] = value;
-    	},
-    	contains: function (key) {
-    		for (var i = this.length; i--;) {
-       			 if (this[i] === key) return true;
+    SpecialArray.prototype.add =function(key, value) {this[key] = value;}
+    SpecialArray.prototype.contains =  function (key) {
+    		for (var i = Object.keys(this).length; i--;) {
+       			if (this[key] != undefined)  return true;
     		}
     		return false;
-    	},
-    	remove: function (key) {
-    		for (var i = this.length; i--;) {
-       			 if (this[i] === key) return this.splice(i, 1);
-    		}
     	}
+    SpecialArray.prototype.remove = function (key) {
+    		for (var i = Object.keys(this).length; i--;) {		
+       			 if (this[key] != undefined) {
+       			 	return this.splice(i, 1);
+       			 }
+    		}
     }
     return (SpecialArray);
 }).call( {} );
