@@ -1,104 +1,101 @@
 
 window.onload=function(){
 ///global variables////
-var masterWidth = window.innerWidth;
-var masterHeight = window.innerHeight;
-var meterOptions = {'animDeclare' : {}, 'animMix' : {}, 'type' : {}, 'duration' : {}, 'anim' : {}, 'sync' : {}, 'order' : {}, 'permanence' : {}, 'division' : {}};
-var gatheredAnimations = animationHunter();
-
-
-///set global variables/////
-initializeGradients();
-$("linearGradient .verticalG").attr('x1', masterHeight);
-function initializeGradients()
-{
-    var elements = document.getElementsByClassName("horizontalG");
-    for(var i = elements.length - 1; i >= 0; --i)
-    {
-        elements[i].setAttribute('x1', masterWidth+300);
-    }
-}
+	var masterWidth = window.innerWidth;
+	var masterHeight = window.innerHeight;
+	var meterOptions = {'animDeclare' : {}, 'animMix' : {}, 'type' : {}, 'duration' : {}, 'anim' : {}, 'sync' : {}, 'order' : {}, 'permanence' : {}, 'division' : {}};
+	var gatheredAnimations = animationHunter();
+	initializeGradients();
+	$("linearGradient .verticalG").attr('x1', masterHeight);
+	function initializeGradients()
+	{
+	    var elements = document.getElementsByClassName("horizontalG");
+	    for(var i = elements.length - 1; i >= 0; --i)
+	    {
+	        elements[i].setAttribute('x1', masterWidth+300);
+	    }
+	}
 
 ////////////////////////////////////////////
 //////Initialize Animations/////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////
-animationHunter.prototype = new Object;
-animationHunter.prototype.constructor = animationHunter;
-function animationHunter() {
-	///an unorganized array of unfiltered animation object
-	this.allAnimations = [];
-	
-	///an array object that is indexed by mix and points to created animation, use this to trigger/calculate///
-	this.namespaceGroup = [];
-	
-	///just a simple reference of all the mixes available used by the controller to calculate mix transitions
-	this.mixGroup = [];
-	this.mixGroup.push('default');
-	
-	///an array that points from the animation namespace to the different possible mixes(including default)
-	///for easy reference in the mix transition calculation
-	this.namespaces = [];
-	
-	
-	this.getAllAnimations = function() {
-		var animationRE = /^animDeclare_/;
-		var animations=[],els=document.getElementsByTagName('*');
-		for (var i=els.length;i--;) {
-			if (animationRE.test(els[i].id)){
-				animations.push(els[i]);
-			} 
-		} 
-		this.allAnimations =  animations;
-		this.makeAnimationObjects();
-		/*thanks, Phrogz*/
-	}
-	this.makeAnimationObjects = function() {
-		/* this function makes the animation Objects that the animation 
-		trigger refers to know what and when to fire every object
-		this object later will calculate all the time divisions,
-		sychronicity, and order of the animations */
-		var processedAnimations = [];
-			for(var anim in this.allAnimations) {
-				/*create key/value pairing of arguments/values gathered by the html classes
-				  this will be passed to the object constructor later */
-				var keyVals = this.allAnimations[anim].className.baseVal.split(" ");
-				var animationDomElement = this.allAnimations[anim];
-				var uneditedAnimationName = this.allAnimations[anim].id;
-				var animationName = uneditedAnimationName.split('_')[1];
-				var notEvenMyFinalForm = {'name' : animationName.split("+")[0].toString(), 'mix' : animationName.split("+")[1].toString(), 'specifications' : []};
-					notEvenMyFinalForm['specifications']['dom'] = animationDomElement;
-				for(var i in keyVals) {
-					var tempKey = keyVals[i].split("_")[0];
-					var tempVal = keyVals[i].split("_")[1];
-					////////////////////////////////////////////
-					//___________extensions go here___________//
-					////////////////////////////////////////////
-					
-					/*{I really don't think this is 
-					  the most optimal
-					  way to handle 
-					  this process, which I do use multiple times 
-					  in this digital poem
-			  
-					  perhaps I'll find another
-					  perhaps not
-			 
-					  I want to functionalize it
-			  		  but the scope of it scares me
-			  
-			  		hesitantly,
-			  		I present
-			  		the process: }*/
-					if(!(tempKey in notEvenMyFinalForm['specifications'])) {
-						notEvenMyFinalForm['specifications'][tempKey] = [];
-						notEvenMyFinalForm['specifications'][tempKey].push(tempVal);
-					} else {
-						notEvenMyFinalForm['specifications'][tempKey].push(tempVal);
-					}
-				}
+	animationHunter.prototype = new Object;
+	animationHunter.prototype.constructor = animationHunter;
+	function animationHunter() {
+		///an unorganized array of unfiltered animation object
+		this.allAnimations = [];
 		
-			/*{arguments she's ACTUALLY looking for
+		///an array object that is indexed by mix and points to created animation, use this to trigger/calculate///
+		this.namespaceGroup = [];
+		
+		///just a simple reference of all the mixes available used by the controller to calculate mix transitions
+		this.mixGroup = [];
+		this.mixGroup.push('default');
+		
+		///an array that points from the animation namespace to the different possible mixes(including default)
+		///for easy reference in the mix transition calculation
+		this.namespaces = [];
+		
+		
+		this.getAllAnimations = function() {
+			var animationRE = /^animDeclare_/;
+			var animations=[],els=document.getElementsByTagName('*');
+			for (var i=els.length;i--;) {
+				if (animationRE.test(els[i].id)){
+					animations.push(els[i]);
+				} 
+			} 
+			this.allAnimations =  animations;
+			this.makeAnimationObjects();
+			/*thanks, Phrogz*/
+		}
+		this.makeAnimationObjects = function() {
+			/* this function makes the animation Objects that the animation 
+			trigger refers to know what and when to fire every object
+			this object later will calculate all the time divisions,
+			sychronicity, and order of the animations */
+			var processedAnimations = [];
+				for(var anim in this.allAnimations) {
+					/*create key/value pairing of arguments/values gathered by the html classes
+					  this will be passed to the object constructor later */
+					var keyVals = this.allAnimations[anim].className.baseVal.split(" ");
+					var animationDomElement = this.allAnimations[anim];
+					var uneditedAnimationName = this.allAnimations[anim].id;
+					var animationName = uneditedAnimationName.split('_')[1];
+					var notEvenMyFinalForm = {'name' : animationName.split("+")[0].toString(), 'mix' : animationName.split("+")[1].toString(), 'specifications' : []};
+						notEvenMyFinalForm['specifications']['dom'] = animationDomElement;
+					for(var i in keyVals) {
+						var tempKey = keyVals[i].split("_")[0];
+						var tempVal = keyVals[i].split("_")[1];
+						////////////////////////////////////////////
+						//___________extensions go here___________//
+						////////////////////////////////////////////
+						
+						/*{I really don't think this is 
+						  the most optimal
+						  way to handle 
+						  this process, which I do use multiple times 
+						  in this digital poem
+				  
+						  perhaps I'll find another
+						  perhaps not
+				 
+						  I want to functionalize it
+				  		  but the scope of it scares me
+				  
+				  		hesitantly,
+				  		I present
+				  		the process: }*/
+						if(!(tempKey in notEvenMyFinalForm['specifications'])) {
+							notEvenMyFinalForm['specifications'][tempKey] = [];
+							notEvenMyFinalForm['specifications'][tempKey].push(tempVal);
+						} else {
+							notEvenMyFinalForm['specifications'][tempKey].push(tempVal);
+						}
+					}
+			
+				/*{arguments she's ACTUALLY looking for
 		  other arguments are nice
 		  but they'll confuse the hell 
 		  out of her modest functions
@@ -238,88 +235,87 @@ function animationHunter() {
 		  	cleanly to her... I mean, do you really want her to be doing all
 		  	the heavy lifting?}
 		  */
-			processedAnimations.push(notEvenMyFinalForm);
-		
-		}
-	
-		////give values to the constructor/////////
-		////////add to ticker//////////////////////
-		////send argument to the creation methods//
-		this.allAnimations = processedAnimations;
-		this.setNamespaceMix();
-		}
-	this.setNamespaceMix = function() {
-		
-		/* needs correct animation creation function... I was lazy*/
-		for(var individualAnimation in this.allAnimations) {
-			///formats the namespace group to be namespace[name][mix] = animation;
-			///adds the namespace to the namespace group to be referenced by the animation timer later.
-			if(!(this.allAnimations[individualAnimation]['name'] in this.namespaceGroup)){
-				this.namespaceGroup[this.allAnimations[individualAnimation]['name']] = [];
-				this.namespaces[this.allAnimations[individualAnimation]['name']] = [];
-				if(!(typeof this.allAnimations[individualAnimation]['mix'] == 'string')) {
-					this.namespaces[this.allAnimations[individualAnimation]['name']].push('default');
-					this.namespaceGroup[this.allAnimations[individualAnimation]['name']]['default'] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
-				} else {
-					this.namespaces[this.allAnimations[individualAnimation]['name']].push(this.allAnimations[individualAnimation]['mix']);
-					this.namespaceGroup[this.allAnimations[individualAnimation]['name']][this.allAnimations[individualAnimation]['mix']] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
-				}
-			} else {
-				if(!(typeof  this.allAnimations[individualAnimation]['mix'] =='string')) {
-					this.namespaces[this.allAnimations[individualAnimation]['name']].push('default');
-					this.namespaceGroup[this.allAnimations[individualAnimation]['name']]['default'] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
-				} else {
-					this.namespaces[this.allAnimations[individualAnimation]['name']].push(this.allAnimations[individualAnimation]['mix']);
-					this.namespaceGroup[this.allAnimations[individualAnimation]['name']][this.allAnimations[individualAnimation]['mix']] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
-				}
-			}
+				processedAnimations.push(notEvenMyFinalForm);
 			
-			if(!(this.allAnimations[individualAnimation]['mix'] in this.mixGroup)) {
-				this.mixGroup.push(this.allAnimations[individualAnimation]['mix']);
 			}
-		}
-		}
-	this.getAllAnimations();
+		
+			////give values to the constructor/////////
+			////////add to ticker//////////////////////
+			////send argument to the creation methods//
+			this.allAnimations = processedAnimations;
+			this.setNamespaceMix();
+			}
+		this.setNamespaceMix = function() {
+			
+			/* needs correct animation creation function... I was lazy*/
+			for(var individualAnimation in this.allAnimations) {
+				///formats the namespace group to be namespace[name][mix] = animation;
+				///adds the namespace to the namespace group to be referenced by the animation timer later.
+				if(!(this.allAnimations[individualAnimation]['name'] in this.namespaceGroup)){
+					this.namespaceGroup[this.allAnimations[individualAnimation]['name']] = [];
+					this.namespaces[this.allAnimations[individualAnimation]['name']] = [];
+					if(!(typeof this.allAnimations[individualAnimation]['mix'] == 'string')) {
+						this.namespaces[this.allAnimations[individualAnimation]['name']].push('default');
+						this.namespaceGroup[this.allAnimations[individualAnimation]['name']]['default'] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
+					} else {
+						this.namespaces[this.allAnimations[individualAnimation]['name']].push(this.allAnimations[individualAnimation]['mix']);
+						this.namespaceGroup[this.allAnimations[individualAnimation]['name']][this.allAnimations[individualAnimation]['mix']] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
+					}
+				} else {
+					if(!(typeof  this.allAnimations[individualAnimation]['mix'] =='string')) {
+						this.namespaces[this.allAnimations[individualAnimation]['name']].push('default');
+						this.namespaceGroup[this.allAnimations[individualAnimation]['name']]['default'] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
+					} else {
+						this.namespaces[this.allAnimations[individualAnimation]['name']].push(this.allAnimations[individualAnimation]['mix']);
+						this.namespaceGroup[this.allAnimations[individualAnimation]['name']][this.allAnimations[individualAnimation]['mix']] = createAnimation(this.allAnimations[individualAnimation]['specifications']);
+					}
+				}
+				
+				if(!(this.allAnimations[individualAnimation]['mix'] in this.mixGroup)) {
+					this.mixGroup.push(this.allAnimations[individualAnimation]['mix']);
+				}
+			}
+			}
+		this.getAllAnimations();
+	
+	
+		///test with multiple animations///
+		///test with duplicate named animations too///
+		///test with duplicate name but different mix///
+		///now to create the controller///
+	}
+	
+	
+
+	animationController.prototype = new Object;
+	animationController.prototype.constructor = animationController;
+	function animationController() {
+		////this is what switches between animations//
+		///this also has all time signatures//////////
+		///it also contains the ability to respond////
+		///this is the 'animation group'//////////////
+	}
 
 
-	///test with multiple animations///
-	///test with duplicate named animations too///
-	///test with duplicate name but different mix///
-	///now to create the controller///
-}
+	function createController(func){
+		//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
+		//furthermore, remove that element from the arguments if it exists.
+		var args = Array.prototype.slice.call(arguments, 0);
+		var typeToSet = (args['type'] != 'undefined') ? args['type'] : 'oneshotAnimation';
+		if(args.indexOf('type') != 'undefined'){
+			args = Array.prototype.slice.call(args.indexOf('type'), 1);
+		} 
+		console.log(typeToSet);
+		var object = Object.create(typeToSet.prototype);
+		console.log(object);
+		typeToSet.apply(object, args);
+		return object;
+	}
 
 
-
-animationController.prototype = new Object;
-animationController.prototype.constructor = animationController;
-function animationController() {
-	////this is what switches between animations//
-	///this also has all time signatures//////////
-	///it also contains the ability to respond////
-	///this is the 'animation group'//////////////
-}
-
-
-function createController(func){
-
-	//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
-	//furthermore, remove that element from the arguments if it exists.
-	var args = Array.prototype.slice.call(arguments, 0);
-	var typeToSet = (args['type'] != 'undefined') ? args['type'] : 'oneshotAnimation';
-	if(args.indexOf('type') != 'undefined'){
-		args = Array.prototype.slice.call(args.indexOf('type'), 1);
-	} 
-	console.log(typeToSet);
-	var object = Object.create(typeToSet.prototype);
-	console.log(object);
-	typeToSet.apply(object, args);
-	return object;
-}
-
-
-function respond() {
-
-}
+	function respond() {
+	
+	}
 
 
 
@@ -330,22 +326,22 @@ function respond() {
 //////Animation/////////////////////////////////////////////////
 //////Options///////////////////////////////////////////////////
 /////////////////////////////////////////////
-function purpledraw() {
-	///array of progress is a horrible idea?///
-	animationGroupGroup['purple'].setProgress('tick');
-  /* if (animationGroupGroup['purple'].master >= animationGroupGroup['purple'].loop) {
-
-     window.cancelAnimationFrame(handle);
-	 animationGroupGroup['purple'].setProgress('reset');
-	 purpledraw();
-   } else {*/
-   	purpleBottomBar.fire();
-   	purpleBackground.fire();
-   	purpleTopBars.fire();
-   	purpleTransitionIn.fire();
-    handle = window.requestAnimationFrame(purpledraw);
-   //}
-};
+	function purpledraw() {
+		///array of progress is a horrible idea?///
+		animationGroupGroup['purple'].setProgress('tick');
+	  /* if (animationGroupGroup['purple'].master >= animationGroupGroup['purple'].loop) {
+	
+	     window.cancelAnimationFrame(handle);
+		 animationGroupGroup['purple'].setProgress('reset');
+		 purpledraw();
+	   } else {*/
+	   	purpleBottomBar.fire();
+	   	purpleBackground.fire();
+	   	purpleTopBars.fire();
+	   	purpleTransitionIn.fire();
+	    handle = window.requestAnimationFrame(purpledraw);
+	   //}
+	};
 
 /*class Game {
    constructor() {
@@ -407,32 +403,25 @@ function purpledraw() {
 ///////////////////////////////////////////////////////////////////
 ////////Random Functions... may not be necessary at all.../////////
 ///////////////////////////////////////////////////////////////////
-function sizeSVG() {
-	masterWidth = window.innerWidth;
-	$('linearGradient.horizontalG').attr('x1', masterWidth+"px");
-	var svg = document.querySelector("svg");
-	var aspect = window.innerHeight / window.innerWidth;
-	svg.removeAttribute("width");
-	svg.removeAttribute("height");
-	svg.setAttribute("width", window.innerWidth);
-	svg.setAttribute("height", window.innerWidth* aspect);
-}
-
-function fetchPreparedSVGElementsByType(type) {
-	var typeElems = document.getElementsByClassName(type);
-	return typeElems;
-
-}
-///check which arguments a function receives ////
-function checkArgument(argumentToCheck) {
-	if (typeof argumentToCheck == "undefined") {
-		console.log(argumentToCheck + ' is undefined');
-		return false;
-	}	else {
-		return true;
+	function sizeSVG() {
+		masterWidth = window.innerWidth;
+		$('linearGradient.horizontalG').attr('x1', masterWidth+"px");
+		var svg = document.querySelector("svg");
+		var aspect = window.innerHeight / window.innerWidth;
+		svg.removeAttribute("width");
+		svg.removeAttribute("height");
+		svg.setAttribute("width", window.innerWidth);
+		svg.setAttribute("height", window.innerWidth* aspect);
 	}
-}
-
+	///check which arguments a function receives ////
+	function checkArgument(argumentToCheck) {
+		if (typeof argumentToCheck == "undefined") {
+			return false;
+		}	else {
+			return true;
+		}
+	}
+	
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
@@ -827,68 +816,68 @@ function checkArgument(argumentToCheck) {
 
 	chained.prototype = new TemporalPattern();
 	function chained(chainedArguments){
-	this.prevStage = -1;
-	this.measureLength = 0; ///dependent on division type///
-	this.local_initial = new Date().getTime();
-	this.delay = 0;///do I need delay?///
-	this.type = 'chained';
-	this.elems = [];
-	///the compost holds the previous stage of the animation, which allows it to deteriorate during the next stage
-	this.compost =[];
-	this.gather = function() {
-		var typeElems = document.getElementsByClassName(this.type);
-		var colorElems = document.getElementsByClassName(this.color);
-		var returnedElems = [];
-		var checkedElems = [];
-		for (var j in colorElems) {
-    	  checkedElems[colorElems[j]] = colorElems[j];
-  		}
- 		for (var i in typeElems) {
- 		     if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
- 		     	var tempClass = typeElems[i].className.baseVal.split(" ")[2];
- 		     	if(typeof returnedElems[tempClass] == 'undefined') {
- 		     		returnedElems[tempClass] = [];
- 		     		returnedElems[tempClass].push(typeElems[i]);
- 		     	}else {
- 		     		returnedElems[tempClass].push(typeElems[i]);
- 		     	}
-
-			 }
- 		}
-		this.elems = returnedElems;
-
-	}
-	this.purifyPaths = function() {
-		var lengths = [];
-			for(var i in this.elems) {
-				for(var paths in this.elems[i]) {
-				var length = this.elems[i][paths].getTotalLength();
-					lengths.push(length);
-					this.elems[i][paths].temporality = this.elems[i][paths].className.baseVal.split(" ")[1];
-					this.elems[i][paths].style.strokeDasharray = length + ' ' + length;
-					this.elems[i][paths].style.strokeDashoffset = length;
-					this.elems[i][paths].totallength = this.elems[i][paths].getTotalLength();
+		this.prevStage = -1;
+		this.measureLength = 0; ///dependent on division type///
+		this.local_initial = new Date().getTime();
+		this.delay = 0;///do I need delay?///
+		this.type = 'chained';
+		this.elems = [];
+		///the compost holds the previous stage of the animation, which allows it to deteriorate during the next stage
+		this.compost =[];
+		this.gather = function() {
+			var typeElems = document.getElementsByClassName(this.type);
+			var colorElems = document.getElementsByClassName(this.color);
+			var returnedElems = [];
+			var checkedElems = [];
+			for (var j in colorElems) {
+    		  checkedElems[colorElems[j]] = colorElems[j];
+  			}
+ 			for (var i in typeElems) {
+ 			     if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
+ 			     	var tempClass = typeElems[i].className.baseVal.split(" ")[2];
+ 			     	if(typeof returnedElems[tempClass] == 'undefined') {
+ 			     		returnedElems[tempClass] = [];
+ 			     		returnedElems[tempClass].push(typeElems[i]);
+ 			     	}else {
+ 			     		returnedElems[tempClass].push(typeElems[i]);
+ 			     	}
+	
+				 }
+	 		}
+			this.elems = returnedElems;
+	
+		}
+		this.purifyPaths = function() {
+			var lengths = [];
+				for(var i in this.elems) {
+					for(var paths in this.elems[i]) {
+					var length = this.elems[i][paths].getTotalLength();
+						lengths.push(length);
+						this.elems[i][paths].temporality = this.elems[i][paths].className.baseVal.split(" ")[1];
+						this.elems[i][paths].style.strokeDasharray = length + ' ' + length;
+						this.elems[i][paths].style.strokeDashoffset = length;
+						this.elems[i][paths].totallength = this.elems[i][paths].getTotalLength();
+					}
 				}
-			}
-
-
-	}
-	///send to compost should be called as the stage is changed.
-	this.sendToCompost = function() {
-		this.compost.length = 0;
-		this.direction *= -1;
-		for(var compostable in this.elems['stage_'+this.prevStage]) {
-			if(this.elems['stage_'+this.prevStage][compostable].className.baseVal.split(" ")[1] == 'temporary') {
-				this.compost.push(this.elems['stage_'+this.prevStage][compostable]);
-			} else {
-				this.elems['stage_'+this.prevStage][compostable].style.strokeDashoffset = 0;
+	
+	
+		}
+		///send to compost should be called as the stage is changed.
+		this.sendToCompost = function() {
+			this.compost.length = 0;
+			this.direction *= -1;
+			for(var compostable in this.elems['stage_'+this.prevStage]) {
+				if(this.elems['stage_'+this.prevStage][compostable].className.baseVal.split(" ")[1] == 'temporary') {
+					this.compost.push(this.elems['stage_'+this.prevStage][compostable]);
+				} else {
+					this.elems['stage_'+this.prevStage][compostable].style.strokeDashoffset = 0;
+				}
 			}
 		}
 	}
-}
 		chained.prototype.fire = function() {};
 		chained.prototype.calculate = function() {};
-	
+		
 	repeatable.prototype = new TemporalPattern();
 	function repeatable(repeatableArguments){
 		TemporalPattern.call(this, repeatableArguments);
@@ -910,8 +899,8 @@ function checkArgument(argumentToCheck) {
  
 			
 	};	
-			repeatable.prototype.fire = function() {};
-			repeatable.prototype.calculate = function() {};
+		repeatable.prototype.fire = function() {};
+		repeatable.prototype.calculate = function() {};
 
 
 //////////////////////////////////////////////
@@ -921,41 +910,41 @@ function checkArgument(argumentToCheck) {
 
 
 
-function createAnimation(func){
-	//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
-	//furthermore, remove that element from the arguments if it exists.
-	var args = new SpecialArray();
-	var animationTypes = {
-	///need this switch board to point to a function of creating the object, it doesn't now and
-	///new oneshot() creates 
-		'oneshot' : function(animationProperties) {return new oneshot(animationProperties)},
-		'chained' : function(animationProperties) {return new chained(animationProperties)},
-		'repeatable' : function(animationProperties) {return new repeatable(animationProperties)}
+	function createAnimation(func){
+		//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
+		//furthermore, remove that element from the arguments if it exists.
+		var args = new SpecialArray();
+		var animationTypes = {
+		///need this switch board to point to a function of creating the object, it doesn't now and
+		///new oneshot() creates 
+			'oneshot' : function(animationProperties) {return new oneshot(animationProperties)},
+			'chained' : function(animationProperties) {return new chained(animationProperties)},
+			'repeatable' : function(animationProperties) {return new repeatable(animationProperties)}
+		}
+	
+		///every time I have to use this pattern, it's because javascript is wrapping the 
+		///array of arguments in an object that's position 0 is an array. fucking javascript.
+		for(var argus in arguments[0]) {
+			args.add(argus, arguments[0][argus]);
+		}
+	
+		var typeToSet = (func['type'] != 'undefined') ? func['type'] : 'oneshotAnimation';
+		if(args.contains('type')){
+			args.remove('type');
+		} 
+		var objectName = typeToSet.toString();
+	
+		var object = animationTypes[objectName](args);
+		///success, victory is yours today. Now the objects correctly create themself
+		///with all arguments. The only tasks left for you down here are:
+		/////creating a group of functions to determine base values based on arguments
+		/////finding a way to pass class-specific options through validation
+		/////dividing the object into moving parts.
+		/////particularizing the arguments by comparing the children against the parent.
+		console.log(object);
+
+		return object;
 	}
-
-	///every time I have to use this pattern, it's because javascript is wrapping the 
-	///array of arguments in an object that's position 0 is an array. fucking javascript.
-	for(var argus in arguments[0]) {
-		args.add(argus, arguments[0][argus]);
-	}
-
-	var typeToSet = (func['type'] != 'undefined') ? func['type'] : 'oneshotAnimation';
-	if(args.contains('type')){
-		args.remove('type');
-	} 
-	var objectName = typeToSet.toString();
-
-	var object = animationTypes[objectName](args);
-	///success, victory is yours today. Now the objects correctly create themself
-	///with all arguments. The only tasks left for you down here are:
-	/////creating a group of functions to determine base values based on arguments
-	/////finding a way to pass class-specific options through validation
-	/////dividing the object into moving parts.
-	/////particularizing the arguments by comparing the children against the parent.
-	console.log(object);
-
-	return object;
-}
 
 
 
@@ -968,87 +957,87 @@ function createAnimation(func){
 ///////////Animation Group Prototype//////////
 ///This is one whole section's animations/////
 //////////////////////////////////////////////
-function createAnimationGroup(func){
-	var args = Array.prototype.slice.call(arguments, 1);
-	var object = Object.create(func.prototype);
-	func.apply(object, args);
-	return object;
-}
-var animationGroup = function(color){
-	//this is the switching mechanism to control which animations are actively being manipulated
-	//these properties are referenced (and the animations thusly) to set local time, get divisional information
-	//this type of group structure is needed, but should be altered to be more fluid. 
-	//i.e. not just my required groups in not just my required mixings.
-	this.state = color;
-	this.background = backgroundGroup[color];
-	this.bottomBar = bottomBarGroup[color];
-	this.topBars = topBarsGroup[color];
-	this.centerContent = centerContentGroup[color];
-	this.centerFlair = centerFlairGroup[color];
-	this.transitionIn = transitionInGroup[color];
-	this.transitionOut = transitionOutGroup[color];
-	this.loop = loopGroup[color];
-	this.frame = 0;
-	this.randomizer = function(min, max) {
-    	return Math.floor(Math.random() * (max - min + 1)) + min;
+	function createAnimationGroup(func){
+		var args = Array.prototype.slice.call(arguments, 1);
+		var object = Object.create(func.prototype);
+		func.apply(object, args);
+		return object;
 	}
-	/*needs to be modified to take a varying amount of perameters
-	  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
-	this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
-	this.setProgress = function(command, data) {
-		//need to formulate bpm to something that can take the place of 10000 and 6000
-		//This is the stage progress. From the initial tick all other timing events should be derrived from their individual duration and their delay.
-		if(command == 'initialize') {
-			this.initial = new Date().getTime();
-			this.master = (Date.now() - this.initial)/(this.loop * 1000);
-			this.progressLoop();
-		} else if (command == 'tick') {
-			this.master = (Date.now() - this.initial)/(this.loop * 1000);
-			this.progressLoop();
-			if(this.master >= this.frame+1) {
-				///forward the frame each interval it should appear, this is used to calculate
-				///chained Animation Progress and scrub position.
-				this.frame += 1;
-			}
-		}else if (command == 'reset') {
-			this.initial = new Date().getTime();
-			this.master = (Date.now() - this.initial)/(this.loop * 1000);
-			this.progressLoop();
-		} else if (command == 'scrub') {
-			this.frame = data;
-			this.initial = new Date().getTime();
-			this.master = (Date.now() - this.initial) + (this.frame * 1000);
-			this.progressLoop();
+	var animationGroup = function(color){
+		//this is the switching mechanism to control which animations are actively being manipulated
+		//these properties are referenced (and the animations thusly) to set local time, get divisional information
+		//this type of group structure is needed, but should be altered to be more fluid. 
+		//i.e. not just my required groups in not just my required mixings.
+		this.state = color;
+		this.background = backgroundGroup[color];
+		this.bottomBar = bottomBarGroup[color];
+		this.topBars = topBarsGroup[color];
+		this.centerContent = centerContentGroup[color];
+		this.centerFlair = centerFlairGroup[color];
+		this.transitionIn = transitionInGroup[color];
+		this.transitionOut = transitionOutGroup[color];
+		this.loop = loopGroup[color];
+		this.frame = 0;
+		this.randomizer = function(min, max) {
+   		 	return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
-	}
-	this.progressLoop = function() {
-		for(var property in this.progress) {
-			if(this[property] !== undefined && this[property] instanceof chainedAnimation) {
-				this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-				//for chained animations, set the stage to the nearest previous stage after scrub(defined by the frame set)
-				if(Date.now() - this[property].local_initial >= this[property].stageLength) {
-          this[property].currentStage = Math.floor((this.master * 1000)/this[property].stageLength);
-          this[property].prevStage = this[property].currentStage - 1;
-					this[property].local_initial = new Date().getTime();
-					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-					this[property].sendToCompost();
+		/*needs to be modified to take a varying amount of perameters
+		  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
+		this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
+		this.setProgress = function(command, data) {
+			//need to formulate bpm to something that can take the place of 10000 and 6000
+			//This is the stage progress. From the initial tick all other timing events should be derrived from their individual duration and their delay.
+			if(command == 'initialize') {
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+			} else if (command == 'tick') {
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+				if(this.master >= this.frame+1) {
+					///forward the frame each interval it should appear, this is used to calculate
+					///chained Animation Progress and scrub position.
+					this.frame += 1;
 				}
-				//set the animation's progress to the % that it should be at the scrubbed time.
-			} else if(this[property] !== undefined && this[property] instanceof repeatableAnimation) {
-				this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].duration);
-        if (this.progress[property] >= 1) {
-          this[property].calculate('reset')
-          this[property].local_initial = new Date().getTime();
-          this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-        }
-			} else {
-				this.progress[property] = ((Date.now() - this.initial)/this[property].duration);
+			}else if (command == 'reset') {
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+			} else if (command == 'scrub') {
+				this.frame = data;
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial) + (this.frame * 1000);
+				this.progressLoop();
+			}	
+		}
+		this.progressLoop = function() {
+			for(var property in this.progress) {
+				if(this[property] !== undefined && this[property] instanceof chainedAnimation) {
+					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+					//for chained animations, set the stage to the nearest previous stage after scrub(defined by the frame set)
+					if(Date.now() - this[property].local_initial >= this[property].stageLength) {
+	          this[property].currentStage = Math.floor((this.master * 1000)/this[property].stageLength);
+	          this[property].prevStage = this[property].currentStage - 1;
+						this[property].local_initial = new Date().getTime();
+						this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+						this[property].sendToCompost();
+					}
+					//set the animation's progress to the % that it should be at the scrubbed time.
+				} else if(this[property] !== undefined && this[property] instanceof repeatableAnimation) {
+					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].duration);
+	        if (this.progress[property] >= 1) {
+	          this[property].calculate('reset')
+	          this[property].local_initial = new Date().getTime();
+	          this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+	        }
+				} else {
+					this.progress[property] = ((Date.now() - this.initial)/this[property].duration);
+				}
 			}
 		}
+		this.setProgress('initialize');
 	}
-	this.setProgress('initialize');
-}
-
+	
 ////////////////////////////////////////////////////////////
 
 
