@@ -1159,16 +1159,7 @@ var animationGroup = function(color){
 		}
 	}
  purpleBackground.calculate('initialize');
-var redBackground = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redBackground.fire = function() {};
-var orangeBackground = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeBackground.fire = function() {};
-var greenBackground = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenBackground.fire = function() {};
-var blueBackground = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueBackground.fire = function() {};
-var yellowBackground = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowBackground.fire = function() {};
+
 
 var purpleBottomBar = createAnimation(repeatableAnimation, 800, 200, false, 'all', 1, false, 'purple', 'bottomBar');
 	purpleBottomBar.fire = function() {
@@ -1202,16 +1193,7 @@ var purpleBottomBar = createAnimation(repeatableAnimation, 800, 200, false, 'all
 
 
 
-var redBottomBar = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redBottomBar.fire = function() {};
-var orangeBottomBar = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeBottomBar.fire = function() {};
-var greenBottomBar = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenBottomBar.fire = function() {};
-var blueBottomBar = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueBottomBar.fire = function() {};
-var yellowBottomBar = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowBottomBar.fire = function() {};
+
 //make it so only one is on the screen at the time, but so that one is always up and fades out//
 var purpleTopBars = createAnimation(repeatableAnimation, 4000, 200, false, 'all', 1, false, 'purple', 'topBars');
 	purpleTopBars.fire = function() {
@@ -1255,43 +1237,6 @@ var purpleTopBars = createAnimation(repeatableAnimation, 4000, 200, false, 'all'
 	};
 	purpleTopBars.calculate('initialize');
 
-var redTopBars = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redTopBars.fire = function() {};
-var orangeTopBars = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeTopBars.fire = function() {};
-var greenTopBars = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenTopBars.fire = function() {};
-var blueTopBars = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueTopBars.fire = function() {};
-var yellowTopBars = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowTopBars.fire = function() {};
-
-var purpleCenterContent = createAnimation(Animation, 800, 200, false, 1, 'purple');
-	purpleCenterContent.fire = function() {};
-var redCenterContent = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redCenterContent.fire = function() {};
-var orangeCenterContent = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeCenterContent.fire = function() {};
-var greenCenterContent = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenCenterContent.fire = function() {};
-var blueCenterContent = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueCenterContent.fire = function() {};
-var yellowCenterContent  = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowCenterContent.fire = function() {};
-
-var purpleCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'purple');
-	purpleCenterFlair.fire = function() {};
-var redCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redCenterFlair.fire = function() {};
-var orangeCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeCenterFlair.fire = function() {};
-var greenCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenCenterFlair.fire = function() {};
-var blueCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueCenterFlair.fire = function() {};
-var yellowCenterFlair = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowCenterFlair.fire = function() {};
-
 var purpleTransitionIn = createAnimation(chainedAnimation, 7000, 1000, false, 6, 1, 'purple', 'transitionIn');
 	purpleTransitionIn.gather();
 	purpleTransitionIn.purifyPaths();
@@ -1307,91 +1252,39 @@ var purpleTransitionIn = createAnimation(chainedAnimation, 7000, 1000, false, 6,
 
 
 
-var redTransitionIn = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redTransitionIn.fire = function() {};
-var orangeTransitionIn = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeTransitionIn.fire = function() {};
-var greenTransitionIn = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenTransitionIn.fire = function() {};
-var blueTransitionIn = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueTransitionIn.fire = function() {};
-var yellowTransitionIn = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowTransitionIn.fire = function() {};
-
-
-var purpleTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'purple');
-	purpleTransitionOut.fire = function() {};
-var redTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'red');
-	redTransitionOut.fire = function() {};
-var orangeTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'orange');
-	orangeTransitionOut.fire = function() {};
-var greenTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'green');
-	greenTransitionOut.fire = function() {};
-var blueTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'blue');
-	blueTransitionOut.fire = function() {};
-var yellowTransitionOut = createAnimation(Animation, 800, 200, false, 1, 'yellow');
-	yellowTransitionOut.fire = function() {};
 
 
 ///animationGroupGroup['purple'].background.fire////
 var backgroundGroup = {
 	'purple' : purpleBackground,
-	'red' : redBackground,
-	'orange' : orangeBackground,
-	'green' : greenBackground,
-	'blue' : blueBackground,
-	'yellow' : yellowBackground
+	
 };
 
 var bottomBarGroup = {
 	'purple' : purpleBottomBar,
-	'red' : redBottomBar,
-	'orange' : orangeBottomBar,
-	'green' : greenBottomBar,
-	'blue' : blueBottomBar,
-	'yellow' : yellowBottomBar
+	
 };
 var topBarsGroup = {
 	'purple' : purpleTopBars,
-	'red' : redTopBars,
-	'orange' : orangeTopBars,
-	'green' : greenTopBars,
-	'blue' : blueTopBars,
-	'yellow' : yellowTopBars
+	
 };
 var centerContentGroup = {
 	'purple' : purpleCenterContent,
-	'red' : redCenterContent,
-	'orange' : orangeCenterContent,
-	'green' : greenCenterContent,
-	'blue' : blueCenterContent,
-	'yellow' : yellowCenterContent
+	
 };
 var centerFlairGroup = {
 	'purple' : purpleCenterFlair,
-	'red' : redCenterFlair,
-	'orange' : orangeCenterFlair,
-	'green' : greenCenterFlair,
-	'blue' : blueCenterFlair,
-	'yellow' : yellowCenterFlair
+	
 };
 
 var transitionInGroup = {
 	'purple' : purpleTransitionIn,
-	'red' : redTransitionIn,
-	'orange' : orangeTransitionIn,
-	'green' : greenTransitionIn,
-	'blue' : blueTransitionIn,
-	'yellow' : yellowTransitionIn
+	
 };
 
 var transitionOutGroup = {
 	'purple' : purpleTransitionOut,
-	'red' : redTransitionOut,
-	'orange' : orangeTransitionOut,
-	'green' : greenTransitionOut,
-	'blue' : blueTransitionOut,
-	'yellow' : yellowTransitionOut
+
 };
 ////multiples of 16ms preferred 320 is one beat////
 //in seconds
@@ -1399,11 +1292,7 @@ var loopGroup = {
 	///this is for the scrubber, the time here (in seconds) identifies the intervals to which the scrubber will scrub
 	///this is necessary for chained animation staging
 	'purple' : 1,
-	'red' : 2,
-	'orange' : 6,
-	'green' : 9,
-	'blue' : 10,
-	'yellow' : 12
+	
 };
 
 
@@ -1411,11 +1300,7 @@ var loopGroup = {
 /////each animation should be an animation object////////
 var animationGroupGroup = {
 	'purple' : createAnimationGroup(animationGroup, 'purple'),
-	'red' : createAnimationGroup(animationGroup, 'red'),
-	'orange' : createAnimationGroup(animationGroup, 'orange'),
-	'green' : createAnimationGroup(animationGroup, 'green'),
-	'blue' : createAnimationGroup(animationGroup, 'blue'),
-	'yellow' : createAnimationGroup(animationGroup, 'yellow')
+	
 
 };
 
