@@ -137,24 +137,6 @@ window.onload=function(){
 		  				cool thing is, she'll take all the animations you can give
 		  				if you want, control them harshly
 		  				or she will control them gently
-		  	noteSync = tell her the grouping pattern. of your notes
-		  				and note multiples.
-		  				hard-ordered notes will always have priority,
-		  				but if they can be paired according to the sync
-		  				they will 
-		  				and if there aren't enough things to pair
-		  				she won't pull them from air
-		  				and if there are too many
-		  				she'll drop them like a bad habit
-		  				synchronized patterns
-		  					pair+num-pair+num-etc
-		  					concerted all at the same time
-		  					for only the duration 
-		  					they want to take
-		  					if the time has been divided
-		  						as if you were aligning every note
-		  						with its duration
-		  						with the start of the meter
 		  	order = used for soft ordering of elements, hard order will always be prioritized
 		  				if you have your elements ordered yourself
 		  				you can set this to tell it to cycle through
@@ -278,23 +260,125 @@ window.onload=function(){
 			}
 		this.getAllAnimations();
 	
-	
 		///test with multiple animations///
 		///test with duplicate named animations too///
 		///test with duplicate name but different mix///
 		///now to create the controller///
+		///which should be relatively identical to the animation group group/// 
 	}
 	
 	
 
 	animationController.prototype = new Object;
 	animationController.prototype.constructor = animationController;
-	function animationController() {
-		////this is what switches between animations//
-		///this also has all time signatures//////////
-		///it also contains the ability to respond////
-		///this is the 'animation group'//////////////
+	function animationController(animationNamespaces, mixlist, animationObjects) {
+		//this is the switching mechanism to control which animations are actively being manipulated
+		//these properties are referenced (and the animations thusly) to set local time, get divisional information
+		//this type of group structure is needed, but should be altered to be more fluid. 
+		//i.e. not just my required groups in not just my required mixings.
+		this.state = color;
+		///how does state relate to the new adding/subtracting mixes ideaology?///
+		///what I'm losing by losing these groups:
+		////the ability to control by color alone
+		////how to bring this in the remix...
+		
+		///can still reference it by calling
+		///however, it will not look for the default fallback or previous animation...
+		///the animations should not be interrupted, so maybe this should have a garbage collection 
+		///that collects once the time loop is finished?
+		this.animationNamespaces[namespace][mix];
+		///generate these for each animationNamespaces[namespace]
+		this.background = backgroundGroup[color];
+		this.bottomBar = bottomBarGroup[color];
+		this.topBars = topBarsGroup[color];
+		this.centerContent = centerContentGroup[color];
+		this.centerFlair = centerFlairGroup[color];
+		this.transitionIn = transitionInGroup[color];
+		this.transitionOut = transitionOutGroup[color];
+		this.loop = loopGroup[color];
+		this.frame = 0;
+		this.randomizer = function(min, max) {
+   		 	return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		/*needs to be modified to take a varying amount of perameters
+		  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
+		this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
+		Object.defineProperty(this, 'progress', {
+			enumerable: false,
+			get: function(){return valuetoreturn;},
+			set: function(value){valuetoreturn = value;},
+			
+		});
+		this.setProgress = function(command, data) {
+			//need to formulate bpm to something that can take the place of 10000 and 6000
+			//This is the stage progress. From the initial tick all other timing events should be derrived from their individual duration and their delay.
+			if(command == 'initialize') {
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+			} else if (command == 'tick') {
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+				if(this.master >= this.frame+1) {
+					///forward the frame each interval it should appear, this is used to calculate
+					///chained Animation Progress and scrub position.
+					this.frame += 1;
+				}
+			}else if (command == 'reset') {
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial)/(this.loop * 1000);
+				this.progressLoop();
+			} else if (command == 'scrub') {
+				this.frame = data;
+				this.initial = new Date().getTime();
+				this.master = (Date.now() - this.initial) + (this.frame * 1000);
+				this.progressLoop();
+			}	
+		}
+		this.progressLoop = function() {
+			for(var property in this.progress) {
+				if(this[property] !== undefined && this[property] instanceof chainedAnimation) {
+					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+					//for chained animations, set the stage to the nearest previous stage after scrub(defined by the frame set)
+					if(Date.now() - this[property].local_initial >= this[property].stageLength) {
+	          this[property].currentStage = Math.floor((this.master * 1000)/this[property].stageLength);
+	          this[property].prevStage = this[property].currentStage - 1;
+						this[property].local_initial = new Date().getTime();
+						this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+						this[property].sendToCompost();
+					}
+					//set the animation's progress to the % that it should be at the scrubbed time.
+				} else if(this[property] !== undefined && this[property] instanceof repeatableAnimation) {
+					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].duration);
+	        if (this.progress[property] >= 1) {
+	          this[property].calculate('reset')
+	          this[property].local_initial = new Date().getTime();
+	          this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
+	        }
+				} else {
+					this.progress[property] = ((Date.now() - this.initial)/this[property].duration);
+				}
+			}
+		}
+		this.setProgress('initialize');
+		this.respond = function() {};
+		this.remix = function(operation, mix) {
+		
+		};
+		
 	}
+
+
+
+	function createAnimationGroup(func){
+		var args = Array.prototype.slice.call(arguments, 1);
+		var object = Object.create(func.prototype);
+		func.apply(object, args);
+		return object;
+	}
+
+
+
 
 
 	function createController(func){
@@ -945,101 +1029,6 @@ window.onload=function(){
 
 		return object;
 	}
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////
-///////////Animation Group Prototype//////////
-///This is one whole section's animations/////
-//////////////////////////////////////////////
-	function createAnimationGroup(func){
-		var args = Array.prototype.slice.call(arguments, 1);
-		var object = Object.create(func.prototype);
-		func.apply(object, args);
-		return object;
-	}
-	var animationGroup = function(color){
-		//this is the switching mechanism to control which animations are actively being manipulated
-		//these properties are referenced (and the animations thusly) to set local time, get divisional information
-		//this type of group structure is needed, but should be altered to be more fluid. 
-		//i.e. not just my required groups in not just my required mixings.
-		this.state = color;
-		this.background = backgroundGroup[color];
-		this.bottomBar = bottomBarGroup[color];
-		this.topBars = topBarsGroup[color];
-		this.centerContent = centerContentGroup[color];
-		this.centerFlair = centerFlairGroup[color];
-		this.transitionIn = transitionInGroup[color];
-		this.transitionOut = transitionOutGroup[color];
-		this.loop = loopGroup[color];
-		this.frame = 0;
-		this.randomizer = function(min, max) {
-   		 	return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-		/*needs to be modified to take a varying amount of perameters
-		  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
-		this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
-		this.setProgress = function(command, data) {
-			//need to formulate bpm to something that can take the place of 10000 and 6000
-			//This is the stage progress. From the initial tick all other timing events should be derrived from their individual duration and their delay.
-			if(command == 'initialize') {
-				this.initial = new Date().getTime();
-				this.master = (Date.now() - this.initial)/(this.loop * 1000);
-				this.progressLoop();
-			} else if (command == 'tick') {
-				this.master = (Date.now() - this.initial)/(this.loop * 1000);
-				this.progressLoop();
-				if(this.master >= this.frame+1) {
-					///forward the frame each interval it should appear, this is used to calculate
-					///chained Animation Progress and scrub position.
-					this.frame += 1;
-				}
-			}else if (command == 'reset') {
-				this.initial = new Date().getTime();
-				this.master = (Date.now() - this.initial)/(this.loop * 1000);
-				this.progressLoop();
-			} else if (command == 'scrub') {
-				this.frame = data;
-				this.initial = new Date().getTime();
-				this.master = (Date.now() - this.initial) + (this.frame * 1000);
-				this.progressLoop();
-			}	
-		}
-		this.progressLoop = function() {
-			for(var property in this.progress) {
-				if(this[property] !== undefined && this[property] instanceof chainedAnimation) {
-					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-					//for chained animations, set the stage to the nearest previous stage after scrub(defined by the frame set)
-					if(Date.now() - this[property].local_initial >= this[property].stageLength) {
-	          this[property].currentStage = Math.floor((this.master * 1000)/this[property].stageLength);
-	          this[property].prevStage = this[property].currentStage - 1;
-						this[property].local_initial = new Date().getTime();
-						this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-						this[property].sendToCompost();
-					}
-					//set the animation's progress to the % that it should be at the scrubbed time.
-				} else if(this[property] !== undefined && this[property] instanceof repeatableAnimation) {
-					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].duration);
-	        if (this.progress[property] >= 1) {
-	          this[property].calculate('reset')
-	          this[property].local_initial = new Date().getTime();
-	          this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
-	        }
-				} else {
-					this.progress[property] = ((Date.now() - this.initial)/this[property].duration);
-				}
-			}
-		}
-		this.setProgress('initialize');
-	}
-	
-////////////////////////////////////////////////////////////
-
 
 
 

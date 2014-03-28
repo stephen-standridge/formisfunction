@@ -1,0 +1,127 @@
+Handling the Animation Timing:
+
+	How it is now:
+		Loops through an array { namespace : value , } and checks its time
+		Dependent on Stage Length, it will advance the stage and time
+			A bug with this approach is that the stages don't change with 100% reliability when they're supposed to.
+			They will always change eventually and correct itself.
+		Dependent on stage Length, it will send things to the trash... mostly reliably
+			Inconsistent at best
+			
+	Problems with current approach:
+		Inconsistency
+		Interrupting the animations is not easy or good
+		Does not allow for complex, interwoven time signatures
+		Does not allow for easy remixing
+		Does not allow for easy scrubbing
+		Each element is controlled by a stage variable and doesn't know when it should be on or off
+		
+		
+
+	Ideal Solution:
+		Each element has a predictable end phase (beit state at start or % complete)
+		Each element knows if it should fire or not.
+		Each element's progress is controlled by a % of the entire transformation
+		Each element composes its entire transformation in its total time.
+		Each element kills/recycles itself when the time comes.(in oneshot animations)
+		Each element knows how long to hold itself by its parents defining characteristics.
+			Meaning each element knows its length. It doesn't know when it should fire It just knows how long.
+			(it basically is just a note out of context)
+			
+			
+		Each animation knows when elements should be turned on/off
+		Each animation knows how to divide time between the elements
+			Meaning each animation needs to know its measure composition without knowing the individual notes.
+			(it basically just has rythm marks)
+		Each animation 'fires' the note when time comes.
+		Each animation kills/recycles itself when the time comes.
+		
+		
+		The controller has all the measures
+		The controller has the tempo
+		The controller has the order of measures to be played
+		The controller can add/remove elements from the mix.
+		The controller sends the animation its master time so that it can fire.
+		the controller has forward, backward, jumpto commands
+		
+		
+		
+		
+		
+		Types of animation:
+			Oneshot
+				A list of animation states that happen only on fire, must be reset to be triggered again
+				It can only have absolute timing
+				Controls:
+					fire
+					to(beginning/end)
+					reset
+					speed
+				will only autoplay on call
+				only one to have its unique time.
+			Repeatable
+				A list of animation states that is cycled through in a regular interval
+				This is a stand-alone animation, but controlling it can be interwoven into an animation
+					(such as changing directions mid chain or pausing mid chain)
+				It can have either relative or absolute timing
+				
+				Controls:
+					fire
+					pause/resume
+					reset
+					to(beginning/end)
+					speed
+					direction
+			Chained
+				A list of animation states that is cycled through sequentially.
+				All timings within a chain are based on a division of the chain's time. 
+					you can have sub chains
+					you can call other animation controls (or functions)as a note. 
+				Controls
+					fire
+					pause/resume
+					skip(direction)
+					to(beginning/end)
+					stage(number)
+					direction
+					scrub
+				these animation states can be animations of other types
+				However, if it is a oneshot, it is only the 'fire' mechanism that is important
+				to be included. It is better to use chained animations to subclass chained animations.
+				due to their unique scrubbing nature.
+					
+					
+			Differences in animation interaction.
+				The difference betweeen chained and repeatable. 
+					Chained uses measures instead of notes
+						each measure of a chained animation describes a set of transformations
+						the 'rests' are both controlled by the individual measure and the pattern of the measure itself.
+						this assumes a linear transformation, its ending state is determined by direction
+						individual notes are only assumed to be active while the measure is active and so the notes will degrade automatically
+							stage permanence can be granted
+								if the stage is a chain animation, it will assume to remain at the end stage
+								if the stage is a repeating animation, it will assume that it should be repeated 
+									with its same temporal walls, but out of a staged context. Basically, it will loop every measure henceforth
+								if the sequence should maintain the same measure spacing, it should be a chained animation within a repeatable animation
+					Repeatable animations consider all elements when calculating time
+						each element has a transformation throughout one call of the pattern.
+						this pattern includes its wait time or rests.
+						this describes a looping transformation
+						individual notes are assumed to be active all the time so unless the animation is stopped(by a time wall)
+							or manually, no note will degrade. 
+						Chained animations can drop out of this repeat loop by setting their permanence
+							this will replace that transformation with an empty measure that is unfilled.
+							can a callback function be used to replace it? 
+				
+					
+	Issue: 
+		Each animation has its own unique time
+			the controller should have the master time
+			the animations should be an extension of that time
+			
+		How to do this while giving individual timing lengths. 
+			Individual timing lengths isn't necessary. The Animation occurs on one bar. 
+			Oneshot animations are a way to break away as they allow for a MS duration.
+		
+					
+				
