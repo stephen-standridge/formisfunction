@@ -28,6 +28,22 @@ Animation API
 			if using a non-linear time division, can set the division here
 			only affects notes/measures that are children of the element on which it was declared
 			any children of these elements will have its parent as its divisor
+				meter+duple
+		  		meter+triple
+		  		meter+simple
+		  		meter+compound-num-num
+		  		fib+collect
+		  		fib+disperse
+		  		fib+polarize	
+		  		linear
+		  		multiple+num
+		  		none
+		  		
+	advancement = for chained animations only advancement controls when the measure changes.
+			flow for automatic, 
+			controlled for function, 
+			wait(num) for a rest, 
+			none to make it never advance
 			
 			
 	anim = function to perform when called. 
@@ -69,10 +85,12 @@ Animation API
 				hard order leaves it to the element to fire at a specific numeric index
 				synchronize synchronizes it with any elements in its group.
 				hard order will also achieve a synchronization
+				
 		
 	permanence = used to determine endstate of the animation. 
-				repeat(num)
-				persist
-				decay
-				none
+				persist keep all changes or go to end state will hold till the end of the animation
+				revert ignore all changes or go to beginning state will hold till end of the animation
+				temporary keep all changes only till the end of the measure
+				permanent keep all changes forever
+				limit_num keep for this many animation counts. (will ignore num ammount of clear calls before activating again)
 				****what does this mean in terms of functional vs state-driven transformations?
