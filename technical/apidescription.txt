@@ -67,7 +67,8 @@ Animation API
 				
 	measureDeclare = a child of animDeclare that encompasses a division. 
 			will assume the division to be one length unless told otherwise by the duration
-			all children within a measure will share this division.
+			all children within a measure will share this division. 
+			looking for the type of measure it is (oneshot/sequential/repeatable)
 			
 ////noteSync = grouping pattern of notes to be fired.
 ////////////if no note sync is declared, it will assume that the notes have NO synchronization.

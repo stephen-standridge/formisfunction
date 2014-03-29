@@ -8,6 +8,7 @@
       <link href='http://fonts.googleapis.com/css?family=Quicksand:300' rel='stylesheet' type='text/css'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="js/jquery.js" type="text/javascript" ></script>
+      <script src="js/deltatime.js" type="text/javascript" ></script>
       <script src="js/sidebar7.js" type="text/javascript" ></script>
       <script src="js/huefixer.js" type="text/javascript" ></script>
       <script src="js/bootstrap.min.js" type="text/javascript" ></script>
@@ -364,8 +365,8 @@
      <stop class="background_gradient 3 border" offset="0%" style="stop-color:rgb(206,87,234);stop-opacity:0"/>
    </linearGradient>
 
-	<g id="animDeclare_backgroundlines+purple" class="type_repeatable duration_20000 anim_draw anim_fadeout noteSync_concerted order_random permanence_none division_fib measures_1">
-   <pattern id="logo_background" height="1" width="1" >
+	<g id="animDeclare_backgroundlines+purple" class="type_repeatable duration_20000 anim_draw anim_fadeout division_fib">
+   <pattern id="logo_background" class="measureDeclare_sequential duration_cover division_inherit permanence_none order_random+renew" height="1" width="1" >
        <path id="bg1" class="background_line" d="M160.567-95.987v168.3l12.4,12.5v136.701l-15.5,15.5l0.1,185.298l-9.888,10.295l-0.031,26.138l9.86,10.376l-0.1,102.192l15.5,15.5v136.701l-12.4,12.5v168.3"/>
        <path id="bg2" class="background_line" d="M164.166-94.787c-0.1,0.7,0,167.6,0,167.6l12.301,12v141.701l-17,17.199v181.898l-14.842,15.506l-0.035,9.746l14.818,15.49v98.261l17,17.199v141.701l-12.301,12c0,0-0.1,166.9,0,167.6"/>
        <path id="bg3" class="background_line" d="M107.343,899.348l-0.101-274.901l-5.215-4.414l0.263-103.367l20.493-20.72l0.184-185.254l-20.236-20.334l-0.012-102.698l10.947-10.146c0,0,0-274.401,0.101-274.901"/>
@@ -421,7 +422,7 @@
        <path id="bg53" class="background_line" d="M338.834-3.788c0.4-235.9,0,60.9,0,67.4l-16.1,16.5v205.104l-20.96,21.676v13.337l8.953,8.811l-0.105,27.105l-12.675,12.675l0.063,70.905l12.675,12.675l0.105,27.105l-10.155,9.625v11.936l22.162,22.263v205.104l16.1,16.5c0,6.5,0.4,303.3,0,67.4"/>
        <path id="bg54" class="background_line" d="M311.985-4.317c0.399-235.9,0,60.9,0,67.4l-14.667,15.065v245.039l10.596,10.164l-0.08,20.905l-13.199,13.199l0.063,73.635l13.199,13.199l0.08,20.905l-10.596,10.164v245.039l14.667,15.065c0,6.5,0.399,303.3,0,67.4"/>
     </pattern>
-    <pattern id="body_background_right" height="1" width="1" >
+    <pattern id="body_background_right" class="measureDeclare_sequential duration_cover division_inherit permanence_none order_random+renew" height="1" width="1" >
          <path id="bg61" class="background_line" d="M39.814,864.499l0.399-190.1l13.9-13.7l0.4-75.6l10.9-11l8.6-0.1l28.985-28.62l-0.53-360.12L73.95,157.099l-8.6-0.1l-10.9-11l-0.4-75.6l-13.9-13.7l-0.399-190.1"/>
          <path id="bg62" class="background_line" d="M36.912,864.299l0.6-197.8l6.8-20.8l0.299-54.7l-5-4.9l0.184-72.774l24.737-24.768l0.156-55.898l18.552-18.806l-0.118-89.467l-18.794-18.539l0.26-65.039l-24.852-24.856l-0.185-70.953l12.1-12l-0.299-54.7l-13.9-13.7l-0.6-197.8"/>
          <path id="bg63" class="background_line" d="M25.6-134.004l0.101,349l40.901,41.1H74.5l5.213,5.512v51.573l9.584,9.969v8.074l19.159,18.985l0.023,43.407l-11.672,11.512v12.632l-10.153,10.247v32L74.56,472.398h-7.899l-40.9,41.1l-0.101,349"/>
@@ -429,7 +430,7 @@
          <path id="bg65" class="background_line" d="M20.901-133.901l0.199,349.4l48.501,48.6l-0.301,59.5l10.375,10.319l0.01,72.704l-10.325,10.57l0.301,47.207l-48.501,48.6l-0.199,349.4"/>
          <path id="bg66" class="background_line" d="M35.299-133.302l0.199,313.7l9.5,9.5V226L67.1,248h20.451l11.95,11.709l0.189,205.658l-15.33,15.131h-17.2l-22.101,22v36.101l-9.5,9.5l-0.199,313.7"/>
     </pattern>
-    <pattern id="body_background_left" height="1" width="1" >
+    <pattern id="body_background_left" class="measureDeclare_sequential duration_cover division_inherit permanence_none order_random+renew" height="1" width="1" >
         <path id="bg55" class="background_line" d="M89.629-133.401l-0.399,190.1l-13.9,13.7l-0.4,75.6l-10.9,11l-8.6,0.1l-28.518,28.161l-0.53,360.12l28.985,28.62l8.6,0.1l10.9,11l0.4,75.6l13.9,13.7l0.399,190.1"/>
         <path id="bg56" class="background_line" d="M92.528-133.201l-0.6,197.8l-13.9,13.7l-0.299,54.7l12.1,12l-0.185,70.953l-24.852,24.856l0.26,65.039l-18.794,18.539l-0.118,89.467l18.552,18.806l0.156,55.898l24.737,24.768l0.184,72.774l-5,4.9l0.299,54.7l6.8,20.8l0.6,197.8"/>
         <path id="bg57" class="background_line" d="M103.72,862.498l-0.101-349l-40.9-41.1H54.82l-12.094-12.393v-32l-10.153-10.247v-12.632l-11.672-11.512l0.023-43.407l19.159-18.985v-8.074l9.584-9.969v-51.573l5.213-5.512h7.898l40.901-41.1l0.101-349"/>

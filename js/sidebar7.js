@@ -257,9 +257,6 @@ window.onload=function(){
 	}
 
 
-
-
-
 	function createController(func){
 		//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
 		//furthermore, remove that element from the arguments if it exists.
@@ -629,6 +626,15 @@ window.onload=function(){
 		TemporalPattern.prototype.fire = function(){};
 		TemporalPattern.prototype.calculate = function(){};
 		TemporalPattern.prototype.gather = function(){
+			///no longer needs to find all elements
+			///instead, needs to take dom and sort it.
+			/////parse through elements
+			////////if measureDeclare, make subanimation and parse it, add fire to array
+			////////if not, parse element and add to array.
+			//////////this is in animations/divisions/element/end/begin only only argument it should take is % of completion.
+			////////array is {timetofire : fire()}
+			////////if fire is a subanimation, it has one as well
+			/////construct ending/transition
 			var typeElems = document.getElementsByClassName(this.type);
     		var colorElems = document.getElementsByClassName(this.color);
     		var returnedElems = [];
