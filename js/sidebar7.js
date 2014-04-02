@@ -4,7 +4,6 @@ window.onload=function(){
 	var masterWidth = window.innerWidth;
 	var masterHeight = window.innerHeight;
 	var meterOptions = {'animDeclare' : {}, 'animMix' : {}, 'type' : {}, 'duration' : {}, 'anim' : {}, 'sync' : {}, 'order' : {}, 'permanence' : {}, 'division' : {}};
-	var gatheredAnimations = animationHunter();
 	initializeGradients();
 	$("linearGradient .verticalG").attr('x1', masterHeight);
 	function initializeGradients()
@@ -20,25 +19,28 @@ window.onload=function(){
 //////Initialize Animations/////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////
-	animationHunter.prototype = new Object;
-	animationHunter.prototype.constructor = animationHunter;
-	function animationHunter() {
-		///an unorganized array of unfiltered animation object
-		this.allAnimations = [];
-		
-		///an array object that is indexed by mix and points to created animation, use this to trigger/calculate///
-		this.namespaceGroup = [];
-		
-		///just a simple reference of all the mixes available used by the controller to calculate mix transitions
-		this.mixGroup = [];
-		this.mixGroup.push('default');
-		
-		///an array that points from the animation namespace to the different possible mixes(including default)
-		///for easy reference in the mix transition calculation
-		this.namespaces = [];
-		
-		
-		this.getAllAnimations = function() {
+
+
+	var animationHunter = {
+		create : function() {
+			this.extend({
+				///an unorganized array of unfiltered animation object
+				allAnimations : [],
+				///an array object that is indexed by mix and points to created animation, use this to trigger/calculate///
+				namespaceGroup : [],
+				
+				///just a simple reference of all the mixes available used by the controller to calculate mix transitions
+				mixGroup : ['default'],
+				
+				///an array that points from the animation namespace to the different possible mixes(including default)
+				///for easy reference in the mix transition calculation
+				namespaces : []
+			
+			});
+			this.getAllAnimations();
+			return this;
+		}, 
+		getAllAnimations : function() {
 			var animationRE = /^animDeclare_/;
 			var animations=[],els=document.getElementsByTagName('*');
 			for (var i=els.length;i--;) {
@@ -49,8 +51,8 @@ window.onload=function(){
 			this.allAnimations =  animations;
 			this.makeAnimationObjects();
 			/*thanks, Phrogz*/
-		}
-		this.makeAnimationObjects = function() {
+		}, 
+		makeAnimationObjects : function() {
 			/* this function makes the animation Objects that the animation 
 			trigger refers to know what and when to fire every object
 			this object later will calculate all the time divisions,
@@ -105,8 +107,8 @@ window.onload=function(){
 			////send argument to the creation methods//
 			this.allAnimations = processedAnimations;
 			this.setNamespaceMix();
-			}
-		this.setNamespaceMix = function() {
+		},
+		setNamespaceMix : function() {
 			
 			/* needs correct animation creation function... I was lazy*/
 			for(var individualAnimation in this.allAnimations) {
@@ -136,9 +138,8 @@ window.onload=function(){
 					this.mixGroup.push(this.allAnimations[individualAnimation]['mix']);
 				}
 			}
-			}
-		this.getAllAnimations();
-	
+		}
+
 		///test with multiple animations///
 		///test with duplicate named animations too///
 		///test with duplicate name but different mix///
@@ -146,49 +147,50 @@ window.onload=function(){
 		///which should be relatively identical to the animation group group/// 
 	}
 	
-	
-
-	animationController.prototype = new Object;
-	animationController.prototype.constructor = animationController;
-	function animationController(animationNamespaces, mixlist, animationObjects) {
-		//this is the switching mechanism to control which animations are actively being manipulated
-		//these properties are referenced (and the animations thusly) to set local time, get divisional information
-		//this type of group structure is needed, but should be altered to be more fluid. 
-		//i.e. not just my required groups in not just my required mixings.
-		this.state = color;
-		///how does state relate to the new adding/subtracting mixes ideaology?///
-		///what I'm losing by losing these groups:
-		////the ability to control by color alone
-		////how to bring this in the remix...
+	var gatheredAnimations = animationHunter.create();
+	var animationController = animationHunter.extend({
+		create: function(args) {
+			var self = animationHunter.create.call(this);
+			///make sure it inherits these: namespaceGroup : [],mixGroup : ['default'],namespaces : []
+			return self;
+		},
+		randomizer: function(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		},
+		setAnimationControllerAttributes : function() {
+			//this is the switching mechanism to control which animations are actively being manipulated
+			//these properties are referenced (and the animations thusly) to set local time, get divisional information
+			//this type of group structure is needed, but should be altered to be more fluid. 
+			//i.e. not just my required groups in not just my required mixings.
+			this.state = color;
+			///how does state relate to the new adding/subtracting mixes ideaology?///
+			///what I'm losing by losing these groups:
+			////the ability to control by color alone
+			////how to bring this in the remix...
 		
-		///can still reference it by calling
-		///however, it will not look for the default fallback or previous animation...
-		///the animations should not be interrupted, so maybe this should have a garbage collection 
-		///that collects once the time loop is finished?
-		this.animationNamespaces[namespace][mix];
-		///generate these for each animationNamespaces[namespace]
-		this.background = backgroundGroup[color];
-		this.bottomBar = bottomBarGroup[color];
-		this.topBars = topBarsGroup[color];
-		this.centerContent = centerContentGroup[color];
-		this.centerFlair = centerFlairGroup[color];
-		this.transitionIn = transitionInGroup[color];
-		this.transitionOut = transitionOutGroup[color];
-		this.loop = loopGroup[color];
-		this.frame = 0;
-		this.randomizer = function(min, max) {
-   		 	return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-		/*needs to be modified to take a varying amount of perameters
-		  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
-		this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
-		Object.defineProperty(this, 'progress', {
-			enumerable: false,
-			get: function(){return valuetoreturn;},
-			set: function(value){valuetoreturn = value;},
+			///can still reference it by calling
+			///however, it will not look for the default fallback or previous animation...
+			///the animations should not be interrupted, so maybe this should have a garbage collection 
+			///that collects once the time loop is finished?
+			this.animationNamespaces[namespace][mix];
+			///generate these for each animationNamespaces[namespace]
+			this.background = backgroundGroup[color];
+			this.bottomBar = bottomBarGroup[color];
+			this.topBars = topBarsGroup[color];
+			this.centerContent = centerContentGroup[color];
+			this.centerFlair = centerFlairGroup[color];
+			this.transitionIn = transitionInGroup[color];
+			this.transitionOut = transitionOutGroup[color];
+			this.loop = loopGroup[color];
+			this.frame = 0;
 			
-		});
-		this.setProgress = function(command, data) {
+			/*needs to be modified to take a varying amount of perameters
+			  also will change based on groups active, so perhaps overlapping namespaces aren't great? */	
+			this.progress = { 'background' : '', 'bottomBar' :  '', 'topBars' : '', 'centerContent' : '', 'centerFlair' : '', 'transitionIn' : '', 'transitionOut' : ''};
+			this.setProgress('initialize');
+		
+		},
+		setProgress : function(command, data) {
 			//need to formulate bpm to something that can take the place of 10000 and 6000
 			//This is the stage progress. From the initial tick all other timing events should be derrived from their individual duration and their delay.
 			if(command == 'initialize') {
@@ -213,8 +215,8 @@ window.onload=function(){
 				this.master = (Date.now() - this.initial) + (this.frame * 1000);
 				this.progressLoop();
 			}	
-		}
-		this.progressLoop = function() {
+		}, 
+		progressLoop : function() {
 			for(var property in this.progress) {
 				if(this[property] !== undefined && this[property] instanceof chainedAnimation) {
 					this.progress[property] = ((Date.now() - this[property].local_initial)/this[property].stageLength);
@@ -238,14 +240,18 @@ window.onload=function(){
 					this.progress[property] = ((Date.now() - this.initial)/this[property].duration);
 				}
 			}
+		},
+		remix : function(operation, mix) {
+		
 		}
-		this.setProgress('initialize');
-		this.respond = function() {};
-		this.remix = function(operation, mix) {
 		
-		};
 		
-	}
+	});
+	eventEmitter.define("addEventListener", eventEmitter.on);
+	animationController.addEventListener("resize", function (oldSize, newSize) {
+    	//do something
+	});
+	var  controller = animationController.create();
 
 
 
@@ -257,25 +263,168 @@ window.onload=function(){
 	}
 
 
-	function createController(func){
-		//if it has a type, set it and remove it from the argument array, if not, default to oneshot.
-		//furthermore, remove that element from the arguments if it exists.
-		var args = Array.prototype.slice.call(arguments, 0);
-		var typeToSet = (args['type'] != 'undefined') ? args['type'] : 'oneshotAnimation';
-		if(args.indexOf('type') != 'undefined'){
-			args = Array.prototype.slice.call(args.indexOf('type'), 1);
-		} 
-		console.log(typeToSet);
-		var object = Object.create(typeToSet.prototype);
-		console.log(object);
-		typeToSet.apply(object, args);
-		return object;
-	}
-
-
-	function respond() {
-	
-	}
+	///the blueprint for an event responder and validator
+	 var eventEmitter = blueprint(function () {
+	     var events = Object.create(null);
+	 
+	     this.on = function (event, listener) {
+	         if (typeof events[event] !== "undefined")
+	             events[event].push(listener);
+	         else events[event] = [listener];
+	     };
+	 
+	     this.emit = function (event) {
+	         if (typeof events[event] !== "undefined") {
+   	          var listeners = events[event];
+   	          var length = listeners.length, index = length;
+   	          var args = Array.prototype.slice.call(arguments, 1);
+	 
+   	          while (index) {
+   	              var listener = listeners[length - (index--)];
+   	              listener.apply(this, args);
+   	          }
+   	      }
+   	  };
+ 	});
+ 	///should be able to add a validator to any object so long as I use 
+ 		//something.addArrayValidator('args')
+		//not quite sure how to call it this way...
+ 	var validator = blueprint(function() {
+ 		///validation functions////
+		Object.defineProperty(this, 'validateArgArray', {
+			value :
+		 		function(unparsedArgs, countOfArgs, possibleArgs) {
+					var cleanedArray = new SpecialArray();
+					for(var parse in unparsedArgs) {
+						if(! possibleArgs[parse]) {
+							throw new Error("invalid argument attribute '"+parse );
+						} 
+						try {
+							this.validateArgContent(unparsedArgs[parse], countOfArgs[parse], possibleArgs[parse]);
+							cleanedArray.add(parse, unparsedArgs[parse]);
+						
+						}
+						catch(e) {
+							throw new Error("invalid options attribute '" + parse + "'");
+						}
+						
+					}
+						return cleanedArray;
+						
+				}, 
+			enumerable : false 
+		});
+		Object.defineProperty(this, 'validateArgContent', {
+			value : 
+		 		function(argToParse, numArgs, argToCrossCheck) {
+					if(typeof argToParse == 'object' && numArgs == 0) {
+			
+						for(var parsee in argToParse) {
+							switch (typeof argToCrossCheck){
+		    					// Case validation function.
+    							case 'function':
+    	    		 				argToCrossCheck.call(this, argToParse);
+    	    		 				break;            	
+    							// Case direct type. 
+    	    					case 'string':
+		    			    		if (typeof argToParse !== argToCrossCheck){
+		    				    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		    			    		}
+		    			    	//case array of possibilities	
+		    			    	case 'object':
+		    		    			var objectCheck = argToCrossCheck.length;
+		       			 			for(var possibility in argToCrossCheck) {
+		       			 				if(argToParse[parsee].substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
+		        							continue;
+		        						} else {
+		        							objectCheck --;
+		        						}
+		        					}
+		        					if (objectCheck = 0){
+		    			    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		    			    		}
+			    				break;
+							}		
+						}
+					} else if(typeof argToParse == 'object' && numArgs == 1) {	
+			
+						switch (typeof argToCrossCheck){
+		    				// Case validation function.
+    						case 'function':
+    	     					argToCrossCheck.call(this, argToParse);
+    	     					break;            	
+    						// Case direct type. 
+    	    				case 'string':
+    	    					if(typeof parseInt(argToParse) == argToCrossCheck) {
+    	    						break;
+    	    					}else if (typeof argToParse != argToCrossCheck){
+		    			    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		    	    			}
+		    	    			break;	
+		    	    		//case array of possibilities	
+		    	    		case 'object':
+		    	    			var objectCheck = argToCrossCheck.length;
+		       			 		for(var possibility in argToCrossCheck) {
+		       			 			if(argToParse.toString().substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
+		        						continue;
+		        					} else {
+		        						objectCheck --;
+		        					}
+		        				}
+		        				if (objectCheck = 0){
+		    			    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		    			    	}
+			    			break;
+						}		
+					}else if (typeof argToParse != 'object') {
+				
+						switch (typeof argToCrossCheck){
+						
+		    				// Case validation function.
+    						case 'function':
+    	     					argToCrossCheck.call(this, argToParse);
+    	     					break;            	
+    						// Case direct type. 
+    	    				case 'string':
+    	    					if(argToCrossCheck == 'number' ) {
+    	    						if (parseInt(argToParse) == 'NaN'){
+		    			    			throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		        					}
+    	    					} else {
+    	    						if (typeof argToParse !== argToCrossCheck){
+		    	    					throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		        					}
+    	    					}
+		        			case 'number': 
+		        				if(argToCrossCheck == 'number') {
+		        					break;
+		        				}		
+		        			//case array of possibilities
+		        			case 'object':
+		        				var objectCheck = argToCrossCheck.length;
+		        				for(var possibility in argToCrossCheck) {
+		        					if(argToParse.substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
+		        						continue;
+		        					} else {
+		        						objectCheck --;
+		        					}
+		        				}
+		        				if (objectCheck = 0){
+		    	    				throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
+		    	    			}
+			    			break;
+						}	
+					} else {
+			
+						throw new Error("Too many arguments '" + Object.toJSON(argToParse) + "' expected number of arguments " + numArgs);
+					}
+			 
+				},
+		 			enumerable : false
+			 });
+ 	});
+ 	validator.define("addArrayValidator", validator.validateArgArray);
+ 	validator.define("addSingletonValidator", validator.validateArgContent);
 
 
 
@@ -395,271 +544,166 @@ window.onload=function(){
 /////////////////////////////////////////////////////
 ////////Individual Animation Prototypes//////////////
 /////////////////////////////////////////////////////
+	var rectangle = {
+ 		//define rectangle.create(); so we can pass arguments to generate a unique object on creation.
+     	create: function (width, height) {
+         	return this.extend({
+             	height: height,
+             	width: width
+         	});
+     	},
+    	 area: function () {
+        	 return this.width * this.height;
+     	}
+ 	};
+ 
+ 	
 
 
 
-	function TemporalPattern(temporalArgs) {
-		///this turns the arguments into an array to be cleaned.
-		this.initialArgs = Array.prototype.slice.call(arguments, 0)[0];
-		
-		//The following are hidden attributes to the temporal pattern object.
-		//initialize presets, possibility and numbers//
-		Object.defineProperty(this, 'presets', {
-			value : {
-				'duration' : 0, 
-				'anim' : 'particular', 
-				'noteSync' : 'concerted', 
-				'order' : 'forward', 
-				'permanence' : 'persist', 
-				'division' : 'linear', 
-				'repeat' : 'none',
-				'dom' : null,
-				'measures' : 1,
-				'type' : 'oneshot'
+
+	var TemporalPattern : {
+		create : function(temporalArgs) {
+			return this.extend({
+				//The following are hidden attributes to the temporal pattern object.
+				//initialize presets, possibility and numbers might not actually set well.
+				Object.defineProperty(this, 'presets', {
+					value : {
+						'duration' : 0, 
+						'anim' : 'particular', 
+						'noteSync' : 'concerted', 
+						'order' : 'forward', 
+						'permanence' : 'persist', 
+						'division' : 'linear', 
+						'repeat' : 'none',
+						'dom' : null,
+						'measures' : 1,
+						'type' : 'oneshot'
+					},
+					enumerable : false 
+				});
+				Object.defineProperty(this, 'possibilities',  {
+					value : {
+						'duration' : 'number', 
+						'anim' : ['draw', 'undraw', 'fadeto', 'colorshift', 'svgMatrix', 'particular'], 
+						'noteSync' : [ 'pair', 'random', 'concerted'], 
+						'order' : ['forward', 'backward', 'randomEach', 'randomOnce'], 
+						'permanence' : ['persist', 'decay', 'none'], 
+						'division' : ['meter', 'fib', 'linear', 'mult'], 
+						'repeat' : 'number',
+						'dom' : 'object',
+						'measures' : 'number',
+						'type' : ['repeatable', 'oneshot', 'chained']
+					},
+					enumerable : false
+				});
+				Object.defineProperty(this, 'numbers', {
+					value: {
+						'duration' : 1, 
+						'anim' : 0, 
+						'noteSync' : 1, 
+						'order' : 1, 
+						'permanence' : 1, 
+						'division' : 1, 
+						'repeat' : 1,
+						'dom' : 1,
+						'measures' : 1,
+						'type' : 1
+						},
+						enumerable : false 
+					});
+					///this turns the arguments into an array to be cleaned.
+					initialArgs : Array.prototype.slice.call(arguments, 0)[0],
+				});
 			},
-			enumerable : false 
-		});
-		Object.defineProperty(this, 'possibilities',  {
-			value : {
-				'duration' : 'number', 
-				'anim' : ['draw', 'undraw', 'fadeto', 'colorshift', 'svgMatrix', 'particular'], 
-				'noteSync' : [ 'pair', 'random', 'concerted'], 
-				'order' : ['forward', 'backward', 'randomEach', 'randomOnce'], 
-				'permanence' : ['persist', 'decay', 'none'], 
-				'division' : ['meter', 'fib', 'linear', 'mult'], 
-				'repeat' : 'number',
-				'dom' : 'object',
-				'measures' : 'number',
-				'type' : ['repeatable', 'oneshot', 'chained']
-			},
-			enumerable : false
-		});
-		Object.defineProperty(this, 'numbers', {
-			value: {
-			'duration' : 1, 
-			'anim' : 0, 
-			'noteSync' : 1, 
-			'order' : 1, 
-			'permanence' : 1, 
-			'division' : 1, 
-			'repeat' : 1,
-			'dom' : 1,
-			'measures' : 1,
-			'type' : 1
-			},
-			enumerable : false 
-		});
-		
-		///validation functions////
-		Object.defineProperty(this, 'validateArgArray', {
-			value :
-		 		function(unparsedArgs, countOfArgs, possibleArgs) {
-					var cleanedArray = new SpecialArray();
-					for(var parse in unparsedArgs) {
-						if(! possibleArgs[parse]) {
-							throw new Error("invalid argument attribute '"+parse );
-						} 
-						try {
-							this.validateArgContent(unparsedArgs[parse], countOfArgs[parse], possibleArgs[parse]);
-							cleanedArray.add(parse, unparsedArgs[parse]);
-						
+			setInitials : function() {
+				///add whichever fields pass the validation, if the argument isn't given, it uses a default////
+				///////this is the setter mechanism to this prototype
+				for(var field in this.presets) {
+					if(field == 'dom' ) {
+						if(this.allArgs.contains(field)) {
+							this[field] = this.allArgs[field];
+							this.allArgs.remove(field);
+							continue;
+						} else {
+							this[field] = this.presets[field];
+							continue;
 						}
-						catch(e) {
-							throw new Error("invalid options attribute '" + parse + "'");
-						}
-						
-					}
-						return cleanedArray;
-						
-				}, 
-			enumerable : false 
-		});
-		Object.defineProperty(this, 'validateArgContent', {
-			value : 
-		 		function(argToParse, numArgs, argToCrossCheck) {
-			if(typeof argToParse == 'object' && numArgs == 0) {
-		
-				for(var parsee in argToParse) {
-					switch (typeof argToCrossCheck){
-		    			// Case validation function.
-    					case 'function':
-    	     				argToCrossCheck.call(this, argToParse);
-    	     				break;            	
-    					// Case direct type. 
-    	    			case 'string':
-		    	    		if (typeof argToParse !== argToCrossCheck){
-		    		    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		    	    		}
-		    	    	//case array of possibilities	
-		    	    	case 'object':
-		    	    		var objectCheck = argToCrossCheck.length;
-		       		 		for(var possibility in argToCrossCheck) {
-		       		 			if(argToParse[parsee].substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
-		        					continue;
-		        				} else {
-		        					objectCheck --;
-		        				}
-		        			}
-		        			if (objectCheck = 0){
-		    		    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		    		    	}
-			    		break;
-					}		
-				}
-			} else if(typeof argToParse == 'object' && numArgs == 1) {	
-			
-					switch (typeof argToCrossCheck){
-		    			// Case validation function.
-    					case 'function':
-    	     				argToCrossCheck.call(this, argToParse);
-    	     				break;            	
-    					// Case direct type. 
-    	    			case 'string':
-    	    				if(typeof parseInt(argToParse) == argToCrossCheck) {
-    	    					break;
-    	    				}else if (typeof argToParse != argToCrossCheck){
-		    		    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		    	    		}
-		    	    		break;	
-		    	    	//case array of possibilities	
-		    	    	case 'object':
-		    	    		var objectCheck = argToCrossCheck.length;
-		       		 		for(var possibility in argToCrossCheck) {
-		       		 			if(argToParse.toString().substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
-		        					continue;
-		        				} else {
-		        					objectCheck --;
-		        				}
-		        			}
-		        			if (objectCheck = 0){
-		    		    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		    		    	}
-			    		break;
-					}		
-			}else if (typeof argToParse != 'object') {
-			
-				switch (typeof argToCrossCheck){
-					
-		    		// Case validation function.
-    				case 'function':
-    	     			argToCrossCheck.call(this, argToParse);
-    	     			break;            	
-    				// Case direct type. 
-    	    		case 'string':
-    	    			if(argToCrossCheck == 'number' ) {
-    	    				if (parseInt(argToParse) == 'NaN'){
-		    	    			throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		        			}
-    	    			} else {
-    	    				if (typeof argToParse !== argToCrossCheck){
-		    	    			throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		        			}
-    	    			}
-		        	case 'number': 
-		        		if(argToCrossCheck == 'number') {
-		        			break;
-		        		}
-		        	//case array of possibilities
-		        	case 'object':
-		        		var objectCheck = argToCrossCheck.length;
-		        		for(var possibility in argToCrossCheck) {
-		        			if(argToParse.substring(0, argToCrossCheck[possibility].length) == argToCrossCheck[possibility]){
-		        				continue;
-		        			} else {
-		        				objectCheck --;
-		        			}
-		        		}
-		        		if (objectCheck = 0){
-		    	    		throw new Error("Invalid argument '" + Object.toJSON(argToParse) + "' expected type " + argToCrossCheck);
-		    	    	}
-			    	break;
-				}	
-			} else {
-			
-				throw new Error("Too many arguments '" + Object.toJSON(argToParse) + "' expected number of arguments " + numArgs);
-			}
-			 
-		},
-		 	enumerable : false
-		 });
-		
-		///this calls the cleaning function on the arguments AND mixes it with the presets, overwriting as it goes.
-		this.allArgs = this.validateArgArray(this.initialArgs, this.numbers, this.possibilities);	
-	
-		///add whichever fields pass the validation, if the argument isn't given, it uses a default////
-		///////this is the setter mechanism to this prototype
-		for(var field in this.presets) {
-			if(field == 'dom' ) {
-				if(this.allArgs.contains(field)) {
-					this[field] = this.allArgs[field];
-					this.allArgs.remove(field);
-					continue;
-				} else {
-					this[field] = this.presets[field];
-					continue;
-				}
 				
-			} else if(typeof this.allArgs[field] == 'object' && this.allArgs[field].length > 1) {
-				if(this.allArgs.contains(field)) {
-					this[field] = this.allArgs[field];
-					this.allArgs.remove(field);
-					continue;
-				} else {
-					this[field] = this.presets[field];
-					continue;
+					} else if(typeof this.allArgs[field] == 'object' && this.allArgs[field].length > 1) {
+						if(this.allArgs.contains(field)) {
+							this[field] = this.allArgs[field];
+							this.allArgs.remove(field);
+							continue;
+						} else {
+							this[field] = this.presets[field];
+							continue;
+						}
+					} else {
+						if(this.allArgs.contains(field)) {
+							this[field] = this.allArgs[field][0];
+							this.allArgs.remove(field);
+							continue;
+						} else {
+							this[field] = this.presets[field];
+							continue;
+						}
+					}
 				}
-			} else {
-				if(this.allArgs.contains(field)) {
-					this[field] = this.allArgs[field][0];
-					this.allArgs.remove(field);
-					continue;
-				} else {
-					this[field] = this.presets[field];
-					continue;
-				}
-			}
-		}
-		///return any type-specific arguments to the prototype to handle///
-		this.typeArgs = this.allArgs;
-		
-	}
-		TemporalPattern.prototype.fire = function(){};
-		TemporalPattern.prototype.calculate = function(){};
-		TemporalPattern.prototype.gather = function(){
-			///no longer needs to find all elements
-			///instead, needs to take dom and sort it.
-			/////parse through elements
-			////////if measureDeclare, make subanimation and parse it, add fire to array
-			////////if not, parse element and add to array.
-			//////////this is in animations/divisions/element/end/begin only only argument it should take is % of completion.
-			////////array is {timetofire : fire()}
-			////////if fire is a subanimation, it has one as well
-			/////construct ending/transition
-			var typeElems = document.getElementsByClassName(this.type);
-    		var colorElems = document.getElementsByClassName(this.color);
-    		var returnedElems = [];
-    		var checkedElems = [];
-    		for (var j in colorElems) {
-        		checkedElems[colorElems[j]] = colorElems[j];
-      		}
-     		for (var i in typeElems) {
-        		if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
-        	    	if(this.lineId == false) {
-        	    		var tempClass = typeElems[i].className.baseVal.split(" ")[2];
-        	    		if(typeof returnedElems[tempClass] == 'undefined') {
-        	    	 	 returnedElems[tempClass] = [];
-        	    	 	 returnedElems[tempClass].push(typeElems[i]);
-        	    		}else {
-        	    	  	returnedElems[tempClass].push(typeElems[i]);
-        	    		}
-        	    	}else {
-        	    	  	returnedElems.push(typeElems[i]);
-        	    	}
-       			}
-     		}
-    		this.elems = returnedElems;
-		};
-		TemporalPattern.prototype.particularize = function(){
+				///return any type-specific arguments to the prototype to handle///
+				this.typeArgs = this.allArgs;
+			},
+			gather : function() {
+				///uses this.dom
+				var child = this.dom.firstChild;
+				var measureRE = /^measureDeclare_/;
+				while(child){
+					var theseClasses = child.className.split(' ');
+					for (var i=theseClasses.length;i--;) {
+						if (measureRE.test(theseClasses[i])){
+							console.log('why yes it does');
+						} 
+					} 
+					
+   					if(hasClass(child, 'measureDeclare')){
+        			//do your stuff here
+    				}
+    				child = child.nextSibling;
+				}			
+				///no longer needs to find all elements
+				///instead, needs to take dom and sort it.
+				/////parse through elements
+				////////if measureDeclare, make subanimation and parse it, add fire to array
+				////////if not, parse element and add to array.
+				//////////this is in animations/divisions/element/end/begin only only argument it should take is % of completion.
+				////////array is {timetofire : fire()}
+				////////if fire is a subanimation, it has one as well
+				/////construct ending/transition
+				var typeElems = document.getElementsByClassName(this.type);
+    			var colorElems = document.getElementsByClassName(this.color);
+    			var returnedElems = [];
+    			var checkedElems = [];
+    			for (var j in colorElems) {
+        			checkedElems[colorElems[j]] = colorElems[j];
+      			}
+     			for (var i in typeElems) {
+        			if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
+        		    	if(this.lineId == false) {
+        		    		var tempClass = typeElems[i].className.baseVal.split(" ")[2];
+        		    		if(typeof returnedElems[tempClass] == 'undefined') {
+        		    	 	 returnedElems[tempClass] = [];
+        		    	 	 returnedElems[tempClass].push(typeElems[i]);
+        		    		}else {
+        		    	  	returnedElems[tempClass].push(typeElems[i]);
+        		    		}
+        		    	}else {
+        		    	  	returnedElems.push(typeElems[i]);
+        		    	}
+       				}
+     			}
+    			this.elems = returnedElems;
+				},
+				particularize : function(){
 		var lengths = [];
 			for(var paths in this.elems) {
 				////cycle through all the elements that are tagged to the animation///
@@ -757,7 +801,19 @@ window.onload=function(){
 				}
 			}
 					
-			} };
+			} },
+		
+		
+		
+		
+		///this calls the cleaning function on the arguments AND mixes it with the presets, overwriting as it goes.
+		this.allArgs = this.validateArgArray(this.initialArgs, this.numbers, this.possibilities);	
+	
+		
+		
+	}
+		
+		
 		
 		
 		
@@ -868,8 +924,202 @@ window.onload=function(){
  
 			
 	};	
-		repeatable.prototype.fire = function() {};
-		repeatable.prototype.calculate = function() {};
+	//	repeatable.prototype.fire = function() {};
+	//	repeatable.prototype.calculate = function() {};
+	//	repeatable.prototype.gather = function(){
+			///uses this.dom
+			var child = this.dom.firstChild;
+			var measureRE = /^measureDeclare_/;
+			while(child){
+				var theseClasses = child.className.split(' ');
+				for (var i=theseClasses.length;i--;) {
+					if (measureRE.test(theseClasses[i])){
+						console.log('why yes it does');
+					} 
+				} 
+				
+   				if(hasClass(child, 'measureDeclare')){
+        		//do your stuff here
+    			}
+    			child = child.nextSibling;
+			}			
+			///no longer needs to find all elements
+			///instead, needs to take dom and sort it.
+			/////parse through elements
+			////////if measureDeclare, make subanimation and parse it, add fire to array
+			////////if not, parse element and add to array.
+			//////////this is in animations/divisions/element/end/begin only only argument it should take is % of completion.
+			////////array is {timetofire : fire()}
+			////////if fire is a subanimation, it has one as well
+			/////construct ending/transition
+		/*	var typeElems = document.getElementsByClassName(this.type);
+    		var colorElems = document.getElementsByClassName(this.color);
+    		var returnedElems = [];
+    		var checkedElems = [];
+    		for (var j in colorElems) {
+        		checkedElems[colorElems[j]] = colorElems[j];
+      		}
+     		for (var i in typeElems) {
+        		if (typeof checkedElems[typeElems[i]] != 'undefined' && typeof checkedElems[typeElems[i]] == 'object') {
+        	    	if(this.lineId == false) {
+        	    		var tempClass = typeElems[i].className.baseVal.split(" ")[2];
+        	    		if(typeof returnedElems[tempClass] == 'undefined') {
+        	    	 	 returnedElems[tempClass] = [];
+        	    	 	 returnedElems[tempClass].push(typeElems[i]);
+        	    		}else {
+        	    	  	returnedElems[tempClass].push(typeElems[i]);
+        	    		}
+        	    	}else {
+        	    	  	returnedElems.push(typeElems[i]);
+        	    	}
+       			}
+     		}
+    		this.elems = returnedElems;*/
+/*		};*/
+
+
+
+	///the object in question
+ 	var rectangle = {
+ 		//define rectangle.create(); so we can pass arguments to generate a unique object on creation.
+     	create: function (width, height) {
+         	return this.extend({
+             	height: height,
+             	width: width
+         	});
+     	},
+    	 area: function () {
+        	 return this.width * this.height;
+     	}
+ 	};
+ 
+ 	///extend the object prototype so it works well with multiple inheritance and extensions
+	Object.prototype.extend = function () {
+		var hasOwnProperty = Object.hasOwnProperty;
+     	var object = Object.create(this);
+     	
+     	var length = arguments.length;
+     	var index = length;
+ 		///loop through properties and inherits(by concatenation) all extended properties, allowing for multiple inheritance.
+     	while (index) {
+         	var extension = arguments[length - (index--)];
+     
+ 		
+         	for (var property in extension)
+             	if (property !== "clones" &&
+                 	hasOwnProperty.call(extension, property) ||
+                 	typeof object[property] === "undefined")
+                     	object[property] = extension[property];
+ 				
+         	if (hasOwnProperty.call(extension, "clones"))
+         		
+             	extension.clones.unshift(object);
+         	else extension.clones = [object];
+         		
+     	}
+ 
+     	return object;
+ 	};
+ 	
+	///fix instanceof for multiple prototype checking
+ 	Object.prototype.instanceof = function (prototype) {
+     	if (Object.hasOwnProperty.call(prototype, "clones"))
+         	var clones = prototype.clones;
+     	var object = this;
+ 
+     	do {
+         	if (object === prototype ||
+             	clones && clones.indexOf(object) >= 0)
+                 	return true;
+ 
+         	var object = Object.getPrototypeOf(object);
+     	} while (object);
+ 
+     	return false;
+ 	};
+
+	///adds the ability to change already created objects using the define function
+ 	Object.prototype.define = function (property, value) {
+    	 this[property] = value;
+ 	
+ 	    if (Object.hasOwnProperty.call(this, "clones")) {
+ 	        var clones = this.clones;
+ 	        var length = clones.length;
+ 	
+ 	        while (length) {
+ 	            var clone = clones[--length];
+ 	            if (typeof clone[property] === "undefined")
+ 	                clone.define(property, value);
+ 	        }
+ 	    }
+ 	};
+
+
+	///make an extension of the original object
+ 	var square = rectangle.extend({
+ 		//extend the create function of rectangle so that it creates a new square
+    	 create: function (side) {
+    	     var self = rectangle.create.call(this, side, side);
+    	     eventEmitter.call(self);
+    	     return self;
+    	 },
+    	 ///utilize extended properties easily!
+    	 resize: function (newSize) {
+    	     var oldSize = this.width;
+    	     this.width = this.height = newSize;
+    	     this.emit("resize", oldSize, newSize);
+    	 }
+ 	});
+
+
+	///fix the prototype chaining for all blueprins
+	 function blueprint(f) {
+	     var g = function () {
+	         f.apply(this, arguments);
+	         g.clones.unshift(this);
+	 
+	         var hasOwnProperty = Object.hasOwnProperty;
+	 
+	         for (var property in g)
+	             if (property !== "clones" &&
+	                 hasOwnProperty.call(g, property))
+	                     this[property] = g[property];
+	     };
+	 
+	     g.clones = [];
+	 
+	     return g;
+	 };
+
+	///make a blueprint for a prototype extension
+	 var eventEmitter = blueprint(function () {
+	     var events = Object.create(null);
+	 
+	     this.on = function (event, listener) {
+	         if (typeof events[event] !== "undefined")
+	             events[event].push(listener);
+	         else events[event] = [listener];
+	     };
+	 
+	     this.emit = function (event) {
+	         if (typeof events[event] !== "undefined") {
+   	          var listeners = events[event];
+   	          var length = listeners.length, index = length;
+   	          var args = Array.prototype.slice.call(arguments, 1);
+	 
+   	          while (index) {
+   	              var listener = listeners[length - (index--)];
+   	              listener.apply(this, args);
+   	          }
+   	      }
+   	  };
+ 	});
+ 	
+ 	var sq = square.create(5);
+ 	
+ 	sq.resize(7);
+	
+
 
 
 //////////////////////////////////////////////
@@ -911,7 +1161,7 @@ window.onload=function(){
 		/////dividing the object into moving parts.
 		/////particularizing the arguments by comparing the children against the parent.
 		console.log(object);
-
+		object.gather();
 		return object;
 	}
 
@@ -1181,7 +1431,7 @@ var c = pusher.color("#FF0000").hue(40).hex6();
 sizeSVG();
 
 purpledraw();*/
-}
+//}
 
 /////////Helper Functions//////////////////
 
