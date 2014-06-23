@@ -1,0 +1,75 @@
+/*///before load///*/
+  a.green.dead, a.green.dead:hover, a.green.dead:visited, a.green.dead:active{
+    color: white;
+    opacity: 0;
+    text-decoration: none !important;
+  }
+
+/*///white styles///*/
+  a.fuckbootstrap.active.white, a.fuckbootstrap.active.white:hover, a.fuckbootstrap.active.white:active, a.fuckbootstrap.active.white:visited, a.fuckbootstrap.active.white.purple, a.fuckbootstrap.active.white.purple:hover, a.fuckbootstrap.active.white.purple:active, a.fuckbootstrap.active.white.purple:visited, a.fuckbootstrap.option.white, a.fuckbootstrap.option.white:active, a.fuckbootstrap.option.white:visited, a.fuckbootstrap.option.white:hover{
+    color: #9ea3a9 !important;
+    font-weight: 400;
+    opacity: 1;
+    line-height: 110%;
+  }
+  a.fuckbootstrap.inactive.white, a.fuckbootstrap.inactive.white:hover, a.fuckbootstrap.inactive.white:active, a.fuckbootstrap.inactive.white:visited, a.fuckbootstrap.inactive.white.purple, a.fuckbootstrap.inactive.white.purple:hover, a.fuckbootstrap.inactive.white.purple:active, a.fuckbootstrap.inactive.white.purple:visited{
+    color: #9ea3a9 !important;
+    font-weight: 400;
+    opacity: 1;
+    line-height: 110%;
+  }
+
+/*///green styles///*/
+   a.fuckbootstrap.inactive.green, a.fuckbootstrap.inactive.green:hover, a.fuckbootstrap.inactive.green:visited, a.fuckbootstrap.inactive.green:active  {
+     color:#52BC46;
+    opacity: .5;
+    font-weight: 400;
+    line-height: 110%;
+   }
+    a.fuckbootstrap.active.green, a.fuckbootstrap.active.green:hover, a.fuckbootstrap.active.green:visited, a.fuckbootstrap.active.green:active, a.fuckbootstrap.option.green a.fuckbootstrap.option.green:active, a.fuckbootstrap.option.green:visited, a.fuckbootstrap.option.green:hover  {
+     color:#52BC46;
+    opacity: .9;
+    font-weight: 400;
+    line-height: 110%;
+   }
+   
+/*///purple styles///*/
+   a.fuckbootstrap.active.purple, a.fuckbootstrap.active.purple:hover, a.fuckbootstrap.active.purple:visited, a.fuckbootstrap.active.purple:active, a.fuckbootstrap.active.purple.green, a.fuckbootstrap.active.purple.green:hover, a.fuckbootstrap.active.purple.green:visited, a.fuckbootstrap.active.purple.green:active, a.fuckbootstrap.option.purple, a.fuckbootstrap.option.purple:active, a.fuckbootstrap.option.purple:visited, a.fuckbootstrap.option.purple:hover {
+     color:#e36eff;
+     font-weight: 400;
+    opacity: .9;
+   }
+    a.fuckbootstrap.inactive.purple, a.fuckbootstrap.inactive.purple:hover, a.fuckbootstrap.inactive.purple:visited, a.fuckbootstrap.inactive.purple:active, a.fuckbootstrap.inactive.purple.green, a.fuckbootstrap.inactive.purple.green:hover, a.fuckbootstrap.inactive.purple.green:visited, a.fuckbootstrap.inactive.purple.green:active {
+     color:#e36eff;
+     font-weight: 400;
+    opacity: .7;
+   }
+
+/*///subnav styles///*/
+  .in, a.fuckbootstrap.in, a.fuckbootstrap.in:visited, a.fuckbootstrap.in:hover, a.fuckbootstrap.in:active{
+    opacity: 1;
+  }
+  .out, a.fuckbootstrap.out, a.fuckbootstrap.out:visited, a.fuckbootstrap.out:hover, a.fuckbootstrap.out:active{
+    opacity: 0;
+  }
+  a.fuckbootstrap.title, a.fuckbootstrap.title:hover, a.fuckbootstrap.title:visited, a.fuckbootstrap.title:active {
+    color: #3eea26;
+  }
+  .simple.out{
+    opacity: 0;
+  }
+  .simple.white{
+  color: #cccccc;
+}
+  .simple.in{
+    z-index: 7;
+    line-height: 130%;
+    transition: opacity: 0.5s ease-in; -moz-transition: opacity: 0.5s ease-in; -webkit-transition: opacity: 0.5s ease-in; -o-transition: opacity: 0.5s ease-in;
+  }
+  
+/*///transitions///*/
+  a, a:hover, a:visited, a:active {
+    transition: opacity: 0.3s ease-in; -moz-transition: opacity: 0.3s ease-in; -webkit-transition: opacity: 0.3s ease-in; -o-transition: opacity: 0.3s ease-in;
+    transition: color: 0.3s ease-in; -moz-transition: color: 0.3s ease-in; -webkit-transition: color: 0.3s ease-in; -o-transition: color: 0.3s ease-in;
+  }
+

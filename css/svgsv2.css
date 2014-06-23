@@ -1,0 +1,47 @@
+.logo_background_container {background-color: transparent; fill: url(#logo_background); stroke: none; width: 100%;}
+.body_background_left_container {fill: url(#body_background_left);background-color:transparent;stroke: none;}
+.body_background_right_cointainer {fill: url(#body_background_right);background-color:transparent;stroke: none;}
+
+
+.shutter {	fill: #ffffff; stroke-miterlimit: 10; stroke-width: .5;}
+
+
+
+
+
+#detail, #innercircle, #outercircle, #bottomjaw, #topjaw, #circlejaw{background-color: transparent;}
+#svggroup {transform-origin: center center;-ms-transform-origin: center center; /* IE 9 */-webkit-transform-origin: center center; /* Safari and Chrome */-moz-transform-origin: center center; /* Firefox */-o-transform-origin: center center; /* Opera */}
+#whitebg{
+	fill: #52bc46;
+	opacity: 0;
+}
+.fadeinline {
+	opacity: 0;
+}
+
+#linework{
+	opacity: 0;
+}
+
+#name_background_1, #name_background_2 {
+	z-index: -5;
+	position: fixed;
+	height: 100%;
+	width: 11%;
+	min-width: 107px;
+}
+#frame1 {
+	fill: url(#fill1);
+}
+#frame2 {
+	fill: url(#fill2);
+}
+#frame3 {
+	fill: url(#fill3);
+}
+#frame4 {
+	fill: url(#fill4);
+}
+#frame5  {
+	fill: url(#fill5);
+}
