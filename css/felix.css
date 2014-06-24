@@ -30,15 +30,14 @@
 	 #greenwrapper, #normalwrapper{
 			height: 95%;
 		}
-	 #designwrapper, #hidden2Content{
+	 #hidden2Content{
 			height: 75%;
 		}
+
 		#wholedesign{
 			height: 80%;
 		}
-		#designrow1{
-			height: 50%;
-		}
+
 		#designnav{
 			height: 30px;
 		}
@@ -64,9 +63,10 @@
 		#dynamicContent{
 			width: 100%
 		}
-		#designwrapper, #hidden2Content{
+		#designwrapper, #designwrapper.out, #hidden2Content, #hidden2Content.out{
 			width: 0px;
 		}
+
 
 		#logobackgroundcontainer{
 			width: 100%;
@@ -87,10 +87,7 @@
 
 
 	/*//top, left, right, bottom styles//*/
-		#designrow1{
-			margin-top: 25%;
-			margin-bottom: 25%;
-		}
+
 		#dynamicContent, #mainContent, #logoanimation, #definitions{
 			top: 0px;
 		}
@@ -109,6 +106,7 @@
 		#designwrapper{
 			right: 0px;
 		}
+
 		#hidden2Content{
 			left: -15px;
 		}
@@ -186,7 +184,6 @@
 	/*//color styles//*/
 		
 		#hidden2Content, #designwrapper{
-			opacity: 1 !important;
 			background-color: white;
 		}
 		#devicenav.white{
@@ -199,6 +196,7 @@
 		#logometawrapper{
 			/*background-image: url(fallbackimage.png);*/
 		}
+
 
 		
 
@@ -224,6 +222,7 @@
 		.fuckbootstrap.image{
 			vertical-align: initial !important;
 		}
+
 		
 		
 	/*//font sizes//*/
@@ -290,9 +289,14 @@
 			color:#A745BF;
 			opacity: 1 !important;
 		}
+		.subhead, .content{
+			letter-spacing: 1px !important;
+		}
+		.quadrant-title{
+			letter-spacing: 2px !important;
+		}
 	
-	
-		.dark.white{
+		.dark.white, .content.gray{
 			color: #959a9e;
 			letter-spacing: 1px;
 		}
@@ -364,7 +368,23 @@
 	////////////////////////////
 								 */
 	
-	@media(max-width:767px){
+@media(max-width:767px){
+
+	.design-san.quadrant, #designrow1, #designwrapper {
+		height: 350px;
+	}
+	.design-san.sub-quadrant{
+		pading-top: 0px;
+		height: 290px;
+		width: 320px;
+	}
+	#designrow1{
+		width: 2900px;
+	}
+	.design-san.quadrant-title{
+				margin-bottom: 10px;
+		height: 20px;
+	}
 	.hidden2-san.quadrants{
 
 		background: white;
@@ -453,7 +473,7 @@
 			font-family: josefin sans;
 			font-weight: 400;
 		}
-		.subdevice{
+		.subdevice, .quadrant-title{
 			font-size: 20px;
 			font-family: josefin sans;
 			font-weight: 400;
@@ -483,10 +503,10 @@
 
 			max-height: 370px;
 		}
-		#simplebackground.white, #devicenav.white{
+		#simplebackground.white, #devicenav.white, #myname.white{
 			background-color: rgba(255, 255, 255, 0.9); 
 		}
-		#simplebackground.black, #devicenav.black{
+		#simplebackground.black, #devicenav.black, #myname.black{
 			background-color: rgba(0, 0, 0, 0.6); 
 		}
 		#designContent{
@@ -532,6 +552,25 @@
 		}
 	}
 	@media(min-width:768px){	
+	
+	#designwrapper{
+		height: 60%;
+	}
+	
+	.design-san.quadrant, #designrow1 {
+		height: 100%;
+	}
+	.design-san.sub-quadrant{
+		height: 90%;
+		width: 420px;
+	}
+	.design-san.quadrant-title{
+			margin-bottom: 15px;
+		height: 5%;
+	}
+	#designrow1{
+		width: 4500px;
+	}
 	
 	.hidden2-san.quadrant.visible-md, .hidden2-san.quadrant.visible-sm{
 		display: inline-block !important;
@@ -614,7 +653,7 @@
 			margin-left: -375px;
 		}
 		#myname{
-			padding-top: 250px;
+			padding-top: 20px;
 			opacity: 1;
 			/*fonts*/
 			font-family: josefin sans;
@@ -629,7 +668,7 @@
 			font-family: josefin sans;
 			font-weight: 400;
 		}
-		.subdevice{
+		.subdevice, .quadrant-title{
 			font-size: 25px;
 			font-family: josefin sans;
 			font-weight: 400;
@@ -648,10 +687,10 @@ display: none;
 			max-height: 0px;
 		}
 		
-		#simplebackground.white, #devicenav.white{
+		#simplebackground.white, #devicenav.white, #myname.white{
 			background-color: rgba(255, 255, 255, 0.9); 
 		}
-		#simplebackground.black, #devicenav.black{
+		#simplebackground.black, #devicenav.black, #myname.black{
 			background-color: rgba(0, 0, 0, 0.6); 
 		}
 		#simpleContent.in{
@@ -714,6 +753,9 @@ display: none;
 		}
 	}
 	@media(min-width:992px){
+	#myname.white, #myname.black{
+		background-color: transparent;
+	}
 			#navoptions{
 
 			display: block;

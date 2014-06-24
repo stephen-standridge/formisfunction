@@ -165,7 +165,11 @@ window.onload=function(){
 					'.unclick' : 'green', 
 					'#devicenav' : 'white', 
 					'.device' : 'green', 
-					'.subdevice' : 'green'
+					'.subdevice' : 'green',
+					'.quadrant-title' : 'green',
+					'.subhead' : 'green', 
+					'.sub-quadrant' : 'green',
+					'.name' : 'white'
 				},
 				'normal' : {
 					/*about section classes*/
@@ -189,7 +193,11 @@ window.onload=function(){
 					'.unclick' : 'green', 
 					'#devicenav' : 'white', 
 					'.device' : 'green', 
-					'.subdevice' : 'green'
+					'.subdevice' : 'green',
+					'.quadrant-title' : 'green',
+					'.subhead' : 'green', 
+					'.sub-quadrant' : 'green',
+					'.name' : 'white'
 				},
 				'hidden2' : {
 					/*illustration section classes*/
@@ -213,7 +221,11 @@ window.onload=function(){
 					'.unclick' : 'green', 
 					'#devicenav' : 'white', 
 					'.device' : 'green', 
-					'.subdevice' : 'green'
+					'.subdevice' : 'green',
+					'.quadrant-title' : 'green',
+					'.subhead' : 'green', 
+					'.sub-quadrant' : 'green',
+					'.name' : 'white'
 				},
 				'design' : {
 					/*design section classes*/
@@ -237,7 +249,11 @@ window.onload=function(){
 					'.unclick' : 'green', 
 					'#devicenav' : 'white', 
 					'.device' : 'green', 
-					'.subdevice' : 'green'
+					'.subdevice' : 'green',
+					'.quadrant-title' : 'green',
+					'.subhead' : 'green', 
+					'.sub-quadrant' : 'green',
+					'.name' : 'white'
 				},
 				'green2' : {
 					/*development section classes*/
@@ -266,7 +282,11 @@ window.onload=function(){
 					'.unclick' : 'green', 
 					'#devicenav' : 'black', 
 					'.device' : 'green', 
-					'.subdevice' : 'green'
+					'.subdevice' : 'green',
+					'.quadrant-title' : 'green',
+					'.subhead' : 'green', 
+					'.sub-quadrant' : 'green',
+					'.name' : 'black'
 				},
 				'simple' : {
 					/*not actually needed*/
@@ -631,12 +651,42 @@ window.onload=function(){
 				$(function(){
 
 				
-					
+					$("#devicenav").swipe({
+						tap: function(event, target){
+							preptransition('filler', 'foreward');
+							$("body").swipe("enable");
+							$('#navtitle').text('home');
+							$('#navdirections').text('swipe or tap');
+						}
+					});
+					$("#designwrapper").swipe({
+						swipe: function(event, direction){
+							if(direction == 'up' || direction == 'down'){
+							siteState.ispurple *= -1;
+    						stateAlchemy(lineStates[siteState.current]);
+							} else{
+							
+							}
+
+						}
+					});
+					$("#hidden2Content").swipe({
+						swipe: function(event, direction){
+							if(direction == 'up' || direction == 'down'){
+							siteState.ispurple *= -1;
+    						stateAlchemy(lineStates[siteState.current]);
+							} else{
+							
+							}
+
+						}
+					});
 					$("body").swipe( {
        				 	tap:function(event, target) {
        				 		preptransition('simple', 'foreward');
 							$('#navtitle').text('connect');
-
+							$('#navdirections').text('tap to return');
+							$("body").swipe("disable");
        					},
         				doubleTap:function(event, target) {
 							siteState.ispurple *= -1;
@@ -645,10 +695,11 @@ window.onload=function(){
        					longTap:function(event, target) {
           					preptransition('simple', 'foreward');
           					$('#navtitle').text('connect'); 
+							$('#navdirections').text('tap to return');
+          					$("body").swipe("disable");
         				},
         				swipe:function(event, direction) {
          				 	swipefunc(event, direction);
-         	
         				},
         				threshold:50, allowPageScroll:"horizontal"
       				});
@@ -657,16 +708,29 @@ window.onload=function(){
 						if(direction == 'up'){
 							preptransition('green2', 'foreward');
 							$('#navtitle').text('development');
+							$('#navdirections').text('tap to return');
+							$("body").swipe("disable");
 						} else if(direction == 'down'){
 							$('#navtitle').text('welcome');
+							$('#navdirections').text('tap to return');
 							preptransition('normal', 'foreward');
+							$("body").swipe("disable");
 						}else if(direction == 'left'){
 							$('#navtitle').text('illustration');
+							$('#navdirections').text('tap to return');
 							preptransition('hidden2', 'foreward');
+							$("body").swipe("disable");
 						}else if(direction == 'right'){
 							$('#navtitle').text('design');
+							$('#navdirections').text('tap to return');
 							preptransition('design', 'foreward');
+							$("body").swipe("disable");
 						}
+					}
+					
+					
+					if(width > 992) {
+						$("body").swipe("destroy");
 					}
 				});
 			

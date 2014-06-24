@@ -11,29 +11,62 @@
 		cursor: pointer;
 	}
 	/*//illustration 'quadrants'//*/
+	.number{
+		position: absolute;
+		bottom: 8px;
+		left: 8px;
+	}
 
 
 
-	
 	/*//design quadrants//*/
-	#designrow1{
-		width: 1600px;
+	.design-san.subhead{
+		margin-top: 15px;
+		margin-bottom: 8px;
+	}
+	.design-san.content{
+		padding-left: 30px;
+		padding-right: 30px;
 	}
 	#designwrapper{
 		overflow: scroll;
 	}
+	.design-san.quadrant-title{
+		
+		top: 0px;
+		display: inline-block;
+		position: relative;
+		text-align: left;
+		width: 100%;
+		
+	}
 	.design-san.quadrant{
-
-		width: 230px;
 		display: inline-block;
 		position: relative;
 		float: left;
 		top: 0px;
 		margin-top: 0px;
 		margin-bottom: 0px;
-		padding-left: 5px;
+		padding-top: 15px;
+		padding-left: 35px;
 		overflow: hidden;
 		text-align: center;
+	}
+	.design-san.sub-quadrant{
+
+		border-top: 1px solid; 
+		border-bottom: 1px solid;
+		margin-right: 35px;
+		margin-bottom: 10px;
+		display: inline-block;
+		position: relative;
+		float: left;
+	}
+	.design-san.sub-quadrant.green{
+		border-color:#52BC46;
+	}
+	.design-san.sub-quadrant.purple{
+		border-color: #e36eff;
 	}
 	.design-san.quadrant > img{
 		position: absolute;
@@ -240,6 +273,9 @@
 	#designwrapper, #hidden2Content, #designwrapper.in, #hidden2Content.in, #designwrapper.out, #hidden2Content.out{
 		transition: width .3s ease-out !important;-ms-transition: width .3s ease-out !important;-moz-transition:width .3s ease-out !important;-webkit-transition: width .3s ease-out !important;
 	}
+	.design.in, .design.out, hidden2.in, .hidden2.out{
+		transition: opacity .5s ease-out !important;-ms-transition: opacity .5s ease-out !important;-moz-transition:opacity .5s ease-out !important;-webkit-transition: opacity .5s ease-out !important;
+	}
 	
 	#normal.out, #green2.out, #simpleContent.out{
 		opacity: 0;
@@ -253,21 +289,6 @@
 	}
 	
 	
-	
-
-	.design-san.execute.image.quadrant.nottargetted{
-		height: 6%;
-	}
-	.design-san.execute.image.quadrant.targetted{
-		opacity: 1;
-		height: 82%;
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
-		transition: height .3s, opacity: 0.4s ease-in;-ms-transition: height 0.3s, opacity: 0.4s ease-in;-moz-transition:height 0.3s, opacity: 0.4s ease-in;-webkit-transition: height 0.3s, opacity: 0.4s ease-in;
-	}
-	.design-san.execute.image.quadrant{
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
-		transition: height .4s, opacity: 0.4s ease-in;-ms-transition: height 0.4s, opacity: 0.4s ease-in;-moz-transition:height 0.4s, opacity: 0.4s ease-in;-webkit-transition: height 0.4s, opacity: 0.4s ease-in;
-	}
 	
 	/*//end transitions //*/
 		#myname.end{
@@ -317,6 +338,9 @@
 	}
 	.in:nth-child(1) {
 		transition-delay:1.4s;-webkit-transition-delay:1.4s; -o-transition-delay:1.4s;-moz-transition-delay:1.4s;
+	}
+	.design.in {
+		transition-delay: .3s;-webkit-transition-delay:.3s; -o-transition-delay:.3s;-moz-transition-delay: .3s;
 	}
 	
 	
@@ -368,6 +392,9 @@
 	.out:nth-child(15) {
 		transition-delay:1.5s;-webkit-transition-delay:1.5s; -o-transition-delay:1.5s;-moz-transition-delay:1.5s;
 	}
+	.design.out {
+		transition-delay: .3s;-webkit-transition-delay:.3s; -o-transition-delay:.3s;-moz-transition-delay: .3s;
+	}
 	
 	
 	/*//illustration-specific delay//*/
@@ -406,24 +433,8 @@
 	.design-san.quadrant.waiting:nth-child(1), .design-san.quadrant.waiting:nth-child(5), .design-san.quadrant.execute:nth-child(1), .design-san.quadrant.execute:nth-child(5) {
 		border-top: 1px solid;
 		margin-top: -1px;
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
 	}
-	.design-san.quadrant.waiting:nth-child(2), .design-san.quadrant.waiting:nth-child(6), .design-san.quadrant.execute:nth-child(2), .design-san.quadrant.execute:nth-child(6) {
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
-	}
-	.design-san.quadrant.waiting:nth-child(3), .design-san.quadrant.waiting:nth-child(7), .design-san.quadrant.execute:nth-child(3), .design-san.quadrant.execute:nth-child(7) {
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
-	}
-	.design-san.quadrant.waiting:nth-child(4), .design-san.quadrant.waiting:nth-child(8), .design-san.quadrant.execute:nth-child(4), .design-san.quadrant.execute:nth-child(8) {
-		transition-delay:.1s;-webkit-transition-delay:.1s; -o-transition-delay:.1s;-moz-transition-delay:.1s;
-		border-bottom: 1px solid;
-		margin-bottom: -5px;
 
-	}
-	.design-san.quadrant.execute.targetted, .design-san.quadrant.nottargetted.execute{
-	
-		transition-delay: .1s;-webkit-transition-delay: .1s; -o-transition-delay: .1s;-moz-transition-delay: .1s;
-	}
 
 
 
