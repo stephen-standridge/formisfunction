@@ -74,6 +74,15 @@
 		#designnav{
 			clear: both;
 		}
+		.mw1{
+			max-width: 480px;
+		}
+		.mw2{
+			max-width: 950px;
+		}
+		.mw3{
+			max-width: 1900px;
+		}
 		
 		
 		
@@ -170,7 +179,15 @@
 		#dynamicContent, #mainContent, #simpleContent{
 			margin: 0px;
 		}
-	
+		.imagetype{
+			padding: 0px !important;
+		}
+		.condensedbot{
+			margin-bottom: 5px !important;
+		}
+		.condensedtop{
+			margin-top: 5px !important;
+		}
 	
 	/*//display styles//*/
 		#hidden2Content{
@@ -379,7 +396,8 @@
 		width: 320px;
 	}
 	#designrow1{
-		width: 4000px;
+		width: 3470px;
+		padding-left: 20px;
 	}
 	.design-san.quadrant-title{
 				margin-bottom: 10px;
@@ -550,9 +568,12 @@
 			-moz-box-shadow:none;
 			box-shadow:none;
 		}
+			.design-san.content{
+		font-size: 13px;
+	}
 	}
 	@media(min-width:768px){	
-	
+
 	#designwrapper{
 		height: 60%;
 	}
@@ -569,7 +590,7 @@
 		height: 5%;
 	}
 	#designrow1{
-		width: 5500px;
+		width: 3850px;
 	}
 	
 	.hidden2-san.quadrant.visible-md, .hidden2-san.quadrant.visible-sm{
@@ -636,6 +657,9 @@
 		body{
 			font-size: 18px;
 			line-height: 117%;
+		}
+		.design-san.content{
+		font-size: 16px;
 		}
 		.option {
 			font-family: josefin sans;
@@ -789,6 +813,9 @@ display: none;
 		body{
 			line-height: 120%;
 			font-weight: 400;
+		}
+		.design-san.content{
+		font-size: 15px;
 		}
 		.option {
 			font-family: josefin sans;
