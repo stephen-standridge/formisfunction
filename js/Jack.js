@@ -668,7 +668,7 @@ window.onload=function(){
 							
 							}
 
-						}
+						}, threshold:50, allowPageScroll:"horizontal"
 					});
 					$("#hidden2Content").swipe({
 						swipe: function(event, direction){
@@ -679,7 +679,7 @@ window.onload=function(){
 							
 							}
 
-						}
+						}, threshold:50, allowPageScroll:"horizontal"
 					});
 					$("body").swipe( {
        				 	tap:function(event, target) {
