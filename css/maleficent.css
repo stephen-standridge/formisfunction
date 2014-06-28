@@ -14,11 +14,60 @@
 	.number{
 		position: absolute;
 		bottom: 8px;
-		left: 8px;
+		padding: 3px;
+		padding-left: 12px;
+		left: -3px;
+	}
+	.design.number.green{
+		color: white;
+		background-color: #52BC46;
+		box-shadow: 1px 1px 3px #cccccc;
+		text-shadow: 1px 1px 1px #cccccc;
+	}
+	.design.number.purple{
+		color: white;
+		background-color: #e36eff;
+		box-shadow: 1px 1px 3px #cccccc;
+		text-shadow: 1px 1px 1px #cccccc;
 	}
 
-
-
+	.hidden2.number.green{
+		color: white;
+		background-color: #52BC46;
+		box-shadow: 1px 1px 4px rgba(82, 188, 70, .7);
+		text-shadow: 1px 1px 1px #cccccc;
+	}
+	.hidden2.number.purple{
+		color: white;
+		background-color: #e36eff;
+		box-shadow: 1px 1px 4px rgba(227, 110, 255, .7);
+		text-shadow: 1px 1px 1px #cccccc;
+	}
+	
+	.fear, .final, .study1, .trees{
+		margin-left: 30px;
+		margin-right: 10px;
+		background-size: cover; 
+		box-shadow: 3px 3px 6px #bbbbbb;
+	}
+	.hidden2-san.quadrants{
+		height: 100%;
+		padding-bottom: 30px;
+		padding-top: 20px;
+	}
+	
+	.fear{
+		background-image: url('http://www.formisfunction.io/images/fearlarge.jpg');
+	}
+	.final{
+		background-image: url('http://www.formisfunction.io/images/secondfinallarge.jpg');
+	}
+	.study1{
+		background-image: url('http://www.formisfunction.io/images/study1large.jpg');
+	}
+	.trees{
+		background-image: url('http://www.formisfunction.io/images/thirdcoloredlarge.jpg');
+	}
 	/*//design quadrants//*/
 	.design-san.subhead{
 		margin-top: 15px;
@@ -53,14 +102,17 @@
 		text-align: center;
 	}
 	.design-san.sub-quadrant{
-
-		border-top: 1px solid; 
-		border-bottom: 1px solid;
+		box-shadow: 1px 1px 5px #dddddd;
 		margin-right: 35px;
 		margin-bottom: 10px;
 		display: inline-block;
 		position: relative;
 		float: left;
+	}
+	#designwrapper, #hidden2section{
+		background: white;
+		opacity: 1 !important;
+		box-shadow: 2px 2px 6px #dddddd;
 	}
 	.design-san.sub-quadrant.green{
 		border-color:#52BC46;
@@ -270,7 +322,7 @@
 		transition: opacity 0.7s ease-in;-ms-transition: opacity 0.7s ease-in;-moz-transition:opacity 0.7s ease-in;-webkit-transition: opacity 0.7s ease-in;
 		transition: height 0.4s ease-in;-ms-transition: height 0.4s ease-in;-moz-transition: height 0.4s ease-in;-webkit-transition: height 0.4s ease-in;
 	}
-	#designwrapper, #hidden2Content, #designwrapper.in, #hidden2Content.in, #designwrapper.out, #hidden2Content.out{
+	#designwrapper, #hidden2section, #designwrapper.in, #hidden2section.in, #designwrapper.out, #hidden2section.out{
 		transition: width .3s ease-out !important;-ms-transition: width .3s ease-out !important;-moz-transition:width .3s ease-out !important;-webkit-transition: width .3s ease-out !important;
 	}
 	.design.in, .design.out, hidden2.in, .hidden2.out{

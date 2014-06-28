@@ -169,7 +169,9 @@ window.onload=function(){
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
-					'.name' : 'white'
+					'.name' : 'white', 
+					'#contentpadderright' : 'white', 
+					'#contentpadderleft' : 'white'
 				},
 				'normal' : {
 					/*about section classes*/
@@ -178,7 +180,7 @@ window.onload=function(){
 					'path.background_line' : 'white',
 					'path.logoline' : 'green',
 					'#dynamicContent' : 'white',
-					'.simple' : 'green',
+					'.simple' : 'white',
 					'stop.rythm' : 'green',
 					'path.logocolor' : 'green',
 					'path.logolinefront' : 'green',
@@ -197,7 +199,9 @@ window.onload=function(){
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
-					'.name' : 'white'
+					'.name' : 'white', 
+					'#contentpadderright' : 'white', 
+					'#contentpadderleft' : 'white'
 				},
 				'hidden2' : {
 					/*illustration section classes*/
@@ -206,7 +210,6 @@ window.onload=function(){
 					'path.background_line' : 'white',
 					'path.logoline' : 'white',
 					'#dynamicContent' : 'white',
-					'.simple' : 'white',
 					'stop.rythm' : 'white',
 					'path.logocolor' : 'white',
 					'path.logolinefront' : 'white',
@@ -225,7 +228,9 @@ window.onload=function(){
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
-					'.name' : 'white'
+					'.name' : 'white', 
+					'#contentpadderright' : 'white', 
+					'#contentpadderleft' : 'white'
 				},
 				'design' : {
 					/*design section classes*/
@@ -234,16 +239,15 @@ window.onload=function(){
 					'path.background_line' : 'white',
 					'path.logoline' : 'green',
 					'#dynamicContent' : 'white',
-					'.simple' : 'green',
 					'stop.rythm' : 'green',
 					'path.logocolor' : 'green',
 					'path.logolinefront' : 'green',
 					'path.logolinemiddle' : 'green',
 					'path.logolinebottom' : 'green',
 					'.option' : 'green',
+					'.simple' : 'white',
 					'#simplebackground' : 'white', 
 					'.period' : 'green',
-					'.simple' : 'green',
 					'.dot' : 'green',
 					'.click' : 'green',
 					'.unclick' : 'green', 
@@ -253,7 +257,10 @@ window.onload=function(){
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
-					'.name' : 'white'
+					'.name' : 'white', 
+					'#contentpadderright' : 'white', 
+					'#contentpadderleft' : 'white',
+					'.green2' : 'green'
 				},
 				'green2' : {
 					/*development section classes*/
@@ -276,7 +283,6 @@ window.onload=function(){
 					'.option' : 'green',
 					'#simplebackground' : 'black',
 					'.period' : 'green', 
-					'.simple' : 'green',
 					'.dot' : 'green',
 					'.click' : 'green',
 					'.unclick' : 'green', 
@@ -286,7 +292,9 @@ window.onload=function(){
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
-					'.name' : 'black'
+					'.name' : 'black', 
+					'#contentpadderright' : 'green', 
+					'#contentpadderleft' : 'green'
 				},
 				'simple' : {
 					/*not actually needed*/
@@ -323,9 +331,9 @@ window.onload=function(){
     	////////////////////////////////////
     	
     		/*define possible subnavigation*/
-			var hidden2content = new SpecialArray();
+			var hidden2section = new SpecialArray();
 			var hidden2options = ['first', 'fourth', 'second', 'third'];
-				hidden2content.populate(hidden2options);
+				hidden2section.populate(hidden2options);
 			var designcontent = new SpecialArray();
 			var designoptions = ['first', 'second'];
 				designcontent.populate(designoptions);
@@ -340,7 +348,7 @@ window.onload=function(){
 			var sectionReference = {
 				/*refer to the section's content as sectionReference[variable]*/
 				'normal' : normalcontent,
-				'hidden2' : hidden2content,
+				'hidden2' : hidden2section,
 				'design' : designcontent,
 				'green2' : green2content,
 				'simple' : simplecontent
@@ -670,7 +678,7 @@ window.onload=function(){
 
 						}, threshold:50, allowPageScroll:"horizontal"
 					});
-					$("#hidden2Content").swipe({
+					$("#hidden2section").swipe({
 						swipe: function(event, direction){
 							if(direction == 'up' || direction == 'down'){
 							siteState.ispurple *= -1;
