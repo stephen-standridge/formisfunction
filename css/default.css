@@ -86,6 +86,9 @@
 		#dynamicContent, #mainContent, #logoanimation, #definitions, #logobackgroundposition, #leftpadder, #rightpadder, #logo, #designwrapper, #greenwrapper, #normalwrapper, #green2, #normal, #hidden2, #simpleContent, #devicenav, #hidden2section, .number{
 			position: absolute;		
 		}
+		#compassrose{
+			position: absolute;
+		}
 		.hidden2-san.quadrant, .design-san.quadrant-title, .design-san.quadrant, .design-san.sub-quadrant{
 			position: relative;
 		}
