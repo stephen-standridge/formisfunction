@@ -168,10 +168,9 @@ window.onload=function(){
 					'.subdevice' : 'green',
 					'.quadrant-title' : 'green',
 					'.subhead' : 'green', 
+					'.number' : 'green',
 					'.sub-quadrant' : 'green',
-					'.name' : 'white', 
-					'#contentpadderright' : 'white', 
-					'#contentpadderleft' : 'white'
+					'.name' : 'white'
 				},
 				'normal' : {
 					/*about section classes*/
@@ -200,8 +199,7 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
-					'#contentpadderright' : 'white', 
-					'#contentpadderleft' : 'white'
+					'.number' : 'green'
 				},
 				'hidden2' : {
 					/*illustration section classes*/
@@ -229,8 +227,7 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
-					'#contentpadderright' : 'white', 
-					'#contentpadderleft' : 'white'
+					'.number' : 'green'
 				},
 				'design' : {
 					/*design section classes*/
@@ -258,9 +255,8 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
-					'#contentpadderright' : 'white', 
-					'#contentpadderleft' : 'white',
-					'.green2' : 'green'
+					'.green2' : 'green', 
+					'.number' : 'green'
 				},
 				'green2' : {
 					/*development section classes*/
@@ -293,8 +289,7 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'black', 
-					'#contentpadderright' : 'green', 
-					'#contentpadderleft' : 'green'
+					'.number' : 'green'
 				},
 				'simple' : {
 					/*not actually needed*/

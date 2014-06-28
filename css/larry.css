@@ -188,8 +188,28 @@
 	.dot.purple, .period.purple {
 		text-shadow: 1px 1px 1px rgba(227, 110, 255, 1);
 	}
-
-	
+	.number.green.in, .number.purple.in, .number, .subhead{
+		color: white;
+	}
+			
+			
+	/*//text styles//*/
+		
+	#navoptions { 
+		font-size: 16px;
+		letter-spacing: 3px;
+	}
+			.period{
+				line-height: 1%!important;
+				font-size: 250%;
+				margin-right: -5px;
+				letter-spacing: -1px;
+			}
+			.dot{
+				line-height: 1%;
+				font-size: 300%;
+				letter-spacing: -1px;
+			}
 	
 /*///transitions///*/
 	a, a:hover, a:visited, a:active {

@@ -1,0 +1,339 @@
+/*
+	////////////////////////////   these are all the default styles
+	///////default styles///////   this controls the resting state
+	////////////////////////////   of the site
+*/
+
+
+	/*//prep styles//*/
+	
+		body, html{
+			overflow: hidden;
+			height: 100%;
+			width: 100%;
+		}
+		body{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+		}
+		
+		
+		
+	/*//height styles//*/
+	
+		html, body, #dynamicContent, #wrapper, #contentmetawrapper, #logometawrapper, #logopadderleft,  #logobackgroundcontainer, #logobackgroundposition, #logopadderright, #contentpadderleft, #contentwrapper, #contentpadderright, #mainContent, #quadrantcontainer, #quadrantpadderleft, #quadrantpadderright, #forelogowrapper, .hidden2-san.quadrant, .hidden2-san.quadrants{
+			height: 100% !important;
+		}		
+		#logowrapper{
+			height: 100%;
+		}		
+		#greenwrapper, #normalwrapper{
+			height: 95%;
+		}		
+	 	#hidden2section{
+			height: 75%;
+		}
+		#wholedesign{
+			height: 80%;
+		}
+		#designnav{
+			height: 30px;
+		}		
+		#logobackgroundcontainer{
+			height: inherit;
+		}		
+		#hidden2{
+			height: 50px;
+		}		
+		#devicenav{
+			height: 70px;
+		}
+		
+		
+		
+	/*//width styles//*/
+			
+	 	#mainContent, #designwrapper, #designnav, #greenwrapper, #normalwrapper, #hidden2, #designrow1, #designrow2, #devicenav, #dynamicContent, #logobackgroundcontainer, .design-san.quadrant-title{
+			width: 100%;		
+		}			
+		#designwrapper, #designwrapper.out, #hidden2section, #hidden2section.out{
+			width: 0px;
+		}		
+		#designnav{
+			clear: both;
+		}		
+		.mw1{
+			max-width: 480px;
+		}		
+		.mw2{
+			max-width: 950px;
+		}		
+		.mw3{
+			max-width: 1900px;
+		}		
+		#devicenav{
+			min-width: 100%;
+		}
+		#logobackgroundcontainer {
+			width: inherit;
+		}
+		
+		
+		
+	/*//position styles//*/
+	
+		#dynamicContent, #mainContent, #logoanimation, #definitions, #logobackgroundposition, #leftpadder, #rightpadder, #logo, #designwrapper, #greenwrapper, #normalwrapper, #green2, #normal, #hidden2, #simpleContent, #devicenav, #hidden2section, .number{
+			position: absolute;		
+		}
+		.hidden2-san.quadrant, .design-san.quadrant-title, .design-san.quadrant, .design-san.sub-quadrant{
+			position: relative;
+		}
+		
+		
+		
+	/*//top, left, right, bottom styles//*/
+
+		#dynamicContent, #mainContent, #logoanimation, #definitions, .hidden2-san.quadrant, .design-san.quadrant-title{
+			top: 0px;
+		}
+		#rightpadder{
+			right: 0px;
+		}
+		#leftpadder, #dynamicContent{
+			left: 0px;
+		}
+		#logo{
+			left: 50%;
+		}
+		#normal, #green2{
+			bottom: 0px;
+		}
+		#designwrapper{
+			right: 0px;
+		}
+
+		#hidden2section{
+			left: -15px;
+		}
+		#devicenav{
+			bottom: 0px;
+		}
+		.number{
+			bottom: 8px;
+			left: -3px;
+		}
+		.design-san.quadrant{
+			top: 0px;
+		}
+		
+		
+		
+	/*//z-index styles//*/
+	
+		#designwrapper, #hidden2section{
+			z-index: 6;
+		}
+		#mainContent {
+			z-index: 5;
+		}
+		#dynamicContent, #svgContent, #nomralwrapper {
+			z-index: 0;
+		}
+		#navoptions{
+			z-index: 10;
+		}	
+		#simpleContent{
+			z-index: 8;
+		}
+		
+		
+	/*//padding/margin styles//*/
+	
+		#wrapper{
+			padding-left: 0px;
+		}
+		#devicenav{
+			margin: 0px;
+			padding-top: 5px;
+		}
+		#contentmetawrapper, #logometawrapper, #logobackgroundposition{
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+		#contentpadderleft{
+			padding-left: 0px;
+		}
+		#contentpadderright{
+			padding-right: 0px;
+		}
+		#normalwrapper, #greenwrapper{
+			padding-right: 15px;
+		}
+		#designnav{
+			padding-top: 20px;
+			margin-left: 0px;
+		}
+		#dynamicContent, #mainContent, #simpleContent{
+			margin: 0px;
+		}
+		.imagetype{
+			padding: 0px !important;
+		}
+		.condensedbot{
+			margin-bottom: 5px !important;
+		}
+		.condensedtop{
+			margin-top: 5px !important;
+		}
+		#simplebackground{
+			padding-left: 10px;
+			padding-right: 15px;
+			padding-top: 7px;
+			padding-bottom: 5px;
+		}
+		.fear, .final, .study1, .trees{
+			margin-left: 30px;
+			margin-right: 10px;
+		}
+		.number{
+			padding: 3px;
+			padding-left: 12px;
+		}
+
+		.hidden2-san.quadrants{
+			padding-bottom: 30px;
+			padding-top: 20px;
+		}	
+		.design-san.subhead{
+			width: 102%;
+			padding-right: 0px;
+			margin-top: 15px;
+			margin-bottom: 8px;
+			padding: 3px;
+			padding-left: 10px;
+			margin-left: -5px;
+		}
+		.design-san.content{
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		.design-san.quadrant{
+			margin-bottom: 0px;
+			margin-top: 0px;
+			padding-top: 15px;
+			padding-left: 35px;
+		}
+		.design-san.sub-quadrant{
+			margin-right: 35px;
+			margin-bottom: 10px;
+		}
+		.navoptions {
+			padding-left: 20px; 
+			padding-right: 20px;
+			padding-bottom: 10px;
+			padding-top: 10px;
+		}
+		.design-san.alternate{
+			margin-top: 3px;
+		}
+		
+		
+		
+	/*//background styles//*/
+	
+		#hidden2section, #designwrapper{
+			background-color: white;
+		}	
+		#logo_background, #body_background_right, #body_background_left{
+			fill: transparent;
+		}
+		#detail, #innercircle, #outercircle, #bottomjaw, #topjaw, #circlejaw{
+			background-color: transparent;
+		}
+		.fear, .final, .study1, .trees{
+			background-size: cover;
+		}
+		.fear{
+			background-image: url('http://www.formisfunction.io/images/fearlarge.jpg');
+		}
+		.final{
+			background-image: url('http://www.formisfunction.io/images/secondfinallarge.jpg');
+		}
+		.study1{
+			background-image: url('http://www.formisfunction.io/images/study1large.jpg');
+		}
+		.trees{
+			background-image: url('http://www.formisfunction.io/images/thirdcoloredlarge.jpg');
+		}
+		.design-san, #designwrapper, #hidden2section{
+			background-color: white;
+		}
+		
+		
+		
+	/*// opacity styles //*/
+	
+		#designwrapper, #hidden2section{
+			opacity: 1;
+		}
+	
+	
+		
+	/*//alignment styles//*/
+	
+		#contentwrapper{
+			text-align: center;
+		}
+		#frontcontent, #devicenav{
+			text-align: center;
+		}
+		#normalwrapper, #greenwrapper, #simpleContent{
+			text-align: right;
+		}
+		.fuckbootstrap.image{
+			vertical-align: initial !important;
+		}
+		.hidden2-san.quadrant{
+			vertical-align: center;
+		}
+		.design-san.quadrant-title, .design-san.quadrant {
+			text-align: left;
+		}
+		.design-san.sub-quadrant, .design-san.quadrant{
+			float: left;
+		}
+
+		
+		
+		
+	/*//overflow styles//*/	
+	
+		#hidden2section, #designwrapper{
+			overflow: scroll;
+		}
+		.design-san.imagetype{
+			overflow: hidden;
+		}
+
+		
+		
+	/*//display styles//*/
+	
+		.hidden2-san.quadrant, .design-san.quadrant-title, .design-san.quadrant, .design-san.sub-quadrant, {
+			display: inline-block;
+		}
+		
+		
+		
+	/*//box-shadow styles//*/
+	
+		.fear, .final, .study1, .trees{
+			box-shadow: 3px 3px 6px #bbbbbb;	
+		}	
+		.design-san.sub-quadrant{
+			box-shadow: 1px 1px 5px #dddddd;
+		}
+		#designwrapper, #hidden2section{
+			box-shadow: 2px 2px 6px #dddddd;
+		}
