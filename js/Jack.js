@@ -705,6 +705,7 @@ window.onload=function(){
 							$('#navtitle').text('connect');
 							$('#navdirections').text('');
 							$("body").swipe("disable");
+							firstTime = 1;
        					},
         				doubleTap:function(event, target) {
 							siteState.ispurple *= -1;
@@ -730,6 +731,7 @@ window.onload=function(){
 							$('#navtitle').text('development');
 							$('#navdirections').text('[return]');
 							$("body").swipe("disable");
+							firstTime = 1;
 						} else if(direction == 'down'){
 							$('g#onlyrose').attr('class', 'down');					
 							$('#navtitle').text('stephen standridge');
@@ -748,12 +750,14 @@ window.onload=function(){
 							$('#navdirections').text('[return]');
 							preptransition('design', 'foreward');
 							$("body").swipe("disable");
+							firstTime = 1;
 						}else if(direction == 'right'){
 							$('g#onlyrose').attr('class', 'right');						
 							$('#navtitle').text('illustration');
 							$('#navdirections').text('[return]');
 							preptransition('hidden2', 'foreward');
 							$("body").swipe("disable");
+							firstTime = 1;
 						}
 					}
 					
