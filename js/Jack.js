@@ -170,7 +170,10 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.number' : 'green',
 					'.sub-quadrant' : 'green',
-					'.name' : 'white'
+					'.name' : 'white',
+					'stop.compass' : 'green',
+					'stop.arrow' : 'green',
+					'path.compassline' : 'green'
 				},
 				'normal' : {
 					/*about section classes*/
@@ -199,7 +202,10 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
-					'.number' : 'green'
+					'.number' : 'green',
+					'stop.compass' : 'green',
+					'stop.arrow' : 'green',
+					'path.compassline' : 'green'
 				},
 				'hidden2' : {
 					/*illustration section classes*/
@@ -214,7 +220,7 @@ window.onload=function(){
 					'path.logolinemiddle' : 'white',
 					'path.logolinebottom' : 'white',
 					'.option' : 'white',
-					'#simplebackground' : 'black', 
+					'#simplebackground' : 'white', 
 					'.period' : 'green',
 					'.simple' : 'white',
 					'.dot' : 'green',
@@ -227,7 +233,10 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
-					'.number' : 'green'
+					'.number' : 'green',
+					'stop.compass' : 'green',
+					'stop.arrow' : 'green',
+					'path.compassline' : 'green'
 				},
 				'design' : {
 					/*design section classes*/
@@ -256,7 +265,10 @@ window.onload=function(){
 					'.sub-quadrant' : 'green',
 					'.name' : 'white', 
 					'.green2' : 'green', 
-					'.number' : 'green'
+					'.number' : 'green',
+					'stop.compass' : 'green',
+					'stop.arrow' : 'green',
+					'path.compassline' : 'green'
 				},
 				'green2' : {
 					/*development section classes*/
@@ -289,7 +301,10 @@ window.onload=function(){
 					'.subhead' : 'green', 
 					'.sub-quadrant' : 'green',
 					'.name' : 'black', 
-					'.number' : 'green'
+					'.number' : 'green',
+					'stop.compass' : 'green',
+					'stop.arrow' : 'green',
+					'path.compassline' : 'green'
 				},
 				'simple' : {
 					/*not actually needed*/
@@ -652,14 +667,15 @@ window.onload=function(){
 				/*detect swipes*/
 				
 				$(function(){
-
+					var firstTime= 0;
 				
 					$("#devicenav").swipe({
 						tap: function(event, target){
+							$('g#onlyrose').attr('class', 'center');		
 							preptransition('filler', 'foreward');
 							$("body").swipe("enable");
 							$('#navtitle').text('home');
-							$('#navdirections').text('swipe or tap');
+							$('#navdirections').text('');
 						}
 					});
 					$("#designwrapper").swipe({
@@ -688,7 +704,7 @@ window.onload=function(){
        				 	tap:function(event, target) {
        				 		preptransition('simple', 'foreward');
 							$('#navtitle').text('connect');
-							$('#navdirections').text('tap to return');
+							$('#navdirections').text('');
 							$("body").swipe("disable");
        					},
         				doubleTap:function(event, target) {
@@ -697,8 +713,8 @@ window.onload=function(){
         				},
        					longTap:function(event, target) {
           					preptransition('simple', 'foreward');
-          					$('#navtitle').text('connect'); 
-							$('#navdirections').text('tap to return');
+          					$('#navtitle').text('stephen standridge'); 
+          					$('#navdirections').text('');
           					$("body").swipe("disable");
         				},
         				swipe:function(event, direction) {
@@ -709,24 +725,35 @@ window.onload=function(){
 					function swipefunc(event, direction, distance, duration, fingerCount){
 				
 						if(direction == 'up'){
+							console.log($('g#onlyrose'));
+							$('g#onlyrose').attr('class', 'up');						
 							preptransition('green2', 'foreward');
 							$('#navtitle').text('development');
-							$('#navdirections').text('tap to return');
+							$('#navdirections').text('[return]');
 							$("body").swipe("disable");
 						} else if(direction == 'down'){
-							$('#navtitle').text('welcome');
-							$('#navdirections').text('tap to return');
-							preptransition('normal', 'foreward');
+							$('g#onlyrose').attr('class', 'down');					
+							$('#navtitle').text('stephen standridge');
+							$('#navdirections').text('[return]');
+							if(firstTime == 0){
+								preptransition('normal', 'skip');
+								firstTime = 1;
+							} else {
+								preptransition('normal', 'foreward');
+							}
+							
 							$("body").swipe("disable");
 						}else if(direction == 'left'){
-							$('#navtitle').text('illustration');
-							$('#navdirections').text('tap to return');
-							preptransition('hidden2', 'foreward');
+						   $('g#onlyrose').attr('class', 'left');					
+							$('#navtitle').text('design');
+							$('#navdirections').text('[return]');
+							preptransition('design', 'foreward');
 							$("body").swipe("disable");
 						}else if(direction == 'right'){
-							$('#navtitle').text('design');
-							$('#navdirections').text('tap to return');
-							preptransition('design', 'foreward');
+							$('g#onlyrose').attr('class', 'right');						
+							$('#navtitle').text('illustration');
+							$('#navdirections').text('[return]');
+							preptransition('hidden2', 'foreward');
 							$("body").swipe("disable");
 						}
 					}

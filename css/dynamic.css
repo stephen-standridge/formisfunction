@@ -54,7 +54,42 @@
 		}
 	
 	
-	
+	/*// mobile styles//*/
+		#onlyrose.left{
+			transform: translate(-300%,0%);
+			-ms-transform: translate(-300%,0%); /* IE 9 */
+			-webkit-transform: translate(-300%,0%); /* Safari and Chrome */
+			-o-transform: translate(-300%,0%); /* Opera */
+			-moz-transform: translate(-300%,0%); /* Firefox */
+		}
+		#onlyrose.right{
+			transform: translate(300%,0%);
+			-ms-transform: translate(300%,0%); /* IE 9 */
+			-webkit-transform: translate(300%,0%); /* Safari and Chrome */
+			-o-transform: translate(300%,0%); /* Opera */
+			-moz-transform: translate(300%,0%); /* Firefox */		
+		}
+		#onlyrose.up{
+			transform: translate(0%,-300%);
+			-ms-transform: translate(0%,-300%); /* IE 9 */
+			-webkit-transform: translate(0%,-300%); /* Safari and Chrome */
+			-o-transform: translate(0%,-300%); /* Opera */
+			-moz-transform: translate(0%,-300%); /* Firefox */		
+		}
+		#onlyrose.down{
+			transform: translate(0%,400%);
+			-ms-transform: translate(0%,400%); /* IE 9 */
+			-webkit-transform: translate(0%,400%); /* Safari and Chrome */
+			-o-transform: translate(0%,400%); /* Opera */
+			-moz-transform: translate(0%,400%); /* Firefox */		
+		}
+		#onlyrose.center{
+			transform: translate(0%,0%);
+			-ms-transform: translate(0%,0%); /* IE 9 */
+			-webkit-transform: translate(0%,0%); /* Safari and Chrome */
+			-o-transform: translate(0%,0%); /* Opera */
+			-moz-transform: translate(0%,0%); /* Firefox */		
+		}
 	
 	/*// transition styles //*/
 	
@@ -62,7 +97,7 @@
 			transition: opacity 0.5s ease-in;-ms-transition: opacity 0.5s ease-in;-moz-transition:opacity 0.5s ease-in;-webkit-transition: opacity 0.5s ease-in;
 		}
 		#designwrapper, #hidden2section, #designwrapper.in, #hidden2section.in, #designwrapper.out, #hidden2section.out{
-			transition: width .3s ease-out !important;-ms-transition: width .3s ease-out !important;-moz-transition:width .3s ease-out !important;-webkit-transition: width .3s ease-out !important;
+			transition: width .5s ease-out !important;-ms-transition: width .5s ease-out !important;-moz-transition:width .5s ease-out !important;-webkit-transition: width .5s ease-out !important;
 		}
 		.design.in, .design.out, hidden2.in, .hidden2.out{
 			transition: opacity .5s ease-out !important;-ms-transition: opacity .5s ease-out !important;-moz-transition:opacity .5s ease-out !important;-webkit-transition: opacity .5s ease-out !important;
@@ -75,6 +110,9 @@
 		}
 		#normal.out, #green2.out, #simpleContent.out, .in, .out{
 			transition: opacity 0.7s ease-in;-ms-transition: opacity0.7s ease-in;-moz-transition: opacity 0.7s ease-in;-webkit-transition: opacity 0.7s ease-in;
+		}
+		#onlyrose{
+			transition: transform 0.3s ease-in;-ms-transition: -ms-transform 0.3s ease-in;-moz-transition: -moz-transform 0.3s ease-in;-webkit-transition: -webkit-transform 0.3s ease-in;
 		}
 		
 	

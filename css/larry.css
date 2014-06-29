@@ -88,6 +88,7 @@
 	}
 	.simple.out{
 		opacity: 0;
+		line-height: 130%;
 	}
 	.simple.white.light{
 		color: #cccccc;
