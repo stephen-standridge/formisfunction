@@ -16,7 +16,6 @@
 			position: fixed;
 			top: 0px;
 			left: 0px;
-			overflow: hidden;
 		}
 		
 		
@@ -321,6 +320,9 @@
 		}
 		.design-san.imagetype{
 			overflow: hidden;
+		}
+		#designwrapper, #hidden2section{
+			overflow-y: hidden;
 		}
 
 		
