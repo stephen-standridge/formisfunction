@@ -686,7 +686,7 @@ window.onload=function(){
 							
 							}
 
-						}, threshold:50, allowPageScroll:"horizontal"
+						}, threshold:20, allowPageScroll:"horizontal"
 					});
 					$("#hidden2section").swipe({
 						swipe: function(event, direction){
@@ -697,7 +697,7 @@ window.onload=function(){
 							
 							}
 
-						}, threshold:50, allowPageScroll:"horizontal"
+						}, threshold:20, allowPageScroll:"horizontal"
 					});
 					$("body").swipe( {
        				 	tap:function(event, target) {
@@ -720,7 +720,7 @@ window.onload=function(){
         				swipe:function(event, direction) {
          				 	swipefunc(event, direction);
         				},
-        				threshold:50, allowPageScroll:"horizontal"
+        				threshold:20, allowPageScroll:"horizontal"
       				});
 					function swipefunc(event, direction, distance, duration, fingerCount){
 				

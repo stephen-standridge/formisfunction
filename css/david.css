@@ -275,16 +275,6 @@
 		}
 		
 		
-		/*//compass gradient//*/
-		.compass.center.white, .compass.center.green, .compass.center.purple  {
-			animation:compass_center 6s linear infinite;-moz-animation:compass_center 6s linear infinites; -webkit-animation:compass_center 6s linear infinite; -o-animation:compass_center 6s linear infinite; 
-		}
-		.compass.midway.white, .compass.midway.green, .compass.midway.purple  {
-			animation:compass_midway 6s linear infinite;-moz-animation:compass_midway 6s linear infinites; -webkit-animation:compass_midway 6s linear infinite; -o-animation:compass_midway 6s linear infinite; 
-		}
-		.compass.outside.white, .compass.outside.green, .compass.outside.purple  {
-			animation:compass_outside 6s linear infinite;-moz-animation:compass_outside 6s linear infinites; -webkit-animation:compass_outside 6s linear infinite; -o-animation:compass_outside 6s linear infinite; 
-		}
 
 		/*//arrow gradient//*/
 		.arrow.center.white, .arrow.center.green, .arrow.center.purple  {
@@ -570,49 +560,10 @@
 		
 		
 		
-		/*//compass keyframes//*/
-		
-		@keyframes compass_center {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-moz-keyframes compass_center {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-webkit-keyframes compass_center{
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-o-keyframes compass_center {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		
-		@keyframes compass_midway {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-moz-keyframes compass_midway {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-webkit-keyframes compass_midway{
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-o-keyframes compass_midway {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		
-		@keyframes compass_outside {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-moz-keyframes compass_outside {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-webkit-keyframes compass_outside{
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
-		@-o-keyframes compass_outside {
-			0%,100%   {stop-opacity: 0.3;} 25%  {stop-opacity: 0.2;} 50%  {stop-opacity: .4;} 75%   {stop-opacity: .3;} 
-		}
+
 		
 		
-		@keyframes arrow_center {
+		@keyframes arrow_outside {
 			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
 		}
 		@-moz-keyframes arrow_center {
@@ -626,29 +577,29 @@
 		}
 		
 		@keyframes arrow_midway {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
 		}
 		@-moz-keyframes arrow_midway {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
 		}
 		@-webkit-keyframes arrow_midway{
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
 		}
 		@-o-keyframes arrow_midway {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
 		}
 		
-		@keyframes arrow_outside {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+		@keyframes arrow_center {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
 		}
 		@-moz-keyframes arrow_outside {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
 		}
 		@-webkit-keyframes arrow_outside{
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
 		}
 		@-o-keyframes arrow_outside {
-			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
 		}
 		
 
