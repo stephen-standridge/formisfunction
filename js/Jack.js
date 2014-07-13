@@ -1,4 +1,4 @@
-window.onload=function(){
+(function(){
 
 	////////////////////////////////////////////
 	/////define arrays that control themself////
@@ -772,4 +772,4 @@ window.onload=function(){
             	
             }
             init();
-}
+})();
