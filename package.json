@@ -20,7 +20,7 @@
     "babel": "^6.3.26",
     "babel-core": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
-    "basic-tree": "^1.2.1",
+    "basic-tree": "^1.2.3",
     "flux": "^2.1.1",
     "immutable": "^3.7.6",
     "keymirror": "^0.1.1",

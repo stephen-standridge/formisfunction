@@ -1,8 +1,8 @@
 import {Map} from 'immutable';
-export const InitialTemplate = Map({
-	directions: '',
-
+export const InitialLinework= Map({
 });
+export const DEG_TO_RAD = Math.PI / 180;
+
 
 //need to determine what data a line has intrinsically.
 
