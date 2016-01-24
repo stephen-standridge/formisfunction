@@ -5,10 +5,10 @@ import {Observable} from 'rx';
 import {Map} from 'immutable';
 
 class Thread extends Tree{
-	constructor(){
-		super();
-		this._thread = [];
-		this._source = Observable.from( this._thread ).publish();
+	constructor(args){
+		super(args);
+		this._queue = [];
+		this._source = Observable.from( this._queue ).publish();
 	}
 	makeNode( value, n=this._node, l=this._level ){
 		let val = value == undefined? false : value,

@@ -20,7 +20,7 @@ describe('#Thread', ()=>{
 		T.root = 'test';
 		T.toNth(2)
 		T.node = 'test2'
-		T._thread.push({type:'SET', value:'derp'})
+		T._queue.push({type:'SET', value:'derp'})
 		T._source.connect()		
 		expect(T.toJS('value')).to.eql(['derp',undefined,undefined,'derp'])	
 	})

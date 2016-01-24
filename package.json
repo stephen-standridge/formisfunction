@@ -25,15 +25,18 @@
     "immutable": "^3.7.6",
     "keymirror": "^0.1.1",
     "react": "^0.14.6",
+    "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
+    "babel-loader": "^6.2.1",
     "chai": "^3.4.1",
     "chai-immutable": "^1.5.3",
     "mocha": "^2.3.4",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "webpack": "^1.12.12"
   },
   "babel": {
     "presets": [
