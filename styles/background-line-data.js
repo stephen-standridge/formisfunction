@@ -1,6 +1,5 @@
 import {fromJS} from 'immutable';
 
-
 const lines = fromJS([
 	{
 		width: 64,
@@ -326,5 +325,51 @@ const verticals = lines.map(function(l){
 					})
 					.map((i)=>{
 						return i.get('length')
-					}).toJS()					
-export {lines, widths, widthsInTens, verticals};
+					})
+				}).toJS()
+const firstVerts = lines.map(function(l){ 
+				return Math.round(l.get('directions')
+					.filter((i)=>{ 
+						return i.get('type') == 'vertical' 
+					})
+					.map((i)=>{
+						return i.get('length')
+					}).get(0) /50)
+				}).toJS()
+const secondVerts = lines.map(function(l){ 
+				return Math.round(l.get('directions')
+					.filter((i)=>{ 
+						return i.get('type') == 'vertical' 
+					})
+					.map((i)=>{
+						return i.get('length')
+					}).get(1)/50)
+				}).toJS()
+const thirdVerts = lines.map(function(l){ 
+				return Math.round(l.get('directions')
+					.filter((i)=>{ 
+						return i.get('type') == 'vertical' 
+					})
+					.map((i)=>{
+						return i.get('length')
+					}).get(2)/50) || ''
+				}).toJS()
+const fourthVerts = lines.map(function(l){ 
+				return Math.round(l.get('directions')
+					.filter((i)=>{ 
+						return i.get('type') == 'vertical' 
+					})
+					.map((i)=>{
+						return i.get('length')
+					}).get(3)/50) || ''
+				}).toJS()
+const fifthVerts = lines.map(function(l){ 
+				return Math.round( l.get('directions')
+					.filter((i)=>{ 
+						return i.get('type') == 'vertical' 
+					})
+					.map((i)=>{
+						return i.get('length')
+					}).get(4)/50 )|| ''
+				}).toJS()
+export {lines, widths, widthsInTens, verticals, firstVerts, secondVerts, thirdVerts, fourthVerts, fifthVerts};

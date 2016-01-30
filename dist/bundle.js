@@ -71,36 +71,30 @@
 
 	var _backgroundLineData = __webpack_require__(164);
 
-	var _backgroundLineData2 = _interopRequireDefault(_backgroundLineData);
+	var _spaceTreeData = __webpack_require__(165);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var PATHS = ['test', 'test2'];
 
-	window.lines = _backgroundLineData2.default;
-	window.complexity = _backgroundLineData2.default.map(function (l) {
-		return l.get('directions').size;
-	}).toJS();
-	window.widths = _backgroundLineData2.default.map(function (l) {
-		return l.get('directions').filter(function (i) {
-			return i.get('type') == 'horizontal' || i.get('type') == 'diagonal';
-		}).map(function (i) {
-			return i.get('length');
-		}).reduce(function (a, b) {
-			return a + b;
-		}, 0);
-	}).toJS();
-	window.tens = _backgroundLineData2.default.map(function (l) {
-		return l.get('directions').filter(function (i) {
-			return i.get('type') == 'horizontal' || i.get('type') == 'diagonal';
-		}).map(function (i) {
-			return i.get('length');
-		}).reduce(function (a, b) {
-			return a + b;
-		}, 0);
-	}).map(function (i) {
-		return Math.round(i * 0.1);
-	}).toJS();
+	window.lines = _backgroundLineData.lines;
+	window.verticals = _backgroundLineData.verticals;
+	window.firstVerts = _backgroundLineData.firstVerts;
+	window.secondVerts = _backgroundLineData.secondVerts;
+	window.thirdVerts = _backgroundLineData.thirdVerts;
+	window.fourthVerts = _backgroundLineData.fourthVerts;
+	window.fifthVerts = _backgroundLineData.fifthVerts;
+
+	window.positions = _spaceTreeData.positions;
+	window.space = _spaceTreeData.space;
+	window.firstSpace = _spaceTreeData.firstSpace;
+	window.firstUnique = _spaceTreeData.firstUnique;
+	window.secondSpace = _spaceTreeData.secondSpace;
+	window.secondUnique = _spaceTreeData.secondUnique;
+	window.thirdSpace = _spaceTreeData.thirdSpace;
+	window.thirdUnique = _spaceTreeData.thirdUnique;
+	window.firstOrSecond = _spaceTreeData.firstOrSecond;
+	window.secondOrThird = _spaceTreeData.secondOrThird;
 
 	_reactDom2.default.render(_react2.default.createElement(_paths2.default, { paths: PATHS }), document.getElementById('tapestry'));
 
@@ -24878,6 +24872,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.fifthVerts = exports.fourthVerts = exports.thirdVerts = exports.secondVerts = exports.firstVerts = exports.verticals = exports.widthsInTens = exports.widths = exports.lines = undefined;
 
 	var _immutable = __webpack_require__(162);
 
@@ -24960,7 +24955,151 @@
 		width: 50,
 		directions: [{ type: 'vertical', length: 348 }, { type: 'diagonal', length: 45 }, { type: 'vertical', length: 51 }, { type: 'diagonal', length: 5 }, { type: 'vertical', length: 53 }]
 	}]);
-	exports.default = lines;
+	var complexity = lines.map(function (l) {
+		return l.get('directions').size;
+	}).toJS();
+	var widths = lines.map(function (l) {
+		return l.get('directions').filter(function (i) {
+			return i.get('type') == 'horizontal' || i.get('type') == 'diagonal';
+		}).map(function (i) {
+			return i.get('length');
+		}).reduce(function (a, b) {
+			return a + b;
+		}, 0);
+	}).toJS();
+	var widthsInTens = lines.map(function (l) {
+		return l.get('directions').filter(function (i) {
+			return i.get('type') == 'horizontal' || i.get('type') == 'diagonal';
+		}).map(function (i) {
+			return i.get('length');
+		}).reduce(function (a, b) {
+			return a + b;
+		}, 0);
+	}).map(function (i) {
+		return Math.round(i * 0.1);
+	}).toJS();
+	var verticals = lines.map(function (l) {
+		return l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		});
+	}).toJS();
+	var firstVerts = lines.map(function (l) {
+		return Math.round(l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		}).get(0) / 50);
+	}).toJS();
+	var secondVerts = lines.map(function (l) {
+		return Math.round(l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		}).get(1) / 50);
+	}).toJS();
+	var thirdVerts = lines.map(function (l) {
+		return Math.round(l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		}).get(2) / 50) || '';
+	}).toJS();
+	var fourthVerts = lines.map(function (l) {
+		return Math.round(l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		}).get(3) / 50) || '';
+	}).toJS();
+	var fifthVerts = lines.map(function (l) {
+		return Math.round(l.get('directions').filter(function (i) {
+			return i.get('type') == 'vertical';
+		}).map(function (i) {
+			return i.get('length');
+		}).get(4) / 50) || '';
+	}).toJS();
+	exports.lines = lines;
+	exports.widths = widths;
+	exports.widthsInTens = widthsInTens;
+	exports.verticals = verticals;
+	exports.firstVerts = firstVerts;
+	exports.secondVerts = secondVerts;
+	exports.thirdVerts = thirdVerts;
+	exports.fourthVerts = fourthVerts;
+	exports.fifthVerts = fifthVerts;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.thirdSpace = exports.thirdUnique = exports.secondOrThird = exports.secondSpace = exports.secondUnique = exports.firstOrSecond = exports.firstSpace = exports.firstUnique = exports.space = exports.positions = undefined;
+
+	var _immutable = __webpack_require__(162);
+
+	var positions = (0, _immutable.fromJS)([2, 5, 9, 14, 48, 53, 58, 62, 65, 69, 72, 76, 103, 114, 115, 120, 123, 128, 157, 161, 164, 195, 198, 200, 204, 209, 214]);
+	var halfCircumference = Number((0.5 * (0.33 * (215 * Math.PI))).toFixed(2));
+	var space = {
+		whole: 215,
+		children: (0, _immutable.fromJS)([{
+			min: 0,
+			width: halfCircumference,
+			max: halfCircumference
+		}, {
+			min: 0.5 * 215 - 0.5 * halfCircumference,
+			width: halfCircumference,
+			max: 0.5 * 215 - 0.5 * halfCircumference + halfCircumference
+		}, {
+			min: 215 - halfCircumference,
+			width: halfCircumference,
+			max: 215
+		}])
+	};
+	var firstSpace = positions.filter(function (i) {
+		return i >= space.children.getIn([0, 'min']) && i <= space.children.getIn([0, 'max']);
+	});
+	console.log(firstSpace);
+	var secondSpace = positions.filter(function (i) {
+		return i >= space.children.getIn([1, 'min']) && i <= space.children.getIn([1, 'max']);
+	});
+	var thirdSpace = positions.filter(function (i) {
+		return i >= space.children.getIn([2, 'min']) && i <= space.children.getIn([2, 'max']);
+	});
+
+	var firstUnique = positions.filter(function (i) {
+		return i >= space.children.getIn([0, 'min']) && i <= space.children.getIn([0, 'max']) && i < space.children.getIn([1, 'min']);
+	});
+	var secondUnique = positions.filter(function (i) {
+		return i >= space.children.getIn([1, 'min']) && i <= space.children.getIn([1, 'max']) && i > space.children.getIn([1, 'max']) && i < space.children.getIn([2, 'min']);
+	});
+	var thirdUnique = positions.filter(function (i) {
+		return i >= space.children.getIn([2, 'min']) && i <= space.children.getIn([2, 'max']) && i > space.children.getIn([1, 'max']);
+	});
+
+	var firstOrSecond = positions.filter(function (i) {
+		return i >= space.children.getIn([0, 'min']) && i <= space.children.getIn([0, 'max']) && i > space.children.getIn([1, 'min']);
+	});
+
+	var secondOrThird = positions.filter(function (i) {
+		return i >= space.children.getIn([2, 'min']) && i <= space.children.getIn([2, 'max']) && i < space.children.getIn([1, 'max']);
+	});
+
+	exports.positions = positions;
+	exports.space = space;
+	exports.firstUnique = firstUnique;
+	exports.firstSpace = firstSpace;
+	exports.firstOrSecond = firstOrSecond;
+	exports.secondUnique = secondUnique;
+	exports.secondSpace = secondSpace;
+	exports.secondOrThird = secondOrThird;
+	exports.thirdUnique = thirdUnique;
+	exports.thirdSpace = thirdSpace;
 
 /***/ }
 /******/ ]);
