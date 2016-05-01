@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
+  watch: true,  
   entry: [ 
     './source/main.jsx'
   ],
