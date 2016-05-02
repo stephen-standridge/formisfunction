@@ -16,10 +16,19 @@ class MainContent extends React.Component {
 				</div>
 			</div>
 			<div className='main__content'>
-				<div className='artwork__wrapper'>
+				<div className='artwork__wrapper'>					
 					<div className='artwork__content'>
-					</div>
+					</div>			
+					<div className='artwork__sidebar'>
+					</div>						
 					<div className='artwork__navigation'>
+						<div className='artwork__navigation-wrapper'>
+							<div className='artwork__navigation-prev'></div>
+							<div className='artwork__navigation-title'>
+								Static
+							</div>						
+							<div className='artwork__navigation-next'></div>						
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,78 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+#app{
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.main__wrapper{
+	max-width: 800px;
+	height: 100%;
+	text-align:center;
+	position: relative;
+	margin: auto;
+}
+
+.main__navigation{
+	display: inline-block;
+}
+
+.main__navigation-item{
+	float: left;
+	display: inline-block;
+	margin: 10px 20px;
+}
+
+.main__content{
+	height: 100%;
+	width: 100%;
+}
+
+.artwork__wrapper{
+	float: right;
+}
+
+.artwork__content{
+	width: 330px;
+	height: 660px;
+	float: left;
+}
+.artwork__sidebar{
+	width: 200px;
+	padding: 10px;
+	height: 660px;	
+	float: left;
+}
+
+.artwork__navigation{
+	width: 330px;
+	clear: both;
+	float: left;
+}
+
+.artwork__navigation-wrapper{
+	float: none;
+	display: inline-block;	
+}
+
+.artwork__navigation-title{
+	padding: 10px 20px;
+	float: left;
+}
+.artwork__navigation-next{
+	height: 50px;
+	width: 50px;
+	float: left;
+	display: inline-block;	
+}
+.artwork__navigation-prev{
+	height: 50px;
+	width: 50px;
+	float: left;
+	display: inline-block;	
+}
