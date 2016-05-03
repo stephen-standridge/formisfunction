@@ -1,23 +1,34 @@
+var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  watch: true,  
-  entry: [ 
-    './source/main.jsx'
+  entry: [
+    'webpack-hot-middleware/client',
+    './source/index'
   ],
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel'
-    }]
+  devtool: 'eval-source-map',
+  output: {
+    path: __dirname,
+    filename: 'bundle.js',
+    publicPath: '/static/'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
+  },  
+  module: {
+    loaders: [{
+      test: /\.jsx$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'source')
+    },{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'source')
+    },
+    { test: /\.css$/, loader: "style-loader!css-loader" }]
   }
 };

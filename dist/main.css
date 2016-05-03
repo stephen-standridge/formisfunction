@@ -4,18 +4,22 @@ html, body{
 	height: 100%;
 	width: 100%;
 }
-#app{
+#root{
 	height: 100%;
 	width: 100%;
 	position: relative;
 }
 
 .main__wrapper{
-	max-width: 800px;
 	height: 100%;
 	text-align:center;
 	position: relative;
+}
+.main__wrapper-content{
+	max-width: 800px;
 	margin: auto;
+	float: none;
+	display: inline-block;	
 }
 
 .main__navigation{
@@ -34,26 +38,22 @@ html, body{
 	width: 100%;
 }
 
-.artwork__sidebar{
+
+.content__sidebar{
 	float: left;
 }
-.artwork__wrapper{
-	float: right;
+.content__wrapper{
+	float: left;
 }
-.artwork__content{
+.content__content{
 	float: left;
 }
 
-.documentation__sidebar{
-	float: left;
+.content__wrapper{
+	width: 330px;
+	height: 660px;	
+	display: inline-block;
 }
-.documentation__wrapper{
-	float: left;
-}
-.documentation__content{
-	float: left;
-}
-
 
 .content__sidebar{
 	width: 200px;
@@ -61,10 +61,6 @@ html, body{
 	height: 630px;	
 }
 
-.content{
-	width: 330px;
-	height: 660px;
-}
 
 .content__footer{
 	max-height: 5%;
