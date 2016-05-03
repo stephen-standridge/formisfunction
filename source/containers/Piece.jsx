@@ -1,4 +1,5 @@
 import React from 'react';
+import PieceStore from '../stores/PieceStore';
 import connectToStores from '../utils/connectToStores';
 
 function parsePiece(params) {
@@ -6,13 +7,19 @@ function parsePiece(params) {
 }
 
 function requestData(props) {
-  const { params } = props;
-  const section = parsePiece(section);
+  const piece = parsePiece(piece);
 
-  // UserActionCreators.requestUser(userLogin, ['name', 'avatarUrl']);
+  PieceActionCreators.requestPiece(name, ['name']);
 }
+function present(props) {
+  const piece = parsePiece(props.params);
 
-// connectToStores([StarredReposByUserStore, UserStore, RepoStore], getState)
+  const currentPiece = PieceStore.get(piece);
+
+  return {
+    currentPiece
+  };
+}
 class Piece extends React.Component {
   componentWillMount() {
     requestData(this.props);
@@ -26,7 +33,9 @@ class Piece extends React.Component {
 	render(){
     const piece = parsePiece(this.props);
 
-		return <div></div>
+		return ( <div>
+      {this.props.currentPiece}
+    </div> )
 	}
 }
 
@@ -37,7 +46,7 @@ Piece.propTypes = {
     piece: React.PropTypes.string.isRequired
   }).isRequired,
   // Injected by connectToStores:
-  // piece: React.PropTypes.object,
+  currentPiece: React.PropTypes.object,
 };
 
-export default Piece
+export default connectToStores([PieceStore], present)(Piece)

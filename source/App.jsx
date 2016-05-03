@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import MainNavigation from './components/MainNavigation';
-import Greeting from './components/Greeting';
+import SectionBody from './components/Section';
 import DocumentTitle from 'react-document-title';
 import CSS from '../dist/main.css'
 
@@ -16,7 +16,7 @@ class App {
     );
   }
   renderChildrenOrHome(){
-    return this.props.children ? this.props.children : <Greeting />
+    return this.props.children ? this.props.children : <SectionBody section={'greeting'} />
   }
 }
 

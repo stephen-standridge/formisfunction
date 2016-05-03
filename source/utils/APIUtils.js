@@ -2,6 +2,9 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import 'core-js/es6/promise';
 import 'whatwg-fetch';
+import requireAll from './requireAll';
+export const assets = requireAll(require.context("../../assets", true, /^\.\/.*\.json$/));
+
 
 /**
  * Extracts the next page URL from Github API response.
@@ -21,53 +24,67 @@ function getNextPageUrl(response) {
 }
 
 // We use this Normalizr schemas to transform API responses from a nested form
-// to a flat form where repos and users are placed in `entities`, and nested
+// to a flat form where pieces and sections are placed in `entities`, and nested
 // JSON objects are replaced with their IDs. This is very convenient for
 // consumption by Stores, because each Store can just grab entities of its kind.
 
 // Read more about Normalizr: https://github.com/gaearon/normalizr
 
-const userSchema = new Schema('users', { idAttribute: 'login' });
-const repoSchema = new Schema('repos', { idAttribute: 'fullName' });
-repoSchema.define({
-  owner: userSchema
+const sectionSchema = new Schema('sections', { idAttribute: 'name' });
+const pieceSchema = new Schema('pieces', { idAttribute: 'name' });
+pieceSchema.define({
+  owner: sectionSchema
 });
 
-const API_ROOT = 'https://api.github.com/';
+
+const API_ROOT = '../';
 
 /**
  * Fetches an API response and normalizes the result JSON according to schema.
  */
+// function fetchAndNormalize(url, schema) {
+//   if (url.indexOf(API_ROOT) === -1) {
+//     url = API_ROOT + url;
+//   }
+//   // return fetch(url).then(response =>{
+//   //   return response.json().then(json => {
+//       const camelizedJson = camelizeKeys(json);
+//       const nextPageUrl = getNextPageUrl(response) || undefined;
+
+//       return {
+//         ...normalize(camelizedJson, schema),
+//         nextPageUrl
+//       };
+//   //   })
+//   // });
+// } 
 function fetchAndNormalize(url, schema) {
   if (url.indexOf(API_ROOT) === -1) {
-    url = API_ROOT + url;
+    url = url.split('/');
   }
-
-  return fetch(url).then(response =>
-    response.json().then(json => {
-      const camelizedJson = camelizeKeys(json);
-      const nextPageUrl = getNextPageUrl(response) || undefined;
-
-      return {
-        ...normalize(camelizedJson, schema),
-        nextPageUrl
-      };
+  return new Promise(function(resolve, reject){
+    let json = assets.getIn(url);
+    const camelizedJson = camelizeKeys(json.toJS());
+    // const nextPageUrl = getNextPageUrl(response) || undefined;
+    resolve({
+      ...normalize(camelizedJson, schema),
+      // nextPageUrlz
     })
-  );
+  })
 }
 
-export function fetchUser(url) {
-  return fetchAndNormalize(url, userSchema);
+export function fetchSection(url) {
+  return fetchAndNormalize(url, sectionSchema);
 }
 
-export function fetchUserArray(url) {
-  return fetchAndNormalize(url, arrayOf(userSchema));
+export function fetchSectionArray(url) {
+  return fetchAndNormalize(url, arrayOf(sectionSchema));
 }
 
-export function fetchRepo(url) {
-  return fetchAndNormalize(url, repoSchema);
+export function fetchPiece(url) {
+  return fetchAndNormalize(url, pieceSchema);
 }
 
-export function fetchRepoArray(url) {
-  return fetchAndNormalize(url, arrayOf(repoSchema));
+export function fetchPieceArray(url) {
+  return fetchAndNormalize(url, arrayOf(pieceSchema));
 }

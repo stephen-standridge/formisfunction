@@ -4,19 +4,19 @@ import { Link } from 'react-router';
 
 class MainNavigation extends React.Component {
 	render(){
-		return ( <div className='main__navigation'>
+		return ( <div className='sections__navigation'>
       <Link to={`/artwork`}>
-				<div className='main__navigation-item'>
+				<div className='sections__navigation-item'>
 					artwork
 				</div>
 			</Link>
       <Link to={`/documentation`}>			
-				<div className='main__navigation-item'>
+				<div className='sections__navigation-item'>
 					documentation
 				</div>
 			</Link>
       <Link to={`/information`}>
-				<div className='main__navigation-item'>
+				<div className='sections__navigation-item'>
 					information
 				</div>
 			</Link>
