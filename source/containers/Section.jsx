@@ -35,7 +35,7 @@ class Section extends React.Component {
 	render(){
     const section = parseSection(this.props.params);
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
-			<SectionBody {...this.props.currentSection} ></SectionBody>
+			<SectionBody {...this.props.currentSection} >{ this.props.children }</SectionBody>
 		</DocumentTitle>
 	}
 }

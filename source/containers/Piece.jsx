@@ -5,15 +5,17 @@ import connectToStores from '../utils/connectToStores';
 function parsePiece(params) {
   return params.piece;
 }
+function parsePieceLocation(params) {
+  return `${params.section}/${params.piece}`;
+}
 
 function requestData(props) {
-  const piece = parsePiece(piece);
+  const location = parsePieceLocation(props.params);
 
-  PieceActionCreators.requestPiece(name, ['name']);
+  PieceActionCreators.requestPiece(location, ['name']);
 }
 function present(props) {
   const piece = parsePiece(props.params);
-
   const currentPiece = PieceStore.get(piece);
 
   return {
@@ -22,17 +24,16 @@ function present(props) {
 }
 class Piece extends React.Component {
   componentWillMount() {
+    console.log(this.props)
     requestData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (parseLogin(nextProps.params) !== parseLogin(this.props.params)) {
+    if (parsePiece(nextProps.params) !== parsePiece(this.props.params)) {
       requestData(nextProps);
     }
   }	
 	render(){
-    const piece = parsePiece(this.props);
-
 		return ( <div>
       {this.props.currentPiece}
     </div> )

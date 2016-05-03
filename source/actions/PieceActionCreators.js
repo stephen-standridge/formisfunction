@@ -4,7 +4,7 @@ import * as PieceAPI from '../api/PieceAPI';
 import PieceStore from '../stores/PieceStore';
 
 export function requestPiece(piece, fields) {
-  // Exit early if we know about this repo
+  // Exit early if we know about this piece
   if (PieceStore.contains(piece, fields)) {
     return;
   }

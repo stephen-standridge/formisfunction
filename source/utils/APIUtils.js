@@ -2,7 +2,6 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import 'core-js/es6/promise';
 import 'whatwg-fetch';
-import requireAll from './requireAll';
 export const assets = require.context("../../assets", true, /^\.\/.*\.js$/);
 
 

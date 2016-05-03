@@ -4,7 +4,7 @@ import * as SectionAPI from '../api/SectionAPI';
 import SectionStore from '../stores/SectionStore';
 
 export function requestSection(section, fields) {
-  // Exit early if we know enough about this user
+  // Exit early if we know enough about this section
   if (SectionStore.contains(section, fields)) {
     return;
   }
