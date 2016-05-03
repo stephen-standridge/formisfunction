@@ -29,6 +29,7 @@ module.exports = {
       loaders: ['babel'],
       include: path.join(__dirname, 'source')
     },
-    { test: /\.css$/, loader: "style-loader!css-loader" }]
+    { test: /\.css$/, loader: "style-loader!css-loader" },
+    { test: /\.json$/, loader: "json-loader" }]
   }
 };

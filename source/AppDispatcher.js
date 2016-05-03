@@ -32,12 +32,11 @@ export function dispatch(type, action = {}) {
     // Actions are just plain JavaScript objects describing “what happened”.
     // Think of them as newspapers.
     if (action.error) {
-      console.error(type, action);
+      // console.error(type, action);
     } else {
-      console.log(type, action);
+      // console.log(type, action);
     }
   }
-
   flux.dispatch({ type, ...action });
 }
 
@@ -46,7 +45,6 @@ export function dispatch(type, action = {}) {
  */
 export function dispatchAsync(promise, types, action = {}) {
   const { request, success, failure } = types;
-
   dispatch(request, action);
   promise.then(
     response => dispatch(success, { ...action, response }),

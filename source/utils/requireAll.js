@@ -2,9 +2,8 @@ import { Map, fromJS } from 'immutable';
 
 export default function requireAll(requireContext) {
 	let returned = Map({}), trimmed;
-	console.log(requireContext)
 	requireContext.keys().map((item, index)=>{
-		trimmed = item.split('.js')[0].split('./')[1]
+		trimmed = item.split('./')[1]
 		let parts = trimmed.split('/')
 		parts = parts.map((item)=> item.toLowerCase() )
 		returned = returned.setIn( parts, fromJS(requireContext(item, index)) )

@@ -13,29 +13,33 @@ html, body{
 .main__wrapper{
 	height: 100%;
 	text-align:center;
-	position: relative;
 }
-.main__wrapper-content{
+.sections__wrapper{
+	width: 100%;
+	height:100%;
+	top: 0;
+	position: absolute;
+}
+.sections__wrapper-content{
 	max-width: 800px;
+	max-height: 90%;
 	margin: auto;
+	margin-top: 5%;
 	float: none;
 	display: inline-block;	
 }
 
-.main__navigation{
+.sections__navigation{
+	z-index: 1;
+	position: relative;
 	display: inline-block;
 	max-height: 5%;
 }
 
-.main__navigation-item{
+.sections__navigation-item{
 	float: left;
 	display: inline-block;
 	margin: 20px 20px 0px 20px;
-}
-
-.main__content{
-	max-height: 90%;
-	width: 100%;
 }
 
 
