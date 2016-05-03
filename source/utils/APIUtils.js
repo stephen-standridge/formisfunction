@@ -3,7 +3,7 @@ import { camelizeKeys } from 'humps';
 import 'core-js/es6/promise';
 import 'whatwg-fetch';
 import requireAll from './requireAll';
-export const assets = requireAll(require.context("../../assets", true, /^\.\/.*\.json$/));
+export const assets = require.context("../../assets", true, /^\.\/.*\.js$/);
 
 
 /**
@@ -37,7 +37,7 @@ pieceSchema.define({
 });
 
 
-const API_ROOT = '../';
+const API_ROOT = './';
 
 /**
  * Fetches an API response and normalizes the result JSON according to schema.
@@ -60,11 +60,13 @@ const API_ROOT = '../';
 // } 
 function fetchAndNormalize(url, schema) {
   if (url.indexOf(API_ROOT) === -1) {
-    url = url.split('/');
+    url = API_ROOT + url;
   }
   return new Promise(function(resolve, reject){
-    let json = assets.getIn(url);
-    const camelizedJson = camelizeKeys(json.toJS());
+    let json = assets(url);
+
+    const camelizedJson = camelizeKeys(json);
+
     // const nextPageUrl = getNextPageUrl(response) || undefined;
     resolve({
       ...normalize(camelizedJson, schema),
