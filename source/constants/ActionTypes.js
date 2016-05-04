@@ -1,11 +1,9 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-  REQUEST_SECTION: null,
-  REQUEST_SECTION_SUCCESS: null,
-  REQUEST_SECTION_ERROR: null,
+  REQUEST_PIECES: null,
+  REQUEST_PIECES_SUCCESS: null,
+  REQUEST_PIECES_ERROR: null,
 
-  REQUEST_PIECE: null,
-  REQUEST_PIECE_SUCCESS: null,
-  REQUEST_PIECE_ERROR: null,
+  SELECT_PIECE: null,
 });

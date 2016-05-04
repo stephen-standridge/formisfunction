@@ -1,16 +1,20 @@
-import { dispatch } from '../AppDispatcher';
+import { dispatchAsync } from '../AppDispatcher';
 import ActionTypes from '../constants/ActionTypes';
 import * as PiecesAPI from '../api/PiecesAPI';
-import PieceStore from '../stores/PieceStore';
+import ApplicationStore from '../stores/ApplicationStore';
 
-export function requestPiecesOrPiece(endpoint, fields) {
+export function requestPiecesOrPiece(endpoint) {
   // Exit early if we know enough about this endpoint
-  if (PieceStore.contains(endpoint, fields)) {
+  if ( ApplicationStore.contains(endpoint) || ApplicationStore.hasVisited(endpoint) ) {
     return;
   }
-  dispatch(PiecesAPI.getPiecesAndPiece(endpoint), {
-    request: ActionTypes.REQUEST_SECTION,
-    success: ActionTypes.REQUEST_SECTION_SUCCESS,
-    failure: ActionTypes.REQUEST_SECTION_ERROR
+  dispatchAsync(PiecesAPI.getPiecesAndPiece(endpoint), {
+    request: ActionTypes.REQUEST_PIECES,
+    success: ActionTypes.REQUEST_PIECES_SUCCESS,
+    failure: ActionTypes.REQUEST_PIECES_ERROR
   }, { endpoint });
+}
+
+export function requestPiece( name ){
+
 }

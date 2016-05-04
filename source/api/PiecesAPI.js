@@ -12,7 +12,11 @@ function determineSelected( pieces, endpoint ){
 }
 
 export function getPiecesAndPiece( endpoint ){
-	let locatedPieces = locatePieceContext( endpoint ).first();
-	let returnedPieces = List(locatedPieces.values() ).toJS();
-  return { pieces: returnedPieces, selected: determineSelected( locatedPieces, endpoint )  };
+	let locatedSection = locatePieceContext( endpoint );
+	let locatedPieces = List( locatedSection.first().values() );
+	let sectionName = List(locatedSection.keys())
+	sectionName = sectionName.first()
+  return new Promise( function(resolve, reject){
+  	resolve({ pieces: locatedPieces.toJS(), selectedPiece: determineSelected( locatedPieces, endpoint ), selectedSection: sectionName  });
+  })
 }

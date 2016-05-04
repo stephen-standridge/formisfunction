@@ -1,25 +1,28 @@
 import React from 'react';
 import connectToStores from '../utils/connectToStores';
-import PieceStore from '../stores/PieceStore';
+import ApplicationStore from '../stores/ApplicationStore';
 import * as PiecesActionCreators from '../actions/PiecesActionCreators';
 import SectionBody from '../components/Section';
 import DocumentTitle from 'react-document-title';
 
 function parseEndpoint(params) {	
-  return params.section;
+  return params.endpoint;
 }
 
 function requestData(props) {
   const endpoint = parseEndpoint(props.params);
 
-  PiecesActionCreators.requestPiecesOrPiece(endpoint, ['name']);
+  PiecesActionCreators.requestPiecesOrPiece( endpoint );
 }
 function present(props) {
-  const section = parseEndpoint(props.params);
-  console.log(PieceStore.get('ryb'))
-  const currentPiece = PieceStore.get(section);
+  const currentPiece = ApplicationStore.currentPiece();
+  const currentSection = ApplicationStore.currentSection();
+  const displayedPiece = ApplicationStore.displayedPiece();
+
   return {
-    currentPiece
+    displayedPiece,
+    currentPiece,
+    currentSection
   };
 }
 
@@ -34,7 +37,9 @@ class Section extends React.Component {
     }
   }	
 	render(){
-    const section = parseEndpoint(this.props.params);
+    console.log(this.props)
+    ///does not work with /static 
+    const section = this.props.currentSection;
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
 			<SectionBody {...this.props.currentSection} >{ this.props.children }</SectionBody>
 		</DocumentTitle>
@@ -44,11 +49,13 @@ class Section extends React.Component {
 Section.propTypes = {
   // Injected by React Router:
   params: React.PropTypes.shape({
-    section: React.PropTypes.string.isRequired
+    endpoint: React.PropTypes.string.isRequired
   }).isRequired,
 
   // Injected by connectToStores:
-  currentSection: React.PropTypes.object,
+  currentSection: React.PropTypes.string,
+  currentPiece: React.PropTypes.string,
+  displayedPiece: React.PropTypes.object,
 };
 
-export default connectToStores([PieceStore], present)( Section )
+export default connectToStores([ApplicationStore], present)( Section )
