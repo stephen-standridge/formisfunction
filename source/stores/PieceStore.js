@@ -16,6 +16,7 @@ const PieceStore = createStore({
 
 PieceStore.dispatchToken = register(action => {
   const responsePieces = selectn('response.entities.pieces', action);
+  console.log(action)
   if (responsePieces) {
     mergeIntoBag(_pieces, responsePieces);
     PieceStore.emitChange();

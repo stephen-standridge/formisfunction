@@ -1,24 +1,25 @@
 import React from 'react';
 import connectToStores from '../utils/connectToStores';
-import SectionStore from '../stores/SectionStore';
-import * as SectionActionCreators from '../actions/SectionActionCreators';
+import PieceStore from '../stores/PieceStore';
+import * as PiecesActionCreators from '../actions/PiecesActionCreators';
 import SectionBody from '../components/Section';
 import DocumentTitle from 'react-document-title';
 
-function parseSection(params) {	
+function parseEndpoint(params) {	
   return params.section;
 }
 
 function requestData(props) {
-  const section = parseSection(props.params);
+  const endpoint = parseEndpoint(props.params);
 
-  SectionActionCreators.requestSection(section, ['name']);
+  PiecesActionCreators.requestPiecesOrPiece(endpoint, ['name']);
 }
 function present(props) {
-  const section = parseSection(props.params);
-  const currentSection = SectionStore.get(section);
+  const section = parseEndpoint(props.params);
+  console.log(PieceStore.get('ryb'))
+  const currentPiece = PieceStore.get(section);
   return {
-    currentSection
+    currentPiece
   };
 }
 
@@ -28,12 +29,12 @@ class Section extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (parseSection(nextProps.params) !== parseSection(this.props.params)) {
+    if (parseEndpoint(nextProps.params) !== parseEndpoint(this.props.params)) {
       requestData(nextProps);
     }
   }	
 	render(){
-    const section = parseSection(this.props.params);
+    const section = parseEndpoint(this.props.params);
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
 			<SectionBody {...this.props.currentSection} >{ this.props.children }</SectionBody>
 		</DocumentTitle>
@@ -50,4 +51,4 @@ Section.propTypes = {
   currentSection: React.PropTypes.object,
 };
 
-export default connectToStores([SectionStore], present)( Section )
+export default connectToStores([PieceStore], present)( Section )

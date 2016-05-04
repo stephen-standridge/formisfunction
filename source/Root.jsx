@@ -14,9 +14,7 @@ class Root extends Component {
     return (
       <Router history={history}>
         <Route name='navigation' path='/' component={App} >
-          <Route name='section' path='/:section' component={Section} >
-            <Route name='piece' path='/:section/:piece' component={Piece} />
-          </Route>     
+          <Route name='section' path='/:section' component={Section} />
         </Route>
       </Router>
     );

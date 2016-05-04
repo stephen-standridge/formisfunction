@@ -1,3 +1,3 @@
 module.exports = {
-	name: 'static'
+	name: 'stephen'
 }
