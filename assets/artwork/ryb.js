@@ -1,5 +1,6 @@
 module.exports = {
   name: 'ryb',
+  left: [],
   center: [
   	{ type: 'SVGPiece' },
   	{ type: 'LinearNavigation' }

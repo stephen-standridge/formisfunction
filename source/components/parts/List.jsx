@@ -3,7 +3,9 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class List extends React.Component {
 	render(){
-		return (	<div className='list'></div> )		
+		return (	<div className='list'>
+			<h1> {`${this.props.name}`} </h1>
+			</div> )		
 	}
 }
 

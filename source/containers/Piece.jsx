@@ -6,7 +6,7 @@ import PieceDisplay from '../components/PieceDisplay';
 import DocumentTitle from 'react-document-title';
 
 function parseEndpoint(params) {	
-  return params.endpoint;
+  return params.endpoint || 'welcome';
 }
 
 function requestData(props) {
@@ -27,7 +27,7 @@ function present(props) {
 
 class Piece extends React.Component {
   componentWillMount() {
-    requestData({ params: { endpoint: 'welcome' }});
+    requestData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,6 +36,7 @@ class Piece extends React.Component {
     }
   }	
 	render(){
+    console.log(this.props.displayedPiece )
     const section = this.props.currentSection;
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
 			<PieceDisplay {...this.props} ></PieceDisplay>

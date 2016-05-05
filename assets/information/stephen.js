@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'stephen',
 	center: [
-		{ type: 'TextPIece',
+		{ type: 'TextPiece',
 			body: 'this is all about me perhaps' }
 	]
 }

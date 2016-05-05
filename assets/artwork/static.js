@@ -1,7 +1,8 @@
 module.exports = {
   name: 'static',
+  left: [],
   center: [
-  	{ type: 'Three' },
+  	{ type: 'ThreePiece' },
   	{ type: 'LinearNavigation' }
   ],
   right: [
@@ -19,7 +20,7 @@ module.exports = {
 		  	{ text: `about`, link: 'test' },
 		  	{ text: `another article`, link: 'test' }  	
 		  ] },
-		{ type: 'Versions' },
+		{ type: 'VersionsNavigation' },
 		{ type: 'Controls' }
   ]
 }

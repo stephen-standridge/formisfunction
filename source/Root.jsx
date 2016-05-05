@@ -10,7 +10,7 @@ class Root extends Component {
     return (
       <Router history={history}>
         <Route name='navigation' path='/' component={App} >
-          <IndexRoute component={Piece}/>
+          // <IndexRoute component={Piece}/>
           <Route name='endpoint' path='/:endpoint' component={Piece} />
         </Route>
       </Router>

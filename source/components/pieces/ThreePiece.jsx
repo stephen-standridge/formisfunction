@@ -3,7 +3,9 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class ThreePiece extends React.Component {
 	render(){
-		return (	<div className='threePiece'></div> )		
+		return (	<div className='threePiece'>
+			<h1> Three</h1>
+			</div> )		
 	}
 }
 
