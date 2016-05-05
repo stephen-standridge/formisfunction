@@ -14,7 +14,6 @@ class PieceDisplay extends React.Component {
 	}
 	renderDivisions(){
 		if(!this.props.displayedPiece){ return }
-			console.log(this.props.displayedPiece)
 		return map(DIVISIONS, function( divisionName ){
 			return <Division key={divisionName} division={divisionName} contents={this.props.displayedPiece[divisionName]} piece={this.props.displayedPiece} section={this.props.currentSection} />
 		}, this)
