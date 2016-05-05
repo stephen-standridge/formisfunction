@@ -2,7 +2,7 @@ import React from 'react';
 import connectToStores from '../utils/connectToStores';
 import ApplicationStore from '../stores/ApplicationStore';
 import * as PiecesActionCreators from '../actions/PiecesActionCreators';
-import SectionBody from '../components/Section';
+import PieceDisplay from '../components/PieceDisplay';
 import DocumentTitle from 'react-document-title';
 
 function parseEndpoint(params) {	
@@ -11,7 +11,6 @@ function parseEndpoint(params) {
 
 function requestData(props) {
   const endpoint = parseEndpoint(props.params);
-
   PiecesActionCreators.requestPiecesOrPiece( endpoint );
 }
 function present(props) {
@@ -26,9 +25,9 @@ function present(props) {
   };
 }
 
-class Section extends React.Component {
+class Piece extends React.Component {
   componentWillMount() {
-    requestData(this.props);
+    requestData({ params: { endpoint: 'welcome' }});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,16 +36,14 @@ class Section extends React.Component {
     }
   }	
 	render(){
-    console.log(this.props)
-    ///does not work with /static 
     const section = this.props.currentSection;
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
-			<SectionBody {...this.props.currentSection} >{ this.props.children }</SectionBody>
+			<PieceDisplay {...this.props} ></PieceDisplay>
 		</DocumentTitle>
 	}
 }
 
-Section.propTypes = {
+Piece.propTypes = {
   // Injected by React Router:
   params: React.PropTypes.shape({
     endpoint: React.PropTypes.string.isRequired
@@ -58,4 +55,4 @@ Section.propTypes = {
   displayedPiece: React.PropTypes.object,
 };
 
-export default connectToStores([ApplicationStore], present)( Section )
+export default connectToStores([ApplicationStore], present)( Piece )

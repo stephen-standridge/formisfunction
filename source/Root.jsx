@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import App from './App';
-import Section from './containers/Section';
+import Piece from './containers/Piece';
 
 class Root extends Component {
 
@@ -10,7 +10,8 @@ class Root extends Component {
     return (
       <Router history={history}>
         <Route name='navigation' path='/' component={App} >
-          <Route name='section' path='/:endpoint' component={Section} />
+          <IndexRoute component={Piece}/>
+          <Route name='endpoint' path='/:endpoint' component={Piece} />
         </Route>
       </Router>
     );

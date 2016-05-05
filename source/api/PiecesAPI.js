@@ -8,12 +8,12 @@ function locatePieceContext( endpoint ){
 	})
 }
 function determineSelected( pieces, endpoint ){
-	return pieces.has(endpoint) ? endpoint : undefined
+	return pieces.has(endpoint) ? endpoint : ''
 }
 
 export function getPiecesAndPiece( endpoint ){
 	let locatedSection = locatePieceContext( endpoint );
-	let locatedPieces = List( locatedSection.first().values() );
+	let locatedPieces = locatedSection.first();
 	let sectionName = List(locatedSection.keys())
 	sectionName = sectionName.first()
   return new Promise( function(resolve, reject){
