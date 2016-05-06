@@ -4,7 +4,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class Controls extends React.Component {
 	render(){
 		return (	<div className='controls'>
-			<strong> 'Controls' </strong>
+			<h3 className="strong"> 'Controls' </h3>
 			</div> )		
 	}
 }

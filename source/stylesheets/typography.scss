@@ -1,13 +1,25 @@
+.piece__right {
+	text-align: left !important;
+}
+.piece__left{
+	text-align: right !important;
+}
+.piece__center {
+	text-align: center;
+}
 div, p {
-	font-family: 'Arvo', serif;
+	font-family: 'Quicksand', sans-serif;
 	font-weight: 400;
+	letter-spacing: 1;
 }
-strong {
-	font-family: 'Arvo', sans-serif;
-	font-weight: 700;
-}
-
 h1, h2, h3, h4, h5, h6, a {
 	font-family: 'Josefin Sans', sans-serif !important;
-	font-weight: 400 !important;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 4;
+}
+.strong{
+	text-transform: lowercase;
+	font-weight: 700 !important;
+	letter-spacing: 2 !important;
 }

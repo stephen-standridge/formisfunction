@@ -4,7 +4,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class TreeNavigation extends React.Component {
 	render(){
 		return (	<div className='treeNavigation'>
-			<strong> 'File Navigation' </strong>
+			<h3 className="strong"> file navigation </h3>
 			</div> )		
 	}
 }

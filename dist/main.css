@@ -3,6 +3,7 @@ html, body{
 	padding: 0;
 	height: 100%;
 	width: 100%;
+	text-align:center;
 }
 #root{
 	height: 100%;
@@ -12,7 +13,6 @@ html, body{
 
 .main__wrapper{
 	height: 100%;
-	text-align:center;
 }
 .sections__wrapper{
 	width: 100%;

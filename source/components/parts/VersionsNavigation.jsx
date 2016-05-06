@@ -4,7 +4,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class VersionsNavigation extends React.Component {
 	render(){
 		return ( <div className='versionsNavigation'>
-			<strong> 'Versions Navigation' </strong>	
+			<h3 className="strong"> 'Versions Navigation' </h3>	
 			</div> )		
 	}
 }
