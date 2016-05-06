@@ -36,7 +36,6 @@ class Piece extends React.Component {
     }
   }	
 	render(){
-    console.log(this.props.displayedPiece )
     const section = this.props.currentSection;
 		return <DocumentTitle title={`Form Is Function :: ${section}`}>
 			<PieceDisplay {...this.props} ></PieceDisplay>
