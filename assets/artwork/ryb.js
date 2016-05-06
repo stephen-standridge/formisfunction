@@ -8,17 +8,17 @@ module.exports = {
   right: [
   	{ type: 'List',
 	  	name: 'technologies',
-	  	entries: [
-		  	{ text: 'react', link: 'test' },
-		  	{ text: 'immutable', link: 'test' },	  	
-		  	{ text: 'basic-tree', link: 'test' },
-		  	{ text: 'svg', link: 'test' }
+	  	items: [
+		  	{ text: 'react', href: 'test' },
+		  	{ text: 'immutable', href: 'test' },	  	
+		  	{ text: 'basic-tree', to: 'test' },
+		  	{ text: 'svg', href: 'test' }
 	  	]	},
   	{ type: 'List',
 	  	name: 'documentation'	,
-	  	entries: [
-		  	{ text: `about`, link: 'test' },
-		  	{ text: `what is this?`, link: 'test' }  	
+	  	items: [
+		  	{ text: `about`, to: 'test' },
+		  	{ text: `what is this?`, to: 'test' }  	
 		  ] },
 		{ type: 'VersionsNavigation' },
 		{ type: 'Controls' }

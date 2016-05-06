@@ -2,7 +2,6 @@ require('babel-core/register');
 import React from 'react';
 import { createHistory, createHashHistory } from 'history';
 import Root from './Root';
-import CSS from '../dist/main.css'
 
 const rootEl = document.getElementById('root');
 // Use hash location for Github Pages

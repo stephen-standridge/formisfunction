@@ -3,8 +3,8 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class VersionsNavigation extends React.Component {
 	render(){
-		return ( <div className='versionsNavigation'>
-			<h3 className="strong"> 'Versions Navigation' </h3>	
+		return ( <div className='versionsNavigation part'>
+			<h3 className="strong"> Versions </h3>	
 			</div> )		
 	}
 }

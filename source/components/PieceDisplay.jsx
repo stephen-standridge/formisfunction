@@ -1,4 +1,3 @@
-require('../stylesheets/typography.scss');
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import DIVISIONS from '../constants/divisions';

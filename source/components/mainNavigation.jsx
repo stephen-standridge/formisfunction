@@ -6,19 +6,19 @@ class MainNavigation extends React.Component {
 	render(){
 		return ( <div className='sections__navigation'>
       <Link to={`/artwork`}>
-				<h5 className='sections__navigation-item strong'>
+				<h4 className='sections__navigation-item strong'>
 					artwork
-				</h5>
+				</h4>
 			</Link>
       <Link to={`/documentation`}>			
-				<h5 className='sections__navigation-item strong'>
+				<h4 className='sections__navigation-item strong'>
 					documentation
-				</h5>
+				</h4>
 			</Link>
       <Link to={`/information`}>
-				<h5 className='sections__navigation-item strong'>
+				<h4 className='sections__navigation-item strong'>
 					information
-				</h5>
+				</h4>
 			</Link>
 			</div> )
 	}

@@ -8,17 +8,17 @@ module.exports = {
   right: [
   	{ type: 'List',
 	  	name: 'technologies',
-	  	entries: [
-		  	{ text: 'three.js', link: 'test' },
-		  	{ text: 'blender', link: 'test' },	  	
-		  	{ text: 'rx.js', link: 'test' },
-		  	{ text: 'cycles', link: 'test' }
+	  	items: [
+		  	{ text: 'three.js', href: 'test' },
+		  	{ text: 'blender', href: 'test' },	  	
+		  	{ text: 'rx.js', href: 'test' },
+		  	{ text: 'cycles', to: 'test' }
 	  	]	},
   	{ type: 'List',
 	  	name: 'documentation'	,
-	  	entries: [
-		  	{ text: `about`, link: 'test' },
-		  	{ text: `another article`, link: 'test' }  	
+	  	items: [
+		  	{ text: `about`, to: 'test' },
+		  	{ text: `another article`, to: 'test' }  	
 		  ] },
 		{ type: 'VersionsNavigation' },
 		{ type: 'Controls' }

@@ -3,8 +3,8 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class Controls extends React.Component {
 	render(){
-		return (	<div className='controls'>
-			<h3 className="strong"> 'Controls' </h3>
+		return (	<div className='controls part'>
+			<h3 className="strong"> Controls </h3>
 			</div> )		
 	}
 }

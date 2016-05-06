@@ -3,7 +3,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class SVGPiece extends React.Component {
 	render(){
-		return (	<div className='svgPiece'>
+		return (	<div className='svgPiece piece'>
 			<h1> SVG </h1>
 			</div> )		
 	}

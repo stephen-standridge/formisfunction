@@ -14,7 +14,7 @@ class Division extends React.Component {
 	renderParts(){
 		if(!this.props.contents){ return }
 			return map(this.props.contents, function( item, index ){
-				return React.createElement( PARTS[item.type], Object.assign({key: index, section: this.props.section}, item) )
+				return React.createElement( PARTS[item.type], Object.assign({key: index, sectionName: this.props.section, pieceName: this.props.piece.name }, item) )
 			}, this)
 	}
 }

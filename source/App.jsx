@@ -2,7 +2,10 @@ import React, { PropTypes } from 'react';
 import MainNavigation from './components/MainNavigation';
 import PieceDisplay from './components/PieceDisplay';
 import DocumentTitle from 'react-document-title';
-import CSS from '../dist/main.css'
+require('./stylesheets/core.scss')
+require('./stylesheets/typography.scss');
+require('./stylesheets/parts.scss');
+require('./stylesheets/pieces.scss');
 
 class App {
   render() {
