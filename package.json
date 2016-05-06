@@ -33,6 +33,7 @@
     "react-document-title": "^1.0.0",
     "react-pure-render": "^1.0.1",
     "react-router": "^1.0.0-beta4",
+    "remarkable": "^1.6.2",
     "selectn": "^0.9.6",
     "underscore": "^1.8.2",
     "whatwg-fetch": "^0.7.0"

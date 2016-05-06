@@ -24,7 +24,7 @@ html, body{
 	max-width: 800px;
 	height: 95%;
 	margin: auto;
-	margin-top: 5%;
+	padding-top: 5%;
 	float: none;
 	display: inline-block;	
 }
@@ -81,6 +81,9 @@ html, body{
   flex-direction: column;
   justify-content: flex-end;
   position: absolute;
+  margin: 0;
+  padding-bottom: 20px;
+
 }
 
 .piece__footer-wrapper{
