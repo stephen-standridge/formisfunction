@@ -2,24 +2,24 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * Clip Model
+ * VideoClip Model
  * ==========
  */
 
-var Clip = new keystone.List('Clip', {
+var VideoClip = new keystone.List('VideoClip', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
 });
 
-Clip.add({
+VideoClip.add({
 	title: { type: String, required: true },
 	description: { type: String },
 	createdAt: { type: Date, default: Date.now },
 	contents: { type: Types.Relationship, ref: 'ContentCollection', many: true },
+	video: { type: Types.Relationship, ref: 'Video' }	
 });
 
-Clip.relationship({ path: 'videoClip', ref: 'Video', refPath: 'clips' });
-Clip.relationship({ path: 'audioClip', ref: 'Audio', refPath: 'clips' });
+VideoClip.relationship({ path: 'contentCollections', ref: 'ContentCollection', refPath: 'videoClip' });
 
-Clip.defaultColumns = 'title, description';
-Clip.register();
+VideoClip.defaultColumns = 'title, description';
+VideoClip.register();

@@ -20,9 +20,10 @@ Video.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
-	},
-	clips: { type: Types.Relationship, ref: 'Clip', many: true }	
+	}
 });
+
+Video.relationship({ path: 'videoClip', ref: 'VideoClip', refPath: 'video' });
 
 Video.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;

@@ -12,11 +12,13 @@ var ContentCollection = new keystone.List('ContentCollection', {
 });
 
 ContentCollection.add({
-	createdAt: { type: Date, default: Date.now }
+	title: { type: String, required: true },		
+	createdAt: { type: Date, default: Date.now },
+	audioClip: { type: Types.Relationship, ref: 'AudioClip', many: true },
+	videoClip: { type: Types.Relationship, ref: 'VideoClip', many: true },
+	articles: { type: Types.Relationship, ref: 'Articles', many: true },
 });
 
-ContentCollection.relationship({ path: 'clips', ref: 'Clip', refPath: 'clips' });
-ContentCollection.relationship({ path: 'articles', ref: 'Article', refPath: 'articles' });
 ContentCollection.relationship({ path: 'views', ref: 'View', refPath: 'contents' });
 
 ContentCollection.register();

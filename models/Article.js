@@ -20,9 +20,10 @@ Article.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
-	},
-	content_collection: { type: Types.Relationship, ref: 'ContentCollection', many: true }	
+	}
 });
+
+Article.relationship({ path: 'contentCollections', ref: 'ContentCollection', refPath: 'article', many:true });
 
 Article.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;

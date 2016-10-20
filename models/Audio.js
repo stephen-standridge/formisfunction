@@ -20,9 +20,10 @@ Audio.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
-	},
-	clips: { type: Types.Relationship, ref: 'Clip', many: true }	
+	}
 });
+
+Audio.relationship({ path: 'audioClip', ref: 'AudioClip', refPath: 'audio' });
 
 Audio.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
