@@ -59,8 +59,7 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	users: 'users',
 	views: ['views', 'paths'],
-	content: ['collections', 'articles', 'audio-clips', 'video-clips'],
-	media: ['audios', 'videos'],	
+	content: ['collections', 'articles', 'media'],
 	enquiries: 'enquiries',	
 });
 

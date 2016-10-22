@@ -15,8 +15,7 @@ Collection.add({
 	title: { type: String, required: true },		
 	type: { type: String },		
 	createdAt: { type: Date, default: Date.now },
-	audioClips: { type: Types.Relationship, ref: 'AudioClip', many: true },
-	videoClips: { type: Types.Relationship, ref: 'VideoClip', many: true },
+	medias: { type: Types.Relationship, ref: 'Media', many: true },
 	articles: { type: Types.Relationship, ref: 'Article', many: true },
 });
 
