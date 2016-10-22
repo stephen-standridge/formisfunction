@@ -18,17 +18,18 @@ const reducer = combineReducers({
   routing: routerReducer
 })
 
-const DevTools = createDevTools(
+const DevTools = process.env.NODE_ENV == 'development' ?  createDevTools(
   <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
     <LogMonitor theme="tomorrow" preserveScrollTop={false} />
   </DockMonitor>
-)
-
-const store = createStore(
+) : function(){ return <div />}
+var stores = [
   reducer,
-  DevTools.instrument(),
   applyMiddleware( ReduxThunk )
-)
+]
+stores = process.env.NODE_ENV == 'development' ? stores.concat( DevTools.instrument()) : stores;
+
+const store = createStore(...stores)
 const history = syncHistoryWithStore(browserHistory, store)
 var div = document.createElement("div");
 div.id = 'mount'
