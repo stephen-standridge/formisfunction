@@ -16,10 +16,10 @@ View.add({
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	createdAt: { type: Date, default: Date.now },
 	publishedAt: Date,
-	contents: { type: Types.Relationship, ref: 'ContentCollection', many: true }
+	collections: { type: Types.Relationship, ref: 'Collection', many: true }
 });
 
-// View.relationship({ path: 'view_collections', ref: 'ViewCollection', refPath: 'views' });
+View.relationship({ path: 'path', ref: 'Path', refPath: 'views' });
 
 
 View.defaultColumns = 'title, state|20%';

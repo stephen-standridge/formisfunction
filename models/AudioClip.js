@@ -18,7 +18,7 @@ AudioClip.add({
 	audio: { type: Types.Relationship, ref: 'Audio' }	
 });
 
-AudioClip.relationship({ path: 'contentCollections', ref: 'ContentCollection', refPath: 'audioClip', many:true });
+AudioClip.relationship({ path: 'collection', ref: 'Collection', refPath: 'audioClips', many:true });
 
 AudioClip.defaultColumns = 'title, description';
 AudioClip.register();

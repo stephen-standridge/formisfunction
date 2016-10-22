@@ -23,6 +23,8 @@ Audio.add({
 	}
 });
 
+Audio.plural = 'audio'
+
 Audio.relationship({ path: 'audioClip', ref: 'AudioClip', refPath: 'audio' });
 
 Audio.schema.virtual('content.full').get(function () {

@@ -23,7 +23,7 @@ Article.add({
 	}
 });
 
-Article.relationship({ path: 'contentCollections', ref: 'ContentCollection', refPath: 'article', many:true });
+Article.relationship({ path: 'collection', ref: 'Collection', refPath: 'articles', many:true });
 
 Article.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
