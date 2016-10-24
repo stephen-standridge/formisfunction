@@ -1,3 +1,4 @@
+//originally at templates/views/helpers/index.js
 var moment = require('moment');
 var _ = require('underscore');
 var hbs = require('handlebars');
