@@ -31,7 +31,7 @@ module.exports = {
   },
   plugins: [ extractCSS, new HtmlWebpackPlugin() ],
   output: {
-    path:'dist',
+    path:'public',
     filename: '[name]-[hash].js'
   },
   devServer: {
