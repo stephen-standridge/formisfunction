@@ -15,12 +15,12 @@ Media.add({
 	title: { type: String, required: true },
 	description: { type: String },
 	url: { type: String },
-	type: { type: Types.Select, options: 'audio, video', default: 'video', index: true },	
+	type: { type: Types.Select, options: 'audio, video, image', default: 'video', index: true },	
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } }
 });
 
-Media.plural = 'audio'
+Media.plural = 'media'
 
 Media.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;

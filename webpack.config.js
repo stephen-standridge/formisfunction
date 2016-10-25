@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
@@ -29,10 +30,14 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
-  plugins: [ extractCSS, new HtmlWebpackPlugin() ],
+  plugins: [ extractCSS, new HtmlWebpackPlugin(), new webpack.ProvidePlugin({
+    'React':      'react',
+    '_':          'lodash',
+    'ReactDOM':   'react-dom'
+  })],
   output: {
     path:'public',
-    filename: '[name]-[hash].js'
+    filename: 'js/[name]-[hash].js'
   },
   devServer: {
     port: 3000,

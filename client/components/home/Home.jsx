@@ -1,6 +1,5 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import { increase, decrease } from '../actions/count'
+import { increase, decrease } from '../../actions/count'
 
 function Home({ number, post_count, increase, decrease }) {
   return (

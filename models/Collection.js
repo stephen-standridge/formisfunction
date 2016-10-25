@@ -13,7 +13,6 @@ var Collection = new keystone.List('Collection', {
 
 Collection.add({
 	title: { type: String, required: true },		
-	type: { type: String },		
 	createdAt: { type: Date, default: Date.now },
 	medias: { type: Types.Relationship, ref: 'Media', many: true },
 	articles: { type: Types.Relationship, ref: 'Article', many: true },

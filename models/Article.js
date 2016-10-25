@@ -14,13 +14,9 @@ var Article = new keystone.List('Article', {
 Article.add({
 	title: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
-	author: { type: Types.Relationship, ref: 'User', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	image: { type: Types.CloudinaryImage },
-	content: {
-		brief: { type: Types.Html, wysiwyg: true, height: 150 },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 },
-	}
+	content: { type: Types.Html, wysiwyg: true, height: 400 }
 });
 
 Article.relationship({ path: 'collection', ref: 'Collection', refPath: 'articles', many:true });
