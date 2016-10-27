@@ -2,6 +2,7 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   watch: true,
@@ -30,14 +31,18 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
-  plugins: [ extractCSS, new HtmlWebpackPlugin(), new webpack.ProvidePlugin({
-    'React':      'react',
-    '_':          'lodash',
-    'ReactDOM':   'react-dom'
-  })],
+  plugins: [ 
+    extractCSS, new HtmlWebpackPlugin(), 
+    new webpack.ProvidePlugin({
+      'React':      'react',
+      '_':          'lodash',
+      'ReactDOM':   'react-dom'
+    }),
+    new CleanWebpackPlugin(['public/build'])    
+  ],
   output: {
     path:'public',
-    filename: 'js/[name]-[hash].js'
+    filename: 'build/[name]-[hash].js'
   },
   devServer: {
     port: 3000,
