@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { increase, decrease } from '../../actions/count'
 
-function Home({ number, post_count, increase, decrease }) {
+function Paths({ number, post_count, increase, decrease, children }) {
+  console.log('paths')
   return (
     <div>
       Visible post count currently:
@@ -12,9 +13,11 @@ function Home({ number, post_count, increase, decrease }) {
       {number}
       <button onClick={() => increase(1)}>Increase</button>
       <button onClick={() => decrease(1)}>Decrease</button>
+      {children}
     </div>
   )
 }
+
 
 export default connect(
   state => ({
@@ -22,4 +25,4 @@ export default connect(
     post_count: state.posts.get('data').filter((d)=> !d.get('hidden') ).size
   }),
   { increase, decrease }
-)(Home)
+)(Paths)
