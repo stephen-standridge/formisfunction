@@ -4,7 +4,6 @@ import { DevTools } from './stores/dev_tools'
 import configureStore from './stores/configure_store'
 import { Nav, View, Paths, Contact } from './components'
 
-
 const [store, history] = configureStore()
 
 var div = document.createElement("div");
@@ -16,11 +15,9 @@ ReactDOM.render(
     <div>
       <Router history={history}>
         <Route path="/" component={Nav}>
-          <IndexRoute component={Paths} />
+          <IndexRoute component={View} />
           <Route path="contact" component={Contact}/>          
-          <Route component={Paths}>
-            <Route path=':slug' component={View} />          
-          </Route>
+          <Route path=':slug' component={View} />
         </Route>
       </Router>
       <DevTools />

@@ -1,18 +1,12 @@
 import { connect } from 'react-redux'
+import ViewLogic from './logic'
 
-function View({ number, post_count, increase, decrease }) {
-  console.log('yes')
-  return (
-    <div>
-      Visible post count currently:
-      {post_count}
-      <br />
-      <hr />
-    </div>
-  )
+const mapStateToProps = (state) => {
+  return {}
 }
 
-export default connect(
-  state => ({}),
+const View = connect( mapStateToProps,
   { test: function(){} }
-)(View)
+)(ViewLogic)
+
+export default View
