@@ -22,17 +22,19 @@ var list = function(req, res) {
  * Get View by ID
  */
 var get = function(req, res) {
-	View.model.findById(req.params.id).exec(function(err, item) {
-		
-		if (err) return res.apiError('database error', err);
-		if (!item) return res.apiError('not found');
-		// returns view: {}
-		// collections: [
-		// ]
-		//
-		res.apiResponse({
-			view: item
-		});
+	View.model.find()
+		.where('slug', req.params.slug)
+		.exec(function(err, item) {
+			
+			if (err) return res.apiError('database error', err);
+			if (!item) return res.apiError('not found');
+			// returns view: {}
+			// collections: [
+			// ]
+			//
+			res.apiResponse({
+				view: item
+			});
 		
 	});
 }
