@@ -18,10 +18,7 @@ Link.add({
 });
 
 Link.relationship({ path: 'main-navigation', ref: 'MainNavigation', refPath: 'links' });
-Link.relationship({ path: 'view', ref: 'View', refPath: 'left_link' });
-Link.relationship({ path: 'view', ref: 'View', refPath: 'right_link' });
-Link.relationship({ path: 'view', ref: 'View', refPath: 'bottom_link' });
-Link.relationship({ path: 'view', ref: 'View', refPath: 'top_link' });
+Link.relationship({ path: 'tagged-link', ref: 'TaggedLink', refPath: 'link' });
 
 
 Link.register();

@@ -7,7 +7,9 @@ var View = keystone.list('View');
  * List Views
  */
 var list = function(req, res) {
-	View.model.find(function(err, items) {
+	View.model.find()
+		.populate('collections tagged_links')
+		.exec(function(err, items) {
 		
 		if (err) return res.apiError('database error', err);
 		
@@ -21,9 +23,11 @@ var list = function(req, res) {
 /**
  * Get View by ID
  */
+
 var get = function(req, res) {
 	View.model.find()
 		.where('slug', req.params.slug)
+		.populate('collections tagged_links')
 		.exec(function(err, item) {
 			
 			if (err) return res.apiError('database error', err);

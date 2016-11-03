@@ -27207,7 +27207,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var DevTools = process.env.NODE_ENV !== 'development' ? (0, _reduxDevtools.createDevTools)(React.createElement(
+	var DevTools = process.env.NODE_ENV === 'development' ? (0, _reduxDevtools.createDevTools)(React.createElement(
 		_reduxDevtoolsDockMonitor2.default,
 		{ toggleVisibilityKey: 'ctrl-h', changePositionKey: 'ctrl-q' },
 		React.createElement(_reduxDevtoolsLogMonitor2.default, { theme: 'tomorrow', preserveScrollTop: false })
@@ -27216,7 +27216,7 @@
 	};
 
 	function connectDevTool(stores) {
-		if (process.env.NODE_ENV !== 'development') {
+		if (process.env.NODE_ENV === 'development') {
 			stores.splice(1, 0, DevTools.instrument());
 			return stores;
 		}
