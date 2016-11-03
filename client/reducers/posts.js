@@ -5,7 +5,7 @@ const initialState = fromJS({
   data: []
 })
 
-export default function update(state = initialState, action) {
+export default function update(state = initialState, action) {  
   switch( action.type ){
     case GET_POSTS_SUCCESS:
       state = state.set('data', fromJS(action.data))

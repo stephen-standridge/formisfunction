@@ -58,7 +58,7 @@
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
-	var _components = __webpack_require__(809);
+	var _components = __webpack_require__(810);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27207,7 +27207,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var DevTools = process.env.NODE_ENV === 'development' ? (0, _reduxDevtools.createDevTools)(React.createElement(
+	var DevTools = process.env.NODE_ENV !== 'development' ? (0, _reduxDevtools.createDevTools)(React.createElement(
 		_reduxDevtoolsDockMonitor2.default,
 		{ toggleVisibilityKey: 'ctrl-h', changePositionKey: 'ctrl-q' },
 		React.createElement(_reduxDevtoolsLogMonitor2.default, { theme: 'tomorrow', preserveScrollTop: false })
@@ -27216,7 +27216,7 @@
 	};
 
 	function connectDevTool(stores) {
-		if (process.env.NODE_ENV === 'development') {
+		if (process.env.NODE_ENV !== 'development') {
 			stores.splice(1, 0, DevTools.instrument());
 			return stores;
 		}
@@ -44911,7 +44911,9 @@
 	var reducer = (0, _redux.combineReducers)(_extends({}, reducers, { routing: _reactRouterRedux.routerReducer }));
 	var stores = (0, _dev_tools.connectDevTool)([reducer, (0, _redux.applyMiddleware)(_reduxApiMiddleware.apiMiddleware)]);
 
-	function configureStore(initialState) {
+	function configureStore() {
+	  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	  var store = _redux.createStore.apply(undefined, _toConsumableArray(stores));
 	  var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
 	  return [store, history];
@@ -48635,7 +48637,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.posts = exports.count = undefined;
+	exports.views = exports.posts = exports.count = undefined;
 
 	var _count2 = __webpack_require__(805);
 
@@ -48645,12 +48647,17 @@
 
 	var _posts3 = _interopRequireDefault(_posts2);
 
+	var _views2 = __webpack_require__(809);
+
+	var _views3 = _interopRequireDefault(_views2);
+
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	exports.count = _count3.default;
 	exports.posts = _posts3.default;
+	exports.views = _views3.default;
 
 /***/ },
 /* 805 */
@@ -53681,12 +53688,18 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	var INCREASE = exports.INCREASE = 'INCREASE';
 	var DECREASE = exports.DECREASE = 'DECREASE';
 	var GET_POSTS_SUCCESS = exports.GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 	var HIDE_POST = exports.HIDE_POST = 'HIDE_POST';
+
+	var VIEW_ACTIONS = exports.VIEW_ACTIONS = {
+		REQUEST: 'VIEW_REQUEST',
+		SUCCESS: 'VIEW_SUCCESS',
+		FAILURE: 'VIEW_FAILURE'
+	};
 
 /***/ },
 /* 808 */
@@ -53728,23 +53741,54 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = update;
+
+	var _immutable = __webpack_require__(806);
+
+	var _action_types = __webpack_require__(807);
+
+	var initialState = (0, _immutable.fromJS)({});
+
+	function update() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		switch (action.type) {
+			case _action_types.VIEW_ACTIONS.SUCCESS:
+				action.payload.views.forEach(function (view) {
+					state = state.set(view.slug, view);
+				});
+				break;
+		}
+		return state;
+	}
+
+/***/ },
+/* 810 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.Contact = exports.Nav = exports.View = exports.Paths = undefined;
 
-	var _paths = __webpack_require__(810);
+	var _paths = __webpack_require__(811);
 
 	var _paths2 = _interopRequireDefault(_paths);
 
-	var _view = __webpack_require__(812);
+	var _view = __webpack_require__(813);
 
 	var _view2 = _interopRequireDefault(_view);
 
-	var _nav = __webpack_require__(814);
+	var _nav = __webpack_require__(817);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	var _contact = __webpack_require__(815);
+	var _contact = __webpack_require__(818);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
@@ -53758,7 +53802,7 @@
 	exports.Contact = _contact2.default;
 
 /***/ },
-/* 810 */
+/* 811 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -53769,7 +53813,7 @@
 
 	var _reactRedux = __webpack_require__(159);
 
-	var _count = __webpack_require__(811);
+	var _count = __webpack_require__(812);
 
 	function Paths(_ref) {
 	  var number = _ref.number,
@@ -53797,7 +53841,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
 
 /***/ },
-/* 811 */
+/* 812 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53825,7 +53869,7 @@
 	}
 
 /***/ },
-/* 812 */
+/* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53836,9 +53880,11 @@
 
 	var _reactRedux = __webpack_require__(159);
 
-	var _logic = __webpack_require__(813);
+	var _logic = __webpack_require__(814);
 
 	var _logic2 = _interopRequireDefault(_logic);
+
+	var _view = __webpack_require__(816);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -53848,12 +53894,12 @@
 	  return {};
 	};
 
-	var View = (0, _reactRedux.connect)(mapStateToProps, { test: function test() {} })(_logic2.default);
+	var View = (0, _reactRedux.connect)(mapStateToProps, { get: _view.get })(_logic2.default);
 
 	exports.default = View;
 
 /***/ },
-/* 813 */
+/* 814 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -53864,7 +53910,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _presentation = __webpack_require__(816);
+	var _presentation = __webpack_require__(815);
 
 	var _presentation2 = _interopRequireDefault(_presentation);
 
@@ -53892,7 +53938,7 @@
 		_createClass(ViewLogic, [{
 			key: 'getOrFetchView',
 			value: function getOrFetchView() {
-				console.log('fetch view');
+				this.props.get();
 				//if slug, get slug or 404
 				//if no slug, get index
 			}
@@ -53906,61 +53952,13 @@
 		return ViewLogic;
 	}(React.Component);
 
-	ViewLogic.propTypes = {
-		// props
-		userId: PropTypes.number.isRequired,
-
-		// state
-		background: PropTypes.object,
-
-		// dispatch
-		loadBackground: PropTypes.func.isRequired
-	};
+	ViewLogic.propTypes = {};
 
 	exports.default = ViewLogic;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
 
 /***/ },
-/* 814 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = Nav;
-
-	var _reactRouter = __webpack_require__(189);
-
-	function Nav(_ref) {
-	  var location = _ref.location,
-	      children = _ref.children;
-
-	  var homeClass = location.pathname.split('/')[1] == '' ? 'selected' : '';
-	  var contactClass = location.pathname.split('/')[1] == 'contact' ? 'selected' : '';
-	  return React.createElement('div', null, React.createElement('header', null, React.createElement(_reactRouter.Link, { to: '/', className: '' + homeClass }, 'Home'), React.createElement(_reactRouter.Link, { to: '/contact', className: '' + contactClass }, 'Contact'), React.createElement(_reactRouter.Link, { to: '/test', className: '' + contactClass }, 'Contact')), React.createElement('div', null, children));
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
-
-/***/ },
 /* 815 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = Contact;
-	function Contact() {
-	  console.log('contact');
-	  return React.createElement('div', null, 'Contact');
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
-
-/***/ },
-/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -53984,6 +53982,82 @@
 	    React.createElement('br', null),
 	    React.createElement('hr', null)
 	  );
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
+
+/***/ },
+/* 816 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.get = get;
+
+	var _reduxApiMiddleware = __webpack_require__(766);
+
+	var _action_types = __webpack_require__(807);
+
+	function _defineProperty(obj, key, value) {
+		if (key in obj) {
+			Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+		} else {
+			obj[key] = value;
+		}return obj;
+	}
+
+	function get() {
+		var slug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'index';
+
+		return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
+			endpoint: function endpoint(state) {
+				if (state.views.get(slug)) [_reduxApiMiddleware.CALL_API].bailout;
+				return ("http://localhost:3000/api/v1") + '/views/' + slug;
+			},
+			headers: { 'Content-Type': 'application/json' },
+			method: 'GET',
+			types: [_action_types.VIEW_ACTIONS.REQUEST, _action_types.VIEW_ACTIONS.SUCCESS, _action_types.VIEW_ACTIONS.FAILURE]
+		});
+	}
+
+/***/ },
+/* 817 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = Nav;
+
+	var _reactRouter = __webpack_require__(189);
+
+	function Nav(_ref) {
+	  var location = _ref.location,
+	      children = _ref.children;
+
+	  var homeClass = location.pathname.split('/')[1] == '' ? 'selected' : '';
+	  var contactClass = location.pathname.split('/')[1] == 'contact' ? 'selected' : '';
+	  return React.createElement('div', null, React.createElement('header', null, React.createElement(_reactRouter.Link, { to: '/', className: '' + homeClass }, 'Home'), React.createElement(_reactRouter.Link, { to: '/contact', className: '' + contactClass }, 'Contact'), React.createElement(_reactRouter.Link, { to: '/test', className: '' + contactClass }, 'Contact')), React.createElement('div', null, children));
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
+
+/***/ },
+/* 818 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = Contact;
+	function Contact() {
+	  console.log('contact');
+	  return React.createElement('div', null, 'Contact');
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)))
 

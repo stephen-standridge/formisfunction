@@ -3,6 +3,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+require('dotenv').config();
 
 module.exports = {
   watch: true,
@@ -38,7 +39,10 @@ module.exports = {
       '_':          'lodash',
       'ReactDOM':   'react-dom'
     }),
-    new CleanWebpackPlugin(['public/build'])    
+    new CleanWebpackPlugin(['public/build']),
+    new webpack.DefinePlugin({
+      'process.env.API_HOST': JSON.stringify(process.env.API_HOST || 'http://localhost:3000/api/v1')
+    })    
   ],
   output: {
     path:'public',

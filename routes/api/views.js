@@ -33,7 +33,7 @@ var get = function(req, res) {
 			// ]
 			//
 			res.apiResponse({
-				view: item
+				views: item
 			});
 		
 	});

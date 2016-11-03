@@ -7,7 +7,7 @@ class ViewLogic extends React.Component {
 		this.componentWillUpdate = this.getOrFetchView;  		
 	}
 	getOrFetchView(){
-		console.log('fetch view')
+		this.props.get()
 		//if slug, get slug or 404
 		//if no slug, get index
 	}
@@ -16,15 +16,6 @@ class ViewLogic extends React.Component {
 	}
 }
 
-ViewLogic.propTypes = {
-   // props
-   userId: PropTypes.number.isRequired,
-
-   // state
-   background: PropTypes.object,
-
-   // dispatch
-   loadBackground: PropTypes.func.isRequired
-}
+ViewLogic.propTypes = {}
 
 export default ViewLogic
