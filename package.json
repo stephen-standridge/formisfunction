@@ -55,7 +55,7 @@
     "lint": "eslint .",
     "start": "node keystone.js",
     "client": "webpack-dev-server --history-api-fallback --no-info --open",
-    "postinstall": "webpack"
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",
   "repository": {
