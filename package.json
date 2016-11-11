@@ -49,7 +49,7 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node keystone.js",
-    "client": "webpack-dev-server --history-api-fallback --no-info --open",
+    "client": "webpack-dev-server --history-api-fallback --no-info --open --watch",
     "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",

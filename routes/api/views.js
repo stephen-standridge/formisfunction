@@ -31,11 +31,16 @@ var get = function(req, res) {
 		.exec(function(err, item) {
 			
 			if (err) return res.apiError('database error', err);
-			if (!item) return res.apiError('not found');
-			// returns view: {}
-			// collections: [
-			// ]
-			//
+			if (!item){
+				return View.model.find().where('slug', '404')
+						.populate('collections tagged_links')				
+						.exec(function(err, item) {
+					if (err) return res.apiError('database error', err);
+					res.apiResponse({
+						views: item
+					});
+				})
+			}
 			res.apiResponse({
 				views: item
 			});

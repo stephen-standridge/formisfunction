@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ViewLogic from './logic'
-import { get } from '../../actions/view'
+import * as actions from '../../actions/view'
 
 const mapStateToProps = (state) => {
   return {}
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 
 const View = connect( 
 	mapStateToProps,
-  { get }
+  actions
 )(ViewLogic)
 
 export default View
