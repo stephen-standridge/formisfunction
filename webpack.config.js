@@ -6,7 +6,6 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 require('dotenv').config();
 
 module.exports = {
-  watch: true,
   entry: './client/app.jsx',
   module: {
     loaders: [

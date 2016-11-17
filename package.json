@@ -44,7 +44,9 @@
     "superagent": "^2.2.0",
     "underscore": "^1.8.3",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "css-loader": "^0.25.0",
+    "sass-loader": "^4.0.2"    
   },
   "scripts": {
     "lint": "eslint .",
@@ -63,9 +65,5 @@
     "url": "https://github.com/stephen-standridge/the-circle-interactive/issues"
   },
   "homepage": "https://github.com/stephen-standridge/the-circle-interactive#readme",
-  "description": "",
-  "devDependencies": {
-    "css-loader": "^0.25.0",
-    "sass-loader": "^4.0.2"
-  }
+  "description": ""
 }
