@@ -6,7 +6,7 @@ var View = keystone.list('View');
 /**
  * List Views
  */
-var list = function(req, res) {
+var index = function(req, res) {
 	View.model.find()
 		.populate('collections tagged_links')
 		.exec(function(err, items) {
@@ -21,19 +21,18 @@ var list = function(req, res) {
 }
 
 /**
- * Get View by ID
+ * Get View by slug
  */
 
 var get = function(req, res) {
 	View.model.find()
 		.where('slug', req.params.slug)
 		.populate('collections tagged_links')
-		.exec(function(err, item) {
-			
+		.exec(function(err, docs) {			
 			if (err) return res.apiError('database error', err);
-			if (!item){
+			if (!docs){
 				return View.model.find().where('slug', '404')
-						.populate('collections tagged_links')				
+						.populate({ path: 'tagged_links.link', model: 'TaggedLink' })		
 						.exec(function(err, item) {
 					if (err) return res.apiError('database error', err);
 					res.apiResponse({
@@ -41,10 +40,11 @@ var get = function(req, res) {
 					});
 				})
 			}
+		View.model.populate(docs, [{ path: 'tagged_links.link', model: 'Link' }, {path: 'collections.articles', model: 'Article'}], function(err, item){
 			res.apiResponse({
 				views: item
-			});
-		
+			});			
+		});
 	});
 }
-exports = module.exports = { get:get, list:list }
+exports = module.exports = { get:get, index:index }

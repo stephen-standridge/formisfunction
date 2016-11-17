@@ -7,9 +7,10 @@ var Types = keystone.Field.Types;
  */
 
 var View = new keystone.List('View', {
+	sortable: true,
+  sortContext: 'Line:views',
 	map: { name: 'title' },
-	autokey: { path: 'slug', from: 'title', unique: true },
-	drilldown: 'tagged_links'	
+	autokey: { path: 'slug', from: 'title', unique: true }
 });
 
 View.add({
@@ -18,9 +19,11 @@ View.add({
 	layout: { type: Types.Select, options: 'only', default: 'only', index: true },	
 	createdAt: { type: Date, default: Date.now },
 	publishedAt: Date,
-	collections: { type: Types.Relationship, ref: 'Collection', many: true },
-	tagged_links: { type: Types.Relationship, ref: 'TaggedLink', many:true }
+	collections: { type: Types.Relationship, ref: 'Collection', many: true }
 });
+
+View.relationship({ path: 'line', ref: 'Line', refPath: 'views' });
+
 
 View.defaultColumns = 'title, state|20%';
 View.register();

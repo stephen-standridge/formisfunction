@@ -18,6 +18,6 @@ Collection.add({
 	articles: { type: Types.Relationship, ref: 'Article', many: true },
 });
 
-Collection.relationship({ path: 'view', ref: 'View', refPath: 'contentCollections' });
+Collection.relationship({ path: 'view', ref: 'View', refPath: 'collections' });
 
 Collection.register();
