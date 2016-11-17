@@ -16,8 +16,7 @@ class ViewLogic extends React.Component {
 		//if no slug, get index
 	}
 	render(){
-		return <div>
-		</div>
+		return <ViewPresentation />
 	}
 }
 

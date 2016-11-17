@@ -63,5 +63,9 @@
     "url": "https://github.com/stephen-standridge/the-circle-interactive/issues"
   },
   "homepage": "https://github.com/stephen-standridge/the-circle-interactive#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "sass-loader": "^4.0.2"
+  }
 }
