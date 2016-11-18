@@ -11,4 +11,4 @@ const View = connect(
   actions
 )(ViewLogic)
 
-export default View
+export {View}

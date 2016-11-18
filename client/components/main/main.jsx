@@ -1,14 +1,13 @@
-import {Nav} from '../nav'
-import PathNav from '../path_nav'
+import {Navigation} from '../navigation';
+import {MainVideo} from '../main_video';
 
 class Main extends React.Component{
-	render(){
+	render(){		
 		return (
 	    <div className="main">
-	    	<PathNav>
-	    	</PathNav>
-	    	<Nav />    		   	
-    		{this.props.children}	    	
+    		{this.props.children}	 
+    		<MainVideo /> 	
+	    	<Navigation />    		   	
 	    </div>
 		)
 	}

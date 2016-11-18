@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import CSS from '../../styles/main_nav'
 
-export default React.createClass({
+export default class Navigation extends React.Component {
   render(){
     return (
       <div className="main__navigation">
@@ -11,5 +11,5 @@ export default React.createClass({
         <div>{this.props.children}</div>
       </div>
     )    
-  }
-})
+  }  
+}
