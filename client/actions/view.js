@@ -1,7 +1,7 @@
 import { CALL_API } from 'redux-api-middleware';
 import { VIEW_ACTIONS } from './action_types';
 
-export function get(slug='index'){
+export function get(slug){
 	return {
 	  [CALL_API]: {
 	    endpoint: function(state){

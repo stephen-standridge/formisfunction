@@ -18,7 +18,6 @@ Link.add({
 });
 
 Link.relationship({ path: 'main-navigation', ref: 'MainNavigation', refPath: 'links' });
-Link.relationship({ path: 'tagged-link', ref: 'TaggedLink', refPath: 'link' });
 
 
 Link.register();

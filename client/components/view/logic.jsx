@@ -6,12 +6,8 @@ class ViewLogic extends React.Component {
 		this.componentWillMount = this.getOrFetchView;
 		this.componentWillReceiveProps = this.getOrFetchView;  		
 	}
-	getParams(props=this.props){
-		if(!props.routeParams || !props.routeParams.slug){ return 'index' }
-		if(props.routeParams.slug){ return props.routeParams.slug }
-	}
 	getOrFetchView(newProps){
-		this.props.get(this.getParams(newProps))
+		this.props.get(this.props.slug)
 		//if slug, get slug or 404
 		//if no slug, get index
 	}

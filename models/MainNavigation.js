@@ -9,6 +9,7 @@ var Types = keystone.Field.Types;
 var MainNavigation = new keystone.List('MainNavigation', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
+	drilldown: 'links'
 });
 
 MainNavigation.add({

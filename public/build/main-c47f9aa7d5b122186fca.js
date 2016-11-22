@@ -60,7 +60,7 @@
 
 	var _components = __webpack_require__(816);
 
-	var _app = __webpack_require__(835);
+	var _app = __webpack_require__(836);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -49606,7 +49606,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var initialState = (0, _immutable.Map)({
 	  number: 1
@@ -54616,32 +54616,7 @@
 	}));
 
 /***/ },
-/* 812 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var INCREASE = exports.INCREASE = 'INCREASE';
-	var DECREASE = exports.DECREASE = 'DECREASE';
-	var GET_POSTS_SUCCESS = exports.GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
-	var HIDE_POST = exports.HIDE_POST = 'HIDE_POST';
-
-	var VIEW_ACTIONS = exports.VIEW_ACTIONS = {
-		REQUEST: 'VIEW_REQUEST',
-		SUCCESS: 'VIEW_SUCCESS',
-		FAILURE: 'VIEW_FAILURE'
-	};
-
-	var LINE_ACTIONS = exports.LINE_ACTIONS = {
-		REQUEST: 'LINE_REQUEST',
-		SUCCESS: 'LINE_SUCCESS',
-		FAILURE: 'LINE_FAILURE'
-	};
-
-/***/ },
+/* 812 */,
 /* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -54654,7 +54629,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var initialState = (0, _immutable.fromJS)({});
 
@@ -54683,7 +54658,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var initialState = (0, _immutable.fromJS)({
 	  data: []
@@ -54716,7 +54691,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var initialState = (0, _immutable.fromJS)({});
 
@@ -54726,6 +54701,7 @@
 
 		switch (action.type) {
 			case _action_types.VIEW_ACTIONS.SUCCESS:
+				console.log(action);
 				action.payload.views.forEach(function (view) {
 					state = state.set(view.slug, view);
 				});
@@ -54756,7 +54732,7 @@
 	  });
 	});
 
-	var _main_video = __webpack_require__(823);
+	var _main_video = __webpack_require__(824);
 
 	Object.keys(_main_video).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54768,7 +54744,7 @@
 	  });
 	});
 
-	var _line_navigation = __webpack_require__(826);
+	var _line_navigation = __webpack_require__(827);
 
 	Object.keys(_line_navigation).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54780,7 +54756,7 @@
 	  });
 	});
 
-	var _view = __webpack_require__(828);
+	var _view = __webpack_require__(829);
 
 	Object.keys(_view).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54804,7 +54780,7 @@
 	  });
 	});
 
-	var _contact = __webpack_require__(834);
+	var _contact = __webpack_require__(835);
 
 	Object.keys(_contact).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54841,7 +54817,7 @@
 /* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -54850,8 +54826,6 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _navigation = __webpack_require__(819);
-
-	var _main_video = __webpack_require__(823);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -54869,13 +54843,12 @@
 		}
 
 		_createClass(Main, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				return React.createElement(
-					'div',
-					{ className: 'main' },
+					"div",
+					{ className: "main" },
 					this.props.children,
-					React.createElement(_main_video.MainVideo, null),
 					React.createElement(_navigation.Navigation, null)
 				);
 			}
@@ -54898,15 +54871,39 @@
 	});
 	exports.Navigation = undefined;
 
-	var _navigation = __webpack_require__(820);
+	var _reactRedux = __webpack_require__(172);
 
-	var _navigation2 = _interopRequireDefault(_navigation);
+	var _logic = __webpack_require__(820);
+
+	var _logic2 = _interopRequireDefault(_logic);
+
+	var _navigation = __webpack_require__(823);
+
+	var actions = _interopRequireWildcard(_navigation);
+
+	function _interopRequireWildcard(obj) {
+	  if (obj && obj.__esModule) {
+	    return obj;
+	  } else {
+	    var newObj = {};if (obj != null) {
+	      for (var key in obj) {
+	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+	      }
+	    }newObj.default = obj;return newObj;
+	  }
+	}
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 
-	exports.Navigation = _navigation2.default;
+	var mapStateToProps = function mapStateToProps(state) {
+	  return { navigation: state.navigation.toJS() };
+	};
+
+	var Navigation = (0, _reactRedux.connect)(mapStateToProps, actions)(_logic2.default);
+
+	exports.Navigation = Navigation;
 
 /***/ },
 /* 820 */
@@ -54915,18 +54912,14 @@
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	__webpack_require__(821);
+
 	var _reactRouter = __webpack_require__(202);
-
-	var _main_nav = __webpack_require__(821);
-
-	var _main_nav2 = _interopRequireDefault(_main_nav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -54934,49 +54927,65 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Navigation = function (_React$Component) {
-	  _inherits(Navigation, _React$Component);
+	var NavigationLogic = function (_React$Component) {
+		_inherits(NavigationLogic, _React$Component);
 
-	  function Navigation() {
-	    _classCallCheck(this, Navigation);
+		function NavigationLogic() {
+			_classCallCheck(this, NavigationLogic);
 
-	    return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).apply(this, arguments));
-	  }
+			var _this = _possibleConstructorReturn(this, (NavigationLogic.__proto__ || Object.getPrototypeOf(NavigationLogic)).call(this));
 
-	  _createClass(Navigation, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { className: 'main__navigation' },
-	        React.createElement(
-	          _reactRouter.Link,
-	          { to: '/' },
-	          'Home'
-	        ),
-	        React.createElement(
-	          _reactRouter.Link,
-	          { to: '/contact' },
-	          'Contact'
-	        ),
-	        React.createElement(
-	          _reactRouter.Link,
-	          { to: '/test' },
-	          'Test'
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          this.props.children
-	        )
-	      );
-	    }
-	  }]);
+			_this.componentWillMount = _this.fetchNavigation;
+			return _this;
+		}
 
-	  return Navigation;
+		_createClass(NavigationLogic, [{
+			key: 'renderLinks',
+			value: function renderLinks() {
+				if (!this.props.navigation) return React.createElement('div', { className: 'navigation__loading' });
+				return this.props.navigation.links.map(function (link) {
+					return React.createElement(
+						_reactRouter.Link,
+						{ to: link.url },
+						'link.href'
+					);
+				});
+			}
+		}, {
+			key: 'fetchNavigation',
+			value: function fetchNavigation() {
+				if (this.props.navigation) return;
+				this.props.fetch();
+			}
+		}, {
+			key: 'routeSlug',
+			value: function routeSlug() {
+				return this.props.routeParams ? this.props.routeParams.slug : false;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return React.createElement(
+					'div',
+					{ className: 'main__navigation' },
+					React.createElement(
+						'div',
+						{ className: 'navigation__links' },
+						this.renderLinks()
+					),
+					React.createElement(
+						'div',
+						null,
+						this.props.children
+					)
+				);
+			}
+		}]);
+
+		return NavigationLogic;
 	}(React.Component);
 
-	exports.default = Navigation;
+	exports.default = NavigationLogic;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
@@ -54993,11 +55002,46 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+
+	var _reduxApiMiddleware = __webpack_require__(771);
+
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	function _defineProperty(obj, key, value) {
+		if (key in obj) {
+			Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+		} else {
+			obj[key] = value;
+		}return obj;
+	}
+
+	function fetch() {
+		return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
+			endpoint: function endpoint(state) {
+				if (state.navigation) [_reduxApiMiddleware.CALL_API].bailout;
+				return ("http://localhost:3000/api/v1") + '/navigation';
+			},
+			headers: { 'Content-Type': 'application/json' },
+			method: 'GET',
+			types: [_action_types.NAVIGATION_ACTIONS.REQUEST, _action_types.NAVIGATION_ACTIONS.SUCCESS, _action_types.NAVIGATION_ACTIONS.FAILURE]
+		});
+	}
+
+/***/ },
+/* 824 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.MainVideo = undefined;
 
-	var _main_video = __webpack_require__(824);
+	var _main_video = __webpack_require__(825);
 
 	var _main_video2 = _interopRequireDefault(_main_video);
 
@@ -55008,7 +55052,7 @@
 	exports.MainVideo = _main_video2.default;
 
 /***/ },
-/* 824 */
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -55019,7 +55063,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _main_video = __webpack_require__(825);
+	var _main_video = __webpack_require__(826);
 
 	var _main_video2 = _interopRequireDefault(_main_video);
 
@@ -55054,13 +55098,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 825 */
+/* 826 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 826 */
+/* 827 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55072,11 +55116,11 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _logic = __webpack_require__(827);
+	var _logic = __webpack_require__(828);
 
 	var _logic2 = _interopRequireDefault(_logic);
 
-	var _lines = __webpack_require__(833);
+	var _lines = __webpack_require__(834);
 
 	var actions = _interopRequireWildcard(_lines);
 
@@ -55105,7 +55149,7 @@
 	exports.LineNavigation = LineNavigation;
 
 /***/ },
-/* 827 */
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55116,13 +55160,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _view = __webpack_require__(828);
+	var _view = __webpack_require__(829);
 
-	var _path_navigation = __webpack_require__(832);
+	var _main_video = __webpack_require__(824);
 
-	var _path_navigation2 = _interopRequireDefault(_path_navigation);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(833);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -55150,9 +55192,20 @@
 				//if no slug, get index
 			}
 		}, {
+			key: 'routeSlug',
+			value: function routeSlug() {
+				return this.props.routeParams ? this.props.routeParams.slug : false;
+			}
+		}, {
 			key: 'renderLines',
 			value: function renderLines() {
 				// return this.props.lines.map(()=> <div className='line'></div> )
+			}
+		}, {
+			key: 'renderContent',
+			value: function renderContent() {
+				if (this.routeSlug()) return React.createElement(_view.View, { slug: this.routeSlug() });
+				return React.createElement(_main_video.MainVideo, null);
 			}
 		}, {
 			key: 'render',
@@ -55161,7 +55214,7 @@
 					'div',
 					{ className: 'line__navigation' },
 					this.renderLines(),
-					React.createElement(_view.View, null)
+					this.renderContent()
 				);
 			}
 		}]);
@@ -55173,7 +55226,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 828 */
+/* 829 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55185,11 +55238,11 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _logic = __webpack_require__(829);
+	var _logic = __webpack_require__(830);
 
 	var _logic2 = _interopRequireDefault(_logic);
 
-	var _view = __webpack_require__(831);
+	var _view = __webpack_require__(832);
 
 	var actions = _interopRequireWildcard(_view);
 
@@ -55218,7 +55271,7 @@
 	exports.View = View;
 
 /***/ },
-/* 829 */
+/* 830 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55229,7 +55282,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _presentation = __webpack_require__(830);
+	var _presentation = __webpack_require__(831);
 
 	var _presentation2 = _interopRequireDefault(_presentation);
 
@@ -55255,21 +55308,9 @@
 		}
 
 		_createClass(ViewLogic, [{
-			key: 'getParams',
-			value: function getParams() {
-				var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props;
-
-				if (!props.routeParams || !props.routeParams.slug) {
-					return 'index';
-				}
-				if (props.routeParams.slug) {
-					return props.routeParams.slug;
-				}
-			}
-		}, {
 			key: 'getOrFetchView',
 			value: function getOrFetchView(newProps) {
-				this.props.get(this.getParams(newProps));
+				this.props.get(this.props.slug);
 				//if slug, get slug or 404
 				//if no slug, get index
 			}
@@ -55289,7 +55330,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 830 */
+/* 831 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -55304,19 +55345,12 @@
 	      increase = _ref.increase,
 	      decrease = _ref.decrease;
 
-	  return React.createElement(
-	    "div",
-	    { className: "" },
-	    "Visible post count currently:",
-	    post_count,
-	    React.createElement("br", null),
-	    React.createElement("hr", null)
-	  );
+	  return React.createElement("div", { className: "view__container" });
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 831 */
+/* 832 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55328,7 +55362,7 @@
 
 	var _reduxApiMiddleware = __webpack_require__(771);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	function _defineProperty(obj, key, value) {
 		if (key in obj) {
@@ -55338,9 +55372,7 @@
 		}return obj;
 	}
 
-	function get() {
-		var slug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'index';
-
+	function get(slug) {
 		return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
 			endpoint: function endpoint(state) {
 				if (state.views.get(slug)) [_reduxApiMiddleware.CALL_API].bailout;
@@ -55353,13 +55385,13 @@
 	}
 
 /***/ },
-/* 832 */
+/* 833 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 833 */
+/* 834 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55371,7 +55403,7 @@
 
 	var _reduxApiMiddleware = __webpack_require__(771);
 
-	var _action_types = __webpack_require__(812);
+	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	function _defineProperty(obj, key, value) {
 		if (key in obj) {
@@ -55394,7 +55426,7 @@
 	}
 
 /***/ },
-/* 834 */
+/* 835 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55410,7 +55442,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 835 */
+/* 836 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
