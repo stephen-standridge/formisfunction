@@ -58,9 +58,9 @@
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
-	var _components = __webpack_require__(816);
+	var _components = __webpack_require__(817);
 
-	var _app = __webpack_require__(836);
+	var _app = __webpack_require__(837);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -49566,7 +49566,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.views = exports.posts = exports.lines = exports.count = undefined;
+	exports.views = exports.navigation = exports.posts = exports.lines = exports.count = undefined;
 
 	var _count2 = __webpack_require__(810);
 
@@ -49580,7 +49580,11 @@
 
 	var _posts3 = _interopRequireDefault(_posts2);
 
-	var _views2 = __webpack_require__(815);
+	var _navigation2 = __webpack_require__(815);
+
+	var _navigation3 = _interopRequireDefault(_navigation2);
+
+	var _views2 = __webpack_require__(816);
 
 	var _views3 = _interopRequireDefault(_views2);
 
@@ -49591,6 +49595,7 @@
 	exports.count = _count3.default;
 	exports.lines = _lines3.default;
 	exports.posts = _posts3.default;
+	exports.navigation = _navigation3.default;
 	exports.views = _views3.default;
 
 /***/ },
@@ -49606,7 +49611,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	var initialState = (0, _immutable.Map)({
 	  number: 1
@@ -54616,7 +54621,38 @@
 	}));
 
 /***/ },
-/* 812 */,
+/* 812 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var INCREASE = exports.INCREASE = 'INCREASE';
+	var DECREASE = exports.DECREASE = 'DECREASE';
+	var GET_POSTS_SUCCESS = exports.GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
+	var HIDE_POST = exports.HIDE_POST = 'HIDE_POST';
+
+	var VIEW_ACTIONS = exports.VIEW_ACTIONS = {
+		REQUEST: 'VIEW_REQUEST',
+		SUCCESS: 'VIEW_SUCCESS',
+		FAILURE: 'VIEW_FAILURE'
+	};
+
+	var LINE_ACTIONS = exports.LINE_ACTIONS = {
+		REQUEST: 'LINE_REQUEST',
+		SUCCESS: 'LINE_SUCCESS',
+		FAILURE: 'LINE_FAILURE'
+	};
+
+	var NAVIGATION_ACTIONS = exports.NAVIGATION_ACTIONS = {
+		REQUEST: 'NAVIGATION_REQUEST',
+		SUCCESS: 'NAVIGATION_SUCCESS',
+		FAILURE: 'NAVIGATION_FAILURE'
+	};
+
+/***/ },
 /* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -54629,7 +54665,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	var initialState = (0, _immutable.fromJS)({});
 
@@ -54658,7 +54694,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	var initialState = (0, _immutable.fromJS)({
 	  data: []
@@ -54691,7 +54727,7 @@
 
 	var _immutable = __webpack_require__(811);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	var initialState = (0, _immutable.fromJS)({});
 
@@ -54700,11 +54736,8 @@
 		var action = arguments[1];
 
 		switch (action.type) {
-			case _action_types.VIEW_ACTIONS.SUCCESS:
-				console.log(action);
-				action.payload.views.forEach(function (view) {
-					state = state.set(view.slug, view);
-				});
+			case _action_types.NAVIGATION_ACTIONS.SUCCESS:
+				state = (0, _immutable.fromJS)(action.payload.navigation);
 				break;
 		}
 		return state;
@@ -54717,10 +54750,41 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = update;
+
+	var _immutable = __webpack_require__(811);
+
+	var _action_types = __webpack_require__(812);
+
+	var initialState = (0, _immutable.fromJS)({});
+
+	function update() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		switch (action.type) {
+			case _action_types.VIEW_ACTIONS.SUCCESS:
+				action.payload.views.forEach(function (view) {
+					state = state.set(view.slug, view);
+				});
+				break;
+		}
+		return state;
+	}
+
+/***/ },
+/* 817 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _main = __webpack_require__(817);
+	var _main = __webpack_require__(818);
 
 	Object.keys(_main).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54732,7 +54796,7 @@
 	  });
 	});
 
-	var _main_video = __webpack_require__(824);
+	var _main_video = __webpack_require__(825);
 
 	Object.keys(_main_video).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54744,7 +54808,7 @@
 	  });
 	});
 
-	var _line_navigation = __webpack_require__(827);
+	var _line_navigation = __webpack_require__(828);
 
 	Object.keys(_line_navigation).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54756,7 +54820,7 @@
 	  });
 	});
 
-	var _view = __webpack_require__(829);
+	var _view = __webpack_require__(830);
 
 	Object.keys(_view).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54768,7 +54832,7 @@
 	  });
 	});
 
-	var _navigation = __webpack_require__(819);
+	var _navigation = __webpack_require__(820);
 
 	Object.keys(_navigation).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54780,7 +54844,7 @@
 	  });
 	});
 
-	var _contact = __webpack_require__(835);
+	var _contact = __webpack_require__(836);
 
 	Object.keys(_contact).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -54793,7 +54857,7 @@
 	});
 
 /***/ },
-/* 817 */
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54803,7 +54867,7 @@
 	});
 	exports.Main = undefined;
 
-	var _main = __webpack_require__(818);
+	var _main = __webpack_require__(819);
 
 	var _main2 = _interopRequireDefault(_main);
 
@@ -54814,7 +54878,7 @@
 	exports.Main = _main2.default;
 
 /***/ },
-/* 818 */
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -54825,7 +54889,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _navigation = __webpack_require__(819);
+	var _navigation = __webpack_require__(820);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -54861,7 +54925,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 819 */
+/* 820 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54873,11 +54937,11 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _logic = __webpack_require__(820);
+	var _logic = __webpack_require__(821);
 
 	var _logic2 = _interopRequireDefault(_logic);
 
-	var _navigation = __webpack_require__(823);
+	var _navigation = __webpack_require__(824);
 
 	var actions = _interopRequireWildcard(_navigation);
 
@@ -54906,7 +54970,7 @@
 	exports.Navigation = Navigation;
 
 /***/ },
-/* 820 */
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -54917,7 +54981,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(821);
+	__webpack_require__(822);
 
 	var _reactRouter = __webpack_require__(202);
 
@@ -54942,19 +55006,19 @@
 		_createClass(NavigationLogic, [{
 			key: 'renderLinks',
 			value: function renderLinks() {
-				if (!this.props.navigation) return React.createElement('div', { className: 'navigation__loading' });
-				return this.props.navigation.links.map(function (link) {
+				if (!this.props.navigation.links) return React.createElement('div', { className: 'navigation__loading' });
+				return this.props.navigation.links.map(function (link, index) {
 					return React.createElement(
 						_reactRouter.Link,
-						{ to: link.url },
-						'link.href'
+						{ key: index, to: link.url },
+						link.href
 					);
 				});
 			}
 		}, {
 			key: 'fetchNavigation',
 			value: function fetchNavigation() {
-				if (this.props.navigation) return;
+				if (this.props.navigation.length) return;
 				this.props.fetch();
 			}
 		}, {
@@ -54989,14 +55053,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 821 */
+/* 822 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 822 */,
-/* 823 */
+/* 823 */,
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55008,7 +55072,7 @@
 
 	var _reduxApiMiddleware = __webpack_require__(771);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	function _defineProperty(obj, key, value) {
 		if (key in obj) {
@@ -55031,7 +55095,7 @@
 	}
 
 /***/ },
-/* 824 */
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55041,7 +55105,7 @@
 	});
 	exports.MainVideo = undefined;
 
-	var _main_video = __webpack_require__(825);
+	var _main_video = __webpack_require__(826);
 
 	var _main_video2 = _interopRequireDefault(_main_video);
 
@@ -55052,7 +55116,7 @@
 	exports.MainVideo = _main_video2.default;
 
 /***/ },
-/* 825 */
+/* 826 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -55063,7 +55127,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _main_video = __webpack_require__(826);
+	var _main_video = __webpack_require__(827);
 
 	var _main_video2 = _interopRequireDefault(_main_video);
 
@@ -55098,13 +55162,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 826 */
+/* 827 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 827 */
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55116,11 +55180,11 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _logic = __webpack_require__(828);
+	var _logic = __webpack_require__(829);
 
 	var _logic2 = _interopRequireDefault(_logic);
 
-	var _lines = __webpack_require__(834);
+	var _lines = __webpack_require__(835);
 
 	var actions = _interopRequireWildcard(_lines);
 
@@ -55149,7 +55213,7 @@
 	exports.LineNavigation = LineNavigation;
 
 /***/ },
-/* 828 */
+/* 829 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55160,11 +55224,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _view = __webpack_require__(829);
+	var _view = __webpack_require__(830);
 
-	var _main_video = __webpack_require__(824);
+	var _main_video = __webpack_require__(825);
 
-	__webpack_require__(833);
+	__webpack_require__(834);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -55226,7 +55290,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 829 */
+/* 830 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55238,11 +55302,11 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _logic = __webpack_require__(830);
+	var _logic = __webpack_require__(831);
 
 	var _logic2 = _interopRequireDefault(_logic);
 
-	var _view = __webpack_require__(832);
+	var _view = __webpack_require__(833);
 
 	var actions = _interopRequireWildcard(_view);
 
@@ -55271,7 +55335,7 @@
 	exports.View = View;
 
 /***/ },
-/* 830 */
+/* 831 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55282,7 +55346,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _presentation = __webpack_require__(831);
+	var _presentation = __webpack_require__(832);
 
 	var _presentation2 = _interopRequireDefault(_presentation);
 
@@ -55330,7 +55394,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 831 */
+/* 832 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -55350,7 +55414,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 832 */
+/* 833 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55362,7 +55426,7 @@
 
 	var _reduxApiMiddleware = __webpack_require__(771);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	function _defineProperty(obj, key, value) {
 		if (key in obj) {
@@ -55385,13 +55449,13 @@
 	}
 
 /***/ },
-/* 833 */
+/* 834 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 834 */
+/* 835 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55403,7 +55467,7 @@
 
 	var _reduxApiMiddleware = __webpack_require__(771);
 
-	var _action_types = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./action_types\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _action_types = __webpack_require__(812);
 
 	function _defineProperty(obj, key, value) {
 		if (key in obj) {
@@ -55426,7 +55490,7 @@
 	}
 
 /***/ },
-/* 835 */
+/* 836 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -55442,7 +55506,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(166)))
 
 /***/ },
-/* 836 */
+/* 837 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

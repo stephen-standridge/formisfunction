@@ -35,6 +35,7 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
+	app.get('/api/v1/navigation', keystone.middleware.api, routes.api.navigation.index);
 	app.get('/api/v1/views', keystone.middleware.api, routes.api.views.index);
 	app.get('/api/v1/views/:slug', keystone.middleware.api, routes.api.views.get);
 	app.get('/api/v1/lines', keystone.middleware.api, routes.api.lines.index);

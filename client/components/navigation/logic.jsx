@@ -6,12 +6,12 @@ class NavigationLogic extends React.Component {
 		super()
 		this.componentWillMount = this.fetchNavigation;
 	}
-	renderLinks() {
-		if(!this.props.navigation) return <div className='navigation__loading' />
-		return this.props.navigation.links.map((link)=> <Link to={link.url}>link.href</Link> )		
+	renderLinks() {	
+		if(!this.props.navigation.links) return <div className='navigation__loading' />
+		return this.props.navigation.links.map((link, index)=> <Link key={index} to={link.url}>{link.href}</Link> )		
 	}
 	fetchNavigation(){
-		if(this.props.navigation) return
+		if(this.props.navigation.length) return
 		this.props.fetch()
 	}
 	routeSlug() {

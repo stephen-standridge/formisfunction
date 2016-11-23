@@ -8,7 +8,7 @@ var View = keystone.list('View');
  */
 var index = function(req, res) {
 	View.model.find()
-		.populate('collections tagged_links')
+		.populate('collections')
 		.exec(function(err, items) {
 		
 		if (err) return res.apiError('database error', err);
@@ -27,12 +27,12 @@ var index = function(req, res) {
 var get = function(req, res) {
 	View.model.find()
 		.where('slug', req.params.slug)
-		.populate('collections tagged_links')
+		.populate('collections')
 		.exec(function(err, docs) {			
 			if (err) return res.apiError('database error', err);
 			if (!docs){
 				return View.model.find().where('slug', '404')
-						.populate({ path: 'tagged_links.link', model: 'TaggedLink' })		
+						.populate('collections')
 						.exec(function(err, item) {
 					if (err) return res.apiError('database error', err);
 					res.apiResponse({
@@ -40,7 +40,7 @@ var get = function(req, res) {
 					});
 				})
 			}
-		View.model.populate(docs, [{ path: 'tagged_links.link', model: 'Link' }, {path: 'collections.articles', model: 'Article'}], function(err, item){
+		View.model.populate(docs, [{path: 'collections.articles', model: 'Article'}], function(err, item){
 			res.apiResponse({
 				views: item
 			});			
