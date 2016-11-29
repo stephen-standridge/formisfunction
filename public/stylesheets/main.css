@@ -14,10 +14,32 @@
   z-index: 0; }
 .line__navigation {
   flex: 1;
-  height: 100%;
-  width: 100%;
   background: rgba(220, 220, 220, 0.5);
   z-index: 1; }
+
+.navigation__wrapper {
+  height: 100%;
+  width: 100%;
+  flex-direction: row; }
+
+.line__navigation--left,
+.line__navigation--right {
+  flex: 1;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
+  justify-content: center; }
+
+.line__link {
+  justify-content: center;
+  margin: auto; }
+
+.line__navigation--center {
+  flex: 3;
+  flex-direction: column; }
+
+.line {
+  flex: 1; }
 html, body, #mount {
   position: absolute;
   top: 0;
