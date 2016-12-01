@@ -21,9 +21,18 @@
 	margin: auto;
 }
 .line__navigation--center {
-	flex: 3;
+	flex-basis: 90%;
+	flex-shrink: 0;
 	flex-direction: column;
 }
 .line {
 	flex: 1;
+	border: 1px solid black;
+	transition: flex 0.4s;
+	&.active {
+		flex: 5;
+	}
+	&.inactive {
+		flex: 1;
+	}
 }
