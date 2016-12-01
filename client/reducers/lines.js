@@ -26,7 +26,7 @@ export default function update(state = initialState, action) {
 			{
 				let pathname = action.payload.pathname.split('/');
 				pathname = pathname.length > 1 ? pathname[1] : pathname[0]
-				let selectedLineIndex = state.get('selectedLineIndex');
+				let selectedLineIndex = false;
 				let selectedViewIndex = state.get('selectedViewIndex');
 				state.get('collection').forEach((line, lineIndex)=>{
 					line.get('views').forEach((view, viewIndex)=>{

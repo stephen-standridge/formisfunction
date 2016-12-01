@@ -54736,7 +54736,7 @@
 					(function () {
 						var pathname = action.payload.pathname.split('/');
 						pathname = pathname.length > 1 ? pathname[1] : pathname[0];
-						var selectedLineIndex = state.get('selectedLineIndex');
+						var selectedLineIndex = false;
 						var selectedViewIndex = state.get('selectedViewIndex');
 						state.get('collection').forEach(function (line, lineIndex) {
 							line.get('views').forEach(function (view, viewIndex) {
@@ -54826,7 +54826,6 @@
 			case _action_types.NAVIGATION_ACTIONS.SUCCESS:
 				state = (0, _immutable.fromJS)(action.payload.navigation);
 				break;
-
 		}
 		return state;
 	}
@@ -55373,20 +55372,44 @@
 			value: function renderLines() {
 				var _this2 = this;
 
-				console.log(this.props);
-				if (!this.props.lines.length) return;
-				return this.props.lines.map(function (line, lineIndex) {
-					return React.createElement(
+				var _props = this.props,
+				    lines = _props.lines,
+				    selectedLineIndex = _props.selectedLineIndex,
+				    selectedViewIndex = _props.selectedViewIndex;
+
+				if (!lines.length) return;
+				return lines.map(function (line, lineIndex) {
+					var shouldRenderLineViewNavigation = selectedLineIndex === false;
+					var shouldRenderBack = selectedLineIndex === lineIndex - 1 || selectedLineIndex === lineIndex + 1;
+					var shouldRenderView = !shouldRenderLineViewNavigation;
+
+					var className = selectedLineIndex === lineIndex ? 'active' : selectedLineIndex !== false ? 'inactive' : '';
+					return shouldRenderLineViewNavigation ? React.createElement(
 						'div',
-						{ key: lineIndex, className: 'line ' + (_this2.props.selectedLineIndex === lineIndex ? 'active' : 'inactive') },
+						{ key: lineIndex, className: 'line ' + className },
 						line.views.map(function (view, viewIndex) {
-							return _this2.routeSlug() == view.slug ? React.createElement(_view.View, _extends({ key: lineIndex + '.' + viewIndex }, view)) : _this2.props.selectedViewIndex === viewIndex ? React.createElement(
+							return selectedViewIndex === viewIndex ? React.createElement(
 								_reactRouter.Link,
 								{ key: lineIndex + '.' + viewIndex, className: 'line__link', to: view.slug },
 								view.title
 							) : null;
 						})
-					);
+					) : shouldRenderBack ? React.createElement(
+						'div',
+						{ key: lineIndex, className: 'line back' },
+						React.createElement(
+							_reactRouter.Link,
+							{ key: lineIndex, className: 'line__link', to: '/' },
+							'Back'
+						),
+						' :'
+					) : shouldRenderView ? React.createElement(
+						'div',
+						{ key: lineIndex, className: 'line ' + className },
+						line.views.map(function (view, viewIndex) {
+							return _this2.routeSlug() == view.slug ? React.createElement(_view.View, _extends({ key: lineIndex + '.' + viewIndex }, view)) : null;
+						})
+					) : null;
 				});
 			}
 		}, {

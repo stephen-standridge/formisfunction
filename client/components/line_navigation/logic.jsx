@@ -23,17 +23,35 @@ class LineNavigationLogic extends React.Component {
 		return <MainVideo /> 
 	}
 	renderLines(){
-		if(!this.props.lines.length) return
-		return this.props.lines.map((line, lineIndex)=>{
-			return <div key={lineIndex} className={`line ${this.props.selectedLineIndex === lineIndex ? 'active' : 'inactive' }`}>
-				{line.views.map((view, viewIndex)=>{
-					return this.routeSlug() == view.slug  ? 
-						<View key={`${lineIndex}.${viewIndex}`} {...view} /> :
-						this.props.selectedViewIndex === viewIndex ? 
-						<Link key={`${lineIndex}.${viewIndex}`} className='line__link' to={view.slug} >{view.title}</Link> :
-						null
-				})}
-			</div>
+		let { lines, selectedLineIndex, selectedViewIndex } = this.props;
+		if(!lines.length) return
+		return lines.map((line, lineIndex)=>{
+			let shouldRenderLineViewNavigation = selectedLineIndex === false;
+			let shouldRenderBack = selectedLineIndex === lineIndex - 1 || selectedLineIndex === lineIndex +1;
+			let shouldRenderView = !shouldRenderLineViewNavigation;
+
+			let className = selectedLineIndex === lineIndex ? 'active' : selectedLineIndex !== false ? 'inactive' : ''			
+			return shouldRenderLineViewNavigation ?
+					<div key={lineIndex} className={`line ${className}`}>
+						{line.views.map((view, viewIndex)=>{
+							return selectedViewIndex === viewIndex ? 
+								<Link key={`${lineIndex}.${viewIndex}`} className='line__link' to={view.slug} >{view.title}</Link> :
+								null
+						})}
+					</div> : 
+				shouldRenderBack ? 
+					<div key={lineIndex} className='line back'>
+						<Link key={lineIndex} className='line__link' to={'/'} >{'Back'}</Link> :				
+					</div> :			
+				shouldRenderView ?
+					<div key={lineIndex} className={`line ${className}`}>
+						{line.views.map((view, viewIndex)=>{
+							return this.routeSlug() == view.slug  ? 
+								<View key={`${lineIndex}.${viewIndex}`} {...view} /> :
+								null
+						})}
+					</div> :
+					null 
 		});		
 	}
 	render(){

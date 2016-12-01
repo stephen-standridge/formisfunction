@@ -25,6 +25,9 @@
 	flex-shrink: 0;
 	flex-direction: column;
 }
+.line__navigation--back {
+	flex: 1;
+}
 .line {
 	flex: 1;
 	border: 1px solid black;
@@ -33,6 +36,6 @@
 		flex: 5;
 	}
 	&.inactive {
-		flex: 1;
+		flex: 0;
 	}
 }
