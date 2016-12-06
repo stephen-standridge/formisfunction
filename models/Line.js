@@ -14,11 +14,16 @@ var Line = new keystone.List('Line', {
 
 Line.add({
 	createdAt: { type: Date, default: Date.now },
+	publishedAt: Date,	
 	title: { type: String, required: true },
-	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
-	layout: { type: Types.Select, options: 'only', default: 'only', index: true },
-	publishedAt: Date,
-	views: { type: Types.Relationship, ref: 'View', many: true}
+	state: { 
+		type: Types.Select, 
+		options: 'draft, published, archived', 
+		default: 'draft', 
+		index: true 
+	},
+	views: { type: Types.Relationship, ref: 'View', many: true},
+	layout: { type: Types.Relationship, ref: 'LineLayout' }	
 });
 
 
