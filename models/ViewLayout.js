@@ -16,8 +16,8 @@ ViewLayout.add({
 	title: { type: String, required: true },
 	type: {
 		type: Types.Select, 
-		options: '1xNVideo, 1x1Video, Nx1Videos, other', 
-		default: '1x1'
+		options: '1xNVideo, other', 
+		default: '1xNVideo'
 	},
 });
 

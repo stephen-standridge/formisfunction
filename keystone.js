@@ -42,8 +42,8 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	site: ['users', 'main-navigations', 'enquiries'],
 	views: ['views', 'lines'],
-	content: ['collections', 'articles', 'media', 'links'],
-	layouts: ['view-layouts', 'line-layouts']	
+	content: ['collections', 'articles', 'media'],
+	layouts: ['view-layouts', 'line-layouts', 'links']	
 });
 
 // Start Keystone to connect to your database and initialise the web server

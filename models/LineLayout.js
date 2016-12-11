@@ -16,7 +16,7 @@ LineLayout.add({
 	title: { type: String, required: true },
 	type: {
 		type: Types.Select, 
-		options: 'OneSelected', 
+		options: 'OneSelected, other', 
 		default: 'OneSelected'
 	},
 	selected: { type: Types.Boolean, dependsOn: { type: 'OneSelected' } }

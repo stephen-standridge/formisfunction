@@ -15,7 +15,7 @@ Collection.add({
 	title: { type: String, required: true },		
 	createdAt: { type: Date, default: Date.now },
 	medias: { type: Types.Relationship, ref: 'Media', many: true },
-	articles: { type: Types.Relationship, ref: 'Article', many: true },
+	articles: { type: Types.Relationship, ref: 'Article', many: true }
 });
 
 Collection.relationship({ path: 'view', ref: 'View', refPath: 'collections' });

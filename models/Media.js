@@ -22,9 +22,5 @@ Media.add({
 
 Media.plural = 'media'
 
-Media.schema.virtual('content.full').get(function () {
-	return this.content.extended || this.content.brief;
-});
-
 Media.defaultColumns = 'title, state|20%, publishedDate|20%';
 Media.register();
