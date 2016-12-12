@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
 
 
 # create lines
@@ -54,3 +54,5 @@ audioClip3 = AudioClip.create! slug: 'octavarium_2', audio: audio2, view: topVie
 videoClip1 = VideoClip.create! slug: 'whole_chaud', video: video1, view: middleView1, start: Time.now + 0.seconds, end: Time.now + 300.seconds, order: 0
 videoClip2 = VideoClip.create! slug: 'symphony_1', video: video2, view: middleView2, start: Time.now + 0.seconds, end: Time.now + 300.seconds, order: 0
 videoClip3 = VideoClip.create! slug: 'symphony_2', video: video2, view: middleView2, start: Time.now + 300.seconds, end: Time.now + 600.seconds, order: 1
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
