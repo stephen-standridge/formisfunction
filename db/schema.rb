@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.string   "title"
     t.text     "body"
     t.integer  "order"
-    t.integer  "view_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "component_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["component_id"], name: "index_articles_on_component_id", using: :btree
     t.index ["slug"], name: "index_articles_on_slug", using: :btree
-    t.index ["view_id"], name: "index_articles_on_view_id", using: :btree
   end
 
   create_table "audio_clips", force: :cascade do |t|
@@ -63,13 +63,13 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.integer  "order"
     t.time     "start"
     t.time     "end"
-    t.integer  "view_id"
+    t.integer  "component_id"
     t.integer  "audio_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["audio_id"], name: "index_audio_clips_on_audio_id", using: :btree
+    t.index ["component_id"], name: "index_audio_clips_on_component_id", using: :btree
     t.index ["slug"], name: "index_audio_clips_on_slug", using: :btree
-    t.index ["view_id"], name: "index_audio_clips_on_view_id", using: :btree
   end
 
   create_table "audios", force: :cascade do |t|
@@ -79,21 +79,54 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "components", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "component_type"
+    t.string   "name"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["slug"], name: "index_components_on_slug", using: :btree
+  end
+
+  create_table "components_views", id: false, force: :cascade do |t|
+    t.integer "view_id"
+    t.integer "component_id"
+    t.index ["component_id"], name: "index_components_views_on_component_id", using: :btree
+    t.index ["view_id"], name: "index_components_views_on_view_id", using: :btree
+  end
+
   create_table "layouts", force: :cascade do |t|
     t.string   "slug"
+    t.string   "layout_type"
     t.integer  "view_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["slug"], name: "index_layouts_on_slug", using: :btree
     t.index ["view_id"], name: "index_layouts_on_view_id", using: :btree
   end
 
   create_table "lines", force: :cascade do |t|
     t.string   "slug"
-    t.string   "type"
+    t.string   "line_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_lines_on_slug", using: :btree
+  end
+
+  create_table "lines_sites", id: false, force: :cascade do |t|
+    t.integer "line_id"
+    t.integer "site_id"
+    t.index ["line_id"], name: "index_lines_sites_on_line_id", using: :btree
+    t.index ["site_id"], name: "index_lines_sites_on_site_id", using: :btree
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.integer  "lines_id"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lines_id"], name: "index_sites_on_lines_id", using: :btree
+    t.index ["slug"], name: "index_sites_on_slug", using: :btree
   end
 
   create_table "video_clips", force: :cascade do |t|
@@ -101,13 +134,13 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.integer  "order"
     t.time     "start"
     t.time     "end"
-    t.integer  "view_id"
+    t.integer  "component_id"
     t.integer  "video_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["component_id"], name: "index_video_clips_on_component_id", using: :btree
     t.index ["slug"], name: "index_video_clips_on_slug", using: :btree
     t.index ["video_id"], name: "index_video_clips_on_video_id", using: :btree
-    t.index ["view_id"], name: "index_video_clips_on_view_id", using: :btree
   end
 
   create_table "videos", force: :cascade do |t|

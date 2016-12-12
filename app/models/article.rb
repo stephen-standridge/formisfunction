@@ -1,3 +1,3 @@
 class Article < ApplicationRecord
-	belongs_to :view
+	belongs_to :component
 end

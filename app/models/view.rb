@@ -1,7 +1,5 @@
 class View < ApplicationRecord
 	belongs_to :line	
-	has_one :layout
-	has_many :articles
-	has_many :audio_clips
-	has_many :video_clips
+	belongs_to :layout
+	has_and_belongs_to_many :components
 end

@@ -6,7 +6,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
 			t.text    :body
 			t.integer :order			
 
-			t.references :view, index: true			
+			t.belongs_to :component, index: true			
       t.timestamps
     end
   end

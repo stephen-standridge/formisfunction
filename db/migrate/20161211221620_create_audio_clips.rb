@@ -6,7 +6,7 @@ class CreateAudioClips < ActiveRecord::Migration[5.0]
 			t.time    :start
 			t.time    :end		
 
-			t.belongs_to :view, index: true
+			t.belongs_to :component, index: true
 			t.references :audio, index: true
       t.timestamps
     end

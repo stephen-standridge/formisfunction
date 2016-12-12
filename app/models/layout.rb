@@ -1,3 +1,3 @@
 class Layout < ApplicationRecord
-	has_and_belongs_to_many :views
+	has_many :views
 end

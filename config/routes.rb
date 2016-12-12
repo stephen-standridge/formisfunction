@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sites
+  resources :components
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :layouts
