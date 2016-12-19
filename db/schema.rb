@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212020958) do
+ActiveRecord::Schema.define(version: 20161218230943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,8 +75,9 @@ ActiveRecord::Schema.define(version: 20161212020958) do
   create_table "audios", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "styleable_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "components", force: :cascade do |t|
@@ -95,16 +96,6 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.index ["view_id"], name: "index_components_views_on_view_id", using: :btree
   end
 
-  create_table "layouts", force: :cascade do |t|
-    t.string   "slug"
-    t.string   "layout_type"
-    t.integer  "view_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["slug"], name: "index_layouts_on_slug", using: :btree
-    t.index ["view_id"], name: "index_layouts_on_view_id", using: :btree
-  end
-
   create_table "lines", force: :cascade do |t|
     t.string   "slug"
     t.string   "line_type"
@@ -120,12 +111,32 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.index ["site_id"], name: "index_lines_sites_on_site_id", using: :btree
   end
 
+  create_table "links", force: :cascade do |t|
+    t.string "href",   null: false
+    t.string "anchor", null: false
+  end
+
+  create_table "links_sites", id: false, force: :cascade do |t|
+    t.integer "link_id"
+    t.integer "site_id"
+    t.index ["link_id"], name: "index_links_sites_on_link_id", using: :btree
+    t.index ["site_id"], name: "index_links_sites_on_site_id", using: :btree
+  end
+
+  create_table "site_layouts", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "layout_type"
+    t.integer  "site_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["site_id"], name: "index_site_layouts_on_site_id", using: :btree
+    t.index ["slug"], name: "index_site_layouts_on_slug", using: :btree
+  end
+
   create_table "sites", force: :cascade do |t|
-    t.integer  "lines_id"
     t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lines_id"], name: "index_sites_on_lines_id", using: :btree
     t.index ["slug"], name: "index_sites_on_slug", using: :btree
   end
 
@@ -150,14 +161,22 @@ ActiveRecord::Schema.define(version: 20161212020958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "view_layouts", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "layout_type"
+    t.integer  "view_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["slug"], name: "index_view_layouts_on_slug", using: :btree
+    t.index ["view_id"], name: "index_view_layouts_on_view_id", using: :btree
+  end
+
   create_table "views", force: :cascade do |t|
+    t.integer  "line_id"
     t.string   "slug"
     t.string   "title"
-    t.integer  "line_id"
-    t.integer  "layout_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["layout_id"], name: "index_views_on_layout_id", using: :btree
     t.index ["line_id"], name: "index_views_on_line_id", using: :btree
     t.index ["slug"], name: "index_views_on_slug", using: :btree
   end
