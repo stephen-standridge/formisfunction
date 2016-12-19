@@ -8,7 +8,6 @@ class CreateLines < ActiveRecord::Migration[5.0]
     end
 
     create_table :sites do |t|
-    	t.references :lines
     	t.string :slug, index: true
       t.timestamps
     end    
@@ -17,5 +16,6 @@ class CreateLines < ActiveRecord::Migration[5.0]
       t.belongs_to :line, index: true
       t.belongs_to :site, index: true
     end    
+
   end
 end

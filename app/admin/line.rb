@@ -1,5 +1,5 @@
 ActiveAdmin.register Line do
-  permit_params :slug, :type, views_attributes: [:slug, :title, :id, :layout_id]
+  permit_params :slug, :type, views_attributes: [:slug, :title, :id, :layout_id, :_destroy]
 
   controller do
     def scoped_collection
@@ -54,7 +54,7 @@ ActiveAdmin.register Line do
           include_blank: false
         view_f.input :layout, 
           as: :select, 
-          collection: Layout.all.map {|l| [l.layout_type, l.id] }, 
+          collection: ViewLayout.all.map {|l| [l.layout_type, l.id] }, 
           include_blank: false  
         if !view_f.object.nil?
           # show the destroy checkbox only if it already exists
