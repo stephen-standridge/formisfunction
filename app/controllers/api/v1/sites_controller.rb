@@ -3,10 +3,8 @@ module Api::V1
 
     # GET /v1/users
     def index
-    	sites = Site.all.includes(:lines, :views, :links).first
-      render json: sites, 
-      	adapter: :json, 
-      	serializer: SiteSerializer
+    	@site = Site.all.includes(:lines, :links).first
+    	render 'sites/index.json'
     end
 
   end

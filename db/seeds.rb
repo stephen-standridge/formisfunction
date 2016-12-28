@@ -99,17 +99,17 @@ article1 = Article.create! slug: 'lorem_article_1',
 	title: Faker::Lorem.word, 
 	body: Faker::Lorem.paragraphs(3).join('/n'), 
 	order: 0, 
-	component: component1
+	component: component5
 article2 = Article.create! slug: 'lorem_article_2', 
 	title: Faker::Lorem.word, 
 	body: Faker::Lorem.paragraphs(3).join('/n'), 
 	order: 0, 
-	component: component2
+	component: component6
 article3 = Article.create! slug: 'lorem_article_3', 
 	title: Faker::Lorem.word, 
 	body: Faker::Lorem.paragraphs(3).join('/n'), 
 	order: 1, 
-	component: component2
+	component: component6
 
 audioClip1 = AudioClip.create! slug: 'whole_space_jam', 
 	audio: audio1,  
@@ -135,18 +135,18 @@ videoClip1 = VideoClip.create! slug: 'whole_chaud',
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds, 
 	order: 0, 
-	component: component5
+	component: component1
 videoClip2 = VideoClip.create! slug: 'symphony_1', 
 	video: video2, 
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds, 
 	order: 0, 
-	component: component6
+	component: component2
 videoClip3 = VideoClip.create! slug: 'symphony_2', 
 	video: video2,  
-	start: Time.now + 300.seconds, 
+	start: Time.now + 300.seconds, 	
 	end: Time.now + 600.seconds, 
 	order: 1, 
-	component: component6
+	component: component2
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

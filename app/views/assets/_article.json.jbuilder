@@ -1,0 +1,1 @@
+json.extract! article, :id, :slug, :title, :body, :order
