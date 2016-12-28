@@ -49,7 +49,7 @@ module.exports = {
     filename: 'build/[name]-[hash].js'
   },
   devServer: {
-    port: 3000,
+    port: 8888,
     historyApiFallback: {
       index: 'index.html'
     }

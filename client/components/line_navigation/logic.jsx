@@ -6,15 +6,6 @@ import '../../styles/line_navigation'
 
 
 class LineNavigationLogic extends React.Component {
-	constructor(){
-		super()
-		this.componentWillMount = this.fetchLines;
-	}
-	fetchLines(){
-		this.props.fetch()
-		//if slug, get slug or 404
-		//if no slug, get index
-	}
 	routeSlug() {
 		return this.props.routeParams ? this.props.routeParams.slug : false
 	}

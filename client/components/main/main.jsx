@@ -1,11 +1,14 @@
-import {Navigation} from '../navigation';
+import Navigation from './navigation';
 
 class Main extends React.Component{
-	render(){		
+	componentWillMount() {
+		this.props.fetch();
+	}
+	render() {		
 		return (
 	    <div className="main">
     		{this.props.children}	 
-	    	<Navigation />
+	    	<Navigation navigation={this.props.navigation} />
 	    </div>
 		)
 	}
