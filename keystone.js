@@ -42,7 +42,7 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	site: ['users', 'main-navigations', 'enquiries'],
 	views: ['views', 'lines'],
-	content: ['collections', 'articles', 'media'],
+	content: ['collections', 'articles', 'media' ],
 	layouts: ['view-layouts', 'line-layouts', 'links']	
 });
 
