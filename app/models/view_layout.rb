@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: layouts
+# Table name: view_layouts
 #
 #  id          :integer          not null, primary key
 #  slug        :string

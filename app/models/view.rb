@@ -3,10 +3,9 @@
 # Table name: views
 #
 #  id         :integer          not null, primary key
+#  line_id    :integer
 #  slug       :string
 #  title      :string
-#  line_id    :integer
-#  layout_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

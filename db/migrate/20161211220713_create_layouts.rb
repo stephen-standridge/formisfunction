@@ -1,7 +1,6 @@
 class CreateLayouts < ActiveRecord::Migration[5.0]
 	def self.up
 		create_table :site_layouts do |t|   	
-    	t.string :slug, index: true
     	t.string :layout_type    	
       t.references :site
 
@@ -9,7 +8,6 @@ class CreateLayouts < ActiveRecord::Migration[5.0]
     end
 
     create_table :view_layouts do |t|     
-      t.string :slug, index: true
       t.string :layout_type     
       t.references :view
 

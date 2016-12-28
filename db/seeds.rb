@@ -17,9 +17,9 @@ home = Link.create! anchor: 'home', href: '/home'
 contact = Link.create! anchor: 'contact', href: '/contact'
 
 # create layouts
-layout1 = ViewLayout.create! slug: '1_by_n_video', layout_type: 'rtl'
-layout2 = ViewLayout.create! slug: 'n_by_1_video', layout_type: 'ltr'
-layout3 = SiteLayout.create! slug: 'stacked_lines', layout_type: 'ttb'
+layout1 = ViewLayout.create! layout_type: 'rtl'
+layout2 = ViewLayout.create! layout_type: 'ltr'
+layout3 = SiteLayout.create! layout_type: 'ttb'
 
 site = Site.create! slug: '', 
 	lines: Line.where(slug: ['top', 'middle', 'bottom']), 

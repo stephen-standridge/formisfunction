@@ -1,11 +1,11 @@
 # == Schema Information
 #
-# Table name: layouts
+# Table name: site_layouts
 #
 #  id          :integer          not null, primary key
 #  slug        :string
 #  layout_type :string
-#  view_id     :integer
+#  site_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
