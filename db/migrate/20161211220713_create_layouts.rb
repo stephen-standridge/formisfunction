@@ -1,15 +1,14 @@
 class CreateLayouts < ActiveRecord::Migration[5.0]
 	def self.up
 		create_table :site_layouts do |t|   	
-    	t.string :layout_type    	
-      t.references :site
-
+ 
       t.timestamps
     end
 
     create_table :view_layouts do |t|     
       t.string :layout_type     
       t.references :view
+      t.json :options
 
       t.timestamps
     end    

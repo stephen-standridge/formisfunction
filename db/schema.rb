@@ -123,17 +123,16 @@ ActiveRecord::Schema.define(version: 20161218230943) do
   end
 
   create_table "site_layouts", force: :cascade do |t|
-    t.string   "layout_type"
-    t.integer  "site_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["site_id"], name: "index_site_layouts_on_site_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sites", force: :cascade do |t|
     t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "layout_type"
+    t.json     "layout_options"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["slug"], name: "index_sites_on_slug", using: :btree
   end
 
@@ -161,17 +160,20 @@ ActiveRecord::Schema.define(version: 20161218230943) do
   create_table "view_layouts", force: :cascade do |t|
     t.string   "layout_type"
     t.integer  "view_id"
+    t.json     "options"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["view_id"], name: "index_view_layouts_on_view_id", using: :btree
   end
 
   create_table "views", force: :cascade do |t|
+    t.string   "layout_type"
+    t.json     "layout_options"
     t.integer  "line_id"
     t.string   "slug"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["line_id"], name: "index_views_on_line_id", using: :btree
     t.index ["slug"], name: "index_views_on_slug", using: :btree
   end

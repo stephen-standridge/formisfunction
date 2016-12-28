@@ -23,6 +23,10 @@ ActiveAdmin.register Site do
     attributes_table do
       row :slug
       row :created_at
+      panel "Layout" do
+        column :layout_type
+        column :layout_options
+      end        
       panel "Lines" do
         table_for site.lines do
           column :slug
@@ -34,18 +38,18 @@ ActiveAdmin.register Site do
           column :href
           column :anchor
         end
-      end 
-      panel "Layout" do
-        table_for site.layout do
-          column :layout_type
-        end
-      end      
+      end     
     end
 
   end
 
   form do |f|
     f.inputs "Site" do
+      f.input :layout_type,
+        as: :select,
+        collection: Site::LAYOUT_TYPES.map{ |l| [l.humanize, l] }
+      f.input :layout_options, 
+        as: :text        
       f.inputs "Lines" do
         f.input :lines,
           as: :select, 
@@ -67,12 +71,6 @@ ActiveAdmin.register Site do
         end  
       end 
 
-      f.inputs "Style" do
-        f.input :layout, 
-            as: :select, 
-            collection: SiteLayout.all.map {|l| [l.layout_type, l.id] }, 
-            include_blank: false  
-      end          
       f.actions
     end
   end

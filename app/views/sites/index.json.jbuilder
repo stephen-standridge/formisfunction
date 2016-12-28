@@ -1,7 +1,5 @@
 json.site do
-	if @site.layout 
-		json.partial! 'layouts/layout', layout: @site.layout
-	end
+	json.extract! @site, :layout_type, :layout_options
 	json.lines do
 		json.array! @site.lines, partial: 'lines/line', as: :line	
 	end

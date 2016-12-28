@@ -1,1 +1,1 @@
-json.extract! layout, :layout_type
+json.extract! layout, :layout_type, :options

@@ -1,6 +1,8 @@
 class CreateViews < ActiveRecord::Migration[5.0]
   def change
     create_table :views do |t|
+      t.string :layout_type     
+      t.json :layout_options        
       t.references :line, index: true
       t.string :slug, index: true
       t.string :title

@@ -11,8 +11,11 @@
 #
 
 class View < ApplicationRecord
-	alias_attribute :layout, :view_layout
+	LAYOUT_TYPES = %w( top_to_bottom left_to_right front_to_back )	
 	belongs_to :line	
-	has_one :view_layout
+
 	has_and_belongs_to_many :components
+	def options
+		options ||= {}
+	end	
 end
