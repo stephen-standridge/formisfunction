@@ -1,5 +1,5 @@
 ActiveAdmin.register Site do
-  permit_params :slug, 
+  permit_params :slug, :layout_type, :layout_options,
     lines_attributes: [:slug, :line_type, :id, :_destroy], 
     links_attributes: [:anchor, :href, :id, :_destroy]
 
@@ -23,10 +23,8 @@ ActiveAdmin.register Site do
     attributes_table do
       row :slug
       row :created_at
-      panel "Layout" do
-        column :layout_type
-        column :layout_options
-      end        
+      row :layout_type
+      row :layout_options
       panel "Lines" do
         table_for site.lines do
           column :slug

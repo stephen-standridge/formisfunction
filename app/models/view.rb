@@ -11,11 +11,9 @@
 #
 
 class View < ApplicationRecord
-	LAYOUT_TYPES = %w( top_to_bottom left_to_right front_to_back )	
+	include WithLayout
+	
 	belongs_to :line	
 
 	has_and_belongs_to_many :components
-	def options
-		options ||= {}
-	end	
 end

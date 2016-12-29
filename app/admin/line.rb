@@ -1,6 +1,6 @@
 ActiveAdmin.register Line do
   permit_params :slug, :type, 
-    views_attributes: [:slug, :title, :id, :layout_id, :_destroy]
+    views_attributes: [:slug, :title, :id, :layout_type, :layout_options, :_destroy]
 
   controller do
     def scoped_collection
