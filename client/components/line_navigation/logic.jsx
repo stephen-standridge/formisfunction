@@ -21,7 +21,7 @@ class LineNavigationLogic extends React.Component {
 			let shouldRenderBack = selectedLineIndex === lineIndex - 1 || selectedLineIndex === lineIndex +1;
 			let shouldRenderView = !shouldRenderLineViewNavigation;
 
-			let className = selectedLineIndex === lineIndex ? 'active' : selectedLineIndex !== false ? 'inactive' : ''			
+			let className = selectedLineIndex === lineIndex ? 'active' : selectedLineIndex !== false ? 'inactive' : ''		
 			return shouldRenderLineViewNavigation ?
 					<div key={lineIndex} className={`line ${className}`}>
 						{line.views.map((view, viewIndex)=>{
@@ -31,14 +31,24 @@ class LineNavigationLogic extends React.Component {
 						})}
 					</div> : 
 				shouldRenderBack ? 
-					<div key={lineIndex} className='line back'>
-						<Link key={lineIndex} className='line__link' to={'/'} >{'Back'}</Link> :				
+					<div key={lineIndex} className={`line back`}>
+						{line.views.map((view, viewIndex)=>{
+							return selectedViewIndex === viewIndex ? 
+								<Link key={`${lineIndex}.${viewIndex}`} className='line__link' to={view.slug} >{view.title}</Link> :
+								null
+						})}
 					</div> :			
 				shouldRenderView ?
 					<div key={lineIndex} className={`line ${className}`}>
 						{line.views.map((view, viewIndex)=>{
-							return this.routeSlug() == view.slug  ? 
-								<View key={`${lineIndex}.${viewIndex}`} {...view} /> :
+							let isView = this.routeSlug() == view.slug;
+							let isFirst = this.routeSlug() == undefined && viewIndex == 0;
+							return isFirst || isView  ? 
+								<View {...view} 
+									key={`${lineIndex}.${viewIndex}`}			
+									id={ view.id }					
+									onPrev={this.props.changeView.bind(this, -1)} 
+									onNext={this.props.changeView.bind(this, 1)}/> :
 								null
 						})}
 					</div> :
@@ -48,11 +58,7 @@ class LineNavigationLogic extends React.Component {
 	render(){
 		return <div className='line__navigation'>
 			<div className='navigation__wrapper'>
-				<div className='line__navigation--left' onClick={this.props.changeView.bind(this, -1)}>{'<'}</div>
-				<div className='line__navigation--center'>
-					{this.renderLines()}
-				</div>
-				<div className='line__navigation--right' onClick={this.props.changeView.bind(this, 1)}>{'>'}</div>				
+				{this.renderLines()}
 			</div>
 			{this.routeSlug() ? this.renderVideo() : null}
 		</div>

@@ -1,18 +1,17 @@
-import ViewPresentation from './presentation';
+import View from './view';
 
 class ViewLogic extends React.Component {
-	// constructor(){
-	// 	super()
-	// 	this.componentWillMount = this.getOrFetchView;
-	// 	this.componentWillReceiveProps = this.getOrFetchView;  		
-	// }
-	// getOrFetchView(newProps){
-	// 	this.props.get(this.props.slug)
-	// 	//if slug, get slug or 404
-	// 	//if no slug, get index
-	// }
+	constructor(){
+		super();
+		this.componentWillMount = this.loadViewMaybe;
+		this.componentWillReceiveProps = this.loadViewMaybe;		
+	}
+	loadViewMaybe(newProps){
+
+		if(!this.props.view) this.props.get(this.props.id)
+	}
 	render(){
-		return <ViewPresentation {...this.props}/>
+		return <View {...this.props}/>
 	}
 }
 

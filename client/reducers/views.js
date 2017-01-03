@@ -7,7 +7,7 @@ export default function update(state = initialState, action) {
 	switch(action.type) {
 		case VIEW_ACTIONS.SUCCESS:
 			action.payload.views.forEach((view)=>{
-				state = state.set(view.slug, view)
+				state = state.set(view.slug, fromJS(view))
 			})
 		break;
 	}

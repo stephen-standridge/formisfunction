@@ -10,12 +10,14 @@ export default function update(state = initialState, action) {
 		case SITE_ACTIONS.SUCCESS:
 			{
 				let maxViewIndices = [];
-				let lines = action.payload.site.lines;
+				const site = action.payload.site;
+				const { lines, site_options } = site;
 				let maxViewIndex = lines.reduce((max, line, lineIndex)=>{
 					let length = line.views.length
 					maxViewIndices.push(length);
 					return max > length ? max : length;
 				}, 0)
+				state = state.set('selectedLineIndex', site_options && site_options.initial ? site_options.initial : false )
 				state = state.set('collection', fromJS(lines))
 				state = state.set('maxViewIndex', maxViewIndex)
 				state = state.set('maxViewIndices', fromJS(maxViewIndices))

@@ -13,7 +13,6 @@ export function changeView(direction){
 		let max = selectedLineIndex ? maxViewIndices[selectedLineIndex] : maxViewIndex;
 		let newIndex = (selectedViewIndex + direction) % max
 		newIndex = newIndex < 0 ? max - 1 : newIndex;	
-
 		let slug = lines.getIn([selectedLineIndex, 'views', newIndex, 'slug'])
 		if (slug) {
 			dispatch(push(`/${slug}`))
