@@ -9,11 +9,13 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "clean-webpack-plugin": "^0.1.13",
+    "css-loader": "^0.25.0",
     "dotenv": "^2.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.0",
     "immutable": "^3.8.1",
     "lodash": "^4.16.6",
+    "lodash.camelcase": "^4.3.0",
     "moment": "^2.15.2",
     "node-sass": "^3.7.0",
     "normalizr": "^2.2.1",
@@ -28,12 +30,11 @@
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",
     "redux-thunk": "^2.1.0",
+    "sass-loader": "^4.0.2",
     "superagent": "^2.2.0",
     "underscore": "^1.8.3",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.14.1",
-    "css-loader": "^0.25.0",
-    "sass-loader": "^4.0.2"    
+    "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --no-info --open --watch",
@@ -52,4 +53,3 @@
   "homepage": "https://github.com/stephen-standridge/the-circle-interactive#readme",
   "description": ""
 }
-

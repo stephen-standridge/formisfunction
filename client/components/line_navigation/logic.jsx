@@ -44,9 +44,8 @@ class LineNavigationLogic extends React.Component {
 							let isView = this.routeSlug() == view.slug;
 							let isFirst = this.routeSlug() == undefined && viewIndex == 0;
 							return isFirst || isView  ? 
-								<View {...view} 
-									key={`${lineIndex}.${viewIndex}`}			
-									id={ view.id }					
+								<View {...view}
+									key={`${lineIndex}.${viewIndex}`}				
 									onPrev={this.props.changeView.bind(this, -1)} 
 									onNext={this.props.changeView.bind(this, 1)}/> :
 								null

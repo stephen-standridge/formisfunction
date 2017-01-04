@@ -1,0 +1,15 @@
+.view__loading {
+	flex: 1;
+}
+.view__container {
+  width: 100%;	
+}
+.view__center {
+	width: 90%;
+}
+.view__left, .view__right {
+  justify-content: center;
+  align-items: center;
+	width: 5%;
+	cursor: pointer;
+}
