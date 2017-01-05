@@ -2,7 +2,10 @@ class DefaultView extends React.Component {
 	renderComponents() {
 		const {view} = this.props;
 		if(!view.components || view.components.length <= 0 ) return <div className="components__empty" />
-		return view.components.map((component,i) => <div key={i}/>)
+		return view.components.map((component,i) =>{
+			console.warn(component)
+			return <div key={i}/>
+		})
 	}
 	render() {
 		const { view, onPrev, onNext } = this.props;
