@@ -1,6 +1,6 @@
 json.site do
-	json.extract! @site, :layout_type
-	json.layout_options JSON.parse(@site.layout_options)
+	json.extract! @site, :site_type
+	json.site_options JSON.parse(@site.site_options)
 	json.lines do
 		json.array! @site.lines, partial: 'lines/line', as: :line	
 	end

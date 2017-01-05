@@ -1,5 +1,5 @@
-json.view do
-	json.partial! 'views/view', view: @view
+json.views do
+	json.array! [@view], partial: 'views/view', as: :view
 end
 if @audio_clips.present?
 	json.audio_clips do

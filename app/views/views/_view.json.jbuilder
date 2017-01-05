@@ -1,5 +1,6 @@
-json.extract! view, :id, :slug, :title, :layout_type, 
-json.layout_options view.layout_options.to_json
+json.extract! view, :id, :slug, :title, :view_type
+
+json.view_options view.view_options
 json.components do 
 	json.array! view.components, partial: 'components/component', as: :component
 end

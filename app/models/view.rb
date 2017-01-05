@@ -11,9 +11,9 @@
 #
 
 class View < ApplicationRecord
-	include WithLayout
-	
+	VIEW_TYPES = %w( default )	
+
 	belongs_to :line	
 
-	has_and_belongs_to_many :components
+	has_and_belongs_to_many :components, join_table: 'components_views'
 end

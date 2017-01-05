@@ -11,7 +11,9 @@
 #
 
 class Component < ApplicationRecord
-	has_and_belongs_to_many :views
+	COMPONENT_TYPES = %w( top_to_bottom left_to_right front_to_back )	
+
+	has_and_belongs_to_many :views, join_table: 'components_views'
 	has_many :articles
 	has_many :audio_clips
 	has_many :video_clips

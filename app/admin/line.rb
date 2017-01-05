@@ -1,10 +1,10 @@
 ActiveAdmin.register Line do
-  permit_params :slug, :type, 
-    views_attributes: [:slug, :title, :id, :layout_type, :layout_options, :_destroy]
-
   controller do
     def scoped_collection
       Line.includes(:views)
+    end
+    def permitted_params
+      params.permit!
     end
   end
 
@@ -30,8 +30,8 @@ ActiveAdmin.register Line do
       table_for line.views do
         column :title
         column :slug
-        column :layout_type
-        column :layout_options
+        column :view_type
+        column :view_options
         column(:components) { |v| v.components.map{|c| c.name }.join(', ') }
       end
     end
@@ -54,10 +54,10 @@ ActiveAdmin.register Line do
           collection: Component.all.map{|c| [c.name, c.id] }, 
           hint: "hold 'command' to select multiple",
           include_blank: false
-        view_f.input :layout_type,
+        view_f.input :view_type,
           as: :select,
-          collection: View::LAYOUT_TYPES.map{ |l| [l.humanize, l] }
-        view_f.input :layout_options, 
+          collection: View::VIEW_TYPES.map{ |l| [l.humanize, l] }
+        view_f.input :view_options, 
           as: :text         
         if !view_f.object.nil?
           # show the destroy checkbox only if it already exists

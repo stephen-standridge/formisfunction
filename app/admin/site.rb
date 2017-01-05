@@ -1,5 +1,5 @@
 ActiveAdmin.register Site do
-  permit_params :slug, :layout_type, :layout_options,
+  permit_params :slug, :site_type, :site_options,
     lines_attributes: [:slug, :line_type, :id, :_destroy], 
     links_attributes: [:anchor, :href, :id, :_destroy]
 
@@ -23,8 +23,8 @@ ActiveAdmin.register Site do
     attributes_table do
       row :slug
       row :created_at
-      row :layout_type
-      row :layout_options
+      row :site_type
+      row :site_options
       panel "Lines" do
         table_for site.lines do
           column :slug
@@ -43,10 +43,10 @@ ActiveAdmin.register Site do
 
   form do |f|
     f.inputs "Site" do
-      f.input :layout_type,
+      f.input :site_type,
         as: :select,
-        collection: Site::LAYOUT_TYPES.map{ |l| [l.humanize, l] }
-      f.input :layout_options, 
+        collection: Site::SITE_TYPES.map{ |l| [l.humanize, l] }
+      f.input :site_options, 
         as: :text        
       f.inputs "Lines" do
         f.input :lines,

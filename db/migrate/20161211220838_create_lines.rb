@@ -9,8 +9,8 @@ class CreateLines < ActiveRecord::Migration[5.0]
 
     create_table :sites do |t|
     	t.string :slug, index: true
-      t.string :layout_type     
-      t.json :layout_options      
+      t.string :site_type     
+      t.json :site_options      
       t.timestamps
     end    
 

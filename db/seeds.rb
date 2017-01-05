@@ -19,8 +19,8 @@ contact = Link.create! anchor: 'contact', href: '/contact'
 site = Site.create! slug: '', 
 	lines: Line.where(slug: ['top', 'middle', 'bottom']), 
 	links: Link.where(anchor: ['home', 'contact']), 
-	layout_type: 'left_to_right',
-	layout_options: { test_option_1: true }
+	site_type: 'left_to_right',
+	site_options: { test_option_1: true }
 
 # create component
 component1 = Component.create! slug: 'component_1', 
@@ -48,41 +48,41 @@ component6 = Component.create! slug: 'component_6',
 topView1 = View.create! slug: 'top_view_1', 
 	title: 'first audio view', 
 	line: top, 
-	layout_type: 'top_to_bottom',
-	layout_options: { test_option_1: false },
+	view_type: 'top_to_bottom',
+	view_options: { test_option_1: false },
 	components: Component.where(slug: ['component_1', 'component_2'])
 topView2 = View.create! slug: 'top_view_2', 
 	title: 'second audio view', 
 	line: top, 
-	layout_type: 'front_to_back',
-	layout_options: { test_option_2: true },
+	view_type: 'front_to_back',
+	view_options: { test_option_2: true },
 	components: Component.where(slug: ['component_2', 'component_3'])
 
 middleView1 = View.create! slug: 'middle_view_1', 
 	title: 'first video view', 
 	line: middle, 
-	layout_type: 'front_to_back',
-	layout_options: { test_option_2: false },
+	view_type: 'front_to_back',
+	view_options: { test_option_2: false },
 	components: Component.where(slug: ['component_3', 'component_4', 'component_5'])
 middleView2 = View.create! slug: 'middle_view_2', 
 	title: 'second video view',
 	line: middle, 
-	layout_type: 'top_to_bottom',
-	layout_options: { test_option_3: true },
+	view_type: 'top_to_bottom',
+	view_options: { test_option_3: true },
 	components: Component.where(slug: ['coponent_5'])
 
 
 bottomView1 = View.create! slug: 'bottom_view_1', 
 	title: 'first article view', 
 	line: bottom, 
-	layout_type: 'top_to_bottom',
-	layout_options: { test_option_3: false },
+	view_type: 'top_to_bottom',
+	view_options: { test_option_3: false },
 	components: Component.where(slug: ['component_6', 'component_5'])
 bottomView2 = View.create! slug: 'bottom_view_2', 
 	title: 'second article view', 
 	line: bottom, 
-	layout_type: 'left_to_right',
-	layout_options: { test_option_3: false },
+	view_type: 'left_to_right',
+	view_options: { test_option_3: false },
 	components: Component.where(slug: ['component_6', 'component_1'])
 
 

@@ -9,7 +9,8 @@
 #
 
 class Site < ApplicationRecord
-	include WithLayout
+
+	SITE_TYPES = %w( top_to_bottom left_to_right front_to_back )	
 
 	alias_attribute :navigation, :links
 	has_and_belongs_to_many :links	
@@ -18,4 +19,5 @@ class Site < ApplicationRecord
 
 	accepts_nested_attributes_for :lines, :allow_destroy => true  	
 	accepts_nested_attributes_for :links, :allow_destroy => true		
+
 end

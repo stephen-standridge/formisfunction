@@ -9,8 +9,6 @@ module Api::V1
       @video_clips = @components.map(&:video_clips).flatten.compact
       @audio_clips = @components.map(&:audio_clips).flatten.compact
       
-      puts '======================'
-      puts @audio_clips
       render 'views/show.json'
     end    
   end

@@ -30,7 +30,10 @@ ActiveAdmin.register Component do
   form do |f|
     f.inputs "Component" do
       f.input :name      
-      f.input :component_type
+      f.input :component_type,
+        as: :select,
+        collection: Component::COMPONENT_TYPES.map{ |l| [l.humanize, l] }
+
       f.input :slug
     end
     f.inputs "Audio Clips" do
