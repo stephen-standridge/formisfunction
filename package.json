@@ -19,6 +19,7 @@
     "moment": "^2.15.2",
     "node-sass": "^3.7.0",
     "normalizr": "^2.2.1",
+    "number-to-words": "^1.2.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.3.0",

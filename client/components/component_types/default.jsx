@@ -1,4 +1,4 @@
-class DefaultComponent extends ViewBase {
+class DefaultComponent extends React.Component {
 	render() {
 		const { component, onPrev, onNext } = this.props;
 		if(!component) return <div className="component__loading" />

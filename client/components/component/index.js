@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
-import ViewLogic from './logic'
-import * as actions from '../../actions/view'
+import ComponentLogic from './logic'
+// import * as actions from '../../actions/component'
 
 const mapStateToProps = (state, ownProps) => {
-	let view = state.views.get(ownProps.slug)
-	view = view && view.toJS()
-  return { view }
+	console.warn(state)
+	console.warn(ownProps)
+  return {}
 }
 
-const View = connect( 
-	mapStateToProps,
-  actions
-)(ViewLogic)
+const Component = connect( 
+	mapStateToProps
+  // actions
+)(ComponentLogic)
 
-export {View}
+export {Component}

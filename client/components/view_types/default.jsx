@@ -13,8 +13,8 @@ class DefaultView extends React.Component {
 		return <div className={`view__container ${view.view_type || ""}`}>
 			<div className="view__left" onClick={onPrev} >{'<'}</div>
 			<div className="view__center" >
-					{view.view_type}
-				{this.renderComponents()}
+				{view.view_type}
+				{this.props.children}
 			</div>
 			<div className="view__right" onClick={onNext} >{'>'}</div>
     </div>

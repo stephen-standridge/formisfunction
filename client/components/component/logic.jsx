@@ -7,16 +7,16 @@ class ComponentLogic extends React.Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		// if the component has just loaded
 		if (!this.props.component && nextProps.component) return true
-		// if the component has changed
-		if (this.props.id !== nextProps.id) return true
 		// otherwise
 		return false
 	}
 
 	render(){
 		const { component } = this.props;
+
 		let component_type = component ? component.component_type : undefined;
 		component_type = upperFirst(camelcase(component_type));
+		console.warn(component_type)
 		if (!component_type) {
 			return <div className="component__not-found" />
 		}
