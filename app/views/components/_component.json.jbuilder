@@ -1,4 +1,5 @@
 json.extract! component, :id, :slug, :component_type, :name
+json.component_options JSON.parse(component.component_options)
 if component.articles.present?
 	json.articles do
 		json.array! component.articles.map(&:id)

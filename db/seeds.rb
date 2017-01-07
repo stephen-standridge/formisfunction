@@ -20,28 +20,34 @@ site = Site.create! slug: '',
 	lines: Line.where(slug: ['top', 'middle', 'bottom']), 
 	links: Link.where(anchor: ['home', 'contact']), 
 	site_type: 'left_to_right',
-	site_options: { test_option_1: true }
+	site_options: { test_option_1: true, initial_line_selected: 1 }.to_json
 
 # create component
 component1 = Component.create! slug: 'component_1', 
 	component_type: '1_by_n_video',
+	component_options: { test_option_3: false }.to_json,		
 	name: '1 video example'
 component2 = Component.create! slug: 'component_2', 
 	component_type: 'n_by_1_video',
+	component_options: { test_option_3: true }.to_json,		
 	name: '2 video example'
 
 component3 = Component.create! slug: 'component_3', 
 	component_type: '1_by_n_audio',
+	component_options: { test_option_1: false }.to_json,		
 	name: '1 audio example'
 component4 = Component.create! slug: 'component_4', 
 	component_type: 'n_by_1_audio',
+	component_options: { test_option_1: true }.to_json,		
 	name: '2 audio example'
 
 component5 = Component.create! slug: 'component_5', 
 	component_type: '1_by_n_article',
+	component_options: { test_option_2: false }.to_json,		
 	name: '1 article example'
 component6 = Component.create! slug: 'component_6', 
 	component_type: 'n_by_1_article',
+	component_options: { test_option_2: true }.to_json,	
 	name: '2 article example'
 
 # create views
@@ -49,26 +55,26 @@ topView1 = View.create! slug: 'top_view_1',
 	title: 'first audio view', 
 	line: top, 
 	view_type: 'top_to_bottom',
-	view_options: { test_option_1: false },
+	view_options: { test_option_1: false }.to_json,
 	components: Component.where(slug: ['component_1', 'component_2'])
 topView2 = View.create! slug: 'top_view_2', 
 	title: 'second audio view', 
 	line: top, 
 	view_type: 'front_to_back',
-	view_options: { test_option_2: true },
+	view_options: { test_option_2: true }.to_json,
 	components: Component.where(slug: ['component_2', 'component_3'])
 
 middleView1 = View.create! slug: 'middle_view_1', 
 	title: 'first video view', 
 	line: middle, 
 	view_type: 'front_to_back',
-	view_options: { test_option_2: false },
+	view_options: { test_option_2: false }.to_json,
 	components: Component.where(slug: ['component_3', 'component_4', 'component_5'])
 middleView2 = View.create! slug: 'middle_view_2', 
 	title: 'second video view',
 	line: middle, 
 	view_type: 'top_to_bottom',
-	view_options: { test_option_3: true },
+	view_options: { test_option_3: true }.to_json,
 	components: Component.where(slug: ['coponent_5'])
 
 
@@ -76,13 +82,13 @@ bottomView1 = View.create! slug: 'bottom_view_1',
 	title: 'first article view', 
 	line: bottom, 
 	view_type: 'top_to_bottom',
-	view_options: { test_option_3: false },
+	view_options: { test_option_3: false }.to_json,
 	components: Component.where(slug: ['component_6', 'component_5'])
 bottomView2 = View.create! slug: 'bottom_view_2', 
 	title: 'second article view', 
 	line: bottom, 
 	view_type: 'left_to_right',
-	view_options: { test_option_3: false },
+	view_options: { test_option_3: false }.to_json,
 	components: Component.where(slug: ['component_6', 'component_1'])
 
 

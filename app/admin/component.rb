@@ -1,5 +1,5 @@
 ActiveAdmin.register Component do
-	permit_params :slug, :component_type, :name, 
+	permit_params :slug, :component_type, :name, :component_options, 
     audio_clips_attributes: [:slug, :start, :end, :audio_id, :id, :_destroy],
     video_clips_attributes: [:slug, :start, :end, :video_id, :id, :_destroy],
     articles_attributes: [:slug, :title, :body, :id, :_destroy]
@@ -10,6 +10,7 @@ ActiveAdmin.register Component do
     column :slug
     column :name
     column :component_type
+    column :component_options
     column :created_at
     actions
   end
@@ -23,6 +24,7 @@ ActiveAdmin.register Component do
       row :slug
       row :name
       row :component_type
+      row :component_options
       row :created_at
     end
   end  
@@ -33,7 +35,8 @@ ActiveAdmin.register Component do
       f.input :component_type,
         as: :select,
         collection: Component::COMPONENT_TYPES.map{ |l| [l.humanize, l] }
-
+      f.input :component_options, 
+          as: :text 
       f.input :slug
     end
     f.inputs "Audio Clips" do
