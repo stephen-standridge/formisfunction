@@ -1,4 +1,5 @@
 import { upperFirst } from 'lodash';
+import makeClassNames from 'classnames'
 import camelcase from 'lodash.camelcase'
 import * as views from '../view_types';
 import { Component } from '../component';
@@ -33,17 +34,19 @@ class ViewLogic extends React.Component {
 
 	render(){
 		const { view, onPrev, onNext } = this.props;
-		let view_type = view ? view.view_type : undefined;
+		let view_type = view ? view.view_type + '_view' : undefined;
+		console.warn(view_type)
+		const classNames = makeClassNames(view_type || 'default_view', view && view.view_options)
 		view_type = upperFirst(camelcase(view_type));
 		if (!view_type) {
 			return <div className="view__not-found" />
 		}
+
 		if ( !views[view_type] ) {
 			view_type = 'DefaultView';
 		}
-		view.components.map((c)=> console.warn(c) )
 		const ViewOfType = views[view_type];
-		return <ViewOfType view={view} onPrev={onPrev} onNext={onNext} >
+		return <ViewOfType view={view} onPrev={onPrev} onNext={onNext} classNames={classNames} >
 			{ this.renderComponents() }
 		</ViewOfType>
 	}

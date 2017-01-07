@@ -27,4 +27,7 @@
 	&.inactive {
 		flex: 0;
 	}
+	&.back {
+		z-index: 5;
+	}
 }

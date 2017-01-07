@@ -1,3 +1,4 @@
+import makeClassNames from 'classnames'
 import { upperFirst } from 'lodash';
 import camelcase from 'lodash.camelcase'
 import * as components from '../component_types';
@@ -13,18 +14,20 @@ class ComponentLogic extends React.Component {
 
 	render(){
 		const { component } = this.props;
+		let component_type = component ? component.component_type + '_component' : undefined;
+		console.warn(component)
+		const classNames = makeClassNames(component_type || 'default_component', component && component.component_options)		
 
-		let component_type = component ? component.component_type : undefined;
 		component_type = upperFirst(camelcase(component_type));
-		console.warn(component_type)
+
 		if (!component_type) {
-			return <div className="component__not-found" />
+			return <div className="component__not-found ${classNames}" />
 		}
 		if ( !components[component_type] ) {
 			component_type = 'DefaultComponent';
 		}
 		const ComponentOfType = components[component_type];
-		return <ComponentOfType {...this.props} />
+		return <ComponentOfType {...this.props} classNames={classNames} />
 	}
 }
 

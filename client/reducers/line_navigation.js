@@ -17,7 +17,7 @@ export default function update(state = initialState, action) {
 					maxViewIndices.push(length);
 					return max > length ? max : length;
 				}, 0)
-				state = state.set('selectedLineIndex', site_options && site_options.initial ? site_options.initial : false )
+				state = state.set('selectedLineIndex', site_options && site_options.initial_line_selected ? site_options.initial_line_selected : false )
 				state = state.set('collection', fromJS(lines))
 				state = state.set('maxViewIndex', maxViewIndex)
 				state = state.set('maxViewIndices', fromJS(maxViewIndices))

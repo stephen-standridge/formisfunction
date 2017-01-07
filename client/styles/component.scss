@@ -1,0 +1,11 @@
+.component__container {
+	width: 100%;
+	cursor: pointer;
+	&.full_bleed {
+		position: absolute;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;  
+	}
+}
