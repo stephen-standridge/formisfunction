@@ -15,7 +15,7 @@
 
 class VideoClip < ApplicationRecord
 	belongs_to :video
-	belongs_to :component	
-
+	has_many :media, as: :medium
+	
 	accepts_nested_attributes_for :video
 end

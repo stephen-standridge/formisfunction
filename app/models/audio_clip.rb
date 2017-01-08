@@ -15,7 +15,7 @@
 
 class AudioClip < ApplicationRecord
 	belongs_to :audio
-	belongs_to :component
+	has_many :media, as: :medium
 	
 	accepts_nested_attributes_for :audio	
 end

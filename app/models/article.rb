@@ -13,5 +13,5 @@
 #
 
 class Article < ApplicationRecord
-	belongs_to :component
+	has_many :media, as: :medium
 end

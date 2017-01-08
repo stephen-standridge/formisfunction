@@ -4,9 +4,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
 			t.string  :slug, index: true
 			t.string  :title
 			t.text    :body
-			t.integer :order			
 
-			t.belongs_to :component, index: true			
       t.timestamps
     end
   end

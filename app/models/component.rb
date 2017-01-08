@@ -14,13 +14,22 @@ class Component < ApplicationRecord
 	COMPONENT_TYPES = %w( one_by_n_video n_by_one_video one_by_n_audio n_by_one_audio one_by_n_article n_by_one_article )	
 
 	has_and_belongs_to_many :views, join_table: 'components_views'
-	has_many :articles
-	has_many :audio_clips
-	has_many :video_clips
+
+ 	has_many :media
+	has_many :audio_clips, through: :media,
+	         source: :medium, source_type: 'AudioClip'
+	has_many :video_clips, through: :media,
+           source: :medium, source_type: 'VideoClip'
+	has_many :articles, through: :media,
+           source: :medium, source_type: 'Article'           
+
 	has_many :audios, through: :audio_clips
 	has_many :videos, through: :video_clips
 
-	accepts_nested_attributes_for :articles, :allow_destroy => true
-	accepts_nested_attributes_for :audio_clips, :allow_destroy => true
-	accepts_nested_attributes_for :video_clips, :allow_destroy => true
+
+	accepts_nested_attributes_for :media, :allow_destroy => true
+
+	# accepts_nested_attributes_for :articles, :allow_destroy => true
+	# accepts_nested_attributes_for :audio_clips, :allow_destroy => true
+	# accepts_nested_attributes_for :video_clips, :allow_destroy => true
 end

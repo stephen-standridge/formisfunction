@@ -30,6 +30,8 @@ module TheCircleInteractive
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Cookies    
 
+    config.active_record.time_zone_aware_types = [:datetime]
+    
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'

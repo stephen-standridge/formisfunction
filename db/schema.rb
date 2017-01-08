@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218230943) do
+ActiveRecord::Schema.define(version: 20170107235707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,25 +50,19 @@ ActiveRecord::Schema.define(version: 20161218230943) do
     t.string   "slug"
     t.string   "title"
     t.text     "body"
-    t.integer  "order"
-    t.integer  "component_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["component_id"], name: "index_articles_on_component_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_articles_on_slug", using: :btree
   end
 
   create_table "audio_clips", force: :cascade do |t|
     t.string   "slug"
-    t.integer  "order"
     t.time     "start"
     t.time     "end"
-    t.integer  "component_id"
     t.integer  "audio_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["audio_id"], name: "index_audio_clips_on_audio_id", using: :btree
-    t.index ["component_id"], name: "index_audio_clips_on_component_id", using: :btree
     t.index ["slug"], name: "index_audio_clips_on_slug", using: :btree
   end
 
@@ -123,6 +117,15 @@ ActiveRecord::Schema.define(version: 20161218230943) do
     t.index ["site_id"], name: "index_links_sites_on_site_id", using: :btree
   end
 
+  create_table "media", force: :cascade do |t|
+    t.integer "order"
+    t.string  "mediable_type"
+    t.integer "mediable_id"
+    t.integer "component_id"
+    t.index ["component_id"], name: "index_media_on_component_id", using: :btree
+    t.index ["mediable_type", "mediable_id"], name: "index_media_on_mediable_type_and_mediable_id", using: :btree
+  end
+
   create_table "sites", force: :cascade do |t|
     t.string   "slug"
     t.string   "site_type"
@@ -134,14 +137,11 @@ ActiveRecord::Schema.define(version: 20161218230943) do
 
   create_table "video_clips", force: :cascade do |t|
     t.string   "slug"
-    t.integer  "order"
     t.time     "start"
     t.time     "end"
-    t.integer  "component_id"
     t.integer  "video_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["component_id"], name: "index_video_clips_on_component_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_video_clips_on_slug", using: :btree
     t.index ["video_id"], name: "index_video_clips_on_video_id", using: :btree
   end
