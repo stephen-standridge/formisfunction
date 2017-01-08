@@ -1,20 +1,6 @@
 json.views do
 	json.array! [@view], partial: 'views/view', as: :view
 end
-if @audio_clips.present?
-	json.audio_clips do
-		json.array! @audio_clips, partial: 'assets/audio_clip', as: :audio_clip	
-	end
-end
 
-if @video_clips.present?
-	json.video_clips do
-		json.array! @video_clips, partial: 'assets/video_clip', as: :video_clip	
-	end
-end
+json.partial! 'media/media', media: @media
 
-if @articles.present?
-	json.articles do
-		json.array! @articles, partial: 'assets/article', as: :article	
-	end
-end

@@ -17,19 +17,15 @@ class Component < ApplicationRecord
 
  	has_many :media
 	has_many :audio_clips, through: :media,
-	         source: :medium, source_type: 'AudioClip'
+	         source: :mediable, source_type: 'AudioClip'
 	has_many :video_clips, through: :media,
-           source: :medium, source_type: 'VideoClip'
+           source: :mediable, source_type: 'VideoClip'
 	has_many :articles, through: :media,
-           source: :medium, source_type: 'Article'           
+           source: :mediable, source_type: 'Article'           
 
 	has_many :audios, through: :audio_clips
-	has_many :videos, through: :video_clips
+	has_many :videos, through: :video_clips, source: :video
 
 
 	accepts_nested_attributes_for :media, :allow_destroy => true
-
-	# accepts_nested_attributes_for :articles, :allow_destroy => true
-	# accepts_nested_attributes_for :audio_clips, :allow_destroy => true
-	# accepts_nested_attributes_for :video_clips, :allow_destroy => true
 end

@@ -14,4 +14,7 @@
 
 class Article < ApplicationRecord
 	has_many :media, as: :medium
+  def method_missing(name, *args, &block)
+  	nil
+  end	
 end

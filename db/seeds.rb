@@ -114,26 +114,26 @@ topView1 = View.create! slug: 'top_view_1',
 	line: top, 
 	view_type: 'top_to_bottom',
 	view_options: { test_option_1: false }.to_json,
-	components: Component.where(slug: ['component_1', 'component_2'])
+	components: Component.where(slug: ['component_3'])
 topView2 = View.create! slug: 'top_view_2', 
 	title: 'second audio view', 
 	line: top, 
 	view_type: 'front_to_back',
 	view_options: { test_option_2: true }.to_json,
-	components: Component.where(slug: ['component_2', 'component_3'])
+	components: Component.where(slug: ['component_4'])
 
 middleView1 = View.create! slug: 'middle_view_1', 
 	title: 'first video view', 
 	line: middle, 
 	view_type: 'front_to_back',
 	view_options: { test_option_2: false }.to_json,
-	components: Component.where(slug: ['component_3', 'component_4', 'component_5'])
+	components: Component.where(slug: ['component_1'])
 middleView2 = View.create! slug: 'middle_view_2', 
 	title: 'second video view',
 	line: middle, 
 	view_type: 'top_to_bottom',
 	view_options: { test_option_3: true }.to_json,
-	components: Component.where(slug: ['coponent_5'])
+	components: Component.where(slug: ['coponent_2'])
 
 
 bottomView1 = View.create! slug: 'bottom_view_1', 
@@ -141,12 +141,12 @@ bottomView1 = View.create! slug: 'bottom_view_1',
 	line: bottom, 
 	view_type: 'top_to_bottom',
 	view_options: { test_option_3: false }.to_json,
-	components: Component.where(slug: ['component_6', 'component_5'])
+	components: Component.where(slug: ['component_5'])
 bottomView2 = View.create! slug: 'bottom_view_2', 
 	title: 'second article view', 
 	line: bottom, 
 	view_type: 'left_to_right',
 	view_options: { test_option_3: false }.to_json,
-	components: Component.where(slug: ['component_6', 'component_1'])
+	components: Component.where(slug: ['component_6'])
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
