@@ -12,8 +12,8 @@ class ViewLogic extends React.Component {
 		this.componentWillReceiveProps = this.loadViewMaybe;		
 	}
 
-	loadViewMaybe(newProps){
-		const { view, id, get } = this.props;
+	loadViewMaybe(newProps=this.props){
+		const { view, id, get } = newProps;
 		if(!view) get(id)
 	}
 
@@ -35,7 +35,6 @@ class ViewLogic extends React.Component {
 	render(){
 		const { view, onPrev, onNext } = this.props;
 		let view_type = view ? view.view_type + '_view' : undefined;
-		console.warn(view_type)
 		const classNames = makeClassNames(view_type || 'default_view', view && view.view_options)
 		view_type = upperFirst(camelcase(view_type));
 		if (!view_type) {

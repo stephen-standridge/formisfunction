@@ -17,7 +17,7 @@ class ComponentLogic extends React.Component {
 		let component_type = component ? component.component_type + '_component' : undefined;
 		console.warn(component)
 		const classNames = makeClassNames(component_type || 'default_component', component && component.component_options)		
-
+		
 		component_type = upperFirst(camelcase(component_type));
 
 		if (!component_type) {
