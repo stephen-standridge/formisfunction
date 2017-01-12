@@ -59,18 +59,11 @@ ActiveRecord::Schema.define(version: 20170107235707) do
     t.string   "slug"
     t.time     "start"
     t.time     "end"
-    t.integer  "audio_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["audio_id"], name: "index_audio_clips_on_audio_id", using: :btree
-    t.index ["slug"], name: "index_audio_clips_on_slug", using: :btree
-  end
-
-  create_table "audios", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_audio_clips_on_slug", using: :btree
   end
 
   create_table "components", force: :cascade do |t|
@@ -139,18 +132,11 @@ ActiveRecord::Schema.define(version: 20170107235707) do
     t.string   "slug"
     t.time     "start"
     t.time     "end"
-    t.integer  "video_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_video_clips_on_slug", using: :btree
-    t.index ["video_id"], name: "index_video_clips_on_video_id", using: :btree
-  end
-
-  create_table "videos", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_video_clips_on_slug", using: :btree
   end
 
   create_table "views", force: :cascade do |t|

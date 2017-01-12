@@ -1,6 +1,17 @@
+# == Schema Information
+#
+# Table name: media
+#
+#  id            :integer          not null, primary key
+#  order         :integer
+#  mediable_type :string
+#  mediable_id   :integer
+#  component_id  :integer
+#
+
 class Medium < ApplicationRecord
 	MEDIABLE_TYPES = %w(Article VideoClip AudioClip Component)
-	delegate :title, :start, :end, :slug, :body, to: :mediable
+	delegate :title, :start, :end, :slug, :body, :url, to: :mediable
   
 	belongs_to :component
   belongs_to :mediable, polymorphic: true	

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: media
+#
+#  id            :integer          not null, primary key
+#  order         :integer
+#  mediable_type :string
+#  mediable_id   :integer
+#  component_id  :integer
+#
+
 require 'rails_helper'
 
 RSpec.describe Medium, type: :model do

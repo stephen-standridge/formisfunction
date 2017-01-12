@@ -2,12 +2,14 @@
 #
 # Table name: views
 #
-#  id         :integer          not null, primary key
-#  line_id    :integer
-#  slug       :string
-#  title      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  view_type    :string
+#  view_options :json
+#  line_id      :integer
+#  slug         :string
+#  title        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class View < ApplicationRecord

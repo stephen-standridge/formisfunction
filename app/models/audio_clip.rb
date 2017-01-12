@@ -2,15 +2,14 @@
 #
 # Table name: audio_clips
 #
-#  id           :integer          not null, primary key
-#  slug         :string
-#  order        :integer
-#  start        :time
-#  end          :time
-#  component_id :integer
-#  audio_id     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id         :integer          not null, primary key
+#  slug       :string
+#  start      :time
+#  end        :time
+#  url        :string
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class AudioClip < ApplicationRecord
