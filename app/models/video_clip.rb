@@ -14,11 +14,4 @@
 #
 
 class VideoClip < ApplicationRecord
-	belongs_to :video
-	has_many :media, as: :medium
-
-	accepts_nested_attributes_for :video
-  def method_missing(name, *args, &block)
-  	nil
-  end	
 end

@@ -3,9 +3,9 @@ class CreateAudioClips < ActiveRecord::Migration[5.0]
     create_table :audio_clips do |t|
 			t.string  :slug, index: true
 			t.time    :start
-			t.time    :end		
-
-			t.references :audio, index: true
+			t.time    :end	
+    	t.string :url
+    	t.string :title				
       t.timestamps
     end
   end

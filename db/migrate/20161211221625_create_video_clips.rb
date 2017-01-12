@@ -4,8 +4,8 @@ class CreateVideoClips < ActiveRecord::Migration[5.0]
 			t.string  :slug, index: true
 			t.time    :start
 			t.time    :end	
-
-			t.references :video, index: true      	
+		 	t.string :url
+    	t.string :title    	
       t.timestamps
     end
   end

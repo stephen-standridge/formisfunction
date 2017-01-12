@@ -38,7 +38,7 @@ ActiveAdmin.register Component do
       f.input :slug
     end
     f.has_many :media do |media_f| 
-      media_f.input :mediable_identifier, collection: (Article.all + VideoClip.all + AudioClip.all).map { |i| [ i.slug, "#{i.class.to_s}-#{i.id}"] }
+      media_f.input :mediable_identifier, collection: (Component.all + Article.all + VideoClip.all + AudioClip.all).map { |i| [ i.slug, "#{i.class.to_s}-#{i.id}"] }
       if !media_f.object.nil?
         # show the destroy checkbox only if it already exists
         # else, there's already dynamic JS to add / remove new

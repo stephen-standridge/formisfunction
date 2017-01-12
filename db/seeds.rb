@@ -22,13 +22,6 @@ site = Site.create! slug: '',
 	site_type: 'left_to_right',
 	site_options: { test_option_1: true, initial_line_selected: 1 }.to_json
 
-# create audio/video
-
-audio1 = Audio.create! title: 'space jam', url: 'https://soundcloud.com/mutrix/space-jam-mutrix-tune-squad-remix-1'
-audio2 = Audio.create! title: 'octavarium', url: 'https://soundcloud.com/dreamtheater/octavarium'
-
-video1 = Video.create! title: 'chaud lapin', url: 'https://vimeo.com/167414855'
-video2 = Video.create! title: 'symphony of the two minds', url: 'https://vimeo.com/168920644'
 
 # create clips/articles
 
@@ -43,56 +36,56 @@ article3 = Article.create! slug: 'lorem_article_3',
 	body: Faker::Lorem.paragraphs(3).join('/n')
 
 audioClip1 = AudioClip.create! slug: 'whole_space_jam', 
-	audio: audio1,  
+	title: 'space jam', url: 'https://soundcloud.com/mutrix/space-jam-mutrix-tune-squad-remix-1', 
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds
 audioClip2 = AudioClip.create! slug: 'octavarium_1', 
-	audio: audio2,  
+	title: 'octavarium', url: 'https://soundcloud.com/dreamtheater/octavarium',  
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds
 audioClip3 = AudioClip.create! slug: 'octavarium_2', 
-	audio: audio2,  
+	title: 'octavarium', url: 'https://soundcloud.com/dreamtheater/octavarium',
 	start: Time.now + 300.seconds, 
 	end: Time.now + 600.seconds
 
 videoClip1 = VideoClip.create! slug: 'whole_chaud', 
-	video: video1,  
+	title: 'chaud lapin', url: 'https://vimeo.com/167414855',  
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds
 videoClip2 = VideoClip.create! slug: 'symphony_1', 
-	video: video2, 
+	title: 'symphony of the two minds', url: 'https://vimeo.com/168920644',
 	start: Time.now + 0.seconds, 
 	end: Time.now + 300.seconds
 videoClip3 = VideoClip.create! slug: 'symphony_2', 
-	video: video2,  
+	title: 'symphony of the two minds', url: 'https://vimeo.com/168920644', 
 	start: Time.now + 300.seconds, 	
 	end: Time.now + 600.seconds
 
 # create component
 component1 = Component.create! slug: 'component_1', 
-	component_type: '1_by_n_video',
+	component_type: 'one_by_n_video',
 	component_options: { test_option_3: false }.to_json,		
 	name: '1 video example'
 component2 = Component.create! slug: 'component_2', 
-	component_type: 'n_by_1_video',
+	component_type: 'n_by_one_video',
 	component_options: { test_option_3: true }.to_json,		
 	name: '2 video example'
 
 component3 = Component.create! slug: 'component_3', 
-	component_type: '1_by_n_audio',
+	component_type: 'one_by_n_audio',
 	component_options: { test_option_1: false }.to_json,		
 	name: '1 audio example'
 component4 = Component.create! slug: 'component_4', 
-	component_type: 'n_by_1_audio',
+	component_type: 'n_by_one_audio',
 	component_options: { test_option_1: true }.to_json,		
 	name: '2 audio example'
 
 component5 = Component.create! slug: 'component_5', 
-	component_type: '1_by_n_article',
+	component_type: 'one_by_n_article',
 	component_options: { test_option_2: false }.to_json,		
 	name: '1 article example'
 component6 = Component.create! slug: 'component_6', 
-	component_type: 'n_by_1_article',
+	component_type: 'n_by_one_article',
 	component_options: { test_option_2: true }.to_json,	
 	name: '2 article example'
 
