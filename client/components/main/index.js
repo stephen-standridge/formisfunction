@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
-import * as actions from '../../actions/site'
+import * as actions from '../../actions/component'
 import MainLogic from './main'
 
 const mapStateToProps = (state) => {
-	const site = state.site.toJS();
-	const { lines, navigation } = site;
-  return { navigation, lines }
+	const site = state.components.toJS();
+	// const { lines, navigation } = site;
+  // return { navigation, lines }
+  return {}
 }
 
 const Main = connect( mapStateToProps, actions )(MainLogic)

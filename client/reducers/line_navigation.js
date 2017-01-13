@@ -7,7 +7,8 @@ const initialState = fromJS({ collection: [], selectedLineIndex: false, selected
 
 export default function update(state = initialState, action) {
 	switch(action.type) {	
-		case SITE_ACTIONS.SUCCESS:
+		case 'none':
+		// case SITE_ACTIONS.SUCCESS:
 			{
 				let maxViewIndices = [];
 				const site = action.payload.site;
