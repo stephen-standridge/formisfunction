@@ -70,62 +70,25 @@ ActiveRecord::Schema.define(version: 20170107235707) do
     t.string   "slug"
     t.string   "component_type"
     t.json     "component_options"
-    t.string   "name"
+    t.string   "title"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["slug"], name: "index_components_on_slug", using: :btree
   end
 
-  create_table "components_views", id: false, force: :cascade do |t|
-    t.integer "view_id"
-    t.integer "component_id"
-    t.index ["component_id"], name: "index_components_views_on_component_id", using: :btree
-    t.index ["view_id"], name: "index_components_views_on_view_id", using: :btree
-  end
-
-  create_table "lines", force: :cascade do |t|
-    t.string   "slug"
-    t.string   "line_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_lines_on_slug", using: :btree
-  end
-
-  create_table "lines_sites", id: false, force: :cascade do |t|
-    t.integer "line_id"
-    t.integer "site_id"
-    t.index ["line_id"], name: "index_lines_sites_on_line_id", using: :btree
-    t.index ["site_id"], name: "index_lines_sites_on_site_id", using: :btree
-  end
-
   create_table "links", force: :cascade do |t|
-    t.string "href",   null: false
     t.string "anchor", null: false
-  end
-
-  create_table "links_sites", id: false, force: :cascade do |t|
-    t.integer "link_id"
-    t.integer "site_id"
-    t.index ["link_id"], name: "index_links_sites_on_link_id", using: :btree
-    t.index ["site_id"], name: "index_links_sites_on_site_id", using: :btree
+    t.string "url",    null: false
   end
 
   create_table "media", force: :cascade do |t|
     t.integer "order"
+    t.string  "for"
     t.string  "mediable_type"
     t.integer "mediable_id"
     t.integer "component_id"
     t.index ["component_id"], name: "index_media_on_component_id", using: :btree
     t.index ["mediable_type", "mediable_id"], name: "index_media_on_mediable_type_and_mediable_id", using: :btree
-  end
-
-  create_table "sites", force: :cascade do |t|
-    t.string   "slug"
-    t.string   "site_type"
-    t.json     "site_options"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["slug"], name: "index_sites_on_slug", using: :btree
   end
 
   create_table "video_clips", force: :cascade do |t|
@@ -137,18 +100,6 @@ ActiveRecord::Schema.define(version: 20170107235707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_video_clips_on_slug", using: :btree
-  end
-
-  create_table "views", force: :cascade do |t|
-    t.string   "view_type"
-    t.json     "view_options"
-    t.integer  "line_id"
-    t.string   "slug"
-    t.string   "title"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["line_id"], name: "index_views_on_line_id", using: :btree
-    t.index ["slug"], name: "index_views_on_slug", using: :btree
   end
 
 end

@@ -10,8 +10,8 @@
 #
 
 class Medium < ApplicationRecord
-	MEDIABLE_TYPES = %w(Article VideoClip AudioClip Component)
-	delegate :title, :start, :end, :slug, :body, :url, to: :mediable
+	MEDIABLE_TYPES = %w(Article VideoClip AudioClip Component Link)
+	delegate :title, :start, :end, :slug, :body, :url, :anchor, to: :mediable
   
 	belongs_to :component
   belongs_to :mediable, polymorphic: true	

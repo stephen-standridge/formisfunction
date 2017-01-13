@@ -1,26 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
+home = Link.create! anchor: 'home', url: '/home'
+contact = Link.create! anchor: 'contact', url: '/contact'
 
+site = Component.create! slug: 'site', 
+	title: 'site',
+	component_type: 'line_navigation_site',
+	component_options: { test_option_1: true, initial_line_selected: 1 }.to_json
 
-# create lines
-top = Line.create! slug: 'top'
-middle = Line.create! slug: 'middle'
-bottom = Line.create! slug: 'bottom'
+line1 = Component.create! slug: 'top',
+	title: 'top_line',
+	component_type: 'line'
 
-home = Link.create! anchor: 'home', href: '/home'
-contact = Link.create! anchor: 'contact', href: '/contact'
+line2 = Component.create! slug: 'middle',
+	title: 'middle_line',
+	component_type: 'line'
 
-site = Site.create! slug: '', 
-	lines: Line.where(slug: ['top', 'middle', 'bottom']), 
-	links: Link.where(anchor: ['home', 'contact']), 
-	site_type: 'left_to_right',
-	site_options: { test_option_1: true, initial_line_selected: 1 }.to_json
+line3 = Component.create! slug: 'bottom',
+	title: 'bottom_line',
+	component_type: 'line'
+
+Medium.create! for: 'line_navigation', order: 0, component: site, mediable: line1
+Medium.create! for: 'line_navigation', order: 1, component: site, mediable: line2
+Medium.create! for: 'line_navigation', order: 2, component: site, mediable: line3
+
+Medium.create! for: 'naivgation', order: 0, component: site, mediable: home
+Medium.create! for: 'naivgation', order: 1, component: site, mediable: contact
 
 
 # create clips/articles
@@ -61,85 +65,56 @@ videoClip3 = VideoClip.create! slug: 'symphony_2',
 	start: Time.now + 300.seconds, 	
 	end: Time.now + 600.seconds
 
+# make site component
+# make line navigation component
 # create component
-component1 = Component.create! slug: 'component_1', 
+middleView1 = Component.create! slug: 'middle_component_1', 
 	component_type: 'one_by_n_video',
 	component_options: { test_option_3: false }.to_json,		
-	name: '1 video example'
-component2 = Component.create! slug: 'component_2', 
+	title: '1 video example'
+middleView2 = Component.create! slug: 'middle_component_2', 
 	component_type: 'n_by_one_video',
 	component_options: { test_option_3: true }.to_json,		
-	name: '2 video example'
+	title: '2 video example'
 
-component3 = Component.create! slug: 'component_3', 
+topView1 = Component.create! slug: 'top_component_1', 
 	component_type: 'one_by_n_audio',
 	component_options: { test_option_1: false }.to_json,		
-	name: '1 audio example'
-component4 = Component.create! slug: 'component_4', 
+	title: '1 audio example'
+topView2 = Component.create! slug: 'top_component_2', 
 	component_type: 'n_by_one_audio',
 	component_options: { test_option_1: true }.to_json,		
-	name: '2 audio example'
+	title: '2 audio example'
 
-component5 = Component.create! slug: 'component_5', 
+bottomView1 = Component.create! slug: 'bottom_component_1', 
 	component_type: 'one_by_n_article',
 	component_options: { test_option_2: false }.to_json,		
-	name: '1 article example'
-component6 = Component.create! slug: 'component_6', 
+	title: '1 article example'
+bottomView2 = Component.create! slug: 'bottom_component_2', 
 	component_type: 'n_by_one_article',
 	component_options: { test_option_2: true }.to_json,	
-	name: '2 article example'
-
-Medium.create! order: 0, component: component1, mediable: videoClip1
-Medium.create! order: 0, component: component2, mediable: videoClip2
-Medium.create! order: 1, component: component2, mediable: videoClip3
-
-Medium.create! order: 0, component: component3, mediable: audioClip1
-Medium.create! order: 0, component: component4, mediable: audioClip2
-Medium.create! order: 1, component: component4, mediable: audioClip3
-
-Medium.create! order: 0, component: component5, mediable: article1
-Medium.create! order: 0, component: component6, mediable: article2
-Medium.create! order: 1, component: component6, mediable: article3
-
-# create views
-topView1 = View.create! slug: 'top_view_1', 
-	title: 'first audio view', 
-	line: top, 
-	view_type: 'top_to_bottom',
-	view_options: { test_option_1: false }.to_json,
-	components: Component.where(slug: ['component_3'])
-topView2 = View.create! slug: 'top_view_2', 
-	title: 'second audio view', 
-	line: top, 
-	view_type: 'front_to_back',
-	view_options: { test_option_2: true }.to_json,
-	components: Component.where(slug: ['component_4'])
-
-middleView1 = View.create! slug: 'middle_view_1', 
-	title: 'first video view', 
-	line: middle, 
-	view_type: 'front_to_back',
-	view_options: { test_option_2: false }.to_json,
-	components: Component.where(slug: ['component_1'])
-middleView2 = View.create! slug: 'middle_view_2', 
-	title: 'second video view',
-	line: middle, 
-	view_type: 'top_to_bottom',
-	view_options: { test_option_3: true }.to_json,
-	components: Component.where(slug: ['coponent_2'])
+	title: '2 article example'
 
 
-bottomView1 = View.create! slug: 'bottom_view_1', 
-	title: 'first article view', 
-	line: bottom, 
-	view_type: 'top_to_bottom',
-	view_options: { test_option_3: false }.to_json,
-	components: Component.where(slug: ['component_5'])
-bottomView2 = View.create! slug: 'bottom_view_2', 
-	title: 'second article view', 
-	line: bottom, 
-	view_type: 'left_to_right',
-	view_options: { test_option_3: false }.to_json,
-	components: Component.where(slug: ['component_6'])
+Medium.create! order: 0, component: line1, mediable: topView1
+Medium.create! order: 1, component: line1, mediable: topView2
+
+Medium.create! order: 0, component: line2, mediable: middleView1
+Medium.create! order: 1, component: line2, mediable: middleView2
+
+Medium.create! order: 0, component: line3, mediable: bottomView1
+Medium.create! order: 1, component: line3, mediable: bottomView2
+
+Medium.create! order: 0, component: topView1, mediable: audioClip1
+Medium.create! order: 1, component: topView2, mediable: audioClip2
+Medium.create! order: 1, component: topView2, mediable: audioClip3
+
+Medium.create! order: 0, component: middleView1, mediable: videoClip1
+Medium.create! order: 1, component: middleView2, mediable: videoClip2
+Medium.create! order: 1, component: middleView2, mediable: videoClip3
+
+Medium.create! order: 0, component: bottomView1, mediable: article1
+Medium.create! order: 1, component: bottomView2, mediable: article2
+Medium.create! order: 1, component: bottomView2, mediable: article3
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

@@ -4,7 +4,7 @@ class CreateComponents < ActiveRecord::Migration[5.0]
       t.string :slug, index: true    	
       t.string :component_type
       t.json :component_options              
-      t.string :name
+      t.string :title
       t.timestamps
     end
   end  
