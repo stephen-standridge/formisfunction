@@ -1,17 +1,14 @@
 import Navigation from './navigation';
+import {Component} from '../component';
 
 class Main extends React.Component{
-	componentWillMount() {
-		this.props.fetch();
-	}
-	render() {		
+	render() {
 		return (
 	    <div className="main">
-    		{this.props.children}	 
-	    	<Navigation navigation={this.props.navigation} />
+	    	<Component slug="site" />
 	    </div>
 		)
 	}
 }
 
-export default Main
+export { Main }

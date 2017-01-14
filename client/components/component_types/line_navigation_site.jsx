@@ -1,14 +1,16 @@
-class DefaultComponent extends React.Component {
+import { Navigation } from './navigation';
+
+class LineNavigationSiteComponent extends React.Component {
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;
+		console.warn(component)		
 		if(!component) return <div className="component__loading" />
 		return <div className={`component__container ${classNames}`}>
 			<div className="component__center" >
-				{component.component_type}
-				{this.props.children}
+	    	<Navigation navigation={component.navigation} />
 			</div>
     </div>
 	}
 }
 
-export { DefaultComponent }
+export { LineNavigationSiteComponent }
