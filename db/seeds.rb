@@ -23,8 +23,8 @@ Medium.create! for: 'line_navigation', order: 0, component: site, mediable: line
 Medium.create! for: 'line_navigation', order: 1, component: site, mediable: line2
 Medium.create! for: 'line_navigation', order: 2, component: site, mediable: line3
 
-Medium.create! for: 'naivgation', order: 0, component: site, mediable: home
-Medium.create! for: 'naivgation', order: 1, component: site, mediable: contact
+Medium.create! for: 'navigation', order: 0, component: site, mediable: home
+Medium.create! for: 'navigation', order: 1, component: site, mediable: contact
 
 
 # create clips/articles

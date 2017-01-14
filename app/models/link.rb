@@ -8,4 +8,7 @@
 #
 
 class Link < ApplicationRecord
+	def slug
+		url.split('/').last
+	end
 end
