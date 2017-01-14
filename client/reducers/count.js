@@ -13,6 +13,8 @@ export default function update(state = initialState, action) {
     case DECREASE:
       state = state.update('number', (n)=> n-= action.amount )
       break;
+
+      
   }
   return state
 }

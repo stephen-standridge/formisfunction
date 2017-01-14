@@ -4,6 +4,27 @@
   height: 30px;
   flex-direction: row;
   z-index: 1; }
+.view__loading {
+  flex: 1; }
+
+.view__container {
+  width: 100%; }
+  .view__container.full_bleed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+
+.view__center {
+  width: 90%; }
+
+.view__left, .view__right {
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+  cursor: pointer; }
 .main__video {
   position: absolute;
   top: 0;
@@ -20,24 +41,11 @@
 .navigation__wrapper {
   height: 100%;
   width: 100%;
-  flex-direction: row; }
-
-.line__navigation--left,
-.line__navigation--right {
-  flex: 1;
-  cursor: pointer;
-  margin: auto;
-  font-size: 20px;
-  justify-content: center; }
+  flex-direction: column; }
 
 .line__link {
   justify-content: center;
   margin: auto; }
-
-.line__navigation--center {
-  flex-basis: 90%;
-  flex-shrink: 0;
-  flex-direction: column; }
 
 .line__navigation--back {
   flex: 1; }
@@ -47,9 +55,20 @@
   border: 1px solid black;
   transition: flex 0.4s; }
   .line.active {
-    flex: 5; }
+    flex: 9; }
   .line.inactive {
     flex: 0; }
+  .line.back {
+    z-index: 5; }
+.component__container {
+  flex: 1;
+  cursor: pointer; }
+  .component__container.full_bleed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
 html, body, #mount {
   position: absolute;
   top: 0;

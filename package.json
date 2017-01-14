@@ -40,7 +40,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --no-info --open --watch",
+    "start": "webpack-dev-server --content-base public/ --no-info --open",
     "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",

@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
+var extractCSS = new ExtractTextPlugin("stylesheets/[name]-[contenthash].css");
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 require('dotenv').config();
 
@@ -33,25 +33,32 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
   plugins: [ 
-    extractCSS, new HtmlWebpackPlugin(), 
+    new CleanWebpackPlugin(['public/build', 'public/stylesheets', 'public/index.html']),  
+    extractCSS, new HtmlWebpackPlugin({
+      title: 'My App',
+      filename: 'index.html'
+    }), 
     new webpack.ProvidePlugin({
       'React':      'react',
       '_':          'lodash',
       'ReactDOM':   'react-dom'
     }),
-    new CleanWebpackPlugin(['public/build']),
     new webpack.DefinePlugin({
       'process.env.API_HOST': JSON.stringify(process.env.API_HOST || 'http://localhost:3000/api/v1')
     })    
   ],
   output: {
-    path:'public',
+    path: __dirname + '/public',
+    publicPath: '/',
     filename: 'build/[name]-[hash].js'
   },
   devServer: {
     port: 8888,
+    colors: true,
     historyApiFallback: {
-      index: 'index.html'
-    }
-  }  
+      index: '/index.html'
+    },
+    inline: true
+  },
+
 };
