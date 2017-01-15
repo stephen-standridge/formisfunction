@@ -1,5 +1,5 @@
 ActiveAdmin.register Component do
-	permit_params :slug, :title, :component_options, :component_type, 
+	permit_params :slug, :title, :options, :component_type, 
   media_attributes: [ :id, :order, :state, :mediable_identifier, :_destroy ]
 
   index do
@@ -8,7 +8,7 @@ ActiveAdmin.register Component do
     column :slug
     column :title
     column :component_type
-    column :component_options
+    column :options
     column(:media) { |component| component.media.map(&:title) }
     column :created_at
     actions
@@ -22,7 +22,7 @@ ActiveAdmin.register Component do
       row :slug
       row :title
       row :component_type
-      row :component_options
+      row :options
       row "Media" do
         component.media.each do |media|
           url_generator = "admin_#{media.mediable_type.underscore}_path".to_sym
@@ -41,7 +41,7 @@ ActiveAdmin.register Component do
       f.input :component_type,
         as: :select,
         collection: Component::COMPONENT_TYPES.map{ |l| [l.humanize, l] }
-      f.input :component_options, 
+      f.input :options, 
           as: :text 
       f.input :slug
     end

@@ -1,5 +1,5 @@
 json.extract! component, :id, :slug, :component_type, :title
-json.component_options JSON.parse(component.component_options)
+json.options JSON.parse(component.options)
 if component.media.present?
 	json.media do
 		json.array! component.media do |medium|

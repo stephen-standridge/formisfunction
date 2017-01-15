@@ -5,7 +5,7 @@ contact = Link.create! anchor: 'contact', url: '/contact'
 site = Component.create! slug: 'site', 
 	title: 'site',
 	component_type: 'line_navigation_site',
-	component_options: { test_option_1: true, initial_line_selected: 1 }.to_json
+	options: { test_option_1: true, initial_line_selected: 1 }.to_json
 
 line1 = Component.create! slug: 'top',
 	title: 'top_line',
@@ -70,29 +70,29 @@ videoClip3 = VideoClip.create! slug: 'symphony_2',
 # create component
 middleView1 = Component.create! slug: 'middle_component_1', 
 	component_type: 'one_by_n_video',
-	component_options: { test_option_3: false }.to_json,		
+	options: { test_option_3: false }.to_json,		
 	title: '1 video example'
 middleView2 = Component.create! slug: 'middle_component_2', 
 	component_type: 'n_by_one_video',
-	component_options: { test_option_3: true }.to_json,		
+	options: { test_option_3: true }.to_json,		
 	title: '2 video example'
 
 topView1 = Component.create! slug: 'top_component_1', 
 	component_type: 'one_by_n_audio',
-	component_options: { test_option_1: false }.to_json,		
+	options: { test_option_1: false }.to_json,		
 	title: '1 audio example'
 topView2 = Component.create! slug: 'top_component_2', 
 	component_type: 'n_by_one_audio',
-	component_options: { test_option_1: true }.to_json,		
+	options: { test_option_1: true }.to_json,		
 	title: '2 audio example'
 
 bottomView1 = Component.create! slug: 'bottom_component_1', 
 	component_type: 'one_by_n_article',
-	component_options: { test_option_2: false }.to_json,		
+	options: { test_option_2: false }.to_json,		
 	title: '1 article example'
 bottomView2 = Component.create! slug: 'bottom_component_2', 
 	component_type: 'n_by_one_article',
-	component_options: { test_option_2: true }.to_json,	
+	options: { test_option_2: true }.to_json,	
 	title: '2 article example'
 
 

@@ -15,8 +15,8 @@ if medium.mediable_type == 'Link'
 end
 if medium.mediable_type == 'Component'
 	json.extract! medium, :component_type, :title
-	if medium.component_options.present?
-		json.component_options JSON.parse(medium.component_options)
+	if medium.options.present?
+		json.options JSON.parse(medium.options)
 	end
 end
 

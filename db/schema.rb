@@ -69,10 +69,10 @@ ActiveRecord::Schema.define(version: 20170107235707) do
   create_table "components", force: :cascade do |t|
     t.string   "slug"
     t.string   "component_type"
-    t.json     "component_options"
+    t.json     "options"
     t.string   "title"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["slug"], name: "index_components_on_slug", using: :btree
   end
 
