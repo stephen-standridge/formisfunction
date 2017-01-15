@@ -7,6 +7,7 @@ export default function update(state = initialState, action) {
 	switch(action.type) {
 		case COMPONENT_ACTIONS.SUCCESS:
 			let component = action.payload.component;
+			let components = action.payload.components || [];
 			let media = component.media;
 
 			delete component.media;
@@ -15,7 +16,10 @@ export default function update(state = initialState, action) {
 				component[section] = component[section] || [];
 				component[section].push(m);
 			})
-			state = state.set(component.slug, fromJS(component))
+			components = components.concat(component);
+			components.forEach((c) => {
+				state = state.set(c.slug, fromJS(c))
+			})			
 		break;
 	}
   return state

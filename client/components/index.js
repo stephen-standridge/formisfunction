@@ -1,5 +1,4 @@
 export * from './main_video'
-export * from './line_navigation'
 export * from './view'
 export * from './contact'
 export * from './component'

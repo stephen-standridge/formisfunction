@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import ComponentLogic from './logic'
+import { ComponentLogic } from './logic'
 import * as actions from '../../actions/component'
 
 const mapStateToProps = (state, ownProps) => {
 	const component = state.components.get(ownProps.slug);
+	console.warn(component, ownProps.slug)
   return { component: component && component.toJS() }
 }
 
@@ -12,4 +13,4 @@ const Component = connect(
   actions
 )(ComponentLogic)
 
-export {Component}
+export { Component }

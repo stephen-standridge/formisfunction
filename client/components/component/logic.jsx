@@ -6,8 +6,9 @@ import '../../styles/component'
 
 
 class ComponentLogic extends React.Component {
-	componentWillMount() {						
-		this.props.fetch();
+	componentWillMount() {			
+		const { component, slug, fetch } = this.props;
+		if (!component && slug) fetch(slug)
 	}
 	componentWillReceiveProps(nextProps) {
 		const { component, slug } = nextProps;
@@ -15,11 +16,9 @@ class ComponentLogic extends React.Component {
 	}
 	componentParam() {
 		const { slug, pathnames } = this.props;
-		// if (!pathnames) return;
+		if (!pathnames) return;
 		const { param, paramIndex } = this.context;
-		let theParam = param( slug );
-		console.warn(paramIndex(slug))
-		return theParam
+		return param( slug );
 	}
 	render(){
 		const { component } = this.props;
@@ -45,4 +44,4 @@ ComponentLogic.contextTypes = {
 
 ComponentLogic.propTypes = {}
 
-export default ComponentLogic
+export { ComponentLogic }

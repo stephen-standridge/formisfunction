@@ -11,13 +11,6 @@ var div = document.createElement("div");
 div.id = 'mount'
 document.body.appendChild(div);
 
-function makeGetParams(params) {
-  const set = params.splat && params.splat.split('/');
-  return set && function(){
-    return set.pop();
-  }
-}
-
 class ParamProvider extends React.Component {
   constructor(props) {
     super(props);
