@@ -1,11 +1,12 @@
 import '../../styles/navigation'
-import { Link } from './media'
+import { Link } from '../media'
 
 class Navigation extends React.Component {
 	renderLinks() {	
-			console.warn(this.props)		
-		if(!this.props.navigation) return <div className='navigation__loading' />
-		return this.props.navigation.map((link, i)=> <Link slug={link.slug} key={i} /> )		
+		const { navigation } = this.props;
+		console.warn(navigation)
+		if(!navigation) return <div className='navigation__loading' />
+		return navigation.map((link, index) => <Link key={index} slug={link.slug} /> )		
 	}
 	render(){
 		return <div className="main__navigation">
@@ -16,4 +17,4 @@ class Navigation extends React.Component {
     </div>
 	}	
 }
-export { Navigation };
+export { Navigation }

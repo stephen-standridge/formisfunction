@@ -11,28 +11,61 @@ var div = document.createElement("div");
 div.id = 'mount'
 document.body.appendChild(div);
 
-var Redirect = React.createClass({
-  statics: {
-    willTransitionTo: function(transition, params) {
-      console.warn(params)
-      // transition.redirect('user-details', params);
-    }
-  },
-  render(){ return }
-});
+function makeGetParams(params) {
+  const set = params.splat && params.splat.split('/');
+  return set && function(){
+    return set.pop();
+  }
+}
+
+class ParamProvider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.getComponentParam = this._getComponentParam.bind(this);
+    this.getComponentParamIndex = this._getComponentParamIndex.bind(this);
+    this.componentWillMount = this.setUp
+    this.componentWillReceiveProps = this.setUp
+  }
+
+  setUp({ params } = this.props) {
+    this.set = params && params.splat.split('/');
+    this.register = {};
+    this.indices = [];
+  }
+  _getComponentParamIndex(slug) {
+    return this.indices.findIndex( key => key == slug);
+  }
+  _getComponentParam(slug) {
+    if (this.register[slug]) return this.register[slug];
+    this.register[slug] = this.set.shift();
+    this.indices.push(slug);
+    return this.register[slug];
+  }
+  getChildContext() {
+    return { 
+      param: this.getComponentParam,
+      paramIndex: this.getComponentParamIndex
+    };
+  } 
+  render(){
+    return this.props.children;
+  }
+};
+
+ParamProvider.childContextTypes = {
+  param: React.PropTypes.func,
+  paramIndex: React.PropTypes.func
+};
 
 ReactDOM.render(
   <Provider store={store}>
     <div className="app">
       <Router history={history}>
-        <Route path="/" component={(props,state) => <Component slug={'site'} params={props.params} /> }>
-          <Route path=":modifier">
-            <Route path=":modifier2">
-              <Route path=":2">
-              </Route>                
-            </Route>          
-          </Route>
-        </Route>
+        <Route path="/*" component={(props,state) => {
+          return <ParamProvider params={props.params}>
+            <Component slug={'site'} /> 
+          </ParamProvider>
+        } } />
       </Router>
       <DevTools />
     </div>

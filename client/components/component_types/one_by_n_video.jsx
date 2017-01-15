@@ -1,4 +1,4 @@
-import { VideoClip } from '../media/video_clip';
+import { VideoClip } from '../media';
 
 class OneByNVideoComponent extends React.Component {
 	renderMedia(){

@@ -1,5 +1,14 @@
 import { connect } from 'react-redux'
-import VideoLogic from './logic';
+import ReactPlayer from 'react-player';
+
+class VideoClipComponent extends React.Component {
+	render() {
+		const { videoClip } = this.props;
+		if (!videoClip) return <div className='video__loading' />
+
+		return <ReactPlayer url={videoClip.url} />
+	}
+}
 
 const mapStateToProps = (state, ownProps) => {
 	console.warn(ownProps.id)
@@ -11,6 +20,6 @@ const mapStateToProps = (state, ownProps) => {
 const VideoClip = connect( 
 	mapStateToProps
   // actions
-)(VideoLogic)
+)(VideoClipComponent)
 
-export {VideoClip}
+export { VideoClip }
