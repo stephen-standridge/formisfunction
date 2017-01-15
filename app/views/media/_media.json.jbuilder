@@ -13,7 +13,3 @@ end
 json.links do
 	json.array! media.select{|m| m.mediable_type == 'Link'}, partial: 'media/medium', as: :medium
 end
-
-json.components do
-	json.array! media.select{|m| m.mediable_type == 'Component'}, partial: 'media/medium', as: :medium
-end
