@@ -4,7 +4,6 @@ import * as actions from '../../actions/component'
 
 const mapStateToProps = (state, ownProps) => {
 	const component = state.components.get(ownProps.slug);
-	console.warn(component, ownProps.slug)
   return { component: component && component.toJS() }
 }
 

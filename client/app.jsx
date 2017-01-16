@@ -5,6 +5,7 @@ import configureStore from './stores/configure_store'
 import { Component } from './components'
 import CSS from './styles/app.scss'
 
+
 const [store, history] = configureStore()
 
 var div = document.createElement("div");
@@ -14,40 +15,83 @@ document.body.appendChild(div);
 class ParamProvider extends React.Component {
   constructor(props) {
     super(props);
+    this.registered = {};
+    this.indices = [];        
+    this.set = props.params && props.params.splat.split('/');    
     this.getComponentParam = this._getComponentParam.bind(this);
-    this.getComponentParamIndex = this._getComponentParamIndex.bind(this);
-    this.componentWillMount = this.setUp
-    this.componentWillReceiveProps = this.setUp
+    this.setComponentParam = this._setComponentParam.bind(this);
+    this.registerComponent = this._registerComponent.bind(this);
+    this.unregisterComponent = this._unregisterComponent.bind(this);
+    this.componentWillReceiveProps = this.parseParams;
+    this.parseParams(props);
   }
 
-  setUp({ params } = this.props) {
-    this.set = params && params.splat.split('/');
-    this.register = {};
-    this.indices = [];
+  _registerComponent(slug) {
+    if(this.registered[slug]) {
+      console.warn(`attempted to re-register component with slug ${slug}`);
+      return;
+    }
+    const index = this.indices.push(slug);
+    this.registered[slug] = index - 1;
   }
-  _getComponentParamIndex(slug) {
-    return this.indices.findIndex( key => key == slug);
+
+  _unregisterComponent(slug) {
+    const atIndex = this.registered[slug];
+    if(!atIndex) {
+      console.warn(`attempted to unregister component with slug ${slug} but failed`);
+      return;
+    }
+    this.indices.splice(atIndex, 1);
+    this.indices.forEach((s, i)=> this.registered[s] = i);
   }
+
+  parseParams({ params }) {
+    const currentParams = this.props.params;  
+    if (currentParams === params) return;
+    this.set = params && params.splat.split('/');    
+  }
+
+  _setComponentParam(slug, param) {
+    let atIndex = this.registered[slug];
+    if (isNaN(atIndex)) {
+      this.registerComponent(slug);
+      atIndex = this.registered[slug];
+    }
+    this.set[atIndex] = slug + '_' + param;
+    this.context.router.push('/' + this.set.join('/'))
+  }
+
   _getComponentParam(slug) {
-    if (this.register[slug]) return this.register[slug];
-    this.register[slug] = this.set.shift();
-    this.indices.push(slug);
-    return this.register[slug];
+    const atIndex = this.registered[slug];    
+    if (isNaN(atIndex)) {
+      return; 
+    }    
+    return this.set[atIndex];
   }
+
   getChildContext() {
     return { 
-      param: this.getComponentParam,
-      paramIndex: this.getComponentParamIndex
+      getParam: this.getComponentParam,
+      setParam: this.setComponentParam,
+      register: this.registerComponent,
+      unregister: this.unregisterComponent
     };
   } 
+
   render(){
     return this.props.children;
   }
 };
 
 ParamProvider.childContextTypes = {
-  param: React.PropTypes.func,
-  paramIndex: React.PropTypes.func
+  getParam: React.PropTypes.func,
+  setParam: React.PropTypes.func,
+  register: React.PropTypes.func,
+  unregister: React.PropTypes.func
+};
+
+ParamProvider.contextTypes = {
+  router: React.PropTypes.object
 };
 
 ReactDOM.render(

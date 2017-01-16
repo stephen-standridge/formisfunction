@@ -8,11 +8,20 @@ import '../../styles/component'
 class ComponentLogic extends React.Component {
 	componentWillMount() {			
 		const { component, slug, fetch } = this.props;
+		const { register, setParam, getParam } = this.context;		
 		if (!component && slug) fetch(slug)
+		if (!getParam(slug)) setParam(slug, 'hello')
 	}
 	componentWillReceiveProps(nextProps) {
-		const { component, slug } = nextProps;
-		if (!component && slug) this.props.fetch(slug)
+		const { component, slug, fetch } = nextProps;
+		const { register, unregister } = this.context;
+		if (!component && slug) {
+			fetch(slug)
+		}
+		if (slug !== this.props.slug) {
+			unregister(this.props.slug);
+			register(slug);
+		}
 	}
 	componentParam() {
 		const { slug, pathnames } = this.props;
@@ -37,9 +46,10 @@ class ComponentLogic extends React.Component {
 }
 
 ComponentLogic.contextTypes = {
-  param: React.PropTypes.func,
-  paramIndex: React.PropTypes.func,
-  router: React.PropTypes.object
+  getParam: React.PropTypes.func,
+  setParam: React.PropTypes.func,
+  register: React.PropTypes.func,
+  unregister: React.PropTypes.func
 };
 
 ComponentLogic.propTypes = {}
