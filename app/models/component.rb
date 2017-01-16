@@ -2,17 +2,17 @@
 #
 # Table name: components
 #
-#  id                :integer          not null, primary key
-#  slug              :string
-#  component_type    :string
-#  options 					 :json
-#  name              :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id             :integer          not null, primary key
+#  slug           :string
+#  component_type :string
+#  options        :json
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 class Component < ApplicationRecord
-	COMPONENT_TYPES = %w( one_by_n_video n_by_one_video one_by_n_audio n_by_one_audio one_by_n_article n_by_one_article )	
+	COMPONENT_TYPES = %w( one_by_n_video n_by_one_video one_by_n_audio n_by_one_audio one_by_n_article n_by_one_article line_navigation_site line )	
 
  	has_many :media
 

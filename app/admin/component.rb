@@ -9,7 +9,7 @@ ActiveAdmin.register Component do
     column :title
     column :component_type
     column :options
-    column(:media) { |component| component.media.map(&:title) }
+    column(:media) { |component| component.media.map{|m| "#{m.mediable_type}: #{m.title}" } }
     column :created_at
     actions
   end
@@ -26,7 +26,7 @@ ActiveAdmin.register Component do
       row "Media" do
         component.media.each do |media|
           url_generator = "admin_#{media.mediable_type.underscore}_path".to_sym
-          a media.title, href: send(url_generator, media.mediable_id)          
+          a "#{media.mediable_type}: #{media.title}", href: send(url_generator, media.mediable_id)          
           text_node "&nbsp".html_safe
         end 
         nil       
@@ -46,7 +46,7 @@ ActiveAdmin.register Component do
       f.input :slug
     end
     f.has_many :media do |media_f| 
-      media_f.input :mediable_identifier, collection: (Component.all + Article.all + VideoClip.all + AudioClip.all).map { |i| [ i.slug, "#{i.class.to_s}-#{i.id}"] }
+      media_f.input :mediable_identifier, collection: (Link.all + Component.all + Article.all + VideoClip.all + AudioClip.all).map { |i| [ i.slug, "#{i.class.to_s}-#{i.id}"] }
       if !media_f.object.nil?
         # show the destroy checkbox only if it already exists
         # else, there's already dynamic JS to add / remove new

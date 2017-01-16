@@ -2,13 +2,13 @@
 #
 # Table name: components
 #
-#  id                :integer          not null, primary key
-#  slug              :string
-#  component_type    :string
-#  options :json
-#  name              :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id             :integer          not null, primary key
+#  slug           :string
+#  component_type :string
+#  options        :json
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 require 'rails_helper'
