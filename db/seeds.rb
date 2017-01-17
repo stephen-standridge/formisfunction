@@ -9,15 +9,18 @@ site = Component.create! slug: 'site',
 
 line1 = Component.create! slug: 'top',
 	title: 'top_line',
-	component_type: 'line'
+	component_type: 'line',
+	options: { initial_state: 'top_1' }.to_json	
 
 line2 = Component.create! slug: 'middle',
 	title: 'middle_line',
-	component_type: 'line'
+	component_type: 'line',
+	options: { initial_state: 'middle_1' }.to_json	
 
 line3 = Component.create! slug: 'bottom',
 	title: 'bottom_line',
-	component_type: 'line'
+	component_type: 'line',
+	options: { initial_state: 'bottom_1' }.to_json		
 
 Medium.create! collection: 'line_navigation', component: site, mediable: line1
 Medium.create! collection: 'line_navigation', component: site, mediable: line2
@@ -68,42 +71,42 @@ videoClip3 = VideoClip.create! slug: 'symphony_2',
 # make site component
 # make line navigation component
 # create component
-middleView1 = Component.create! slug: 'middle_component_1', 
+middleView1 = Component.create! slug: 'middle_1', 
 	component_type: 'one_by_n_video',
 	options: { test_option_3: false }.to_json,		
 	title: '1 video example'
-middleView2 = Component.create! slug: 'middle_component_2', 
+middleView2 = Component.create! slug: 'middle_2', 
 	component_type: 'n_by_one_video',
 	options: { test_option_3: true }.to_json,		
 	title: '2 video example'
 
-topView1 = Component.create! slug: 'top_component_1', 
+topView1 = Component.create! slug: 'top_1', 
 	component_type: 'one_by_n_audio',
 	options: { test_option_1: false }.to_json,		
 	title: '1 audio example'
-topView2 = Component.create! slug: 'top_component_2', 
+topView2 = Component.create! slug: 'top_2', 
 	component_type: 'n_by_one_audio',
 	options: { test_option_1: true }.to_json,		
 	title: '2 audio example'
 
-bottomView1 = Component.create! slug: 'bottom_component_1', 
+bottomView1 = Component.create! slug: 'bottom_1', 
 	component_type: 'one_by_n_article',
 	options: { test_option_2: false }.to_json,		
 	title: '1 article example'
-bottomView2 = Component.create! slug: 'bottom_component_2', 
+bottomView2 = Component.create! slug: 'bottom_2', 
 	component_type: 'n_by_one_article',
 	options: { test_option_2: true }.to_json,	
 	title: '2 article example'
 
 
-Medium.create! order: 0, component: line1, mediable: topView1
-Medium.create! order: 1, component: line1, mediable: topView2
+Medium.create! order: 0, component: line1, collection: 'views', mediable: topView1
+Medium.create! order: 1, component: line1, collection: 'views', mediable: topView2
 
-Medium.create! order: 0, component: line2, mediable: middleView1
-Medium.create! order: 1, component: line2, mediable: middleView2
+Medium.create! order: 0, component: line2, collection: 'views', mediable: middleView1
+Medium.create! order: 1, component: line2, collection: 'views', mediable: middleView2
 
-Medium.create! order: 0, component: line3, mediable: bottomView1
-Medium.create! order: 1, component: line3, mediable: bottomView2
+Medium.create! order: 0, component: line3, collection: 'views', mediable: bottomView1
+Medium.create! order: 1, component: line3, collection: 'views', mediable: bottomView2
 
 Medium.create! order: 0, component: topView1, mediable: audioClip1
 Medium.create! order: 1, component: topView2, mediable: audioClip2

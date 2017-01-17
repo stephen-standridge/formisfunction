@@ -1,6 +1,6 @@
 ActiveAdmin.register Component do
 	permit_params :slug, :title, :options, :component_type, 
-  media_attributes: [ :id, :order, :state, :mediable_identifier, :_destroy ]
+  media_attributes: [ :id, :order, :collection, :mediable_identifier, :_destroy ]
 
   index do
     selectable_column
