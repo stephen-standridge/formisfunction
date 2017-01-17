@@ -19,12 +19,12 @@ line3 = Component.create! slug: 'bottom',
 	title: 'bottom_line',
 	component_type: 'line'
 
-Medium.create! for: 'line_navigation', order: 0, component: site, mediable: line1
-Medium.create! for: 'line_navigation', order: 1, component: site, mediable: line2
-Medium.create! for: 'line_navigation', order: 2, component: site, mediable: line3
+Medium.create! collection: 'line_navigation', component: site, mediable: line1
+Medium.create! collection: 'line_navigation', component: site, mediable: line2
+Medium.create! collection: 'line_navigation', component: site, mediable: line3
 
-Medium.create! for: 'navigation', order: 0, component: site, mediable: home
-Medium.create! for: 'navigation', order: 1, component: site, mediable: contact
+Medium.create! collection: 'navigation', order: 0, component: site, mediable: home
+Medium.create! collection: 'navigation', order: 1, component: site, mediable: contact
 
 
 # create clips/articles

@@ -52,7 +52,8 @@ ActiveAdmin.register Component do
         # else, there's already dynamic JS to add / remove new
         media_f.input :_destroy, :as => :boolean, :label => "Destroy?"
       end
-      media_f.input :for      
+      media_f.input :collection      
+      media_f.input :order      
     end
     f.actions
   end

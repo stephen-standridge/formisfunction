@@ -6,7 +6,8 @@ if component.media.present?
 			json.slug medium.slug 
 			json.id medium.mediable_id
 			json.type medium.mediable_type
-			json.for medium.for
+			json.collection medium.collection
+
 			json.order medium.order
 		end
 	end

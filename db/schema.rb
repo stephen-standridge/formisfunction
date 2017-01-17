@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170107235707) do
 
   create_table "media", force: :cascade do |t|
     t.integer "order"
-    t.string  "for"
+    t.string  "collection"
     t.string  "mediable_type"
     t.integer "mediable_id"
     t.integer "component_id"
