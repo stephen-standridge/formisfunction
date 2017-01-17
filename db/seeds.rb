@@ -5,7 +5,7 @@ contact = Link.create! anchor: 'contact', url: '/contact'
 site = Component.create! slug: 'site', 
 	title: 'site',
 	component_type: 'line_navigation_site',
-	options: { history: true, initial_line_selected: 1 }.to_json
+	options: { history: true, initial_state: 'middle' }.to_json
 
 line1 = Component.create! slug: 'top',
 	title: 'top_line',
