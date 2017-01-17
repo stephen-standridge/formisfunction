@@ -12,9 +12,9 @@ export default function update(state = initialState, action) {
 
 			delete component.media;
 			media.forEach((m,i)=>{
-				let section = m.for || 'media';
-				component[section] = component[section] || [];
-				component[section].push(m);
+				let collection = m.collection || 'media';
+				component[collection] = component[collection] || [];
+				component[collection].push(m);
 			})
 			components = components.concat(component);
 			components.forEach((c) => {

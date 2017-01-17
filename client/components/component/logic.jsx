@@ -6,23 +6,45 @@ import '../../styles/component'
 
 
 class ComponentLogic extends React.Component {
-	componentWillMount() {			
-		const { component, slug, fetch } = this.props;
-		const { register, setParam, getParam } = this.context;		
-		if (!component && slug) fetch(slug)
-		if (!getParam(slug)) setParam(slug, 'hello')
+	constructor(props) {
+		super(props);
+		this.componentWillMount = this.handleProps;
+		this.componentWillReceiveProps = this.handleProps;
+		this.state = { current: undefined };
 	}
-	componentWillReceiveProps(nextProps) {
-		const { component, slug, fetch } = nextProps;
-		const { register, unregister } = this.context;
-		if (!component && slug) {
-			fetch(slug)
+	handleProps({ component, slug, fetch }= this.props) {
+		const { register, unregister, setParam, getParam, isRegistered } = this.context;		
+		if (!component && slug) fetch(slug);
+		const options = component && component.options;
+		const shouldUpdateHistory = options && options.history;
+		// if (component && component.options.history) {
+		// 	if (!getParam(slug)) setParam(slug, 'hello');					
+		// }
+		// if (slug !== this.props.slug) {
+		// 	unregister(this.props.slug);
+		// 	register(slug);
+		// }
+		if( shouldUpdateHistory && !isRegistered(slug)) {
+			console.warn(shouldUpdateHistory, !isRegistered(slug), slug)
+			const otherComponent = this.props.component;
+			const otherUpdateHistory = otherComponent && otherComponent.options.history;			
+			if (shouldUpdateHistory && otherUpdateHistory) {
+				register(slug, this.props.slug);	
+			} else if (otherUpdateHistory && isRegistered(this.props.slug)) {
+				unregister(this.props.slug);
+			} else {
+				register(slug);
+			}			
 		}
-		if (slug !== this.props.slug) {
-			unregister(this.props.slug);
-			register(slug);
+
+		const currentState = shouldUpdateHistory ? getParam(slug) : this.state.current;
+		if (!currentState) {
+			console.warn(currentState)
+			const current = options && options.initial_state || 'default';
+			this.setState({ current }, () =>{ if (shouldUpdateHistory) setParam(slug, current) })
 		}
 	}
+
 	componentParam() {
 		const { slug, pathnames } = this.props;
 		if (!pathnames) return;
@@ -49,7 +71,8 @@ ComponentLogic.contextTypes = {
   getParam: React.PropTypes.func,
   setParam: React.PropTypes.func,
   register: React.PropTypes.func,
-  unregister: React.PropTypes.func
+  unregister: React.PropTypes.func,
+  isRegistered: React.PropTypes.func
 };
 
 ComponentLogic.propTypes = {}

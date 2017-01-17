@@ -22,17 +22,28 @@ class ParamProvider extends React.Component {
     this.setComponentParam = this._setComponentParam.bind(this);
     this.registerComponent = this._registerComponent.bind(this);
     this.unregisterComponent = this._unregisterComponent.bind(this);
+    this.isComponentRegistered = this._isComponentRegistered.bind(this);
     this.componentWillReceiveProps = this.parseParams;
     this.parseParams(props);
   }
 
-  _registerComponent(slug) {
-    if(this.registered[slug]) {
+  _registerComponent(slug, other=false) {
+    if (this.registered[slug]) {
       console.warn(`attempted to re-register component with slug ${slug}`);
       return;
     }
-    const index = this.indices.push(slug);
-    this.registered[slug] = index - 1;
+    if (other === false) {
+      const index = this.indices.push(slug);
+      this.registered[slug] = index - 1;   
+    } else {
+      this.registered[slug] = this.registered[other];
+      delete this.registered[other];
+    }
+
+  }
+
+  _isComponentRegistered(slug) {
+    return !isNaN(this.registered[slug]);
   }
 
   _unregisterComponent(slug) {
@@ -74,7 +85,8 @@ class ParamProvider extends React.Component {
       getParam: this.getComponentParam,
       setParam: this.setComponentParam,
       register: this.registerComponent,
-      unregister: this.unregisterComponent
+      unregister: this.unregisterComponent,
+      isRegistered: this.isComponentRegistered
     };
   } 
 
@@ -87,7 +99,8 @@ ParamProvider.childContextTypes = {
   getParam: React.PropTypes.func,
   setParam: React.PropTypes.func,
   register: React.PropTypes.func,
-  unregister: React.PropTypes.func
+  unregister: React.PropTypes.func,
+  isRegistered: React.PropTypes.func
 };
 
 ParamProvider.contextTypes = {
