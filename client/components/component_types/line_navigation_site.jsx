@@ -1,18 +1,17 @@
 import { Component } from '../component';
 import { Link } from '../media';
+import '../../styles/line_navigation';
 
 class LineNavigationSiteComponent extends React.Component {
 	renderLineNavigation(){
-		const { component } = this.props;
+		const { component, componentState, setComponentState } = this.props;
 		const { line_navigation } = component;
 		return line_navigation && line_navigation.map((line, lineIndex)=>{
-			// let shouldRenderLineViewNavigation = selectedLineIndex === false;
-			// let shouldRenderBack = selectedLineIndex === lineIndex - 1 || selectedLineIndex === lineIndex +1;
-			// let shouldRenderView = !shouldRenderLineViewNavigation;
-
-			// let className = selectedLineIndex === lineIndex ? 'active' : selectedLineIndex !== false ? 'inactive' : ''		
-			return <Component key={lineIndex} slug={line.slug} />
+			return <Component key={lineIndex} slug={line.slug} select={ ()=> setComponentState(line.slug) } active={line.slug == componentState} />
 		});		
+	}
+	shouldComponentUpdate({ componentState }, nextState) {
+		return componentState !== this.props.componentState;
 	}
 	renderNavigation() {	
 		const { component } = this.props;

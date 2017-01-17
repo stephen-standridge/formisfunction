@@ -68,7 +68,7 @@ class ParamProvider extends React.Component {
       this.registerComponent(slug);
       atIndex = this.registered[slug];
     }
-    this.set[atIndex] = slug + '_' + param;
+    this.set[atIndex] = param;
     this.context.router.push('/' + this.set.join('/'))
   }
 

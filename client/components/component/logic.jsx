@@ -10,47 +10,42 @@ class ComponentLogic extends React.Component {
 		super(props);
 		this.componentWillMount = this.handleProps;
 		this.componentWillReceiveProps = this.handleProps;
+		this.setComponentState = this._setComponentState.bind(this);
+		this.getComponentState = this._getComponentState.bind(this);
 		this.state = { current: undefined };
 	}
 	handleProps({ component, slug, fetch }= this.props) {
-		const { register, unregister, setParam, getParam, isRegistered } = this.context;		
+		const { register, setParam, getParam, isRegistered } = this.context;		
 		if (!component && slug) fetch(slug);
 		const options = component && component.options;
-		const shouldUpdateHistory = options && options.history;
-		// if (component && component.options.history) {
-		// 	if (!getParam(slug)) setParam(slug, 'hello');					
-		// }
-		// if (slug !== this.props.slug) {
-		// 	unregister(this.props.slug);
-		// 	register(slug);
-		// }
-		if( shouldUpdateHistory && !isRegistered(slug)) {
-			console.warn(shouldUpdateHistory, !isRegistered(slug), slug)
-			const otherComponent = this.props.component;
-			const otherUpdateHistory = otherComponent && otherComponent.options.history;			
-			if (shouldUpdateHistory && otherUpdateHistory) {
-				register(slug, this.props.slug);	
-			} else if (otherUpdateHistory && isRegistered(this.props.slug)) {
-				unregister(this.props.slug);
-			} else {
-				register(slug);
-			}			
+		const withHistory = options && options.history;
+
+		if( withHistory && !isRegistered(slug)) {
+			register(slug);
 		}
 
-		const currentState = shouldUpdateHistory ? getParam(slug) : this.state.current;
-		if (!currentState) {
-			console.warn(currentState)
+		const currentState = this.getComponentState();
+		if (component && !currentState) {
 			const current = options && options.initial_state || 'default';
-			this.setState({ current }, () =>{ if (shouldUpdateHistory) setParam(slug, current) })
+			this.setComponentState(current);
 		}
 	}
 
-	componentParam() {
-		const { slug, pathnames } = this.props;
-		if (!pathnames) return;
-		const { param, paramIndex } = this.context;
-		return param( slug );
+	_setComponentState(current) {
+		const { slug, component } = this.props;
+		const { setParam } = this.context;
+		const withHistory = component && component.options && component.options.history;
+		return this.setState({ current }, () =>{ if (withHistory) setParam(slug, current) })
 	}
+
+	_getComponentState() {
+		const { slug, component } = this.props;
+		const { getParam } = this.context;		
+		const { current } = this.state;
+		const withHistory = component && component.options && component.options.history;		
+		return withHistory ? getParam(slug) : current;
+	}
+
 	render(){
 		const { component } = this.props;
 		let component_type = component ? component.component_type + '_component' : undefined;
@@ -63,7 +58,7 @@ class ComponentLogic extends React.Component {
 			component_type = 'DefaultComponent';
 		}
 		const ComponentOfType = components[component_type];
-		return <ComponentOfType {...this.props} classNames={classNames} param={this.componentParam()}/>
+		return <ComponentOfType {...this.props} setComponentState={this.setComponentState} classNames={classNames} componentState={this.getComponentState()}/>
 	}
 }
 
