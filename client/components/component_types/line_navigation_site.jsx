@@ -7,7 +7,13 @@ class LineNavigationSiteComponent extends React.Component {
 		const { component, componentState, setComponentState } = this.props;
 		const { line_navigation } = component;
 		return line_navigation && line_navigation.map((line, lineIndex)=>{
-			return <Component key={lineIndex} slug={line.slug} select={ ()=> setComponentState(line.slug) } active={line.slug == componentState} />
+			const active = line.slug == componentState ;
+			return <div key={lineIndex}  className={`line ${active ? 'active' : '' }`}>
+				{ active ? 
+					<Component slug={line.slug}/> :
+					<div onClick={ ()=> setComponentState(line.slug) } > {line.slug} </div>
+				}
+				</div>
 		});		
 	}
 	shouldComponentUpdate({ componentState }, nextState) {

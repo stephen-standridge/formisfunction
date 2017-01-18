@@ -36,6 +36,7 @@ class ParamProvider extends React.Component {
       const index = this.indices.push(slug);
       this.registered[slug] = index - 1;   
     } else {
+      if (!this.registered[other]) console.warn(`attempted to register ${slug} as unregistered ${other}`)
       this.registered[slug] = this.registered[other];
       delete this.registered[other];
     }
