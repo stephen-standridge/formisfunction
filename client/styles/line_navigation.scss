@@ -17,10 +17,10 @@
 .line__navigation--back {
 	flex: 1;
 }
-.line {
+.line__wrapper {
 	flex: 1;
-	border: 1px solid black;
-	transition: flex 0.4s;
+	transition: flex 0.4s;	
+	border: 1px solid black;	
 	&.active {
 		flex: 9;
 	}
@@ -29,5 +29,8 @@
 	}
 	&.back {
 		z-index: 5;
-	}
+	}	
+}
+.line {
+	flex: 1;
 }

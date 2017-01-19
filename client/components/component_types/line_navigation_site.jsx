@@ -8,7 +8,7 @@ class LineNavigationSiteComponent extends React.Component {
 		const { line_navigation } = component;
 		return line_navigation && line_navigation.map((line, lineIndex)=>{
 			const active = line.slug == componentState ;
-			return <div key={lineIndex}  className={`line ${active ? 'active' : '' }`}>
+			return <div key={lineIndex}  className={`line__wrapper ${active ? 'active' : '' }`}>
 				{ active ? 
 					<Component slug={line.slug}/> :
 					<div onClick={ ()=> setComponentState(line.slug) } > {line.slug} </div>
@@ -26,7 +26,6 @@ class LineNavigationSiteComponent extends React.Component {
 	}
 	render() {
 		const { component, onPrev, onNext, classNames, slug, param } = this.props;
-		if(!component) return <div className="component__loading" />
 		return <div className={`component__container ${classNames}`}>
 			<div className='line__navigation'>
 				<div className='navigation__wrapper'>	

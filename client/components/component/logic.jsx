@@ -44,7 +44,6 @@ class ComponentLogic extends React.Component {
 				//if the current component is registered, switch the registration it
 				register(slug, otherSlug);
 			} else {
-				console.warn('registering', slug)
 				register(slug);
 			}
 		}
@@ -84,6 +83,7 @@ class ComponentLogic extends React.Component {
 			component_type = 'DefaultComponent';
 		}
 		const ComponentOfType = components[component_type];
+		if (!component) return <div className="component__loading" />
 		return <ComponentOfType {...this.props} setComponentState={this.setComponentState} classNames={classNames} componentState={this.getComponentState()}/>
 	}
 }

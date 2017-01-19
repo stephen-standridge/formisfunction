@@ -9,10 +9,8 @@ class OneByNVideoComponent extends React.Component {
 	}
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;
-		if(!component) return <div className="component__loading" />
-		return <div className={`component__container ${ classNames }`}>
-			<div className="component__center" >
-				{component.component_type}
+		return <div className={`one_by_n_video__container ${ classNames }`}>
+			<div className="one_by_n_video__center" >
 				{this.renderMedia()}
 			</div>
     </div>
