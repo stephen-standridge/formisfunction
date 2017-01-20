@@ -1,0 +1,1 @@
+json.extract! link, :href, :anchor
