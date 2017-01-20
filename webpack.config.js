@@ -1,64 +1,9 @@
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var extractCSS = new ExtractTextPlugin("stylesheets/[name]-[contenthash].css");
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-require('dotenv').config();
+var config = require('./webpack/webpack.core.js');
 
-module.exports = {
-  watch: true,
-  entry: './client/app.jsx',
-  module: {
-    loaders: [
-    { test: /\.scss$/, loader: extractCSS.extract(['css','sass']) },
-    { test: /\.css$/, loader: extractCSS.extract(['css']) },
-    {
-      test: /.jsx?$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react']
-      }
-    },
-    {
-      test: /.js?$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015']
-      }
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.scss']
-  },
-  plugins: [ 
-    new CleanWebpackPlugin(['public/build', 'public/stylesheets', 'public/index.html']),  
-    extractCSS, new HtmlWebpackPlugin({
-      title: 'My App',
-      filename: 'index.html'
-    }), 
-    new webpack.ProvidePlugin({
-      'React':      'react',
-      '_':          'lodash',
-      'ReactDOM':   'react-dom'
-    }),
-    new webpack.DefinePlugin({
-      'process.env.API_HOST': JSON.stringify(process.env.API_HOST || 'http://localhost:3000/api/v1')
-    })    
-  ],
-  output: {
-    path: __dirname + '/public',
-    publicPath: '/',
-    filename: 'build/[name]-[hash].js'
-  },
-  devServer: {
-    port: 8888,
-    colors: true,
-    historyApiFallback: {
-      index: '/index.html'
-    },
-    inline: true
-  },
+var apiHostPlugin = new webpack.DefinePlugin({
+  'process.env.API_HOST': JSON.stringify('http://localhost:3000/api/v1')
+});
 
-};
+config.plugins.push(apiHostPlugin);
+module.exports = config;
