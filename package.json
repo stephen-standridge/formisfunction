@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.dev-server.config.js",
-    "prod": "webpack --config ./webpack/webpack.s3.config.js",
+    "prod": "webpack --config ./webpack/webpack.prod.config.js",
     "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",
