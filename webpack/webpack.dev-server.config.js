@@ -1,5 +1,6 @@
 var webpack = require('webpack')
 var config = require('./webpack.core.js');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 config.devServer = {
   contentBase: process.env.PWD + '/public/',
@@ -8,10 +9,15 @@ config.devServer = {
   port: 8888,
   colors: true,
   historyApiFallback: {
-    index: process.env.PWD + '/index.html'
+    index: process.env.PWD + '/public/index.html'
   },
   inline: true
 }
+var cleanWebpackPlugin = new CleanWebpackPlugin([
+  '/public/build', 
+  '/public/stylesheets', 
+  '/public/index.html'
+], { root: process.env.PWD })
 
 var apiHostPlugin = new webpack.DefinePlugin({
   'process.env.API_HOST': JSON.stringify('http://localhost:3000/api/v1')

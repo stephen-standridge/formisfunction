@@ -2,11 +2,10 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var extractCSS = new ExtractTextPlugin("stylesheets/[name]-[contenthash].css");
-var CleanWebpackPlugin = require('clean-webpack-plugin');
 require('dotenv').config();
 
 module.exports = {
-  entry: process.env.PWD + '/client/app.jsx',
+  entry: './client/app.jsx',
   module: {
     loaders: [
     { test: /\.scss$/, loader: extractCSS.extract(['css','sass']) },
@@ -32,11 +31,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
   plugins: [ 
-    new CleanWebpackPlugin([
-      process.env.PWD + '/public/build', 
-      process.env.PWD + '/public/stylesheets', 
-      process.env.PWD + '/public/index.html'
-    ], { root: process.env.PWD }),  
     extractCSS, new HtmlWebpackPlugin({
       title: 'My App',
       filename: 'index.html'
@@ -48,8 +42,7 @@ module.exports = {
     })  
   ],
   output: {
-    path: process.env.PWD + '/public',
-    publicPath: process.env.PWD,
+    path: './public',
     filename: 'build/[name]-[hash].js'
   },
 };
