@@ -2,10 +2,15 @@ var webpack = require('webpack')
 var config = require('./webpack/webpack.core.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
+
+var fileName = 'build/[name].js';
+var apiHost = 'http://localhost:3000/api/v1';
+var nodeEnv = 'development';
+
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
-    API_HOST: JSON.stringify('http://localhost:3000/api/v1'),
-    NODE_ENV: JSON.stringify('development')
+    API_HOST: JSON.stringify(apiHost),
+    NODE_ENV: JSON.stringify()
   }  
 });
 
@@ -15,8 +20,9 @@ var cleanWebpackPlugin = new CleanWebpackPlugin([
   './public/index.html'
 ])
 
-var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', 'build/[name].js')  
+var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', fileName)  
 
 config.plugins.push(nodeEnvPlugin, cleanWebpackPlugin, chunkWebpackPlugin);
+config.output.filename = fileName;
 
 module.exports = config;

@@ -2,6 +2,9 @@ var webpack = require('webpack')
 var config = require('./webpack.core.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
+var nodeEnv = 'development';
+var apiHost = 'http://localhost:3000/api/v1';
+
 config.devServer = {
   contentBase: process.env.PWD + '/public/',
   noInfo: true,
@@ -14,15 +17,15 @@ config.devServer = {
   inline: true
 }
 var cleanWebpackPlugin = new CleanWebpackPlugin([
-  '/public/build', 
-  '/public/stylesheets', 
-  '/public/index.html'
+  './public/build', 
+  './public/stylesheets', 
+  './public/index.html'
 ], { root: process.env.PWD })
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
-    API_HOST: JSON.stringify('http://localhost:3000/api/v1'),
-    NODE_ENV: JSON.stringify('development')
+    API_HOST: JSON.stringify(apiHost),
+    NODE_ENV: JSON.stringify(nodeEnv)
   } 
 });
 
