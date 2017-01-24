@@ -18,13 +18,30 @@ var s3Plugin = new S3Plugin({
   }
 });
 
-var apiHostPlugin = new webpack.DefinePlugin({
-  'process.env.API_HOST': JSON.stringify(apiHost)
-})    
+var nodeEnvPlugin = new webpack.DefinePlugin({
+  'process.env': {
+      API_HOST: JSON.stringify(apiHost),
+      NODE_ENV: JSON.stringify('production')
+    }  
+}) 
+
+var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', 'build/[name]-[chunkhash].js')  
+var chunkMetaPlugin = new webpack.optimize.CommonsChunkPlugin({name: 'meta', chunks: ['vendor']})
+
+var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+})
+var sourceMapPlugin = new webpack.SourceMapDevToolPlugin({
+  test: ['.js', '.jsx'],
+})
 
 //turn of watching for a one-time build
 config.watch = false;
 
-config.plugins.push(s3Plugin);
-config.plugins.push(apiHostPlugin);
+//hash the production build
+config.output.filename = 'build/[name]-[chunkhash].js'
+
+config.plugins.push(s3Plugin, nodeEnvPlugin, chunkWebpackPlugin, chunkMetaPlugin, uglifyPlugin, sourceMapPlugin);
 module.exports = config;

@@ -19,11 +19,14 @@ var cleanWebpackPlugin = new CleanWebpackPlugin([
   '/public/index.html'
 ], { root: process.env.PWD })
 
-var apiHostPlugin = new webpack.DefinePlugin({
-  'process.env.API_HOST': JSON.stringify('http://localhost:3000/api/v1')
+var nodeEnvPlugin = new webpack.DefinePlugin({
+  'process.env': {
+    API_HOST: JSON.stringify('http://localhost:3000/api/v1'),
+    NODE_ENV: JSON.stringify('development')
+  } 
 });
 
 config.watch = true;
-config.plugins.push(apiHostPlugin)
+config.plugins.push(nodeEnvPlugin, cleanWebpackPlugin)
 
 module.exports = config;

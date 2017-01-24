@@ -3,7 +3,6 @@ export const DECREASE = 'DECREASE'
 export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS'
 export const HIDE_POST = 'HIDE_POST'
 
-
 export const VIEW_ACTIONS = {
 	REQUEST: 'VIEW_REQUEST',
 	SUCCESS: 'VIEW_SUCCESS',

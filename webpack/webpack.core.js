@@ -5,7 +5,10 @@ var extractCSS = new ExtractTextPlugin("stylesheets/[name]-[contenthash].css");
 require('dotenv').config();
 
 module.exports = {
-  entry: './client/app.jsx',
+  entry: {
+    app: './client/app.jsx',
+    vendor: ['react', 'react-dom', 'lodash', 'moment'],
+  },
   module: {
     loaders: [
     { test: /\.scss$/, loader: extractCSS.extract(['css','sass']) },
@@ -37,12 +40,12 @@ module.exports = {
     }), 
     new webpack.ProvidePlugin({
       'React':      'react',
-      '_':          'lodash',
-      'ReactDOM':   'react-dom'
-    })  
+      'ReactDOM':   'react-dom',
+      'moment':     'moment'
+    })
   ],
   output: {
     path: './public',
-    filename: 'build/[name]-[hash].js'
+    filename: 'build/[name].js'
   },
 };
