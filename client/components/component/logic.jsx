@@ -73,13 +73,12 @@ class ComponentLogic extends React.Component {
 
 	render(){
 		const { component, children } = this.props;		
-		return <div className={`component__loading`}>{ children }</div>
 		if (!component) {
-			return <div className={`component__loading`}>{ children }</div>
+			return <div className={`component__container component__loading`}>{ children }</div>
 		}
 
 		let component_type = component ? component.component_type + '_component' : undefined;
-		const classNames = makeClassNames(component_type || 'default_component')		
+		const classNames = makeClassNames(component_type || 'default_component', 'component__wrapper')		
 		component_type = upperFirst(camelcase(component_type));
 
 		if (!components[component_type]) {
