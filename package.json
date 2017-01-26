@@ -55,6 +55,8 @@
   "homepage": "https://github.com/stephen-standridge/the-circle-interactive#readme",
   "description": "",
   "devDependencies": {
+    "file-loader": "^0.9.0",
+    "url-loader": "^0.5.7",
     "webpack-s3-plugin": "^0.9.2"
   }
 }
