@@ -6,7 +6,7 @@ var nodeEnv = 'development';
 var apiHost = 'http://localhost:3000/api/v1';
 
 config.devServer = {
-  contentBase: process.env.PWD + '/public/',
+  contentBase: process.env.PWD + '/public',
   noInfo: true,
   open: true,
   port: 8888,
@@ -17,9 +17,9 @@ config.devServer = {
   inline: true
 }
 var cleanWebpackPlugin = new CleanWebpackPlugin([
-  './public/build', 
-  './public/stylesheets', 
-  './public/index.html'
+  'public/build', 
+  'public/stylesheets', 
+  'public/index.html'
 ], { root: process.env.PWD })
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
@@ -30,6 +30,11 @@ var nodeEnvPlugin = new webpack.DefinePlugin({
 });
 
 config.watch = true;
+config.output = {
+  path: process.env.PWD + '/public',     
+  publicPath: process.env.PWD + '/public',
+  filename: 'build/[name].js'
+}
 config.plugins.push(nodeEnvPlugin, cleanWebpackPlugin)
 
 module.exports = config;
