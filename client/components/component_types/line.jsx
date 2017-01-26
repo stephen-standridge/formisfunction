@@ -1,4 +1,4 @@
-import { Component } from '../component';
+import { ComponentCreator } from '../component';
 
 class LineComponent extends React.Component {
 	render(){
@@ -6,7 +6,7 @@ class LineComponent extends React.Component {
 		return <div className={`line__container ${classNames}`}>
 			{ component && component.views.map((c, index) => {
 				const active = c.slug == componentState;
-				return active ? <Component key={index} slug={c.slug} /> : <div key={index} className="view__wrapper" />
+				return active ? <ComponentCreator key={index} slug={c.slug} /> : <div key={index} className="view__wrapper" />
 			}) }
 		</div>
 	}	

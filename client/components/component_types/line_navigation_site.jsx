@@ -1,4 +1,4 @@
-import { Component } from '../component';
+import { ComponentCreator } from '../component';
 import { Link } from '../media';
 import '../../styles/line_navigation';
 
@@ -10,7 +10,7 @@ class LineNavigationSiteComponent extends React.Component {
 			const active = line.slug == componentState ;
 			return <div key={lineIndex}  className={`line__wrapper ${active ? 'active' : '' }`}>
 				{ active ? 
-					<Component slug={line.slug}/> :
+					<ComponentCreator slug={line.slug}/> :
 					<div onClick={ ()=> setComponentState(line.slug) } > {line.slug} </div>
 				}
 				</div>

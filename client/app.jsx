@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { DevTools } from './stores/dev_tools'
 import configureStore from './stores/configure_store'
-import { Component } from './components'
+import { ComponentCreator, ParamProvider, SiteLoading } from './components'
 import CSS from './styles/app.scss'
 
 
@@ -18,7 +18,9 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/*" component={(props,state) => {
           return <ParamProvider params={props.params}>
-            <Component slug={'site'} />
+            <ComponentCreator slug={'site'}>
+              <SiteLoading />
+            </ComponentCreator>
           </ParamProvider>
         } } />
       </Router>
