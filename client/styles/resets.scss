@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    line-height: 1.5;
+		background: #EEEEEE;
+}
+
+html {
+  font-size: 15px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.p {
+  display: inline-block;
+  box-decoration-break: clone;
+  -o-box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+a[href^="http"]:empty::before {
+    content: attr(href);
+}
+
+a[href]:not([class]) {
+    color: #999;
+    text-decoration: none;
+    transition: all ease-in-out .3s;
+}
+
+img {
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    height: auto;
+    line-height: 2;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+img:before {
+    content: "We're sorry, the image below is missing :(";
+    display: block;
+    margin-bottom: 10px;
+}
+img:after {
+    content: "(url: " attr(src) ")";
+    display: block;
+    font-size: 12px;
+}
+
+body {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+}
