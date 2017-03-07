@@ -9,11 +9,12 @@ var apiHost = 'localhost:3000/api/v1'
 var fileName = 'build/[name]-[chunkhash].js';
 var nodeEnv = 'production';
 var s3CacheString ='max-age=2592000';
+var emscriptenHost = 'http://localhost:8888/'
 
 var s3Plugin = new S3Plugin({
-  // Only upload css and js 
+  // Only upload css and js
   include: /.*\.(css|js|html)/,
-  // s3Options are required 
+  // s3Options are required
   s3Options: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -27,17 +28,18 @@ var s3Plugin = new S3Plugin({
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
       API_HOST: JSON.stringify(apiHost),
-      NODE_ENV: JSON.stringify(nodeEnv)
-    }  
-}) 
+      NODE_ENV: JSON.stringify(nodeEnv),
+      EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost)
+    }
+})
 
 var cleanWebpackPlugin = new CleanWebpackPlugin([
-  './public/build', 
-  './public/stylesheets', 
+  './public/build',
+  './public/stylesheets',
   './public/index.html'
 ], { root: process.env.PWD })
 
-var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', fileName)  
+var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', fileName)
 var chunkMetaPlugin = new webpack.optimize.CommonsChunkPlugin({name: 'meta', chunks: ['vendor']})
 
 var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({

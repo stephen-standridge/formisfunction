@@ -4,6 +4,7 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var nodeEnv = 'development';
 var apiHost = 'http://localhost:3000/api/v1';
+var emscriptenHost = 'http://localhost:8888/';
 
 config.devServer = {
   contentBase: process.env.PWD + '/public',
@@ -17,21 +18,22 @@ config.devServer = {
   inline: true
 }
 var cleanWebpackPlugin = new CleanWebpackPlugin([
-  'public/build', 
-  'public/stylesheets', 
+  'public/build',
+  'public/stylesheets',
   'public/index.html'
 ], { root: process.env.PWD })
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
     API_HOST: JSON.stringify(apiHost),
-    NODE_ENV: JSON.stringify(nodeEnv)
-  } 
+    NODE_ENV: JSON.stringify(nodeEnv),
+    EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost)
+  }
 });
 
 config.watch = true;
 config.output = {
-  path: process.env.PWD + '/public',     
+  path: process.env.PWD + '/public',
   publicPath: process.env.PWD + '/public',
   filename: 'build/[name].js'
 }
