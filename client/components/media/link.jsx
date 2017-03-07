@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router'
 
-class LinkComponent extends React.Component {
+class LinkMedia extends React.Component {
 	render(){
 		const {link} = this.props;
-		return <RouterLink to={link.url}>{link.anchor}</RouterLink>		
+		return <RouterLink to={link.url}>{link.anchor}</RouterLink>
 	}
 }
 
@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
   return { link: link && link.toJS() }
 }
 
-const Link = connect( 
+const Link = connect(
 	mapStateToProps
-)(LinkComponent)
+)(LinkMedia)
 
 export {Link}

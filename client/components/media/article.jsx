@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Markdown from 'remarkable'
 
-class ArticleComponent extends React.Component {
+class ArticleMedia extends React.Component {
 	render(){
 		const { article } = this.props;
 		return <div>
@@ -17,6 +17,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const Article = connect(
 	mapStateToProps
-)(ArticleComponent)
+)(ArticleMedia)
 
 export {Article}

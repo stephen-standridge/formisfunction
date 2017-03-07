@@ -1,9 +1,20 @@
 import { connect } from 'react-redux'
 
-class Emscripten extends React.Component {
+window.Module = {};
+
+class EmscriptenMedia extends React.Component {
   constructor(props){
     super(props);
-    this.Module = {
+    this.state = {
+      loaded: null,
+      total: null,
+      hideProgress: false,
+      hideSpinner: false,
+      statusText: 'Downloading...'
+    };
+  }
+  componentDidMount(){
+    Module = {
       preRun: [],
       postRun: [],
       locateFile: this.locateFile.bind(this),
@@ -11,43 +22,41 @@ class Emscripten extends React.Component {
       printErr: this.printError.bind(this),
       canvas: this.canvasElement,
       setStatus: this.setStatus.bind(this),
-      monitorRunDependencies: this.monitorRunDependencies.bind(this);
+      monitorRunDependencies: this.monitorRunDependencies.bind(this)
     };
-    window.onerror = function(event) {
+    window.onerror = function(e) {
       // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
-      this.Module.setStatus('Exception thrown, see JavaScript console');
-      this.Module.setStatus = function(text) {
-        if (text) this.Module.printErr('[post-exception status] ' + text);
-      };
-      return {
-        totalDependencies: 0,
-        loaded: null,
-        total: null,
-        hideProgress: false,
-        hideSpinner: false,
-        statusText: 'Downloading...'
-      };
+      // Module.setStatus('Exception thrown, see JavaScript console');
+      // console.warn(e);
     }
+    this.componentDidUpdate({ emscripten: {} })
   }
-  componentWillMount(){
-    this.componentWillReceiveProps(this.props, true)
-  }
-  componentWillReceiveProps(nextProps, load=false) {
-      if((nextProps.memoryInitializer !== this.props.memoryInitializer) || load){
-        let xhr = this.Module['memoryInitializerRequest'] = new XMLHttpRequest();
-        xhr.open('GET', process.env.EMSCRIPTEN_HOST + nextProps.memoryInitializer, true);
+  componentDidUpdate(prevProps, prevState) {
+      if (!this.canvasElement) return;
+      const { emscripten } = this.props;
+      const prevEmscripten = prevProps.emscripten;
+      const { urlPrefix, initializer } = emscripten;
+      const host = `${urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+
+      if(initializer !== prevEmscripten.initializer){
+        this.scriptElement && document.body.removeChild(this.scriptElement);
+
+        let xhr = Module['memoryInitializerRequest'] = new XMLHttpRequest();
+        xhr.open('GET', `${host}${initializer}.html.mem`, true);
         xhr.responseType = 'arraybuffer';
         xhr.send(null);
-      }
-      if((nextProps.initializerScript !== this.props.initializerScript) || load){
-        //remove old element
+
         let script = document.createElement('script');
-        script.src = process.env.EMSCRIPTEN_HOST + nextProps.initializerScript;
+        script.src = `${host}${initializer}.js`;
         document.body.appendChild(script);
+        this.scriptElement = script;
       }
   }
   locateFile(url){
-    return process.env.EMSCRIPTEN_HOST + url
+    const urlPrefix = this.props.emscripten && this.props.emscripten.urlPrefix;
+    const initializer = this.props.emscripten && this.props.emscripten.initializer;
+    const host = `${urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+    return host + url
   }
   print(...args){
     const text = Array.prototype.slice.call(args).join(' ');
@@ -62,10 +71,9 @@ class Emscripten extends React.Component {
     }
   }
   setStatus(text) {
-    if (!this.Module.setStatus.last) this.Module.setStatus.last = { time: Date.now(), text: '' };
-    if (text === this.Module.setStatus.text) return;
+    if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
     let m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
-    if (m) {
+    if (m && m.length) {
       text = m[1];
       this.setState({
         loaded: parseInt(m[2])*100,
@@ -89,35 +97,39 @@ class Emscripten extends React.Component {
     e.preventDefault();
   }
   monitorRunDependencies(left){
-    this.setState((prevState) =>{
-      return Object.assign( prevState, { totalDependencies: Math.max(totalDependencies, left) });
-    }, (newState)=>{
-      this.Module.setStatus(left ?
-        'Preparing... (' + (newState.totalDependencies-left) + '/' + newState.totalDependencies + ')'
-        : 'All downloads complete.');
+    this.setState((prevState) => {
+      let total = Math.max(prevState.total, left);
+      return Object.assign( prevState, { total, loaded: total - left });
+    }, ()=>{
+      const { total } = this.state;
+      Module.setStatus(left ? `Preparing... (${total-left}/${total})` : 'All downloads complete.');
     })
   }
+
+  renderLoadingMaybe(){
+    return this.state.hideProgress ? null
+          : <div className="emscripten_media__component">{`${this.state.loaded}/${this.state.total}`}</div>
+  }
+
   render(){
     const { emscripten } = this.props;
-    return <div>
-      { this.hideProgress ?  null : <div className="emscripten__loading">{this.state.loaded + "/" + this.state.total}</div> }
-      <div className="emscripten__status">{this.state.status}</div>
+    return (<div className="emscripten_media__component">
+      { this.renderLoadingMaybe() }
       <canvas ref={(canv) => {
         this.canvasElement = canv;
-        this.canvasElement.addEventListener("webglcontextlost", this.onContextLoss.bind(this), false);
+        this.canvasElement && this.canvasElement.addEventListener("webglcontextlost", this.onContextLoss.bind(this), false);
       }} />
-    </div>
+      <div className="emscripten_media__status">{ this.state.statusText }</div>
+    </div>);
   }
 }
-
 const mapStateToProps = (state, ownProps) => {
-  const emscripten = state.media.getIn(['emscriptens', ownProps.slug]);
-
+  const emscripten = state.media.getIn(['emscriptens', ownProps.id]);
   return { emscripten: emscripten && emscripten.toJS() }
 }
 
 const Emscripten = connect(
   mapStateToProps
-)(Emscripten)
+)(EmscriptenMedia)
 
 export { Emscripten }
