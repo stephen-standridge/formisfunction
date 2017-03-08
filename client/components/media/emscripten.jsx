@@ -36,8 +36,7 @@ class EmscriptenMedia extends React.Component {
       const { emscripten } = this.props;
       const prevEmscripten = prevProps.emscripten;
       const { urlPrefix, initializer } = emscripten;
-      const host = `${urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
-
+      const host = `${urlPrefix &&  urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
       if(initializer !== prevEmscripten.initializer){
         this.scriptElement && document.body.removeChild(this.scriptElement);
 
@@ -55,7 +54,7 @@ class EmscriptenMedia extends React.Component {
   locateFile(url){
     const urlPrefix = this.props.emscripten && this.props.emscripten.urlPrefix;
     const initializer = this.props.emscripten && this.props.emscripten.initializer;
-    const host = `${urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
     return host + url
   }
   print(...args){
@@ -124,7 +123,7 @@ class EmscriptenMedia extends React.Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  const emscripten = state.media.getIn(['emscriptens', ownProps.id]);
+  const emscripten = state.media.getIn(['programs', ownProps.id]);
   return { emscripten: emscripten && emscripten.toJS() }
 }
 

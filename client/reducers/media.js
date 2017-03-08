@@ -6,7 +6,7 @@ const initialState = fromJS({ video_clips: [], audio_clips: [], articles: [] })
 export default function update(state = initialState, action) {
 	switch(action.type) {
 		case COMPONENT_ACTIONS.SUCCESS:
-			const { audio_clips, video_clips, articles, links, emscriptens } = action.payload;
+			const { audio_clips, video_clips, articles, links, programs } = action.payload;
 			audio_clips && audio_clips.forEach((audio_clip)=>{
 				state = state.setIn(['audio_clips', audio_clip.id], fromJS(audio_clip))
 			})
@@ -19,8 +19,8 @@ export default function update(state = initialState, action) {
 			links && links.forEach((link)=>{
 				state = state.setIn(['links', link.id], fromJS(link))
 			})
-			emscriptens && emscriptens.forEach((emscripten)=>{
-				state = state.setIn(['emscriptens', emscripten.id], fromJS(emscripten))
+			programs && programs.forEach((program)=>{
+				state = state.setIn(['programs', program.id], fromJS(program))
 			})
 		break;
 	}
