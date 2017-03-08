@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-
-window.Module = {};
+window.emscriptenInitializers = window.emscriptenInitializers || [];
+window.Modules = window.Modules || [];
+window.scriptElements = window.ScriptElements || [];
 
 class EmscriptenMedia extends React.Component {
   constructor(props){
@@ -10,20 +11,11 @@ class EmscriptenMedia extends React.Component {
       total: null,
       hideProgress: false,
       hideSpinner: false,
-      statusText: 'Downloading...'
+      statusText: 'Downloading...',
+      moduleIndex: 0
     };
   }
   componentDidMount(){
-    Module = {
-      preRun: [],
-      postRun: [],
-      locateFile: this.locateFile.bind(this),
-      print: this.print.bind(this),
-      printErr: this.printError.bind(this),
-      canvas: this.canvasElement,
-      setStatus: this.setStatus.bind(this),
-      monitorRunDependencies: this.monitorRunDependencies.bind(this)
-    };
     window.onerror = function(e) {
       // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
       // Module.setStatus('Exception thrown, see JavaScript console');
@@ -36,20 +28,39 @@ class EmscriptenMedia extends React.Component {
       const { emscripten } = this.props;
       const prevEmscripten = prevProps.emscripten;
       const { urlPrefix, initializer } = emscripten;
-      const host = `${urlPrefix &&  urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
       if(initializer !== prevEmscripten.initializer){
-        this.scriptElement && document.body.removeChild(this.scriptElement);
+        const host = `${urlPrefix &&  urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+        this.createModule();
+        // this.scriptElement && document.body.removeChild(this.scriptElement);
 
-        let xhr = Module['memoryInitializerRequest'] = new XMLHttpRequest();
+        let xhr = window.Modules[this.state.moduleIndex]['memoryInitializerRequest'] = new XMLHttpRequest();
         xhr.open('GET', `${host}${initializer}.html.mem`, true);
         xhr.responseType = 'arraybuffer';
         xhr.send(null);
 
         let script = document.createElement('script');
+        script.onload = this.initializeModule.bind(this, this.state.moduleIndex)
         script.src = `${host}${initializer}.js`;
         document.body.appendChild(script);
-        this.scriptElement = script;
+        window.scriptElements.push(script);
       }
+  }
+  initializeModule(index){
+    window.emscriptenInitializers[index](window.Modules[index]);
+  }
+  createModule(){
+    window.Modules.push({
+      preRun: [],
+      postRun: [],
+      locateFile: this.locateFile.bind(this),
+      print: this.print.bind(this),
+      printErr: this.printError.bind(this),
+      canvas: this.canvasElement,
+      setStatus: this.setStatus.bind(this),
+      monitorRunDependencies: this.monitorRunDependencies.bind(this)
+    });
+    this.setState({ moduleIndex: window.Modules.length - 1 })
+    window.Module = window.Modules[window.Modules.length - 1];
   }
   locateFile(url){
     const urlPrefix = this.props.emscripten && this.props.emscripten.urlPrefix;
@@ -70,7 +81,10 @@ class EmscriptenMedia extends React.Component {
     }
   }
   setStatus(text) {
-    if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+    const { moduleIndex } = this.state;
+    if (!window.Modules[moduleIndex].setStatus.last) {
+      window.Modules[moduleIndex].setStatus.last = { time: Date.now(), text: '' };
+    }
     let m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
     if (m && m.length) {
       text = m[1];
@@ -100,8 +114,8 @@ class EmscriptenMedia extends React.Component {
       let total = Math.max(prevState.total, left);
       return Object.assign( prevState, { total, loaded: total - left });
     }, ()=>{
-      const { total } = this.state;
-      Module.setStatus(left ? `Preparing... (${total-left}/${total})` : 'All downloads complete.');
+      const { total, moduleIndex } = this.state;
+      window.Modules[moduleIndex].setStatus(left ? `Preparing... (${total-left}/${total})` : 'All downloads complete.');
     })
   }
 
