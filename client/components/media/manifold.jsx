@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-class EmscriptenMedia extends React.Component {
+class ManifoldMedia extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -21,14 +21,14 @@ class EmscriptenMedia extends React.Component {
       // Module.setStatus('Exception thrown, see JavaScript console');
       // console.warn(e);
     }
-    this.componentDidUpdate({ emscripten: {} })
+    this.componentDidUpdate({ manifold: {} })
   }
   componentDidUpdate(prevProps, prevState) {
       if (!this.canvasElement) return;
-      const { emscripten } = this.props;
-      const prevEmscripten = prevProps.emscripten;
-      const { urlPrefix, initializer } = emscripten;
-      if(initializer !== prevEmscripten.initializer){
+      const { manifold } = this.props;
+      const prevManifold = prevProps.manifold;
+      const { urlPrefix, initializer } = manifold;
+      if(initializer !== prevManifold.initializer){
         this.createModule();
 
         let script = document.createElement('script');
@@ -56,9 +56,9 @@ class EmscriptenMedia extends React.Component {
     };
   }
   locateFile(url){
-    const urlPrefix = this.props.emscripten && this.props.emscripten.urlPrefix;
-    const initializer = this.props.emscripten && this.props.emscripten.initializer;
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+    const urlPrefix = this.props.manifold && this.props.manifold.urlPrefix;
+    const initializer = this.props.manifold && this.props.manifold.initializer;
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}manifold/${initializer}/`;
     return host + url
   }
   print(...args){
@@ -112,28 +112,28 @@ class EmscriptenMedia extends React.Component {
 
   renderLoadingMaybe(){
     return this.state.hideProgress ? null
-          : <div className="emscripten_media__component">{`${this.state.loaded}/${this.state.total}`}</div>
+          : <div className="manifold_media__component">{`${this.state.loaded}/${this.state.total}`}</div>
   }
 
   render(){
-    const { emscripten } = this.props;
-    return (<div className="emscripten_media__component">
+    const { manifold } = this.props;
+    return (<div className="manifold_media__component">
       { this.renderLoadingMaybe() }
       <canvas ref={(canv) => {
         this.canvasElement = canv;
         this.canvasElement && this.canvasElement.addEventListener("webglcontextlost", this.onContextLoss.bind(this), false);
       }} />
-      <div className="emscripten_media__status">{ this.state.statusText }</div>
+      <div className="manifold_media__status">{ this.state.statusText }</div>
     </div>);
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  const emscripten = state.media.getIn(['programs', ownProps.id]);
-  return { emscripten: emscripten && emscripten.toJS() }
+  const manifold = state.media.getIn(['programs', ownProps.id]);
+  return { manifold: manifold && manifold.toJS() }
 }
 
-const Emscripten = connect(
+const Manifold = connect(
   mapStateToProps
-)(EmscriptenMedia)
+)(ManifoldMedia)
 
-export { Emscripten }
+export { Manifold }

@@ -3,3 +3,4 @@ export * from './line_navigation_site';
 export * from './default';
 export * from './line';
 export * from './emscripten_wrapper';
+export * from './manifold_wrapper';
