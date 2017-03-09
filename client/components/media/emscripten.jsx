@@ -40,7 +40,8 @@ class EmscriptenMedia extends React.Component {
       }
   }
   initializeModule(){
-    this.Module = window.ouroboros(this.Module);
+    const { emscripten } = this.props;
+    this.Module = window[emscripten.initializer](this.Module);
   }
   createModule(){
     this.Module = {
@@ -112,7 +113,7 @@ class EmscriptenMedia extends React.Component {
 
   renderLoadingMaybe(){
     return this.state.hideProgress ? null
-          : <div className="emscripten_media__component">{`${this.state.loaded}/${this.state.total}`}</div>
+          : <div className="emscripten_media__loading">{`${this.state.loaded}/${this.state.total}`}</div>
   }
 
   render(){
