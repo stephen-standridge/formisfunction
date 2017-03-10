@@ -35,7 +35,9 @@ config.watch = true;
 config.output = {
   path: process.env.PWD + '/public',
   publicPath: process.env.PWD + '/public',
-  filename: 'build/[name].js'
+  filename: 'build/[name].js',
+  library: '[name]',
+  libraryTarget: 'var'
 }
 config.plugins.push(nodeEnvPlugin, cleanWebpackPlugin)
 

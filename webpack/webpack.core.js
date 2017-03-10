@@ -8,6 +8,8 @@ module.exports = {
   entry: {
     app: './client/app.jsx',
     vendor: ['react', 'react-dom', 'lodash', 'moment'],
+    immutable: 'immutable',
+    THREE: 'three',
   },
   module: {
     loaders: [
@@ -46,11 +48,14 @@ module.exports = {
     new webpack.ProvidePlugin({
       'React':      'react',
       'ReactDOM':   'react-dom',
-      'moment':     'moment'
+      'moment':     'moment',
+      'immutable':  'immutable'
     })
   ],
   output: {
     path: './public',
-    filename: 'build/[name].js'
+    filename: 'build/[name].js',
+    library: '[name]',
+    libraryTarget: 'var'
   },
 };
