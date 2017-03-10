@@ -10,6 +10,7 @@ var fileName = 'build/[name]-[chunkhash].js';
 var nodeEnv = 'production';
 var s3CacheString ='max-age=2592000';
 var emscriptenHost = 'http://localhost:8888/'
+var manifoldHost = 'http://localhost:8888/'
 
 var s3Plugin = new S3Plugin({
   // Only upload css and js
@@ -29,7 +30,8 @@ var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
       API_HOST: JSON.stringify(apiHost),
       NODE_ENV: JSON.stringify(nodeEnv),
-      EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost)
+      EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost),
+      MANIFOLD_HOST: JSON.stringify(manifoldHost)
     }
 })
 

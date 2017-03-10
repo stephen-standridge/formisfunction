@@ -9,7 +9,7 @@ module.exports = {
     app: './client/app.jsx',
     vendor: ['react', 'react-dom', 'lodash', 'moment'],
     immutable: 'immutable',
-    THREE: 'three',
+    three: 'three',
   },
   module: {
     loaders: [

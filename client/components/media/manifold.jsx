@@ -22,7 +22,7 @@ class ManifoldMedia extends React.Component {
       if(initializer !== prevManifold.initializer){
         let script = document.createElement('script');
         script.onload = this.initializeManifold.bind(this)
-        script.src = this.locateFile(`configuration.js`);
+        script.src = this.configurationFile(`configuration.js`);
         document.body.appendChild(script);
         this.scriptElement = script;
       }
@@ -31,12 +31,20 @@ class ManifoldMedia extends React.Component {
     const { manifold } = this.props;
     const { initializer, options, slug } = manifold;
     let configuration = window[`${slug}_${initializer}`];
-    this.Manifold.load(`${slug}_${initializer}`, configuration, { locateFile: this.locateFile.bind(this) });
+    this.Manifold.load(`${slug}_${initializer}`, configuration, { locateFile: this.locateFile.bind(this), locateSource: this.locateFile.bind(this) });
+  }
+  configurationFile(url){
+    const { manifold } = this.props;
+    const { urlPrefix, initializer, slug } = manifold;
+
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${initializer}/`;
+    return host + url
   }
   locateFile(url){
     const { manifold } = this.props;
     const { urlPrefix, initializer, slug } = manifold;
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}manifold/${slug}/${initializer}/`;
+
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${initializer}/assets/`;
     return host + url
   }
   print(...args){
