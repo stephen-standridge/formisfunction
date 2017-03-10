@@ -7,31 +7,60 @@ class ManifoldMedia extends React.Component {
     this.Manifold = createManifold();
     this.configuration;
     this.scriptElement;
+    this.startManifold = this._startManifold.bind(this);
+    this.stopManifold = this._stopManifold.bind(this);
     this.state = {
       hideProgress: false
     }
   }
-
   componentDidMount(){
     this.componentDidUpdate({ manifold: {} })
+  }
+  componentWillUnmount(){
+    const { manifold } = this.props;
+    this.clearManifold(manifold);
   }
   componentDidUpdate(prevProps, prevState) {
       const { manifold } = this.props;
       const prevManifold = prevProps.manifold;
-      const { urlPrefix, initializer } = manifold;
+      const { urlPrefix, initializer, slug } = manifold;
       if(initializer !== prevManifold.initializer){
-        let script = document.createElement('script');
-        script.onload = this.initializeManifold.bind(this)
-        script.src = this.configurationFile(`configuration.js`);
-        document.body.appendChild(script);
-        this.scriptElement = script;
+        if(window[`${slug}_${initializer}`]){
+          this.initializeManifold(prevManifold);
+        } else  {
+          let script = document.createElement('script');
+          script.onload = this.initializeManifold.bind(this, prevManifold);
+          script.src = this.configurationFile(`configuration.js`);
+          document.body.appendChild(script);
+          this.scriptElement = script;
+        }
       }
   }
-  initializeManifold(){
+  initializeManifold(prevManifold){
     const { manifold } = this.props;
     const { initializer, options, slug } = manifold;
     let configuration = window[`${slug}_${initializer}`];
-    this.Manifold.load(`${slug}_${initializer}`, configuration, { locateFile: this.locateFile.bind(this), locateSource: this.locateFile.bind(this) });
+    this.Manifold.load(`${slug}_${initializer}`, configuration, {
+      locateFile: this.locateFile.bind(this),
+      locateSource: this.locateFile.bind(this),
+      onInitialize: this.clearManifold.bind(this, prevManifold)
+    });
+    document.body.removeChild(this.scriptElement);
+  }
+  _startManifold(){
+    const { manifold } = this.props;
+    const { initializer, slug } = manifold;
+    this.Manifold.start(`${slug}_${initializer}`)
+  }
+  _stopManifold(){
+    const { manifold } = this.props;
+    const { initializer, slug } = manifold;
+    this.Manifold.stop(`${slug}_${initializer}`)
+  }
+  clearManifold(manifold){
+    const { initializer, slug } = manifold;
+    if (!initializer || !slug) return;
+    this.Manifold.unload(`${slug}_${initializer}`);
   }
   configurationFile(url){
     const { manifold } = this.props;
@@ -78,6 +107,10 @@ class ManifoldMedia extends React.Component {
     return (<div className="manifold_media__component">
       { this.renderLoadingMaybe() }
       { this.renderCanvases() }
+      <div className="manifold_media__controls">
+        <div className="manifold_media__stop" onClick={this.stopManifold}>stop</div>
+        <div className="manifold_media__start" onClick={this.startManifold}>start</div>
+      </div>
       <div className="manifold_media__status">{  }</div>
     </div>);
   }
