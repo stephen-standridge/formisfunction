@@ -27,21 +27,20 @@ class EmscriptenMedia extends React.Component {
       if (!this.canvasElement) return;
       const { emscripten } = this.props;
       const prevEmscripten = prevProps.emscripten;
-      const { urlPrefix, initializer } = emscripten;
-      if(initializer !== prevEmscripten.initializer){
+      const { urlPrefix, slug } = emscripten;
+      if(slug !== prevEmscripten.slug){
         this.createModule();
 
         let script = document.createElement('script');
         script.onload = this.initializeModule.bind(this)
-        script.src = this.locateFile(`${initializer}.js`);
+        script.src = this.locateFile(`${slug}.js`);
         document.body.appendChild(script);
         this.scriptElement = script;
-
       }
   }
   initializeModule(){
     const { emscripten } = this.props;
-    this.Module = window[emscripten.initializer](this.Module);
+    this.Module = window[emscripten.slug](this.Module);
   }
   createModule(){
     this.Module = {
@@ -57,9 +56,9 @@ class EmscriptenMedia extends React.Component {
     };
   }
   locateFile(url){
-    const urlPrefix = this.props.emscripten && this.props.emscripten.urlPrefix;
-    const initializer = this.props.emscripten && this.props.emscripten.initializer;
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${initializer}/`;
+    const { emscripten } = this.props;
+    const { urlPrefix, slug, version_id } = emscripten;
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.EMSCRIPTEN_HOST}emscripten/${slug}/${version_id}/`;
     return host + url
   }
   print(...args){

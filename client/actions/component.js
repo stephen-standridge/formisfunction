@@ -6,7 +6,7 @@ export function fetch(slug='site'){
 	  [CALL_API]: {
 	    endpoint: function(state){
 	    	if(state.navigation) [CALL_API].bailout
-	    	return `${process.env.API_HOST}/components/${slug}`
+	    	return `${process.env.API_HOST}/component?slug=${slug}`
 	    },
 			headers: { 'Content-Type': 'application/json' },
 	    method: 'GET',

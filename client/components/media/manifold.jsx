@@ -23,9 +23,9 @@ class ManifoldMedia extends React.Component {
   componentDidUpdate(prevProps, prevState) {
       const { manifold } = this.props;
       const prevManifold = prevProps.manifold;
-      const { urlPrefix, initializer, slug } = manifold;
-      if(initializer !== prevManifold.initializer){
-        if(window[`${slug}_${initializer}`]){
+      const { urlPrefix, version_id, slug } = manifold;
+      if(version_id !== prevManifold.version_id){
+        if(window[`${slug}_${version_id}`]){
           this.initializeManifold(prevManifold);
         } else  {
           let script = document.createElement('script');
@@ -38,9 +38,9 @@ class ManifoldMedia extends React.Component {
   }
   initializeManifold(prevManifold){
     const { manifold } = this.props;
-    const { initializer, options, slug } = manifold;
-    let configuration = window[`${slug}_${initializer}`];
-    this.Manifold.load(`${slug}_${initializer}`, configuration, {
+    const { version_id, options, slug } = manifold;
+    let configuration = window[`${slug}_${version_id}`];
+    this.Manifold.load(`${slug}_${version_id}`, configuration, {
       locateFile: this.locateFile.bind(this),
       locateSource: this.locateFile.bind(this),
       onInitialize: this.clearManifold.bind(this, prevManifold)
@@ -49,31 +49,31 @@ class ManifoldMedia extends React.Component {
   }
   _startManifold(){
     const { manifold } = this.props;
-    const { initializer, slug } = manifold;
-    this.Manifold.start(`${slug}_${initializer}`)
+    const { version_id, slug } = manifold;
+    this.Manifold.start(`${slug}_${version_id}`)
   }
   _stopManifold(){
     const { manifold } = this.props;
-    const { initializer, slug } = manifold;
-    this.Manifold.stop(`${slug}_${initializer}`)
+    const { version_id, slug } = manifold;
+    this.Manifold.stop(`${slug}_${version_id}`)
   }
   clearManifold(manifold){
-    const { initializer, slug } = manifold;
-    if (!initializer || !slug) return;
-    this.Manifold.unload(`${slug}_${initializer}`);
+    const { version_id, slug } = manifold;
+    if (!version_id || !slug) return;
+    this.Manifold.unload(`${slug}_${version_id}`);
   }
   configurationFile(url){
     const { manifold } = this.props;
-    const { urlPrefix, initializer, slug } = manifold;
+    const { urlPrefix, version_id, slug } = manifold;
 
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${initializer}/`;
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${version_id}/`;
     return host + url
   }
   locateFile(url){
     const { manifold } = this.props;
-    const { urlPrefix, initializer, slug } = manifold;
+    const { urlPrefix, version_id, slug } = manifold;
 
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${initializer}/assets/`;
+    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${version_id}/assets/`;
     return host + url
   }
   print(...args){
