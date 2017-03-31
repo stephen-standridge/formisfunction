@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   return { component: component && component.toJS() }
 }
 
-const ComponentCreator = connect( 
+const ComponentCreator = connect(
 	mapStateToProps,
   actions
 )(ComponentLogic)

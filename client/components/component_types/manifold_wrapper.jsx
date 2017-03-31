@@ -9,8 +9,9 @@ class ManifoldWrapperComponent extends React.Component {
 	}
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;
-		return <div className={`manifold_wrapper__container ${ classNames }`}>
-			<div className="manifold_wrapper__center" >
+		const { slug } = component;
+		return <div className={`piece__container piece__container--${slug} ${ classNames }`}>
+			<div className="piece__wrapper piece__wrapper--${slug}" >
 				{this.renderMedia()}
 			</div>
     </div>

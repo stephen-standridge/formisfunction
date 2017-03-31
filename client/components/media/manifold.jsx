@@ -45,7 +45,6 @@ class ManifoldMedia extends React.Component {
       locateSource: this.locateFile.bind(this),
       onInitialize: this.clearManifold.bind(this, prevManifold)
     });
-    document.body.removeChild(this.scriptElement);
   }
   _startManifold(){
     const { manifold } = this.props;
@@ -61,6 +60,10 @@ class ManifoldMedia extends React.Component {
     const { version_id, slug } = manifold;
     if (!version_id || !slug) return;
     this.Manifold.unload(`${slug}_${version_id}`);
+    if (this.sciptElement) {
+      document.body.removeChild(this.scriptElement);
+      this.scriptElement = null;
+    }
   }
   configurationFile(url){
     const { manifold } = this.props;
@@ -98,8 +101,9 @@ class ManifoldMedia extends React.Component {
           : <div className="manifold_media__loading"></div>
   }
   renderCanvases(){
-    console.warn(this.Manifold);
-    return;
+    const { manifold } = this.props;
+    const { slug } = manifold;
+    return <div className={`${slug}_piece`} />
   }
 
   render(){
