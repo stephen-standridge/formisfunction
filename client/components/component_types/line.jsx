@@ -9,6 +9,6 @@ class LineComponent extends React.Component {
 				return active ? <ComponentCreator key={index} slug={c.slug} /> : <div key={index} className="view__wrapper" />
 			}) }
 		</div>
-	}	
+	}
 }
 export { LineComponent }

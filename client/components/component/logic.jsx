@@ -29,7 +29,7 @@ class ComponentLogic extends React.Component {
 	}
 
 	handleProps({ component, slug, fetch }= this.props) {
-		const { register, setParam, getParam, isRegistered, unregister } = this.context;		
+		const { register, setParam, getParam, isRegistered, unregister } = this.context;
 		if (!component && slug) fetch(slug);
 		const options = component && component.options;
 		const withHistory = options && options.history;
@@ -65,20 +65,20 @@ class ComponentLogic extends React.Component {
 
 	_getComponentState() {
 		const { slug, component } = this.props;
-		const { getParam } = this.context;		
+		const { getParam } = this.context;
 		const { current } = this.state;
-		const withHistory = component && component.options && component.options.history;		
+		const withHistory = component && component.options && component.options.history;
 		return withHistory ? getParam(slug) : current;
 	}
 
 	render(){
-		const { component, children } = this.props;		
+		const { component, children } = this.props;
 		if (!component) {
 			return <div className={`component__container component__loading`}>{ children }</div>
 		}
 
 		let component_type = component ? component.component_type + '_component' : undefined;
-		const classNames = makeClassNames(component_type || 'default_component', 'component__wrapper')		
+		const classNames = makeClassNames(component_type || 'default_component', 'component__wrapper')
 		component_type = upperFirst(camelcase(component_type));
 
 		if (!components[component_type]) {
@@ -87,9 +87,9 @@ class ComponentLogic extends React.Component {
 
 		const ComponentOfType = components[component_type];
 
-		return <ComponentOfType {...this.props} 
-						setComponentState={this.setComponentState} 
-						classNames={classNames} 
+		return <ComponentOfType {...this.props}
+						setComponentState={this.setComponentState}
+						classNames={classNames}
 						componentState={this.getComponentState()}>
 					{ children }
 					</ComponentOfType>
