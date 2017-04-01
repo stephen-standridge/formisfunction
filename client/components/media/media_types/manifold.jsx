@@ -115,7 +115,7 @@ class ManifoldMedia extends React.Component {
   renderCanvases(){
     const { manifold } = this.props;
     const { slug } = manifold;
-    return <div className={`${slug}_piece`} />
+    return <div className={`${slug}_piece manifold`} />
   }
 
   render(){

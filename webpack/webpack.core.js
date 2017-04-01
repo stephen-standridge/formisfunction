@@ -8,8 +8,8 @@ module.exports = {
   entry: {
     app: './client/app.jsx',
     vendor: ['react', 'react-dom', 'lodash', 'moment'],
-    immutable: 'immutable',
-    three: 'three',
+    immutable: ['immutable'],
+    three: ['three'],
   },
   module: {
     loaders: [

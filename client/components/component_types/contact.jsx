@@ -18,7 +18,6 @@ class ContactComponent extends React.Component {
 		const { component, className, isActive } = this.props;
 		const { slug } = component;
 		const { active } = this.state;
-		console.warn(component)
 		return <div className={`contact contact--${slug} ${className}` }>
 				<div className={`contact__information contact__information--${slug}`}>
 					{ component.information && component.information.map((info, i) => <Article slug={info.slug} key={i}/> )}
