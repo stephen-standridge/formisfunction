@@ -11,7 +11,7 @@ class VideoClipMedia extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	let videoClip = state.media.getIn(['video_clips',ownProps.id])
+	let videoClip = state.media.getIn(['video_clips',ownProps.slug])
 	videoClip = videoClip && videoClip.toJS()
   return { videoClip }
 }

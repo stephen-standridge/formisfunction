@@ -1,6 +1,17 @@
+.line_navigation_site_component {
+	justify-content: center;
+	align-items: center;
+}
+
+.line__navigation-contact {
+	width: 650px;
+	flex-basis: 60px;
+	justify-content: center;
+}
 .line__navigation {
-	flex: 1;
-	background: rgba(220,220,220,0.5);
+	width: 100%;
+	flex-basis: 740px;
+	flex-grow: 0;
 	z-index: 1;
 }
 .navigation__wrapper {
@@ -19,13 +30,13 @@
 }
 .line__wrapper {
 	flex: 1;
-	border: 1px solid black;
 }
 
 .line__container {
   max-width: 100%;
 	flex-direction: column;
 	flex: 1;
+	justify-content: center;
 }
 
 
@@ -41,7 +52,8 @@
 
 .line__controls--prev, .line__controls--next {
 		flex-direction: row;
-    min-width: 75px;
+    min-width: 50px;
+    margin-left: 5px;
 		justify-content: center;
 }
 
@@ -58,12 +70,16 @@
 }
 .line__items {
 	display: flex;
-	flex: 1;
+	flex-basis: 670px;
+	flex-shrink: 0;
 	position: relative;
 }
 
+.line__controls {
+	user-select: none;
+}
+
 .line__item {
-	max-width: 500px;
 	position: absolute;
   align-items: center;
   justify-content: center;

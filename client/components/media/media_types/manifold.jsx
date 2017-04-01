@@ -21,8 +21,9 @@ class ManifoldMedia extends React.Component {
     this.clearManifold(manifold);
   }
   componentDidUpdate(prevProps, prevState) {
-      const { manifold } = this.props;
+      const { manifold, isActive } = this.props;
       const prevManifold = prevProps.manifold;
+      const prevActive = prevProps.isActive;
       const { urlPrefix, version_id, slug } = manifold;
       if(version_id !== prevManifold.version_id){
         if(window[`${slug}_${version_id}`]){
@@ -33,6 +34,13 @@ class ManifoldMedia extends React.Component {
           script.src = this.configurationFile(`configuration.js`);
           document.body.appendChild(script);
           this.scriptElement = script;
+        }
+      } else {
+        if(isActive && !prevActive){
+          this._startManifold();
+        }
+        if(!isActive && prevActive){
+          this._stopManifold();
         }
       }
   }
@@ -57,12 +65,16 @@ class ManifoldMedia extends React.Component {
     this.Manifold.stop(`${slug}_${version_id}`)
   }
   clearManifold(manifold){
+    const { isActive } = this.props;
     const { version_id, slug } = manifold;
     if (!version_id || !slug) return;
     this.Manifold.unload(`${slug}_${version_id}`);
     if (this.sciptElement) {
       document.body.removeChild(this.scriptElement);
       this.scriptElement = null;
+    }
+    if(!isActive) {
+      this._stopManifold();
     }
   }
   configurationFile(url){
@@ -111,16 +123,12 @@ class ManifoldMedia extends React.Component {
     return (<div className="manifold_media__component">
       { this.renderLoadingMaybe() }
       { this.renderCanvases() }
-      <div className="manifold_media__controls">
-        <div className="manifold_media__stop" onClick={this.stopManifold}>stop</div>
-        <div className="manifold_media__start" onClick={this.startManifold}>start</div>
-      </div>
       <div className="manifold_media__status">{  }</div>
     </div>);
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  const manifold = state.media.getIn(['programs', ownProps.id]);
+  const manifold = state.media.getIn(['programs', ownProps.slug]);
   return { manifold: manifold && manifold.toJS() }
 }
 

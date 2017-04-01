@@ -128,7 +128,7 @@ class EmscriptenMedia extends React.Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  const emscripten = state.media.getIn(['programs', ownProps.id]);
+  const emscripten = state.media.getIn(['programs', ownProps.slug]);
   return { emscripten: emscripten && emscripten.toJS() }
 }
 

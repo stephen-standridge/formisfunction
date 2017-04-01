@@ -1,4 +1,5 @@
 import { ComponentCreator } from '../component';
+import { ContactComponent } from './contact';
 import { Link } from '../media';
 import '../../styles/line_navigation';
 
@@ -19,22 +20,20 @@ class LineNavigationSiteComponent extends React.Component {
 	shouldComponentUpdate({ componentState }, nextState) {
 		return componentState !== this.props.componentState;
 	}
-	renderNavigation() {
+	renderContact() {
 		const { component } = this.props;
-		const { navigation } = component;
-		return navigation && navigation.map((link, index) => <Link key={index} slug={link.slug} /> )
+		const { contact } = component;
+		return contact && contact.map((c, i)=> <ComponentCreator slug={c.slug} key={i}/>);
 	}
 	render() {
 		const { component, onPrev, onNext, classNames, slug, param } = this.props;
 		return <div className={`component__container ${classNames}`}>
+			<div className="line__navigation-contact">
+					{this.renderContact()}
+			</div>
 			<div className='line__navigation'>
 				<div className='navigation__wrapper'>
 					{this.renderLineNavigation()}
-				</div>
-			</div>
-			<div className="main__navigation">
-				<div className='navigation__links' >
-					{this.renderNavigation()}
 				</div>
 			</div>
     </div>

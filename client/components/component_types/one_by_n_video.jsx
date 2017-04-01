@@ -5,7 +5,7 @@ class OneByNVideoComponent extends React.Component {
 		const { component } = this.props;
 		const { media } = component;
 
-		return media && media.map( (m, i) => <VideoClip key={i} id={m.id}/>)
+		return media && media.map( (m, i) => <VideoClip key={i} slug={m.slug}/>)
 	}
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;

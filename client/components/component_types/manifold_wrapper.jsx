@@ -1,19 +1,23 @@
-import { Manifold } from '../media';
+import * as media_types from '../media';
+import { PieceMetaComponent } from './piece_meta';
+import '../../styles/pieces.scss';
+
+const Manifold = media_types.Manifold;
 
 class ManifoldWrapperComponent extends React.Component {
 	renderMedia(){
-		const { component } = this.props;
+		const { component, isActive } = this.props;
 		const { media } = component;
-
-		return media && media.map( (m, i) => <Manifold key={i} id={m.id}/>)
+		return media && media.map( (m, i) => m.type == "Program" && <Manifold key={i} slug={m.slug} isActive={isActive}/>)
 	}
 	render() {
-		const { component, onPrev, onNext, classNames } = this.props;
+		const { component, onPrev, onNext, classNames, isActive } = this.props;
 		const { slug } = component;
 		return <div className={`piece__container piece__container--${slug} ${ classNames }`}>
-			<div className="piece__wrapper piece__wrapper--${slug}" >
+			<div className={`piece__wrapper piece__wrapper--${slug} clickable`} >
 				{this.renderMedia()}
 			</div>
+			<PieceMetaComponent component={component} />
     </div>
 	}
 }

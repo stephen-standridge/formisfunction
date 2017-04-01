@@ -27,11 +27,10 @@ class LineComponent extends React.Component {
 			</div>
 			<div className="line__controls">
 				{ prevState ?
-					<div className="line__controls--prev" onClick={setComponentState.bind(this, prevState)} >prev</div> :
+					<div className="line__controls--prev clickable" onClick={setComponentState.bind(this, prevState)} >{"<"}</div> :
 					<div className="line__controls--prev"/> }
-				{ <div className="line__controls--current" >{ componentState }</div> }
 				{ nextState ?
-					<div className="line__controls--next" onClick={setComponentState.bind(this, nextState)} >next</div> :
+					<div className="line__controls--next clickable" onClick={setComponentState.bind(this, nextState)} >{">"}</div> :
 					<div className="line__controls--next"/> }
 			</div>
 		</div>

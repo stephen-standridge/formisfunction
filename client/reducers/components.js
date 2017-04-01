@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { COMPONENT_ACTIONS } from '../actions/action_types'
+import { uniq } from 'lodash';
 
 const initialState = fromJS({})
 
@@ -11,14 +12,19 @@ export default function update(state = initialState, action) {
 				const { component, components } = payload;
 				const { slug } = meta;
 				const { media } = component;
-
+				delete component.media;
 				component.media = [];
+				let collections = [];
 				media && media.forEach((m,i)=>{
-					let collection = m.collection || 'media';
-					component[collection] = component[collection] || [];
-					component[collection].push(m);
+					let collection = m.collection;
+					if( collection ){
+						component[collection] = component[collection] || [];
+						component[collection].push(m);
+						collections.push(collection);
+					}
 					component.media.push(m)
 				})
+				component.collections = uniq(collections);
 				components && components.forEach((c) => {
 					state = state.set(c.slug, fromJS(Object.assign(c, { needsLoad: true })))
 				})

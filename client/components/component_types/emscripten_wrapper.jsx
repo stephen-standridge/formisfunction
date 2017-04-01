@@ -1,11 +1,12 @@
 import { Emscripten } from '../media';
+import '../../styles/pieces.scss';
 
 class EmscriptenWrapperComponent extends React.Component {
 	renderMedia(){
 		const { component } = this.props;
 		const { media } = component;
 
-		return media && media.map( (m, i) => <Emscripten key={i} id={m.id}/>)
+		return media && media.map( (m, i) => <Emscripten key={i} slug={m.slug}/>)
 	}
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;
