@@ -15,7 +15,7 @@ class LinkMedia extends React.Component {
 		const copiedClass = copied == false ? 'copied_again' : copied == true ? 'copied' : ''
 		return isEmail ? <CopyToClipboard text={url}
 																			onCopy={() => this.setState({copied: !this.state.copied})}>
-																			<span className={`clickable link__media ${copiedClass}`} >{url}</span>
+																			<span className={`clickable link__media ${copiedClass}`} >{link.anchor}</span>
 											</CopyToClipboard> :
 											<a className="link__media clickable" href={link.url} target="_blank">{link.anchor}</a>
 		// return <RouterLink className="clickable" to={link.url}>{link.anchor}</RouterLink>

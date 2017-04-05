@@ -13,17 +13,38 @@
 	}
 	.clickable {
 		cursor: pointer;
-		box-shadow: 4px 4px 2px rgba(0,0,0,0.2);
+		box-shadow: 4px 4px 2px rgba(100,100,100,0.2);
 		background-color: rgba(255,255,255,0.3);
 		&:hover {
 			background-color: rgba(255,255,255,0.3);
-			box-shadow: 3px 3px 1px rgba(0,0,0,0.3);
+			box-shadow: 3px 3px 1px rgba(100,100,100,0.3);
 		}
 		-webkit-transition: background-color 0.3s; /* Safari */
     transition: background-color 0.3s;
 	}
 	.link__media {
+		position: relative;
+
+		&:after {
+			content: 'copied';
+			position: absolute;
+			right: 0px;
+			left: 0px;
+			margin: auto;
+			top: -20px;
+			opacity: 0;
+			color: rgba(100,100,100,0.5);
+		}
+		&.copied:after {
+			animation: fadeIn 1s;
+		}
+		&.copied_again:after {
+			animation: otherFade 1s;
+		}
 		text-decoration: none;
-		color: black;
+		color: rgba(100,100,100,0.5);
+		&:hover {
+			color: rgba(100,100,100,0.8);
+		}
 	}
 }

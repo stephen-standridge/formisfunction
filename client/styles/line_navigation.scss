@@ -55,6 +55,10 @@
     min-width: 50px;
     margin-left: 5px;
 		justify-content: center;
+		color: rgba(100,100,100,0.5);
+		&:hover {
+			color: rgba(100,100,100,0.8);
+		}
 }
 
 .line__controls--current {
