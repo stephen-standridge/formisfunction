@@ -8,20 +8,26 @@ class PieceMetaComponent extends React.Component {
 		super(props);
 		this.state = { active: {} };
 	}
-	toggleActive(collection){
+	toggleActive(part){
 		this.setState(({ active })=>{
-			return Object.assign({ active }, { active: { [collection]: !active[collection] }})
+			return Object.assign({ active }, { active: { [part]: !active[part] }})
 		})
 	}
-	render() {
-		const { component, className, isActive } = this.props;
-		const { slug } = component;
+	classNamesFor(part){
+		const { classNames } = this.props;
 		const { active } = this.state;
-		return <div className={`piece__meta piece__meta--${slug} ${className}` }>
+
+		return `piece__${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
+	}
+	render() {
+		const { component, isActive } = this.props;
+		const { slug } = component;
+
+		return <div className={`piece__meta--${slug} ${this.classNamesFor('meta')}` }>
 			  { component.collections.map((collection, i)=> {
-			  	let classNames = `piece__collection--wrapper piece__${collection}--wrapper clickable ${active[collection] ? 'active' : ''}`;
+			  	let classNames = `piece__collection--wrapper piece__${collection}--wrapper clickable ${this.classNamesFor(collection)}`;
 			  	return collection && <div className={classNames} key={i} onClick={this.toggleActive.bind(this, collection)}>
-			  		<div className={`piece__${collection} piece__collection`} >
+			  		<div className={`${this.classNamesFor('collection')}`} >
 				  		{ component[collection] && component[collection].map((m, i)=>{
 				  			let MediaOfType = media_types[m.type];
 				  			return <MediaOfType slug={m.slug} key={i} isActive={isActive} />
