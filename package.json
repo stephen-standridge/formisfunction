@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@stephen.standridge/manifold": "^0.2.12",
+    "@stephen.standridge/manifold": "^0.2.13",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.3.13",
@@ -43,7 +43,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack/webpack.dev-server.config.js",
+    "start": "webpack-dev-server --config ./webpack/webpack.dev-server.config.js --compress --open",
     "prod": "webpack --config ./webpack/webpack.prod.config.js",
     "postinstall": "./node_modules/.bin/webpack"
   },
