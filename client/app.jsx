@@ -18,8 +18,8 @@ ReactDOM.render(
     <div className="app">
       <Router history={history}>
         <Route path="/*" component={(props,state) => {
-          return <ParamProvider params={props.params}>
-            <ComponentCreator slug={'site'} />
+          return <ParamProvider {...props}>
+            <ComponentCreator slug={'index'} />
           </ParamProvider>
         } } />
       </Router>

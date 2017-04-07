@@ -1,9 +1,19 @@
 class ParamProvider extends React.Component {
   constructor(props) {
     super(props);
+    const { match, location, slug } = props;
+    const { url } = match;
+    const { hash } = location;
     this.registered = {};
-    this.indices = [];        
-    this.set = props.params && props.params.splat.split('/');    
+    this.indices = [];
+    if (hash){
+      this.set = hash && hash.split('#!/');
+      this.set.shift();
+    } else {
+      this.set = url && url.split('/');
+      this.set.shift();
+    }
+    this.set = this.set || [];
     this.getComponentParam = this._getComponentParam.bind(this);
     this.setComponentParam = this._setComponentParam.bind(this);
     this.registerComponent = this._registerComponent.bind(this);
@@ -11,6 +21,9 @@ class ParamProvider extends React.Component {
     this.isComponentRegistered = this._isComponentRegistered.bind(this);
     this.componentWillReceiveProps = this.parseParams;
     this.parseParams(props);
+  }
+  componentWillMount(){
+    this.context.router.history.push('/' + this.set.join('/'))
   }
 
   _registerComponent(slug, other=false) {
@@ -20,7 +33,7 @@ class ParamProvider extends React.Component {
     }
     if (other === false) {
       const index = this.indices.push(slug);
-      this.registered[slug] = index - 1;   
+      this.registered[slug] = index - 1;
     } else {
       if (!this.registered[other]) console.warn(`attempted to register ${slug} as unregistered ${other}`)
       this.registered[slug] = this.registered[other];
@@ -43,10 +56,20 @@ class ParamProvider extends React.Component {
     this.indices.forEach((s, i)=> this.registered[s] = i);
   }
 
-  parseParams({ params }) {
-    const currentParams = this.props.params;  
-    if (currentParams === params) return;
-    this.set = params && params.splat.split('/');    
+  parseParams({ match, location }) {
+    const { url } = match;
+    const { hash } = location;
+    const oldMatch = this.props.match;
+    const oldUrl = oldMatch && oldMatch.url;
+    if (oldUrl === url || oldUrl === hash) return;
+    if (hash) {
+
+      this.set = url && url.split('#!/')[1].split('/');
+      this.set.shift();
+    } else {
+      this.set = url && url.split('/');
+      this.set.shift();
+    }
   }
 
   _setComponentParam(slug, param) {
@@ -56,26 +79,26 @@ class ParamProvider extends React.Component {
       atIndex = this.registered[slug];
     }
     this.set[atIndex] = param;
-    this.context.router.push('/' + this.set.join('/'))
+    this.context.router.history.push('/' + this.set.join('/'))
   }
 
   _getComponentParam(slug) {
-    const atIndex = this.registered[slug];    
+    const atIndex = this.registered[slug];
     if (isNaN(atIndex)) {
-      return; 
-    }    
+      return;
+    }
     return this.set[atIndex];
   }
 
   getChildContext() {
-    return { 
+    return {
       getParam: this.getComponentParam,
       setParam: this.setComponentParam,
       register: this.registerComponent,
       unregister: this.unregisterComponent,
       isRegistered: this.isComponentRegistered
     };
-  } 
+  }
 
   render(){
     return this.props.children;
