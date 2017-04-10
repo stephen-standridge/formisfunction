@@ -13,6 +13,11 @@ class ManifoldMedia extends React.Component {
       hideProgress: false
     }
   }
+  classNamesFor(part){
+    const { classNames } = this.props;
+
+    return `manifold-media__${part} ${classNames && classNames[part] || ''}`
+  }
   componentDidMount(){
     this.componentDidUpdate({ manifold: {} })
   }
@@ -22,6 +27,7 @@ class ManifoldMedia extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
       const { manifold, isActive } = this.props;
+      if (!manifold) return;
       const prevManifold = prevProps.manifold;
       const prevActive = prevProps.isActive;
       const { urlPrefix, version_id, slug } = manifold;
@@ -114,16 +120,18 @@ class ManifoldMedia extends React.Component {
   }
   renderCanvases(){
     const { manifold } = this.props;
+    if (!manifold) return <div className={this.classNamesFor('not_found')} />
+
     const { slug } = manifold;
     return <div className={`${slug}_piece manifold`} />
   }
 
   render(){
     const { manifold } = this.props;
-    return (<div className="manifold_media__component">
+    return (<div className={this.classNamesFor('component')}>
       { this.renderLoadingMaybe() }
       { this.renderCanvases() }
-      <div className="manifold_media__status">{  }</div>
+      <div className={this.classNamesFor('status')}>{  }</div>
     </div>);
   }
 }

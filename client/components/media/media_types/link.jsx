@@ -7,8 +7,15 @@ class LinkMedia extends React.Component {
 		super(props);
 		this.state={};
 	}
+	classNamesFor(part){
+		const { classNames } = this.props;
+		const { active } = this.state;
+
+		return `link__${part} ${(classNames && classNames[part]) || ''}}`
+	}
 	render(){
 		const { link } = this.props;
+		if (!link) return <div className={this.classNamesFor('not_found')} />
 		const { url, anchor } = link;
 		const { copied } = this.state;
 		const isEmail = url.split("@").length > 1;

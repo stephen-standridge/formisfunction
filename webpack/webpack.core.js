@@ -10,6 +10,7 @@ module.exports = {
     vendor: ['react', 'react-dom', 'lodash', 'moment'],
     immutable: ['immutable'],
     three: ['three'],
+    abstracts: ['abstracts']
   },
   module: {
     loaders: [
@@ -49,7 +50,8 @@ module.exports = {
       'React':      'react',
       'ReactDOM':   'react-dom',
       'moment':     'moment',
-      'immutable':  'immutable'
+      'immutable':  'immutable',
+      'abstracts':  'abstracts'
     })
   ],
   output: {

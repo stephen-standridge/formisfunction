@@ -21,6 +21,7 @@ class ArticleMedia extends React.Component {
 	}
 	render(){
 		const { article, classNames } = this.props;
+		if (!article) return <div className={this.classNamesFor('not_found')} />
 		const { title, body } = article;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
 			{ title && <div className={`${this.classNamesFor('title')}`}
