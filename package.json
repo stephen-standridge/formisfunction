@@ -47,6 +47,7 @@
     "dev": "NODE_ENV=DEVELOPMENT webpack-dev-server --config ./webpack/webpack.dev-server.config.js --compress --open",
     "start": "webpack-dev-server --config ./webpack/webpack.dev-server.config.js --compress --open",
     "prod": "webpack --config ./webpack/webpack.prod.config.js",
+    "staging": "webpack --config ./webpack/webpack.staging.config.js",
     "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",

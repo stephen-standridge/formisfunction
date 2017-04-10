@@ -4,15 +4,14 @@ var config = require('./webpack.core.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
-
-var s3BucketName = 'component_api_client.com'
-var apiHost = 'localhost:3000/api/v1'
+var s3BucketName = 'staging.formisfunction.io'
+var apiHost = 'https://formisfunction-staging.herokuapp.com/api/v1'
 var fileName = 'build/[name]-[chunkhash].js';
 var nodeEnv = 'production';
 var s3CacheString ='max-age=2592000';
-var s3Url = 'http://localhost:8888/';
-var emscriptenHost = s3Url;
-var manifoldHost = s3Url;
+var s3Url = 'http://staging.formisfunction.io.s3-website-us-west-2.amazonaws.com/';
+var emscriptenHost = s3Url
+var manifoldHost = s3Url
 
 var s3Plugin = new S3Plugin({
   // Only upload css and js
@@ -54,7 +53,6 @@ var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 var sourceMapPlugin = new webpack.SourceMapDevToolPlugin({
   test: ['.js', '.jsx'],
 })
-
 
 var onBuildPlugin = new WebpackOnBuildPlugin(function(){
   var spawn = require('child_process').spawn
