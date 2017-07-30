@@ -38,7 +38,10 @@ class ArticleMedia extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const article = state.media.getIn(['articles', ownProps.slug]);
-  return { article: article && article.toJS() }
+	const [...version_ids] = article && article.get('article_versions').keys();
+	const version = article && state.versions.getIn(['article_versions', version_ids[0]]);
+	const toDisplay = article && version ? article.merge(version).toJS() : article.toJS();
+  return { article: toDisplay };
 }
 
 const Article = connect(

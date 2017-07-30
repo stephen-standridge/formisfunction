@@ -4,7 +4,6 @@ var config = require('./webpack.core.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
-
 var s3BucketName = 'component_api_client.com'
 var apiHost = 'localhost:3000/api/v1'
 var fileName = 'build/[name]-[chunkhash].js';
@@ -30,6 +29,9 @@ var s3Plugin = new S3Plugin({
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
+      FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+      FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+      FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
       API_HOST: JSON.stringify(apiHost),
       NODE_ENV: JSON.stringify(nodeEnv),
       EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost),
@@ -43,7 +45,7 @@ var cleanWebpackPlugin = new CleanWebpackPlugin([
   './public/index.html'
 ], { root: process.env.PWD })
 
-var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin('vendor', fileName)
+var chunkWebpackPlugin = new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename })
 var chunkMetaPlugin = new webpack.optimize.CommonsChunkPlugin({name: 'meta', chunks: ['vendor']})
 
 var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({

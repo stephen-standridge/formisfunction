@@ -129,7 +129,10 @@ class EmscriptenMedia extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
   const emscripten = state.media.getIn(['programs', ownProps.slug]);
-  return { emscripten: emscripten && emscripten.toJS() }
+  const [...version_ids] = emscripten && emscripten.get('program_versions').keys();
+  const version = emscripten && state.versions.getIn(['program_versions', version_ids[0]]);
+  const toDisplay = emscripten && version ? emscripten.merge(version).toJS() : emscripten.toJS();
+  return { emscripten: toDisplay };
 }
 
 const Emscripten = connect(

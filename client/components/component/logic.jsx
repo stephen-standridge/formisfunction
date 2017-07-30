@@ -28,7 +28,7 @@ class ComponentLogic extends React.Component {
 		}
 	}
 
-	handleProps({ component, slug, fetch, requested }= this.props) {
+	handleProps({ component, slug, fetch, requested } = this.props) {
 		const { register, setParam, getParam, isRegistered, unregister } = this.context;
 		if (!component || component.needsLoad) {
 			requested(slug);
@@ -86,10 +86,11 @@ class ComponentLogic extends React.Component {
 		if (!components[component_type]) {
 			component_type = 'DefaultComponent';
 		}
-
 		const ComponentOfType = components[component_type];
 
-		return <ComponentOfType {...this.props}
+		return component.needsLoad ? <div className="component__loading"></div> :
+					 component.loading ? <div className="component__loading"></div> :
+					 <ComponentOfType {...this.props}
 						setComponentState={this.setComponentState}
 						classNames={classNames}
 						componentState={this.getComponentState()}>

@@ -2,9 +2,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk';
-import { apiMiddleware } from 'redux-api-middleware';
+import { firMiddleware } from 'redux-firebase-middleware';
 import { connectDevTool } from './dev_tools'
 import * as reducers from '../reducers'
+import { createLogger } from 'redux-logger';
+import { database } from './firebase';
+
+const logger = createLogger();
 
 const browserHistory = createHistory({
   basename: '',             // The base URL of the app (see below)
@@ -16,7 +20,7 @@ const browserHistory = createHistory({
 browserHistory.listen((location, action) => {})
 
 const reducer = combineReducers({ ...reducers, routing: routerReducer })
-const stores = connectDevTool([ reducer, applyMiddleware( routerMiddleware(browserHistory), apiMiddleware, thunk ) ])
+const stores = connectDevTool([ reducer, applyMiddleware( routerMiddleware(browserHistory), firMiddleware, thunk, logger ) ])
 
 
 export default function configureStore(initialState={}) {

@@ -137,7 +137,10 @@ class ManifoldMedia extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
   const manifold = state.media.getIn(['programs', ownProps.slug]);
-  return { manifold: manifold && manifold.toJS() }
+  const [...version_ids] = manifold && manifold.get('program_versions').keys();
+  const version = manifold && state.versions.getIn(['program_versions', version_ids[0]]);
+  const toDisplay = manifold && version ? manifold.merge(version).toJS() : manifold.toJS();
+  return { manifold: toDisplay };
 }
 
 const Manifold = connect(

@@ -29,6 +29,9 @@ var s3Plugin = new S3Plugin({
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
   'process.env': {
+      FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+      FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+      FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
       API_HOST: JSON.stringify(apiHost),
       NODE_ENV: JSON.stringify(nodeEnv),
       EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost),
@@ -63,7 +66,7 @@ var onBuildPlugin = new WebpackOnBuildPlugin(function(){
 config.watch = false;
 
 //hash the production build
-config.output.filename = fileName
+config.output.filename = filename
 
 config.plugins.push(cleanWebpackPlugin, s3Plugin, nodeEnvPlugin, chunkWebpackPlugin, chunkMetaPlugin, uglifyPlugin, sourceMapPlugin, onBuildPlugin);
 module.exports = config;

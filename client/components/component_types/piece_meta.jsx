@@ -1,7 +1,6 @@
-import * as media_types from '../media';
+import * as media_component_types from '../media';
 import '../../styles/pieces.scss';
-
-const Manifold = media_types.Manifold;
+import { capitalize } from 'lodash';
 
 class PieceMetaComponent extends React.Component {
 	constructor(props){
@@ -29,7 +28,7 @@ class PieceMetaComponent extends React.Component {
 			  	return collection && <div className={classNames} key={i} onClick={this.toggleActive.bind(this, collection)}>
 			  		<div className={`${this.classNamesFor('collection')}`} >
 				  		{ component[collection] && component[collection].map((m, i)=>{
-				  			let MediaOfType = media_types[m.type];
+				  			let MediaOfType = media_component_types[capitalize(m.type)];
 				  			return <MediaOfType slug={m.slug} key={i} isActive={isActive} />
 				  		})}
 			  		</div>

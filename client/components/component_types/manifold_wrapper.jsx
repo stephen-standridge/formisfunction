@@ -8,7 +8,7 @@ class ManifoldWrapperComponent extends React.Component {
 	renderMedia(){
 		const { component, isActive } = this.props;
 		const { media } = component;
-		return media && media.map( (m, i) => m.type == "Program" && <Manifold key={i} slug={m.slug} isActive={isActive}/>)
+		return media && media.map( (m, i) => m.type == "program" && <Manifold key={i} slug={m.slug} isActive={isActive}/>)
 	}
 	render() {
 		const { component, onPrev, onNext, classNames, isActive } = this.props;
