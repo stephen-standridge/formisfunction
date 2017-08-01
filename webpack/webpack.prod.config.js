@@ -4,14 +4,9 @@ var config = require('./webpack.core.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
-var s3BucketName = 'component_api_client.com'
-var apiHost = 'localhost:3000/api/v1'
 var fileName = 'build/[name]-[chunkhash].js';
 var nodeEnv = 'production';
 var s3CacheString ='max-age=2592000';
-var s3Url = 'http://localhost:8888/';
-var emscriptenHost = s3Url;
-var manifoldHost = s3Url;
 
 var s3Plugin = new S3Plugin({
   // Only upload css and js
@@ -22,7 +17,7 @@ var s3Plugin = new S3Plugin({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
   s3UploadOptions: {
-    Bucket: s3BucketName,
+    Bucket: process.env.PRODUCTION_S3_BUCKET_NAME,
     CacheControl: s3CacheString
   }
 });
@@ -32,10 +27,10 @@ var nodeEnvPlugin = new webpack.DefinePlugin({
       FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
       FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
       FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
-      API_HOST: JSON.stringify(apiHost),
+      API_HOST: JSON.stringify(process.env.PRODUCTION_API_HOST),
       NODE_ENV: JSON.stringify(nodeEnv),
-      EMSCRIPTEN_HOST: JSON.stringify(emscriptenHost),
-      MANIFOLD_HOST: JSON.stringify(manifoldHost)
+      EMSCRIPTEN_HOST: JSON.stringify(process.env.PRODUCTION_S3_URL),
+      MANIFOLD_HOST: JSON.stringify(process.env.PRODUCTION_S3_URL)
     }
 })
 
@@ -60,7 +55,7 @@ var sourceMapPlugin = new webpack.SourceMapDevToolPlugin({
 
 var onBuildPlugin = new WebpackOnBuildPlugin(function(){
   var spawn = require('child_process').spawn
-  spawn('open', [s3Url]);
+  spawn('open', [process.env.PRODUCTION_S3_URL]);
 })
 
 //turn of watching for a one-time build
