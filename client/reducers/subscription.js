@@ -19,7 +19,7 @@ export default function update(state = initialState, action) {
     case SUBSCRIPTION_ACTIONS.FAILURE:
       state = state.set('subscribed', false)
       state = state.set('subscribing', false)
-      state = state.set('error', state.get('error_count') < err.length ? err_messages[state.get('error_count')] : final_message);
+      state = state.set('error', state.get('error_count') < err_messages.length ? err_messages[state.get('error_count')] : final_message);
       state = state.update('error_count', (c) => c+1);
     break;
   }
