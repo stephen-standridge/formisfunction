@@ -57,9 +57,10 @@ module.exports = {
     })
   ],
   output: {
+    publicPath: '/',
     path: path.resolve('public'),
     filename: 'build/[name].js',
     library: '[name]',
     libraryTarget: 'var'
-  },
+  }
 };
