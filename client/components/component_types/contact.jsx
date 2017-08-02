@@ -9,11 +9,6 @@ class ContactComponent extends React.Component {
 		super(props);
 		this.state = { active: {} };
 	}
-	toggleActive(collection){
-		// this.setState(({ active })=>{
-		// 	return Object.assign({ active }, { active: { [collection]: !active[collection] }})
-		// })
-	}
 	render() {
 		const { component, classNames, isActive } = this.props;
 		const { slug } = component;

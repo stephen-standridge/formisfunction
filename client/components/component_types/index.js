@@ -5,3 +5,4 @@ export * from './line';
 export * from './emscripten_wrapper';
 export * from './manifold_wrapper';
 export * from './contact';
+export * from './subscription';

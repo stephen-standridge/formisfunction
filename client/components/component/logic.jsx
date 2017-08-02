@@ -87,7 +87,6 @@ class ComponentLogic extends React.Component {
 			component_type = 'DefaultComponent';
 		}
 		const ComponentOfType = components[component_type];
-
 		return component.needsLoad ? <div className="component__loading"></div> :
 					 component.loading ? <div className="component__loading"></div> :
 					 <ComponentOfType {...this.props}

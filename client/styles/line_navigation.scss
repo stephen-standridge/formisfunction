@@ -3,9 +3,9 @@
 	align-items: center;
 }
 
-.line__navigation-contact {
+.line__navigation-contact, .line__navigation-meta {
 	width: 650px;
-	flex-basis: 60px;
+	// flex-basis: 60px;
   justify-content: flex-start;
 }
 .line__navigation {
@@ -42,7 +42,8 @@
 
 .line__controls {
 	justify-content: center;
-	flex-basis: 50px;
+	margin-bottom: 5px;
+	flex-basis: 30px;
 	flex-shrink: 0;
 	flex-grow: 0;
 	align-self: center;

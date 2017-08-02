@@ -58,19 +58,10 @@ export function fetch(slug='index'){
 						})
 						dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
 					}).catch(boundReportError) || dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta })
-					// const version_promises = fetchVersions(media_of_type_vals);
-					// Promise.all(version_promises).then((version_snaps) => {
-					// 	// dispatch({  type: COMPONENT_ACTIONS.SUCCESS, payload: {test: true}, meta })
-					// }).catch(boundReportError)
 				}).catch(boundReportError) || dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
 			}).catch(boundReportError) || dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
 		}).catch(boundReportError)
 	}
-}
-
-function fetchComponent() {
-		//fetch component
-		//check if has media
 }
 
 function fetchMedia(media_vals){

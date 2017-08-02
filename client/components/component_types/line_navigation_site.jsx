@@ -25,6 +25,11 @@ class LineNavigationSiteComponent extends React.Component {
 		const { contact } = component;
 		return contact && contact.map((c, i)=> <ComponentCreator slug={c.slug} key={i}/>);
 	}
+	renderMeta() {
+		const { component } = this.props;
+		const { meta } = component;
+		return meta && meta.map((m, i)=> <ComponentCreator slug={m.slug} key={i}/>);
+	}
 	render() {
 		const { component, onPrev, onNext, classNames, slug, param } = this.props;
 		return <div className={`component__container ${classNames}`}>
@@ -35,6 +40,9 @@ class LineNavigationSiteComponent extends React.Component {
 				<div className='navigation__wrapper'>
 					{this.renderLineNavigation()}
 				</div>
+			</div>
+			<div className="line__navigation-meta">
+					{this.renderMeta()}
 			</div>
     </div>
 	}

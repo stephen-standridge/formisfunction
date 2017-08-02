@@ -22,7 +22,7 @@
 		-webkit-transition: background-color 0.3s; /* Safari */
     transition: background-color 0.3s;
 	}
-	.link__media {
+	.link__media, .link {
 		position: relative;
 
 		&:after {
@@ -46,5 +46,10 @@
 		&:hover {
 			color: rgba(100,100,100,0.8);
 		}
+
+	  user-select: none;
+	  letter-spacing: 0.3px;
+	  font-family: 'Arial';
+	  line-height: 1.2em;
 	}
 }
