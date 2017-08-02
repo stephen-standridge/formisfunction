@@ -21,7 +21,6 @@ class SubscriptionComponent extends React.Component {
     }
   }
   _handleKeyPress(e) {
-    this.setState({ valid: true })
     if (e.key == "Enter") {
       this.submitEmailMaybe()
     }
