@@ -1,6 +1,5 @@
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import { DevTools } from './stores/dev_tools'
 import configureStore from './stores/configure_store'
 import { ComponentCreator, ParamProvider } from './components'
 import './styles/resets.scss'
@@ -23,7 +22,6 @@ ReactDOM.render(
           </ParamProvider>
         } } />
       </Router>
-      <DevTools />
     </div>
   </Provider>,
   document.getElementById('mount')

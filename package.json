@@ -47,7 +47,7 @@
     "webpack-dev-server": "^2.6.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack/webpack.dev-server.config.js --compress --open",
+    "start": "NODE_ENV=DEVELOPMENT webpack-dev-server --config ./webpack/webpack.dev-server.config.js --compress --open",
     "postinstall": "./node_modules/.bin/webpack"
   },
   "main": "gulpfile.js",
