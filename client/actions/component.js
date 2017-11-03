@@ -17,8 +17,8 @@ const media_types = {
 const version_types = {
 	'article': 'article_versions',
 	'articles': 'article_versions',
-	'program': 'program_versions',
-	'programs': 'program_versions'
+	// 'program': 'program_versions',
+	// 'programs': 'program_versions'
 }
 
 export function fetch(slug='index'){
@@ -32,7 +32,7 @@ export function fetch(slug='index'){
 			links: [],
 			components: [],
 			article_versions: {},
-			program_versions: {}
+			// program_versions: {}
 		};
 		dispatch({ type: COMPONENT_ACTIONS.REQUEST, meta })
 

@@ -1,6 +1,5 @@
 {
   "hosting": {
-  // Add the "redirects" section within "hosting"
     "public": "public",
     "rewrites": [
       {
@@ -8,5 +7,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }

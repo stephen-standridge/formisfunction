@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import * as actions from '../../../actions/manifold'
 var createManifold = require('@stephen.standridge/manifold');
 
 class ManifoldMedia extends React.Component {
@@ -18,6 +19,20 @@ class ManifoldMedia extends React.Component {
 
     return `manifold-media__${part} ${classNames && classNames[part] || ''}`
   }
+  getSlug(props=this.props) {
+      const { manifold } = props;
+      return manifold.slug;
+  }
+  getVersion(props=this.props) {
+    const { manifold } = props;
+    const { program_versions, current_version } = manifold;
+    return program_versions && program_versions[current_version] || {};
+  }
+  getVersionId(props=this.props) {
+    const { manifold } = props;
+    const { program_versions, current_version } = manifold;
+    return program_versions && program_versions[current_version] && program_versions[current_version].version_id;
+  }
   componentDidMount(){
     this.componentDidUpdate({ manifold: {} })
   }
@@ -26,55 +41,58 @@ class ManifoldMedia extends React.Component {
     this.clearManifold(manifold);
   }
   componentDidUpdate(prevProps, prevState) {
-      const { manifold, isActive } = this.props;
+      const { manifold, isActive, get_versions, updating } = this.props;
       if (!manifold) return;
       const prevManifold = prevProps.manifold;
       const prevActive = prevProps.isActive;
+      const versionId = this.getVersionId();
+
       const { urlPrefix, version_id, slug } = manifold;
-      if(version_id !== prevManifold.version_id){
-        if(window[`${slug}_${version_id}`]){
-          this.initializeManifold(prevManifold);
-        } else  {
-          let script = document.createElement('script');
-          script.onload = this.initializeManifold.bind(this, prevManifold);
-          script.src = this.configurationFile(`configuration.js`);
-          document.body.appendChild(script);
-          this.scriptElement = script;
-        }
-      } else {
-        if(isActive && !prevActive){
-          this._startManifold();
-        }
-        if(!isActive && prevActive){
-          this._stopManifold();
+
+      if(manifold.slug != prevManifold.slug) {
+        return get_versions(manifold);
+      } else if (!updating) {
+        if(versionId !== this.getVersionId(prevProps)){
+          if(window[`${slug}_${versionId}`]){
+            this.initializeManifold(prevProps);
+          } else  {
+            let script = document.createElement('script');
+            script.onload = this.initializeManifold.bind(this, prevProps);
+            script.src = this.configurationFile(manifold);
+            document.body.appendChild(script);
+            this.scriptElement = script;
+          }
+        } else {
+          if(isActive && !prevActive) this._startManifold();
+          if(!isActive && prevActive) this._stopManifold();
         }
       }
+
   }
-  initializeManifold(prevManifold){
+  initializeManifold(prevProps){
     const { manifold } = this.props;
-    const { version_id, options, slug } = manifold;
-    let configuration = window[`${slug}_${version_id}`];
-    this.Manifold.load(`${slug}_${version_id}`, configuration, {
+    const { options, slug } = manifold;
+    const versionId = this.getVersionId();
+    let configuration = window[`${slug}_${versionId}`];
+    this.Manifold.load(`${slug}_${versionId}`, configuration, {
       locateFile: this.locateFile.bind(this),
       locateSource: this.locateFile.bind(this),
-      onInitialize: this.clearManifold.bind(this, prevManifold)
+      onInitialize: this.clearManifold.bind(this, prevProps)
     });
   }
   _startManifold(){
-    const { manifold } = this.props;
-    const { version_id, slug } = manifold;
-    this.Manifold.start(`${slug}_${version_id}`)
+    this.Manifold.start(`${this.getSlug()}_${this.getVersionId()}`)
   }
   _stopManifold(){
-    const { manifold } = this.props;
-    const { version_id, slug } = manifold;
-    this.Manifold.stop(`${slug}_${version_id}`)
+    this.Manifold.stop(`${this.getSlug()}_${this.getVersionId()}`)
   }
-  clearManifold(manifold){
+  clearManifold(prevProps){
     const { isActive } = this.props;
-    const { version_id, slug } = manifold;
-    if (!version_id || !slug) return;
-    this.Manifold.unload(`${slug}_${version_id}`);
+    const { manifold } = prevProps;
+    const { slug } = manifold;
+    const versionId = this.getVersionId(prevProps);
+    if (!versionId || !slug) return;
+    this.Manifold.unload(`${slug}_${versionId}`);
     if (this.sciptElement) {
       document.body.removeChild(this.scriptElement);
       this.scriptElement = null;
@@ -83,19 +101,13 @@ class ManifoldMedia extends React.Component {
       this._stopManifold();
     }
   }
-  configurationFile(url){
-    const { manifold } = this.props;
-    const { urlPrefix, version_id, slug } = manifold;
-
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${version_id}/`;
-    return host + url
+  configurationFile(){
+    const { configuration_url } = actions;
+    return configuration_url(this.getSlug(), this.getVersion());
   }
   locateFile(url){
-    const { manifold } = this.props;
-    const { urlPrefix, version_id, slug } = manifold;
-
-    const host = `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/${version_id}/assets/`;
-    return host + url
+    const { file_url } = actions;
+    return file_url(this.getSlug(), this.getVersion(), url)
   }
   print(...args){
     const text = Array.prototype.slice.call(args).join(' ');
@@ -135,16 +147,19 @@ class ManifoldMedia extends React.Component {
     </div>);
   }
 }
+
+
 const mapStateToProps = (state, ownProps) => {
-  const manifold = state.media.getIn(['programs', ownProps.slug]);
-  const [...version_ids] = manifold && manifold.get('program_versions').keys();
-  const version = manifold && state.versions.getIn(['program_versions', version_ids[0]]);
-  const toDisplay = manifold && version ? manifold.merge(version).toJS() : manifold.toJS();
-  return { manifold: toDisplay };
+  let manifold = state.media.getIn(['programs', ownProps.slug]);
+  manifold = manifold.merge(state.manifold.get(ownProps.slug));
+  const versions = manifold && manifold.getIn([ownProps.slug, 'program_versions']);
+
+  return { manifold: manifold && manifold.toJS(), versions: versions && versions.toJS() };
 }
 
 const Manifold = connect(
-  mapStateToProps
+  mapStateToProps,
+  actions
 )(ManifoldMedia)
 
 export { Manifold }
