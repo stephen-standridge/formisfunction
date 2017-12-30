@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import * as actions from '../../../actions/manifold'
+import * as actions from '../../../actions/manifold';
 var createManifold = require('@stephen.standridge/manifold');
+import './manifold.scss';
+
 
 class ManifoldMedia extends React.Component {
   constructor(props){

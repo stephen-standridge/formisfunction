@@ -1,4 +1,6 @@
-class DefaultComponent extends React.Component {
+import './not_found.scss';
+
+class NotFoundComponent extends React.Component {
 	render() {
 		const { component, onPrev, onNext, classNames } = this.props;
 		return <div className={`component__container ${classNames}`}>
@@ -10,4 +12,4 @@ class DefaultComponent extends React.Component {
 	}
 }
 
-export { DefaultComponent }
+export { NotFoundComponent }

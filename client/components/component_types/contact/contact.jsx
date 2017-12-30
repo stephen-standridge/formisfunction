@@ -1,8 +1,5 @@
-import * as media_types from '../media';
-import '../../styles/contact.scss';
-
-const Article = media_types.Article;
-const Link = media_types.Link;
+import { Article, Link } from '../../media';
+import './contact.scss';
 
 class ContactComponent extends React.Component {
 	constructor(props){

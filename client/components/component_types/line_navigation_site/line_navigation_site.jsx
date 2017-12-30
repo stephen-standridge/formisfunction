@@ -1,7 +1,7 @@
-import { ComponentCreator } from '../component';
-import { ContactComponent } from './contact';
-import { Link } from '../media';
-import '../../styles/line_navigation';
+import { ComponentCreator } from '../../component';
+import { ContactComponent } from '../contact/contact.jsx';
+import { Link } from '../../media';
+import './line_navigation_site.scss';
 
 class LineNavigationSiteComponent extends React.Component {
 	renderLineNavigation(){

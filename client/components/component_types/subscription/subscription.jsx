@@ -1,4 +1,4 @@
-import '../../styles/subscription.scss';
+import './subscription.scss';
 import isEmail from 'validator/lib/isEmail';
 
 class SubscriptionComponent extends React.Component {

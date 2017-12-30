@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Remarkable from 'remarkable';
+import './article.scss'
 
 var md = new Remarkable({linkTarget: "_blank"});
 

@@ -1,4 +1,5 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import './emscripten.scss';
 
 class EmscriptenMedia extends React.Component {
   constructor(props){

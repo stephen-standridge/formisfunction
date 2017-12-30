@@ -1,8 +1,7 @@
-import * as media_types from '../media';
-import { PieceMetaComponent } from './piece_meta';
-import '../../styles/pieces.scss';
+import { Manifold } from '../../media';
+import { PieceMetaComponent } from '../piece_meta/piece_meta.jsx';
+import './manifold_wrapper.scss';
 
-const Manifold = media_types.Manifold;
 
 class ManifoldWrapperComponent extends React.Component {
 	renderMedia(){

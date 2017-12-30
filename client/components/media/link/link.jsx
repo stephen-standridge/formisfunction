@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router'
 import CopyToClipboard from 'react-copy-to-clipboard';
-
+import './link.scss';
 class LinkMedia extends React.Component {
 	constructor(props){
 		super(props);

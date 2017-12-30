@@ -1,5 +1,5 @@
-import { Emscripten } from '../media';
-import '../../styles/pieces.scss';
+import { Emscripten } from '../../media';
+import './emscripten_wrapper.scss';
 
 class EmscriptenWrapperComponent extends React.Component {
 	renderMedia(){

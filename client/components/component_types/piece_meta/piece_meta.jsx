@@ -1,6 +1,6 @@
-import * as media_component_types from '../media';
-import '../../styles/pieces.scss';
+import * as media_component_types from '../../media';
 import { capitalize } from 'lodash';
+import './piece_meta.scss'
 
 class PieceMetaComponent extends React.Component {
 	constructor(props){

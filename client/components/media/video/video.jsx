@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import ReactPlayer from 'react-player';
+import './video.scss';
 
-class VideoClipMedia extends React.Component {
+class VideoMedia extends React.Component {
 	render() {
 		const { videoClip } = this.props;
 		if (!videoClip) return <div className='video__loading' />
@@ -19,6 +20,6 @@ const mapStateToProps = (state, ownProps) => {
 const VideoClip = connect(
 	mapStateToProps
   // actions
-)(VideoClipMedia)
+)(VideoMedia)
 
 export { VideoClip }
