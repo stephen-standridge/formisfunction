@@ -1,55 +1,50 @@
 .contact__wrapper {
-	flex-direction: row;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
-
-	.article__wrapper {
-		flex-direction: column;
-		height: 140px;
-    justify-content: flex-end;
-	}
-	.article__title {
-		font-size: 2.25rem;
-		flex-basis: 45px;
-		color: rgba(100,100,100,0.5);
-	}
-	.article__body {
-			overflow: hidden;
-			flex: 0;
-			padding: 11px 8px;
-			p {
-				display: flex;
-				padding-top: 11px;
-			}
-		&.active {
-			flex-basis: 100px;
-			flex: 1;
-		}
-	}
+  flex-basis: 40px;
 }
+.contact__wrapper .article__wrapper {
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.contact__wrapper .article__title {
+  font-family: 'clemente';
+  letter-spacing: 1px;
+  font-size: 2.25rem;
+  color: rgba(100, 100, 100, 0.5);
+}
+.contact__wrapper .article__body {
+  padding: 11px 8px;
+}
+.contact__wrapper .article__body p {
+  display: flex;
+}
+
 .contact__information {
-	padding: 0 10px 0 0;
+  padding: 0 10px 0 0;
 }
 
 .contact__links {
-  align-items: flex-end;
-
-	.link__media {
-		margin-right: 10px;
-		padding: 0px 4px;
-		&:after {
-			content: 'copied';
-			position: absolute;
-			right: -50px;
-			opacity: 0;
-		}
-		&.copied:after {
-			animation: fadeIn 1s;
-		}
-		&.copied_again:after {
-			animation: otherFade 1s;
-		}
-	}
+  flex-direction: row;
+}
+.contact__links .link__media {
+  font-size: 1.1rem;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  width: 70px;
+  &:after {
+    content: 'copied';
+    position: absolute;
+    right: -50px;
+    opacity: 0;
+  }
+  &.copied:after {
+    animation: fadeIn 1s;
+  }
+  &.copied_again:after {
+    animation: otherFade 1s;
+  }
 }
 
 @keyframes fadeIn {

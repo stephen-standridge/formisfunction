@@ -1,65 +1,58 @@
 .subscription__wrapper {
-  .subscription__button {
-    margin-right: 10px;
-    padding: 5px 8px;
-    .subscribed {
-      color: rgba(100,155,100,0.5) !important;
-    }
-  }
-
-  .subscription__input {
-    width: 150px;
-
-  }
-  input {
-    box-shadow: none !important;
-    -webkit-appearance:     none;
-    -moz-appearance:        none;
-    -ms-appearance:         none;
-    -o-appearance:          none;
-    appearance:             none;
-    outline: none;
-  }
-  .error {
-    color: rgba(200,100,100,0.6);
-  }
-  .invalid .subscription__input {
-    border-color: rgba(200,100,100,0.6);
-  }
-  .subscription__error {
-    margin-top: 5px;
-  }
-
-  .subscription__form {
-    flex-direction: column;
-  }
-
-  .subscription__cancel {
-    width: 20px;
-    &:hover {
-      color: rgba(200,100,100,0.6) !important;
-    }
-    &.disabled {
-      &:hover {
-        color: rgba(100,100,100,0.6) !important;
-      }
-    }
-  }
-  .subscription__confirm {
-    width: 50px;
-    letter-spacing: 0.0px;
-    &:hover {
-      color: rgba(100,200,100,0.6) !important;
-    }
-    &.disabled {
-      &:hover {
-        color: rgba(100,100,100,0.6) !important;
-      }
-    }
-  }
-  .subscription__option {
-    margin: 0px 2px;
-    align-content: center;
-    justify-content: center;
-  }
+  height: 30px;
+}
+.subscription__wrapper .subscription__button {
+  margin-right: 10px;
+  padding: 5px 8px;
+}
+.subscription__wrapper .subscription__button .subscribed {
+  color: rgba(100, 155, 100, 0.5) !important;
+}
+.subscription__wrapper .subscription__input {
+  width: 150px;
+}
+.subscription__wrapper input {
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: none;
+}
+.subscription__wrapper .error {
+  color: rgba(200, 100, 100, 0.6);
+}
+.subscription__wrapper .invalid .subscription__input {
+  border-color: rgba(200, 100, 100, 0.6);
+}
+.subscription__wrapper .subscription__error {
+  margin-top: 5px;
+}
+.subscription__wrapper .subscription__form {
+  flex-direction: column;
+}
+.subscription__wrapper .subscription__cancel {
+  width: 20px;
+}
+.subscription__wrapper .subscription__cancel:hover {
+  color: rgba(200, 100, 100, 0.6) !important;
+}
+.subscription__wrapper .subscription__cancel.disabled:hover {
+  color: rgba(100, 100, 100, 0.6) !important;
+}
+.subscription__wrapper .subscription__confirm {
+  width: 50px;
+  letter-spacing: 0.0px;
+}
+.subscription__wrapper .subscription__confirm:hover {
+  color: rgba(100, 200, 100, 0.6) !important;
+}
+.subscription__wrapper .subscription__confirm.disabled:hover {
+  color: rgba(100, 100, 100, 0.6) !important;
+}
+.subscription__wrapper .subscription__option {
+  margin: 0px 2px;
+  align-content: center;
+  justify-content: center;
 }
