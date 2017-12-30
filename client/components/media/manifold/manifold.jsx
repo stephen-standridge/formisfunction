@@ -3,11 +3,10 @@ import * as actions from '../../../actions/manifold';
 var createManifold = require('@stephen.standridge/manifold');
 import './manifold.scss';
 
-
 class ManifoldMedia extends React.Component {
   constructor(props){
     super(props);
-    this.Manifold = createManifold();
+    this.Manifold = null;
     this.configuration;
     this.scriptElement;
     this.startManifold = this._startManifold.bind(this);
@@ -36,6 +35,7 @@ class ManifoldMedia extends React.Component {
     return program_versions && program_versions[current_version] && program_versions[current_version].version_id;
   }
   componentDidMount(){
+    this.Manifold = createManifold({}, {});
     this.componentDidUpdate({ manifold: {} })
   }
   componentWillUnmount(){
@@ -65,14 +65,17 @@ class ManifoldMedia extends React.Component {
             this.scriptElement = script;
           }
         } else {
-          if(isActive && !prevActive) this._startManifold();
-          if(!isActive && prevActive) this._stopManifold();
+          if(isActive && !prevActive) { this._startManifold(); }
+          else if(!isActive && prevActive) { this._stopManifold(); }
+          else if(isActive) { this._startManifold(); }
+          else { this._stopManifold(); }
+
         }
       }
 
   }
   initializeManifold(prevProps){
-    const { manifold } = this.props;
+    const { manifold, isActive } = this.props;
     const { options, slug } = manifold;
     const versionId = this.getVersionId();
     let configuration = window[`${slug}_${versionId}`];
@@ -80,7 +83,9 @@ class ManifoldMedia extends React.Component {
       locateFile: this.locateFile.bind(this),
       locateSource: this.locateFile.bind(this),
       onInitialize: this.clearManifold.bind(this, prevProps)
-    });
+    }, this.refs[`${slug}_${versionId}`] );
+    if (isActive) { this._startManifold(); }
+    else { this._stopManifold(); }
   }
   _startManifold(){
     this.Manifold.start(`${this.getSlug()}_${this.getVersionId()}`)
@@ -136,13 +141,14 @@ class ManifoldMedia extends React.Component {
     const { manifold } = this.props;
     if (!manifold) return <div className={this.classNamesFor('not_found')} />
 
-    const { slug } = manifold;
-    return <div className={`${slug}_piece manifold`} />
+    const { options, slug } = manifold;
+    const versionId = this.getVersionId();
+    return <div className={`${slug}_piece manifold`} ref={`${slug}_${versionId}`}/>
   }
 
   render(){
     const { manifold } = this.props;
-    return (<div className={this.classNamesFor('component')}>
+    return (<div className={this.classNamesFor('component') + `${this.getSlug()}_${this.getVersionId()} canvas_container`}>
       { this.renderLoadingMaybe() }
       { this.renderCanvases() }
       <div className={this.classNamesFor('status')}>{  }</div>
