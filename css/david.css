@@ -1,0 +1,606 @@
+/* these are the state-based css styles, gathered to avoid confusion */
+
+
+/*
+ /////////////////////////////////
+ /////default dynamic styles///////
+ /////////////////////////////////
+								  */	
+
+#greenbg{
+	fill: url(#fadeinlogo);
+}
+#finalbg{
+	fill: white;
+	opacity: 0;
+}
+#dynamicContent.black {
+	background: black;
+}
+#dynamicContent.white {
+	background: white;
+}
+#hidden2section.in, #designwrapper.in{
+	width: 102%;
+}
+
+
+.background_line.inner.green {opacity: .8; fill:none;stroke:#52BC46;stroke-miterlimit:10; stroke-width: .7; background-color: transparent;}
+.background_line.middle.green {opacity: .6; fill:none;stroke:#52BC46;stroke-miterlimit:10; stroke-width: .7; background-color: transparent;}
+.background_line.outer.green {opacity: .4; fill:none;stroke:#52BC46;stroke-miterlimit:10; stroke-width: .7; background-color: transparent; }
+
+
+.background_line.inner.purple{opacity: .8; fill:none;stroke:#A745BF;stroke-miterlimit:10; stroke-width: .7; background-color: transparent;}
+.background_line.middle.purple{opacity: .6; fill:none;stroke:#A745BF;stroke-miterlimit:10; stroke-width: .7; background-color: transparent;}
+.background_line.outer.purple {opacity: .4; fill:none;stroke:#A745BF;stroke-miterlimit:10; stroke-width: .7; background-color: transparent; }
+
+.background_line.inner.white {opacity: 1 !important; fill:none;stroke:#c1c7d0 !important; stroke-miterlimit:10; stroke-width: .5 !important; background-color: transparent;}
+.background_line.middle.white {opacity: 1 !important; fill:none;stroke:#9ea3a9 !important;stroke-miterlimit:10; stroke-width: .5 !important; background-color: transparent;}
+.background_line.outer.white {opacity: 1 !important; fill:none;stroke:#5b5d5f !important;stroke-miterlimit:10; stroke-width: .5 !important; background-color: transparent; }
+
+
+/*
+ /////////////////////////////////
+ //////logo linework styles///////
+ /////////////////////////////////
+								  */	
+
+	/*//shared presets//*/
+	
+		.logolinefront{
+			stroke-width: 1;
+			opacity: .6;
+		}
+		.logolinemiddle{
+			stroke-width: 1;
+			opacity: .3;
+		}
+		.logolinebottom{
+			stroke-width: 1;
+			opacity: .3;
+		}
+		.logoline{
+			opacity: .6;
+			stroke-width: 1 ;
+		}
+		#linework {
+			opacity:1;
+		}
+
+
+	/*//color presets//*/
+	
+		.logoline.purple, .logolinefront.purple, .logolinemiddle.purple, .logolinebottom.purple, .compassline.purple{
+			fill: none;
+			stroke: #A745BF;
+		}
+		
+		.logoline.green, .logolinefront.green, .logolinemiddle.green, .logolinebottom.green, .compassline.green{
+			fill:none;
+			stroke:#52BC46;
+		}
+		.logoline.white, .logolinefront.white, .logolinemiddle.white, .logolinebottom.white, .compassline.white{
+			fill: none;
+			/*stroke: #9ea3a9 !important;*/
+			stroke: #52BC46;
+		}
+		.compassline{
+			stroke-width: .7;
+		}
+	
+	/*//positional presets//*/
+		.logoline.green{
+			stroke-dasharray: 20,15;
+			stroke-dashoffset: 15;
+		}
+		.logolinefront.green{
+			stroke-dasharray: 20,15;
+		}
+		.logolinemiddle.green{
+			stroke-dasharray: 15,10;
+			stroke-dashoffset: 23;
+		}
+		.logolinebottom.green{
+			stroke-dasharray: 15,10;
+			stroke-dashoffset: 27;
+		}
+		
+		
+		.logoline.purple{
+			stroke-dasharray: 17,8;
+			stroke-dashoffset: 13;
+		}
+		.logolinefront.purple{
+			stroke-dasharray: 19,6;
+		}
+		.logolinemiddle.purple{
+			stroke-dasharray: 26,8;
+			stroke-dashoffset: 7;
+		}
+		.logolinebottom.purple{
+			stroke-dasharray: 26,12;
+			stroke-dashoffset: 14;
+		}
+
+
+		.logoline.white{
+			stroke-dasharray: 17,8;
+			stroke-dashoffset: 13;
+		}
+		.logolinefront.white{
+			stroke-dasharray: 22,9;
+		}
+		.logolinemiddle.white{
+			stroke-dasharray: 12,10;
+			stroke-dashoffset: 8;
+		}
+		.logolinebottom.white{
+			stroke-dasharray: 20,12;
+			stroke-dashoffset: 11;
+		}	
+	
+	
+		
+		
+	/*//the heartbeat//*/
+	
+		.rythm.center.white{
+			/*stop-color:#FFFFFF;	*/
+			stop-color:#52BC46;
+		}
+		.rythm.midway.white{
+			/*stop-color:#FFFFFF;*/
+			stop-color:#52BC46;
+			stop-opacity: .3;
+		}
+		.rythm.outside.white{
+			/*stop-color:#FFFFFF;*/
+			stop-color:#52BC46;
+			stop-opacity: .2;
+		}
+		.rythm.center.green{
+			stop-color:#52BC46;
+			stop-opacity: .2;	
+		}
+		.rythm.midway.green{
+			stop-color:#52BC46;
+			stop-opacity: .3;
+		}
+		.rythm.outside.green{
+			stop-color:#52BC46;
+			stop-opacity: .2;
+		}
+		.rythm.outside.purple{
+			stop-color:#A745BF;
+			stop-opacity: .2;
+		}
+		.rythm.midway.purple{
+			stop-color:#A745BF;
+			stop-opacity: .3;
+		}
+		.rythm.center.purple{
+			stop-color:#A745BF;
+			stop-opacity: .2;
+		}
+		
+		
+		.compass.center.white, .arrow.center.white{
+			/*stop-color:#FFFFFF;	*/
+			stop-color:#52BC46;
+			stop-opacity: .1
+		}
+		.compass.midway.white, .arrow.midway.white{
+			/*stop-color:#FFFFFF;*/
+			stop-color:#52BC46;
+			stop-opacity: .2;
+		}
+		.compass.outside.white, .arrow.outside.white{
+			/*stop-color:#FFFFFF;*/
+			stop-color:#52BC46;
+			stop-opacity: .1;
+		}
+		.compass.center.green, .arrow.center.green{
+			stop-color:#52BC46;
+			stop-opacity: .2;	
+		}
+		.compass.midway.green, .arrow.midway.green{
+			stop-color:#52BC46;
+			stop-opacity: .1;
+		}
+		.compass.outside.green, .arrow.outside.green{
+			stop-color:#52BC46;
+			stop-opacity: .2;
+		}
+		.compass.outside.purple, .arrow.outside.purple{
+			stop-color:#A745BF;
+			stop-opacity: .2;
+		}
+		.compass.midway.purple, .arrow.midway.purple{
+			stop-color:#A745BF;
+			stop-opacity: .1;
+		}
+		.compass.center.purple, .arrow.center.purple{
+			stop-color:#A745BF;
+			stop-opacity: .2;
+		}
+		
+		/*//he who must not be named//*/
+		.logocolor.white{
+			fill: #52BC46;
+			/*fill: #ffffff;*/
+			opacity: .3;
+		}
+		.logocolor.green{
+			fill: #52BC46;
+			opacity: .3;
+		}
+		.logocolor.purple{
+			fill: #A745BF;
+			opacity: .3;
+		}
+
+
+
+/*
+ /////////////////////////////////
+ ////main animation references////
+ /////////////////////////////////
+								  */
+	/*//white styles//*/	
+		
+			
+		/*//background lines//*/
+						  
+		.background_line.white.outer {
+			animation:backgroundlines_white_outer 10s linear infinite;-moz-animation:backgroundlines_white_outer 10s linear infinites; -webkit-animation:backgroundlines_white_outer 10s linear infinite; -o-animation:backgroundlines_white_outer 10s linear infinite; 
+		}
+		.background_line.white.middle {
+			animation:backgroundlines_white_middle 10s linear infinite;-moz-animation:backgroundlines_white_middle 10s linear infinite; -webkit-animation:backgroundlines_white_middle 10s linear infinite; -o-animation:backgroundlines_white_middle 10s linear infinite; 
+		}
+		.background_line.white.inner {
+			animation:backgroundlines_white_inner 10s linear infinite;-moz-animation:backgroundlines_white_inner 10s linear infinite; -webkit-animation:backgroundlines_white_inner 10s linear infinite; -o-animation:backgroundlines_white_inner 10s linear infinite; 
+		}
+		
+		
+		/*//logo gradient//*/
+		
+		.rythm.center.white, .rythm.center.green, .rythm.center.purple  {
+			animation:rythm_center 4s linear infinite;-moz-animation:rythm_center 4s linear infinites; -webkit-animation:rythm_center 4s linear infinite; -o-animation:rythm_center 4s linear infinite; 
+		}
+		.rythm.midway.white, .rythm.midway.green, .rythm.midway.purple  {
+			animation:rythm_midway 4s linear infinite;-moz-animation:rythm_midway 4s linear infinites; -webkit-animation:rythm_midway 4s linear infinite; -o-animation:rythm_midway 4s linear infinite; 
+		}
+		.rythm.outside.white, .rythm.outside.green, .rythm.outside.purple  {
+			animation:rythm_outside 4s linear infinite;-moz-animation:rythm_outside 4s linear infinites; -webkit-animation:rythm_outside 4s linear infinite; -o-animation:rythm_outside 4s linear infinite; 
+		}
+		
+		
+
+		/*//arrow gradient//*/
+		.arrow.center.white, .arrow.center.green, .arrow.center.purple  {
+			animation:arrow_center 8s linear infinite;-moz-animation:arrow_center 8s linear infinites; -webkit-animation:arrow_center 8s linear infinite; -o-animation:arrow_center 8s linear infinite; 
+		}
+		.arrow.midway.white, .arrow.midway.green, .arrow.midway.purple  {
+			animation:arrow_midway 8s linear infinite;-moz-animation:arrow_midway 8s linear infinites; -webkit-animation:arrow_midway 8s linear infinite; -o-animation:arrow_midway 8s linear infinite; 
+		}
+		.arrow.outside.white, .arrow.outside.green, .arrow.outside.purple  {
+			animation:arrow_outside 8s linear infinite;-moz-animation:arrow_outside 8s linear infinites; -webkit-animation:arrow_outside 8s linear infinite; -o-animation:arrow_outside 8s linear infinite; 
+		}
+
+	/*//purple and green styles//*/	
+	
+		.dot {
+			animation: dot 2s linear infinite; -moz-animation: dot 2s linear infinite; -webkit-animation: dot 2s linear infinite; -o-animation: dot 2s linear infinite;
+		}
+		/*//background lines//*/
+		
+		.background_line.outer.green, .background_line.outer.purple {
+			animation:backgroundlines_outer_green 10s linear infinite;-moz-animation:backgroundlines_outer_green 10s linear infinites; -webkit-animation:backgroundlines_outer_green 10s linear infinite; -o-animation:backgroundlines_outer_green 10s linear infinite; 
+		}
+		.background_line.middle.green, .background_line.middle.purple {
+			animation:backgroundlines_middle_green 10s linear infinite;-moz-animation:backgroundlines_middle_green 10s linear infinite; -webkit-animation:backgroundlines_middle_green 10s linear infinite; -o-animation:backgroundlines_middle_green 10s linear infinite; 
+		}
+		.background_line.inner.green, .background_line.inner.purple {
+			animation:backgroundlines_inner_green 10s linear infinite;-moz-animation:backgroundlines_inner_green 10s linear infinite; -webkit-animation:backgroundlines_inner_green 10s linear infinite; -o-animation:backgroundlines_inner_green 10s linear infinite; 
+		}
+
+	
+
+/*
+ /////////////////////////////////
+ ///////////transitions///////////
+ /////////////////////////////////
+								  */
+								  
+								  
+	.background_line.outer.green, .background_line.outer.purple, .background_line.middle.green, .background_line.middle.purple, background_line.inner.green, background_line.inner.purple, .logoline_green.green, .logoline.purple{
+		transition: opacity 0.4s ease-in;-ms-transition: opacity 0.4s ease-in;-moz-transition: opacity 0.4s ease-in;-webkit-transition: opacity 0.4s ease-in;
+		transition: stroke 0.3s ease-in;-ms-transition: stroke 0.3s ease-in;-moz-transition: stroke 0.3s ease-in;-webkit-transition: stroke 0.3s ease-in;
+	}	
+	.logoline, .logolinefront, .logolinemiddle, .logolinebottom{
+		transition: stroke-dasharray 0.4s ease-in;-ms-transition: stroke-dasharray 0.4s ease-in;-moz-transition: stroke-dasharray 0.4s ease-in;-webkit-transition: stroke-dasharray 0.4s ease-in;
+		transition: stroke-dashoffset 0.3s ease-in;-ms-transition: stroke-dashoffset 0.3s ease-in;-moz-transition: stroke-dashoffset 0.3s ease-in;-webkit-transition: stroke-dashoffset 0.3s ease-in;
+	}	
+	.rythm {
+		transition: stop-color 0.4s ease-in;-ms-transition: stop-color 0.4s ease-in;-moz-transition: stop-color 0.4s ease-in;-webkit-transition: stop-color 0.4s ease-in;
+	}
+	.logocolor {
+		transition: fill 0.4s ease-in;-ms-transition: fill 0.4s ease-in;-moz-transition: fill 0.4s ease-in;-webkit-transition: fill 0.4s ease-in;
+	}
+	#dynamicContent{
+		transition: background 0.4s ease-in;-ms-transition: background 0.4s ease-in;-moz-transition: background 0.4s ease-in;-webkit-transition: background 0.4s ease-in;
+	}
+
+
+
+/*
+ /////////////////////////////////
+ ////////animation timings////////
+ /////////////////////////////////
+								  */
+
+	/*//animation delays//*/
+	
+		/*//dot//*/
+		.dot.late{
+			animation-delay: .5s; -webkit-animation-delay: .5s; -moz-animation-delay: .5s; -o-animation-delay: .5s;
+		}
+		/*//background lines//*/
+		
+		.background_line.inner:nth-child(1), .background_line.middle:nth-child(1),  .background_line.outer:nth-child(1),{
+			animation-delay:.5s;-webkit-animation-delay:.5s; -o-animation-delay:.5s;-moz-animation-delay:.5s;
+		}
+		.background_line.inner:nth-child(2), .background_line.middle:nth-child(2),  .background_line.outer:nth-child(2){
+			animation-delay:1s;-webkit-animation-delay:1s; -o-animation-delay:1s;-moz-animation-delay:1s;
+		}
+		.background_line.inner:nth-child(3), .background_line.middle:nth-child(3),  .background_line.outer:nth-child(3){
+			animation-delay:1.5s;-webkit-animation-delay:1.5s; -o-animation-delay:1.5s;-moz-animation-delay:1.5s;
+		}
+		.background_line.inner:nth-child(4), .background_line.middle:nth-child(4),  .background_line.outer:nth-child(4){
+			animation-delay:2s;-webkit-animation-delay:2s; -o-animation-delay:2s;-moz-animation-delay:2s;
+		}
+		.background_line.inner:nth-child(5), .background_line.middle:nth-child(5),  .background_line.outer:nth-child(5){
+			animation-delay:2.5s;-webkit-animation-delay:2.5s; -o-animation-delay:2.5s;-moz-animation-delay:2.5s;
+		}
+		.background_line.inner:nth-child(6), .background_line.middle:nth-child(6),  .background_line.outer:nth-child(6){
+			animation-delay:3s;-webkit-animation-delay:3s; -o-animation-delay:3s;-moz-animation-delay:3s;
+		}
+		.background_line.inner:nth-child(7), .background_line.middle:nth-child(7),  .background_line.outer:nth-child(7){
+			animation-delay:3.5s;-webkit-animation-delay:3.5s; -o-animation-delay:3.5s;-moz-animation-delay:3.5s;
+		}
+		.background_line.inner:nth-child(8), .background_line.middle:nth-child(8),  .background_line.outer:nth-child(8){
+			animation-delay:4s;-webkit-animation-delay:4s; -o-animation-delay:4s;-moz-animation-delay:4s;
+		}
+		.background_line.inner:nth-child(9), .background_line.middle:nth-child(9), .background_line.outer:nth-child(9){
+			animation-delay:4.5s;-webkit-animation-delay:4.5s; -o-animation-delay:4.5s;-moz-animation-delay:4.5s;
+		}
+	
+	
+		/*//logo gradients//*/
+		
+		.rythm.midway.white, .rythm.midway.green, .rythm.midway.purple{
+			animation-delay:.3s;-webkit-animation-delay:.3s; -o-animation-delay:.3s;-moz-animation-delay:.3s;
+		}
+		.compass.midway.white, .compass.midway.green, .compass.midway.purple{
+			animation-delay:.5s;-webkit-animation-delay:.5s; -o-animation-delay:.5s;-moz-animation-delay:.5s;
+		}
+		.arrow.midway.white, .arrow.midway.green, .arrow.midway.purple{
+			animation-delay:.5s;-webkit-animation-delay:.5s; -o-animation-delay:.5s;-moz-animation-delay:.5s;
+		}
+		
+		
+		.rythm.outside.white, .rythm.outside.green, .rythm.outside.purple{
+			animation-delay:.6s;-webkit-animation-delay:.6s; -o-animation-delay:.6s;-moz-animation-delay:.6s;
+		}
+		.compass.outside.white, .compass.outside.green, .compass.outside.purple{
+			animation-delay:1s;-webkit-animation-delay:1s; -o-animation-delay:1s;-moz-animation-delay:1s;
+		}
+		.arrow.outside.white, .arrow.outside.green, .arrow.outside.purple{
+			animation-delay:1s;-webkit-animation-delay:1s; -o-animation-delay:1s;-moz-animation-delay:1s;
+		}
+		
+		
+		/*//logo linework//*/
+	
+	/*//transition delays//*/
+	
+	
+	
+/*
+ /////////////////////////////////
+ ////////////keyframes////////////
+ /////////////////////////////////
+								  */	
+	/*//green and purple//*/
+	
+		/*//background lines//*/
+	
+		@keyframes backgroundlines_outer_green {
+			0%,100%   {opacity: .8;} 25%  {opacity: .6;} 75%  {opacity: .4;}
+		}
+		@-moz-keyframes backgroundlines_outer_green {
+			0%,100%   {opacity: .8;} 25%  {opacity: .6;} 75%  {opacity: .4;}
+		}
+		@-webkit-keyframes backgroundlines_outer_green{
+			0%,100%   {opacity: .8;} 25%  {opacity: .6;} 75%  {opacity: .4;}
+		}
+		@-o-keyframes backgroundlines_outer_green {
+			0%,100%   {opacity: .8;} 25%  {opacity: .6;} 75%  {opacity: .4;}
+		}
+
+
+		@keyframes backgroundlines_middle_green{
+			0%,100%   {opacity: .6;}25%  {opacity: .8;}75%  {opacity: .4;}
+		}
+		@-moz-keyframes backgroundlines_middle_green {
+			0%,100%   {opacity: .6;}25%  {opacity: .8;}75%  {opacity: .4;}
+		}
+		@-webkit-keyframes backgroundlines_middle_green {
+			0%,100%   {opacity: .6;}25%  {opacity: .8;}75%  {opacity: .4;}
+		}
+		@-o-keyframes backgroundlines_middle_green {
+			0%,100%   {opacity: .6;}25%  {opacity: .8;}75%  {opacity: .4;}
+		}
+
+
+		@keyframes backgroundlines_inner_green{
+			0%,100%   {opacity: .4;}25%  {opacity: .6;}75%  {opacity: .8;}
+		}
+		@-moz-keyframes backgroundlines_inner_green {
+			0%,100%   {opacity: .4;}25%  {opacity: .6;}75%  {opacity: .8;}
+		}
+		@-webkit-keyframes backgroundlines_inner_green {
+			0%,100%   {opacity: .4;}25%  {opacity: .6;}75%  {opacity: .8;}
+		}
+		@-o-keyframes backgroundlines_inner_green {
+			0%,100%   {opacity: .4;}25%  {opacity: .6;}75%  {opacity: .8;}
+		}
+		
+		
+		
+		
+		@keyframes backgroundlines_white_outer{
+			0%,100%   {stroke:#5b5d5f;}25%  {stroke:#c1c7d0;}75%  {stroke:#9ea3a9;}
+		}
+		@-moz-keyframes backgroundlines_white_outer {
+			0%,100%   {stroke:#5b5d5f;}25%  {stroke:#c1c7d0;}75%  {stroke:#9ea3a9;}
+		}
+		@-webkit-keyframes backgroundlines_white_outer {
+			0%,100%   {stroke:#5b5d5f;}25%  {stroke:#c1c7d0;}75%  {stroke:#9ea3a9;}
+		}
+		@-o-keyframes backgroundlines_white_outer {
+			0%,100%   {stroke:#5b5d5f;}25%  {stroke:#c1c7d0;}75%  {stroke:#9ea3a9;}
+		}
+
+
+		@keyframes backgroundlines_white_middle{
+			0%,100%   {stroke:#c1c7d0;}25%  {stroke:#5b5d5f;}75%  {stroke:#9ea3a9;}
+		}
+		@-moz-keyframes backgroundlines_white_middle {
+			0%,100%   {stroke:#c1c7d0;}25%  {stroke:#5b5d5f;}75%  {stroke:#9ea3a9;}
+		}
+		@-webkit-keyframes backgroundlines_white_middle {
+			0%,100%   {stroke:#c1c7d0;}25%  {stroke:#5b5d5f;}75%  {stroke:#9ea3a9;}
+		}
+		@-o-keyframes backgroundlines_white_middle {
+			0%,100%   {stroke:#c1c7d0;}25%  {stroke:#5b5d5f;}75%  {stroke:#9ea3a9;}
+		}
+
+
+		@keyframes backgroundlines_white_inner{
+			0%,100%   {stroke:#9ea3a9;}25%  {stroke:#c1c7d0;}75%  {stroke:#5b5d5f;}
+		}
+		@-moz-keyframes backgroundlines_white_inner {
+			0%,100%   {stroke:#9ea3a9;}25%  {stroke:#c1c7d0;}75%  {stroke:#5b5d5f;}
+		}
+		@-webkit-keyframes backgroundlines_white_inner {
+			0%,100%   {stroke:#9ea3a9;}25%  {stroke:#c1c7d0;}75%  {stroke:#5b5d5f;}
+		}
+		@-o-keyframes backgroundlines_white_inner {
+			0%,100%   {stroke:#9ea3a9;}25%  {stroke:#c1c7d0;}75%  {stroke:#5b5d5f;}
+		}
+		
+		
+		
+		@keyframes dot{
+			0%,100%   {opacity: 0;} 23%  {opacity: 0;} 25%  {opacity: 1;} 50%  {opacity: .2;}
+		}
+		@-moz-keyframes dot {
+			0%,100%   {opacity: 0;} 23%  {opacity: 0;} 25%  {opacity: 1;} 50%  {opacity: .2;}
+		}
+		@-webkit-keyframes dot {
+			0%,100%   {opacity: 0;} 23%  {opacity: 0;} 25%  {opacity: 1;} 50%  {opacity: .2;}
+		}
+		@-o-keyframes dot {
+			0%,100%   {opacity: 0;} 23%  {opacity: 0;} 25%  {opacity: 1;} 50%  {opacity: .2;}
+		}
+		
+		
+		
+		/*//logo gradient//*/
+		
+		@keyframes rythm_center {
+			0%,100%   {stop-opacity: 0.5;} 88%  {stop-opacity: 0.5;} 90%  {stop-opacity: .15;} 91%   {stop-opacity: .1;} 94%   {stop-opacity: .15;} 96%  {stop-opacity: .5;}
+		}
+		@-moz-keyframes rythm_center {
+			0%,100%   {stop-opacity: 0.5;} 88%  {stop-opacity: 0.5;} 90%  {stop-opacity: .15;} 91%   {stop-opacity: .1;} 94%   {stop-opacity: .15;} 96%  {stop-opacity: .5;}
+		}
+		@-webkit-keyframes rythm_center{
+			0%,100%   {stop-opacity: 0.5;} 88%  {stop-opacity: 0.5;} 90%  {stop-opacity: .15;} 91%   {stop-opacity: .1;} 94%   {stop-opacity: .15;} 96%  {stop-opacity: .5;}
+		}
+		@-o-keyframes rythm_center {
+			0%,100%   {stop-opacity: 0.5;} 88%  {stop-opacity: 0.5;} 90%  {stop-opacity: .15;} 91%   {stop-opacity: .1;} 94%   {stop-opacity: .15;} 96%  {stop-opacity: .5;}
+		}
+		
+		@keyframes rythm_midway {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .2;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-moz-keyframes rythm_midway {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .2;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-webkit-keyframes rythm_midway{
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .2;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-o-keyframes rythm_midway {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .2;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		
+		@keyframes rythm_outside {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .25;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-moz-keyframes rythm_outside {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .25;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-webkit-keyframes rythm_outside{
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .25;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		@-o-keyframes rythm_outside {
+			0%,100%   {stop-opacity: .15;} 88%  {stop-opacity: .15;} 90%  {stop-opacity: .25;} 91%   {stop-opacity: .15;} 94%   {stop-opacity: .2;} 96%  {stop-opacity: .15;}
+		}
+		
+		
+		
+
+		
+		
+		@keyframes arrow_outside {
+			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+		}
+		@-moz-keyframes arrow_center {
+			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+		}
+		@-webkit-keyframes arrow_center{
+			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+		}
+		@-o-keyframes arrow_center {
+			0%,100%   {stop-opacity: 0.1;}  75%   {stop-opacity: .2;} 
+		}
+		
+		@keyframes arrow_midway {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
+		}
+		@-moz-keyframes arrow_midway {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
+		}
+		@-webkit-keyframes arrow_midway{
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
+		}
+		@-o-keyframes arrow_midway {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .4;} 
+		}
+		
+		@keyframes arrow_center {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
+		}
+		@-moz-keyframes arrow_outside {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
+		}
+		@-webkit-keyframes arrow_outside{
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
+		}
+		@-o-keyframes arrow_outside {
+			0%,100%   {stop-opacity: 0.3;}  75%   {stop-opacity: .5;} 
+		}
+		
+
+	
