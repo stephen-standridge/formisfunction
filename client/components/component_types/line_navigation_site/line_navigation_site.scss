@@ -1,0 +1,24 @@
+.line_navigation_site_component {
+  justify-content: flex-start;
+}
+
+.line_navigation_site_component .line__item {
+  display: none;
+}
+.line_navigation_site_component .line__item.active {
+  display: flex;
+}
+
+.line__navigation-contact, .line__navigation-meta {
+  width: 100vw;
+  height: 10vh;
+  justify-content: flex-start;
+}
+
+.line__navigation {
+  width: 100vw;
+  height: 100%;
+  flex-grow: 0;
+  z-index: 1;
+  justify-content: flex-start;
+}

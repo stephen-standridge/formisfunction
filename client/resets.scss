@@ -5,20 +5,24 @@
 }
 
 *, *:before, *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
-    line-height: 1.5;
-		background: #EEEEEE;
+  line-height: 1.5;
+  background: #222222;
 }
 
 html {
   font-size: 15px;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .p {
@@ -29,40 +33,42 @@ html, body {
 }
 
 a[href^="http"]:empty::before {
-    content: attr(href);
+  content: attr(href);
 }
 
 a[href]:not([class]) {
-    color: rgba(100,100,100,1);
-    text-decoration: none;
-    transition: all ease-in-out .3s;
+  color: #646464;
+  text-decoration: none;
+  transition: all ease-in-out .3s;
 }
 
 img {
-    display: block;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 300;
-    height: auto;
-    line-height: 2;
-    position: relative;
-    text-align: center;
-    width: 100%;
+  display: block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  height: auto;
+  line-height: 2;
+  position: relative;
+  text-align: center;
+  width: 100%;
 }
+
 img:before {
-    content: "We're sorry, the image below is missing :(";
-    display: block;
-    margin-bottom: 10px;
+  content: "We're sorry, the image below is missing :(";
+  display: block;
+  margin-bottom: 10px;
 }
+
 img:after {
-    content: "(url: " attr(src) ")";
-    display: block;
-    font-size: 12px;
+  content: "(url: " attr(src) ")";
+  display: block;
+  font-size: 12px;
 }
 
 body {
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-flex;
-    display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
 }
