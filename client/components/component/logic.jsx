@@ -31,6 +31,7 @@ class ComponentLogic extends React.Component {
 
 	handleProps({ component, slug, fetch, requested } = this.props) {
 		const { register, setParam, getParam, isRegistered, unregister } = this.context;
+		if (component && component.error) return;
 		if (!component || component.needsLoad) {
 			requested(slug);
 			fetch(slug);
@@ -92,16 +93,16 @@ class ComponentLogic extends React.Component {
 			component_type = process.env.NODE_ENV == 'DEVELOPMENT' && 'CreateComponent' || 'NotFoundComponent';
 		}
 
-		console.warn(component)
 		const ComponentOfType = components[component_type];
-		return component.needsLoad ? <div className="component__loading"></div> :
-					 component.loading ? <div className="component__loading"></div> :
+		return ((component.error && <div className="component__error">{component.error.message}</div>) ||
+					 (component.needsLoad && <div className="component__loading"></div>) ||
+					 (component.loading && <div className="component__loading"></div>) ||
 					 <ComponentOfType {...this.props}
 						setComponentState={this.setComponentState}
 						classNames={classNames}
 						componentState={this.getComponentState()}>
 					{ children }
-					</ComponentOfType>
+					</ComponentOfType>)
 	}
 }
 

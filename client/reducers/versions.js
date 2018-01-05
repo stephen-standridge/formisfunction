@@ -1,11 +1,11 @@
 import { fromJS } from 'immutable';
-import { COMPONENT_ACTIONS } from '../actions/action_types'
+import { VERSIONS_ACTIONS } from '../actions/action_types'
 
 const initialState = fromJS({ program_versions: {}, article_versions: {} });
 
 export default function update(state = initialState, action) {
 	switch(action.type) {
-		case COMPONENT_ACTIONS.SUCCESS:
+		case VERSIONS_ACTIONS.SUCCESS:
 			const { article_versions, program_versions } = action.payload;
 			article_versions && Object.keys(article_versions).forEach((article)=>{
 				state = state.setIn(['article_versions', article], fromJS(article_versions[article]))

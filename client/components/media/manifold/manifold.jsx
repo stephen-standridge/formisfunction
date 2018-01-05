@@ -22,15 +22,17 @@ class ManifoldMedia extends React.Component {
   }
   getSlug(props=this.props) {
       const { manifold } = props;
-      return manifold.slug;
+      return manifold && manifold.slug || 'ERROR-no-slug';
   }
   getVersion(props=this.props) {
     const { manifold } = props;
+    if (!manifold) return 'ERROR-no-version';
     const { program_versions, current_version } = manifold;
     return program_versions && program_versions[current_version] || {};
   }
   getVersionId(props=this.props) {
     const { manifold } = props;
+    if (!manifold) return 'ERROR-no-version-id';
     const { program_versions, current_version } = manifold;
     return program_versions && program_versions[current_version] && program_versions[current_version].version_id;
   }
@@ -45,7 +47,7 @@ class ManifoldMedia extends React.Component {
   componentDidUpdate(prevProps, prevState) {
       const { manifold, isActive, get_versions, updating } = this.props;
       if (!manifold) return;
-      const prevManifold = prevProps.manifold;
+      const prevManifold = prevProps.manifold || {};
       const prevActive = prevProps.isActive;
       const versionId = this.getVersionId();
 
@@ -135,7 +137,7 @@ class ManifoldMedia extends React.Component {
 
   renderLoadingMaybe(){
     return this.state.hideProgress ? null
-          : <div className="manifold_media__loading"></div>
+          : (this.props.needsLoad && <div className="manifold_media__loading"></div>)
   }
   renderCanvases(){
     const { manifold } = this.props;
@@ -159,7 +161,7 @@ class ManifoldMedia extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   let manifold = state.media.getIn(['programs', ownProps.slug]);
-  manifold = manifold.merge(state.manifold.get(ownProps.slug));
+  manifold = manifold && manifold.merge(state.manifold.get(ownProps.slug));
   const versions = manifold && manifold.getIn([ownProps.slug, 'program_versions']);
 
   return { manifold: manifold && manifold.toJS(), versions: versions && versions.toJS() };

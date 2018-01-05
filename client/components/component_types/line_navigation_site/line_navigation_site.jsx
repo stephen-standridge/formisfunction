@@ -33,9 +33,6 @@ class LineNavigationSiteComponent extends React.Component {
 	render() {
 		const { component, onPrev, onNext, classNames, slug, param } = this.props;
 		return <div className={`component__container ${classNames}`}>
-			<div className="line__navigation-contact">
-					{this.renderContact()}
-			</div>
 			<div className='line__navigation'>
 				<div className='navigation__wrapper'>
 					{this.renderLineNavigation()}
@@ -43,6 +40,9 @@ class LineNavigationSiteComponent extends React.Component {
 			</div>
 			<div className="line__navigation-meta">
 					{this.renderMeta()}
+			</div>
+			<div className="line__navigation-contact">
+					{this.renderContact()}
 			</div>
     </div>
 	}

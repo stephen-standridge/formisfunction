@@ -1,6 +1,7 @@
 import { MANIFOLD_ACTIONS } from './action_types';
 import { database } from '../stores/firebase';
 import  request from 'browser-request';
+
 export function version_url(manifold) {
   const { urlPrefix, slug } = manifold;
   return `${urlPrefix && urlPrefix.length ? urlPrefix : process.env.MANIFOLD_HOST}manifold/${slug}/versions.json`;

@@ -5,8 +5,24 @@ import thunk from 'redux-thunk';
 import * as reducers from '../reducers'
 import { createLogger } from 'redux-logger';
 import { database } from './firebase';
+import { Iterable } from 'immutable';
 
-const logger = createLogger();
+
+const logger = createLogger({
+  stateTransformer: (state) => {
+    let newState = {};
+
+    for (var i of Object.keys(state)) {
+      if (Iterable.isIterable(state[i])) {
+        newState[i] = state[i].toJS();
+      } else {
+        newState[i] = state[i];
+      }
+    };
+
+    return newState;
+  }
+});
 
 const browserHistory = createHistory({
   basename: '',             // The base URL of the app (see below)

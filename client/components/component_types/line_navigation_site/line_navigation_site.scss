@@ -22,3 +22,11 @@
   z-index: 1;
   justify-content: flex-start;
 }
+
+.line__wrapper {
+  display: none;
+}
+
+.line__wrapper.active {
+  display: block;
+}
