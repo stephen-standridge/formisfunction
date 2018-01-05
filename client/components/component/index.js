@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import { ComponentLogic } from './logic'
-import * as actions from '../../actions'
+import { connect } from 'react-redux';
+import { ComponentLogic } from './logic';
+import * as actions from '../../actions';
 
 const mapStateToProps = (state, ownProps) => {
   let store;

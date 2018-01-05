@@ -22,3 +22,4 @@ class ContactComponent extends React.Component {
 }
 
 export { ContactComponent }
+

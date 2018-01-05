@@ -4,15 +4,20 @@ import { fetchMedia, processMedia } from './media';
 import { reportError } from './errors';
 import assign from 'object-assign';
 
-export function create(slug, data) {
+function create(slug, data) {
 	const meta = { slug };
 	return function(dispatch, getState) {
-
 		dispatch({ type: COMPONENT_ACTIONS.CREATE, meta })
+
+		database.ref('components').child(slug).set(data).once('value', new_component => {
+			const component = new_component.val();
+			payload = assign(payload, { component });
+			dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
+		})
 	};
 };
 
-export function fetch(slug='index'){
+function fetch(slug='index'){
 	const meta = { slug };
 	return function(dispatch, getState) {
 		let payload = {
@@ -47,6 +52,8 @@ function fetchAssociation(val, association){
 	}) || []
 }
 
-export function requested(slug){
+function requested(slug){
 	return { type: COMPONENT_ACTIONS.REQUESTED, meta: { slug } }
 }
+
+export { create, fetch, requested };

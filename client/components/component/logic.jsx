@@ -2,8 +2,11 @@ import makeClassNames from 'classnames'
 import { upperFirst } from 'lodash';
 import camelcase from 'lodash.camelcase'
 import * as components from '../component_types';
+import { CreateComponent } from './create/create.jsx';
 import './component.scss'
 import './piece.scss'
+
+components.CreateComponent = CreateComponent;
 
 
 class ComponentLogic extends React.Component {

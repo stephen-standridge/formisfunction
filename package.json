@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@stephen.standridge/manifold": "^0.2.38",
+    "@stephen.standridge/manifold": "^0.4.10",
     "abstracts": "0.0.7",
     "ajax-request": "^1.2.3",
     "babel-core": "^6.4.5",
@@ -23,6 +23,7 @@
     "immutable": "^3.8.1",
     "lodash": "^4.16.6",
     "lodash.camelcase": "^4.3.0",
+    "lodash.snakecase": "^4.1.1",
     "moment": "^2.15.2",
     "node-sass": "^3.7.0",
     "normalizr": "^2.2.1",
