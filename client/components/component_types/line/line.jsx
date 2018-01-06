@@ -21,16 +21,15 @@ class LineComponent extends React.Component {
         const classNames = makeClassNames("line__item", { active, next, prev })
         if (active || prev || next) {
           return <div key={index} className={classNames} >
-            <ComponentCreator key={index} slug={c.slug} isActive={active} isPrev={prev} isNext={next}>
-              <div className="line__controls">
-                { prevState ?
-                  <div className="line__controls--prev clickable" onClick={setComponentState.bind(this, prevState)} >{"<"}</div> :
-                  <div className="line__controls--prev"/> }
-                { nextState ?
-                  <div className="line__controls--next clickable" onClick={setComponentState.bind(this, nextState)} >{">"}</div> :
-                  <div className="line__controls--next"/> }
-              </div>
-            </ComponentCreator>
+            <ComponentCreator key={index} slug={c.slug} isActive={active} isPrev={prev} isNext={next} />
+            <div className="line__controls">
+              { prevState ?
+                <div className="line__controls--prev clickable" onClick={setComponentState.bind(this, prevState)} >{"<"}</div> :
+                <div className="line__controls--prev"/> }
+              { nextState ?
+                <div className="line__controls--next clickable" onClick={setComponentState.bind(this, nextState)} >{">"}</div> :
+                <div className="line__controls--next"/> }
+            </div>
           </div>
         }
       }) }

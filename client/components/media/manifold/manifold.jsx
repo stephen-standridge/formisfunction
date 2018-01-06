@@ -41,8 +41,7 @@ class ManifoldMedia extends React.Component {
     this.componentDidUpdate({ manifold: {} })
   }
   componentWillUnmount(){
-    const { manifold } = this.props;
-    this.clearManifold(manifold);
+    this.clearManifold(this.props);
   }
   componentDidUpdate(prevProps, prevState) {
       const { manifold, isActive, get_versions, updating } = this.props;
@@ -95,19 +94,15 @@ class ManifoldMedia extends React.Component {
   _stopManifold(){
     this.Manifold.stop(`${this.getSlug()}_${this.getVersionId()}`)
   }
-  clearManifold(prevProps){
-    const { isActive } = this.props;
-    const { manifold } = prevProps;
+  clearManifold(props=this.props){
+    const { manifold } = props;
     const { slug } = manifold;
-    const versionId = this.getVersionId(prevProps);
+    const versionId = this.getVersionId(props);
     if (!versionId || !slug) return;
     this.Manifold.unload(`${slug}_${versionId}`);
     if (this.sciptElement) {
       document.body.removeChild(this.scriptElement);
       this.scriptElement = null;
-    }
-    if(!isActive) {
-      this._stopManifold();
     }
   }
   configurationFile(){

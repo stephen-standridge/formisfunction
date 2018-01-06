@@ -1,7 +1,6 @@
 import { COMPONENT_ACTIONS } from './action_types';
 import { database } from '../stores/firebase';
 import { fetchMedia, processMedia } from './media';
-import { reportError } from './errors';
 import assign from 'object-assign';
 
 function create(slug, data) {
@@ -44,6 +43,12 @@ function fetch(slug='index'){
 
 		}).catch(reportError.bind(null, dispatch, meta))
 	}
+}
+
+function reportError(dispatch, meta, error) {
+  console.error(error);
+  const payload = { error };
+  dispatch({ type: COMPONENT_ACTIONS.FAILURE, payload, meta });
 }
 
 function fetchAssociation(val, association){
