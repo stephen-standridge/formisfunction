@@ -96,11 +96,6 @@ class ManifoldMedia extends React.Component {
     this.Manifold.unload(`${slug}_${versionId}`);
   }
 
-  configurationFile(){
-    const { configuration_url } = actions;
-    return configuration_url(this.getSlug(), this.getVersion());
-  }
-
   locateFile(url){
     const { file_url } = actions;
     return file_url(this.getSlug(), this.getVersion(), url)
