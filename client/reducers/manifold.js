@@ -5,7 +5,7 @@ const initialState = fromJS({
 })
 
 export default function update(state = initialState, action) {
-  const { slug, payload, error } = action;
+  const { slug, version_id, payload, error } = action;
   switch(action.type) {
     case MANIFOLD_ACTIONS.VERSIONS_REQUESTED:
       state = state.setIn([slug, 'updating'], true)
@@ -19,8 +19,24 @@ export default function update(state = initialState, action) {
       state = state.setIn([slug, 'error'], false)
     break;
     case MANIFOLD_ACTIONS.VERSIONS_FAILURE:
-      state = state.setIn([slug, 'updating'], false)
+      state = state.setIn([slug, 'updating'], false);
       state = state.setIn([slug, 'error'], error);
+    break;
+    case MANIFOLD_ACTIONS.CONFIGURATION_REQUESTED:
+      state = state.setIn(['configurations', slug, version_id, 'loading'], true);
+      state = state.setIn(['configurations', slug, version_id, 'loaded'], false);
+      state = state.setIn(['configurations', slug, version_id, 'error'], false);
+    break;
+    case MANIFOLD_ACTIONS.CONFIGURATION_SUCCESS:
+      state = state.setIn(['configurations', slug, version_id, 'loading'], false);
+      state = state.setIn(['configurations', slug, version_id, 'loaded'], true);
+      state = state.setIn(['configurations', slug, version_id, 'error'], false);
+      state = state.setIn(['configurations', slug, version_id, 'script'], payload);
+    break;
+    case MANIFOLD_ACTIONS.CONFIGURATION_FAILURE:
+      state = state.setIn(['configurations', slug, version_id, 'loading'], false);
+      state = state.setIn(['configurations', slug, version_id, 'loaded'], false);
+      state = state.setIn(['configurations', slug, version_id, 'error'], error);
     break;
   }
   return state

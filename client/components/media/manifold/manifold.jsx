@@ -1,16 +1,17 @@
+import { ManifoldConfiguration } from './configuration';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/manifold';
 var createManifold = require('@stephen.standridge/manifold');
 import './manifold.scss';
-
+const M = createManifold({}, {});
 class ManifoldMedia extends React.Component {
   constructor(props){
     super(props);
-    this.Manifold = null;
+    this.Manifold = M;
     this.configuration;
-    this.scriptElement;
     this.startManifold = this._startManifold.bind(this);
     this.stopManifold = this._stopManifold.bind(this);
+    this.initializeManifold = this._initializeManifold.bind(this);
     this.state = {
       hideProgress: false
     }
@@ -37,14 +38,13 @@ class ManifoldMedia extends React.Component {
     return program_versions && program_versions[current_version] && program_versions[current_version].version_id;
   }
   componentDidMount(){
-    this.Manifold = createManifold({}, {});
     this.componentDidUpdate({ manifold: {} })
   }
   componentWillUnmount(){
     this.clearManifold(this.props);
   }
   componentDidUpdate(prevProps, prevState) {
-      const { manifold, isActive, get_versions, updating } = this.props;
+      const { manifold, isActive, get_versions, get_configuration, updating } = this.props;
       if (!manifold) return;
       const prevManifold = prevProps.manifold || {};
       const prevActive = prevProps.isActive;
@@ -56,15 +56,7 @@ class ManifoldMedia extends React.Component {
         return get_versions(manifold);
       } else if (!updating) {
         if(versionId !== this.getVersionId(prevProps)){
-          if(window[`${slug}_${versionId}`]){
-            this.initializeManifold(prevProps);
-          } else  {
-            let script = document.createElement('script');
-            script.onload = this.initializeManifold.bind(this, prevProps);
-            script.src = this.configurationFile(manifold);
-            document.body.appendChild(script);
-            this.scriptElement = script;
-          }
+          get_configuration(manifold, this.getVersion());
         } else {
           if(isActive && !prevActive) { this._startManifold(); }
           else if(!isActive && prevActive) { this._stopManifold(); }
@@ -75,15 +67,16 @@ class ManifoldMedia extends React.Component {
       }
 
   }
-  initializeManifold(prevProps){
+  _initializeManifold(prevProps) {
     const { manifold, isActive } = this.props;
     const { options, slug } = manifold;
     const versionId = this.getVersionId();
     let configuration = window[`${slug}_${versionId}`];
+    console.warn(`${slug}_${versionId}`, this.refs[`${slug}_${versionId}`]);
     this.Manifold.load(`${slug}_${versionId}`, configuration, {
       locateFile: this.locateFile.bind(this),
       locateSource: this.locateFile.bind(this),
-      onInitialize: this.clearManifold.bind(this, prevProps)
+      // onInitialize: this.clearManifold.bind(this, prevProps)
     }, this.refs[`${slug}_${versionId}`] );
     if (isActive) { this._startManifold(); }
     else { this._stopManifold(); }
@@ -100,10 +93,6 @@ class ManifoldMedia extends React.Component {
     const versionId = this.getVersionId(props);
     if (!versionId || !slug) return;
     this.Manifold.unload(`${slug}_${versionId}`);
-    if (this.sciptElement) {
-      document.body.removeChild(this.scriptElement);
-      this.scriptElement = null;
-    }
   }
   configurationFile(){
     const { configuration_url } = actions;
@@ -130,25 +119,28 @@ class ManifoldMedia extends React.Component {
     e.preventDefault();
   }
 
-  renderLoadingMaybe(){
-    return this.state.hideProgress ? null
-          : (this.props.needsLoad && <div className="manifold_media__loading"></div>)
-  }
-  renderCanvases(){
-    const { manifold } = this.props;
-    if (!manifold) return <div className={this.classNamesFor('not_found')} />
+  // renderLoadingMaybe(){
+  //   return this.state.hideProgress ? null
+  //         : (this.props.needsLoad && <div className="manifold_media__loading"></div>)
+  // }
+  // renderCanvases(){
+  //   const { manifold } = this.props;
+  //   if (!manifold) return <div className={this.classNamesFor('not_found')} />
 
-    const { options, slug } = manifold;
-    const versionId = this.getVersionId();
-    return <div className={`${slug}_piece manifold`} ref={`${slug}_${versionId}`}/>
-  }
+
+  //   const versionId = this.getVersionId();
+  //   return
+  // }
 
   render(){
-    const { manifold } = this.props;
+    const { manifold, isActive } = this.props;
+    if (!manifold) return <div className="manifold_media__loading"></div>;
+    const { options, slug } = manifold;
+
     return (<div className={this.classNamesFor('component') + `${this.getSlug()}_${this.getVersionId()} canvas_container`}>
-      { this.renderLoadingMaybe() }
-      { this.renderCanvases() }
-      <div className={this.classNamesFor('status')}>{  }</div>
+      <div className={`${slug}_piece manifold`} ref={`${slug}_${this.getVersionId()}`}>
+          { this.getVersionId() && <ManifoldConfiguration isActive={isActive} slug={this.getSlug()} version_id={this.getVersionId()} onload={this.initializeManifold}/>}
+      </div>
     </div>);
   }
 }
@@ -157,9 +149,7 @@ class ManifoldMedia extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   let manifold = state.media.getIn(['programs', ownProps.slug]);
   manifold = manifold && manifold.merge(state.manifold.get(ownProps.slug));
-  const versions = manifold && manifold.getIn([ownProps.slug, 'program_versions']);
-
-  return { manifold: manifold && manifold.toJS(), versions: versions && versions.toJS() };
+  return { manifold: manifold && manifold.toJS() };
 }
 
 const Manifold = connect(

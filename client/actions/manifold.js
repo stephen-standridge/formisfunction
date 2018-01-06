@@ -30,3 +30,19 @@ export function get_versions(manifold) {
     })
   }
 }
+
+export function get_configuration(manifold, version) {
+  return function(dispatch) {
+    const { version_id } = version;
+    const { slug } = manifold;
+    const options = { method:'GET', uri:configuration_url(slug, version), body:'{"relaxed":true}' };
+    dispatch({ type: MANIFOLD_ACTIONS.CONFIGURATION_REQUESTED, slug, version })
+    request(options, function(error, res, payload) {
+      if(error) {
+        dispatch({ type: MANIFOLD_ACTIONS.CONFIGURATION_FAILURE, slug, version_id, error });
+      } else {
+        dispatch({ type: MANIFOLD_ACTIONS.CONFIGURATION_SUCCESS, slug, version_id, payload })
+      }
+    })
+  }
+}
