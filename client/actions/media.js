@@ -16,7 +16,7 @@ const media_types = {
 
 function fetchMedia(media_vals){
   return media_vals.reduce((sum, m_val) => {
-
+    if (!m_val) return sum;
     let data_type = media_types[m_val.type];
     sum[0].push(database.ref(`${data_type}/${m_val.slug}`).once('value'));
     sum[1].push(data_type)

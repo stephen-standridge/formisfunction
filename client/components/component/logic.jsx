@@ -20,46 +20,61 @@ class ComponentLogic extends React.Component {
 	}
 
 	componentWillUnmount() {
-		const { slug, component } = this.props;
+		const { slug, component, withHistory } = this.props;
 		const options = component && component.options;
-		const withHistory = options && options.history;
 		const { unregister, isRegistered, getParam, setParam } = this.context;
 		const currentState = withHistory ? getParam(slug) : this.state.current;
 
+		console.warn('unmounting', slug)
 		if (withHistory && isRegistered(slug)) {
+			console.warn('unregistering', slug)
 			setParam(slug, '')
 			unregister(slug)
 		}
 	}
 
-	handleProps({ component, slug, fetch, requested } = this.props) {
+	handleProps(nextProps=this.props) {
+		const { component, slug, fetch, requested, withHistory } = nextProps;
 		const { register, setParam, getParam, isRegistered, unregister } = this.context;
 		if (component && component.error) return;
+		const prevComponent = this.props.component;
+		const prevSlug = this.props.slug;
+		const prevWithHistory = this.props.withHistory;
+
 		if (!component || component.needsLoad) {
-			requested(slug);
-			fetch(slug);
-		}
-		const options = component && component.options;
-		const withHistory = options && options.history;
-
-		const currentComponent = this.props.component;
-		const currentSlug = this.props.slug;
-		const currentOptions = currentComponent && currentComponent.options;
-		const withHistoryCurrently = currentOptions && currentOptions.history;
-
-		if (withHistory && !isRegistered(slug)) {
-			if (isRegistered(currentSlug)) {
-				//if the current component is registered, switch the registration it
-				register(slug, otherSlug);
-			} else {
-				register(slug);
+			if (!isRegistered(slug)) {
+				if (prevWithHistory && !withHistory) {
+					/*unregister*/
+					console.warn('==========> unregistering', slug)
+					if (getParam(prevSlug)) setParam(prevSlug, '');
+					unregister(prevSlug);
+				}
+				if (prevWithHistory && withHistory) {
+					console.warn('==========> register other', slug, prevSlug)
+					if (getParam(prevSlug)) setParam(prevSlug, '');
+					register(slug, isRegistered(prevSlug) && prevSlug);
+				}
+				if (!prevWithHistory && withHistory) {
+					console.warn('==========> registering', slug)
+					register(slug, false);
+				}
+				if (!prevWithHistory && !withHistory) {
+					console.warn('==========> nothing')
+					/*nothing*/
+				}
 			}
+			console.warn(slug, this.props.component && this.props.component.slug)
+			return fetch(slug);
 		}
 
+		const { options } = component;
 		const currentState = withHistory ? getParam(slug) : this.state.current;
 		if (component && !currentState) {
 			const current = options && options.initial_state || null;
-			this.setState({ current }, () =>{ if (withHistory) setParam(slug, current) })
+			this.setState({ current }, () =>{
+				if (component.loading) return;
+				if (withHistory) setParam(slug, current)
+			})
 		}
 	}
 
@@ -79,7 +94,7 @@ class ComponentLogic extends React.Component {
 	}
 
 	render(){
-		const { component, children } = this.props;
+		const { component, children, slug } = this.props;
 		if (!component) {
 			return <div className={`component__container component__loading`}>{ children }</div>;
 		}

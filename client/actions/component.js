@@ -57,8 +57,8 @@ function fetchAssociation(val, association){
 	}) || []
 }
 
-function requested(slug){
-	return { type: COMPONENT_ACTIONS.REQUESTED, meta: { slug } }
-}
+// function requested(slug){
+// 	return { type: COMPONENT_ACTIONS.REQUESTED, meta: { slug } }
+// }
 
-export { create, fetch, requested };
+export { create, fetch };

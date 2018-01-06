@@ -36,7 +36,7 @@ export default function update(state = initialState, action) {
 				state = state.set(slug, fromJS(component));
 				break;
 			}
-		case COMPONENT_ACTIONS.REQUESTED:
+		case COMPONENT_ACTIONS.REQUEST:
 			{
 				const { slug } = meta;
 				state = state.update(slug, (c=fromJS({}))=> c.merge(fromJS({ loading: true, needsLoad: false })));
