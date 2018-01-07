@@ -18,7 +18,7 @@ class ComponentLogic extends React.Component {
 		this.getCurrentState = this._getCurrentState.bind(this);
 		this.getNextState = this._getNextState.bind(this);
 		this.getPrevState = this._getPrevState.bind(this);
-		this.state = { current: 0 };
+		this.state = { current: -1 };
 	}
 
 	componentWillUnmount() {
@@ -27,9 +27,7 @@ class ComponentLogic extends React.Component {
 		const { unregister, isRegistered, getParam, setParam } = this.context;
 		const currentState = withHistory ? getParam(slug) : this.state.current;
 
-		console.warn('unmounting', withHistory, isRegistered(slug), slug)
 		if (withHistory && isRegistered(slug)) {
-			console.warn('unregistering', slug)
 			setParam(slug, '')
 			unregister(slug)
 		}
@@ -46,16 +44,12 @@ class ComponentLogic extends React.Component {
 		if (!component || component.needsLoad) {
 			if (!isRegistered(slug)) {
 				if (prevWithHistory && !withHistory) {
-					/*unregister*/
-					console.warn('==========> unregistering', slug)
 					if (getParam(prevSlug)) setParam(prevSlug, '');
 					unregister(prevSlug);
 				} else if (withHistory && slug === prevSlug) {
-					console.warn('registering', slug)
 					if (isRegistered(slug)) return
 					register(slug);
 				} else if (withHistory) {
-					console.warn('==========> register other', slug, prevSlug);
 					if (getParam(prevSlug)) setParam(prevSlug, '');
 					register(slug, isRegistered(prevSlug) && prevSlug);
 				}
@@ -63,14 +57,17 @@ class ComponentLogic extends React.Component {
 			return fetch(slug);
 		}
 
-		const { options } = component;
-		const currentState = withHistory ? getParam(slug) : this.state.current;
+		const currentState = withHistory && getParam(slug);
+
 		if (component && !currentState) {
-			const current = options && options.initial_state || null;
-			this.setState({ current }, () =>{
-				if (component.loading) return;
-				if (withHistory) setParam(slug, current)
-			})
+			const { options, states } = component;
+			const initial = options && options.initial_state || null;
+			if (withHistory && initial) {
+				setParam(slug, initial)
+			} else {
+				const current = initial && findIndex(states, function(s){ return s == initial });
+				if (current >= 0) this.setState({ current })
+			}
 		}
 	}
 
@@ -94,8 +91,6 @@ class ComponentLogic extends React.Component {
 		} else {
 			current = this.state.current;
 		}
-		console.warn(getParam(slug), states, )
-		console.warn(current);
 		return current;
 	}
 

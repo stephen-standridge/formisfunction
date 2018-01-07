@@ -74,12 +74,13 @@ class ParamProvider extends React.Component {
 
   _setComponentParam(slug, param) {
     let atIndex = this.registered[slug];
-    // if (isNaN(atIndex)) {
-    //   this.registerComponent(slug);
-    //   atIndex = this.registered[slug];
-    // }
+    if (isNaN(atIndex)) {
+      this.registerComponent(slug);
+      atIndex = this.registered[slug];
+    }
 
-    console.warn(atIndex, param, '/' + this.set.join('/'), this.set);
+    this.indices.length = atIndex + 1;
+    this.set.length = atIndex + 1;
     this.set[atIndex] = param;
     this.context.router.history.push('/' + this.set.join('/'))
   }
