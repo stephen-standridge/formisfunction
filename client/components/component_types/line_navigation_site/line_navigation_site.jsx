@@ -18,7 +18,9 @@ class LineNavigationSiteComponent extends React.Component {
 	renderContact() {
 		const { component } = this.props;
 		const { contact } = component;
-		return contact && contact.map(function(c, i){ return <ComponentCreator slug={c.slug} key={i}/> });
+		return contact && contact.map(function(c, i){
+      return <ComponentCreator slug={c.slug} key={i}/>
+    });
 	}
 	renderControls() {
 		const { component, toPrevState, toNextState, currentSlug, nextSlug, prevSlug } = this.props;

@@ -10,7 +10,6 @@ function createTypeEnum(components) {
     snaked.pop();
     returned[componentKeys[i]] = snaked.join('_');
   }
-  console.error(returned);
   return returned;
 }
 
@@ -23,7 +22,6 @@ const createable = {
 class CreateComponent extends React.Component {
   render() {
     const { component, onPrev, onNext, classNames, create } = this.props;
-    console.warn(component);
     return <div className={`component__container ${classNames}`}>
       <div className="component__center" >
         {`create ${component.component_type}`}

@@ -8,7 +8,7 @@ class PieceMetaComponent extends React.Component {
 		this.state = { active: {} };
 	}
 	toggleActive(part){
-		this.setState(({ active })=>{
+		this.setState(function({ active }) {
 			return Object.assign({ active }, { active: { [part]: !active[part] }})
 		})
 	}
@@ -23,11 +23,11 @@ class PieceMetaComponent extends React.Component {
 		const { slug } = component;
 
 		return <div className={`piece__meta--${slug} ${this.classNamesFor('meta')}` }>
-			  { component.collections.map((collection, i)=> {
+			  { component.collections.map(function(collection, i) {
 			  	let classNames = `piece__collection--wrapper piece__${collection}--wrapper clickable ${this.classNamesFor(collection)}`;
 			  	return collection && <div className={classNames} key={i} onClick={this.toggleActive.bind(this, collection)}>
 			  		<div className={`${this.classNamesFor('collection')}`} >
-				  		{ component[collection] && component[collection].map((m, i)=>{
+				  		{ component[collection] && component[collection].map(function(m, i) {
 				  			let MediaOfType = media_component_types[capitalize(m.type)];
 				  			return <MediaOfType slug={m.slug} key={i} isActive={isActive} />
 				  		})}

@@ -16,6 +16,7 @@ export default function update(state = initialState, action) {
 				component.media = [];
 				component.states = [];
 				let collections = [];
+
 				media && media.forEach((m,i)=>{
 					if(!m) return;
 					const { collection, state } = m;
@@ -51,7 +52,6 @@ export default function update(state = initialState, action) {
 			}
 		case COMPONENT_ACTIONS.CREATE:
 			{
-
 			}
 	}
   return state

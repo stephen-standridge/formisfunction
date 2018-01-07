@@ -10,7 +10,7 @@ class ArticleMedia extends React.Component {
 		this.state = { active: {} };
 	}
 	toggleActive(part){
-		this.setState(({ active })=>{
+		this.setState(function({ active }) {
 			return Object.assign({ active }, { active: { [part]: !active[part] }})
 		})
 	}

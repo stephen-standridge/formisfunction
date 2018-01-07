@@ -4,4 +4,4 @@ export * from './line/line.jsx';
 export * from './emscripten_wrapper/emscripten_wrapper.jsx';
 export * from './manifold_wrapper/manifold_wrapper.jsx';
 export * from './contact/contact.jsx';
-export * from './subscription/subscription.jsx';
+export * from './subscribe/subscribe.jsx';

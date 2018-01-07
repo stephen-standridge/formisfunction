@@ -26,11 +26,20 @@ function fetch(slug='index'){
 		};
 
 		dispatch({ type: COMPONENT_ACTIONS.REQUEST, meta })
-
 		database.ref(`components/${slug}`).once('value', component_snap => {
 			const val = component_snap.val();
-			const promises = fetchAssociation(val, 'media');
+			if (!val){
+				reportError(dispatch, meta, { message: `attempted to fetch component ${slug} but it was not found or not a component.`})
+				return;
+			}
+
 			payload = assign(payload, { component: val });
+
+			if (!val.media) {
+				dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
+				return;
+			}
+			const promises = fetchAssociation(val, 'media');
 
 			promises.length && Promise.all(promises).then((snaps) => {
 				const vals = snaps.map((snap) => snap.val());

@@ -1,7 +1,8 @@
-import './subscription.scss';
+import { connect } from 'react-redux'
 import isEmail from 'validator/lib/isEmail';
+import './subscribe.scss';
 
-class SubscriptionComponent extends React.Component {
+class Subscribe extends React.Component {
   constructor(props){
     super(props);
     this.state = { active: false, valid: true, subscribed: false };
@@ -91,4 +92,13 @@ class SubscriptionComponent extends React.Component {
   }
 }
 
-export { SubscriptionComponent }
+const mapStateToProps = (state, ownProps) => {
+  const store = state.subscription.toJS();
+  return { store: store }
+}
+
+const SubscribeComponent = connect(
+  mapStateToProps
+)(Subscribe)
+
+export { SubscribeComponent }

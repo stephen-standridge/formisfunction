@@ -102,10 +102,10 @@ class EmscriptenMedia extends React.Component {
     e.preventDefault();
   }
   monitorRunDependencies(left){
-    this.setState((prevState) => {
+    this.setState(function(prevState) {
       let total = Math.max(prevState.total, left);
       return Object.assign( prevState, { total, loaded: total - left });
-    }, ()=>{
+    }, function(){
       const { total } = this.state;
       this.Module.setStatus(left ? `Preparing... (${total-left}/${total})` : 'All downloads complete.');
     })
@@ -120,7 +120,7 @@ class EmscriptenMedia extends React.Component {
     const { emscripten } = this.props;
     return (<div className="emscripten_media__component">
       { this.renderLoadingMaybe() }
-      <canvas ref={(canv) => {
+      <canvas ref={function(canv) {
         this.canvasElement = canv;
         this.canvasElement && this.canvasElement.addEventListener("webglcontextlost", this.onContextLoss.bind(this), false);
       }} />
