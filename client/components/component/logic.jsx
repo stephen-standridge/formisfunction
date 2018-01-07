@@ -1,5 +1,5 @@
 import makeClassNames from 'classnames'
-import { upperFirst } from 'lodash';
+import { upperFirst, findIndex } from 'lodash';
 import camelcase from 'lodash.camelcase'
 import * as components from '../component_types';
 import { CreateComponent } from './create/create.jsx';
@@ -13,10 +13,12 @@ class ComponentLogic extends React.Component {
 	constructor(props) {
 		super(props);
 		this.componentWillReceiveProps = this.handleProps;
-		this.componentWillMount = this.handleProps;
+		this.componentDidMount = this.handleProps;
 		this.setComponentState = this._setComponentState.bind(this);
-		this.getComponentState = this._getComponentState.bind(this);
-		this.state = { current: undefined };
+		this.getCurrentState = this._getCurrentState.bind(this);
+		this.getNextState = this._getNextState.bind(this);
+		this.getPrevState = this._getPrevState.bind(this);
+		this.state = { current: 0 };
 	}
 
 	componentWillUnmount() {
@@ -25,7 +27,7 @@ class ComponentLogic extends React.Component {
 		const { unregister, isRegistered, getParam, setParam } = this.context;
 		const currentState = withHistory ? getParam(slug) : this.state.current;
 
-		console.warn('unmounting', slug)
+		console.warn('unmounting', withHistory, isRegistered(slug), slug)
 		if (withHistory && isRegistered(slug)) {
 			console.warn('unregistering', slug)
 			setParam(slug, '')
@@ -48,22 +50,16 @@ class ComponentLogic extends React.Component {
 					console.warn('==========> unregistering', slug)
 					if (getParam(prevSlug)) setParam(prevSlug, '');
 					unregister(prevSlug);
-				}
-				if (prevWithHistory && withHistory) {
-					console.warn('==========> register other', slug, prevSlug)
+				} else if (withHistory && slug === prevSlug) {
+					console.warn('registering', slug)
+					if (isRegistered(slug)) return
+					register(slug);
+				} else if (withHistory) {
+					console.warn('==========> register other', slug, prevSlug);
 					if (getParam(prevSlug)) setParam(prevSlug, '');
 					register(slug, isRegistered(prevSlug) && prevSlug);
 				}
-				if (!prevWithHistory && withHistory) {
-					console.warn('==========> registering', slug)
-					register(slug, false);
-				}
-				if (!prevWithHistory && !withHistory) {
-					console.warn('==========> nothing')
-					/*nothing*/
-				}
 			}
-			console.warn(slug, this.props.component && this.props.component.slug)
 			return fetch(slug);
 		}
 
@@ -79,22 +75,63 @@ class ComponentLogic extends React.Component {
 	}
 
 	_setComponentState(current) {
-		const { slug, component } = this.props;
+		const { slug, component, withHistory } = this.props;
+		const { states } = component;
 		const { setParam } = this.context;
-		const withHistory = component && component.options && component.options.history;
-		return this.setState({ current }, () =>{ if (withHistory) setParam(slug, current) })
+		if (withHistory) {
+			return setParam(slug, states[current])
+		}
+		return this.setState({ current });
 	}
 
-	_getComponentState() {
-		const { slug, component } = this.props;
+	_getCurrentState() {
+		const { slug, component, withHistory } = this.props;
+		const { states } = component;
 		const { getParam } = this.context;
-		const { current } = this.state;
-		const withHistory = component && component.options && component.options.history;
-		return withHistory ? getParam(slug) : current;
+		let current;
+		if (withHistory) {
+			current = findIndex(states, function(s) { return s == getParam(slug) });
+		} else {
+			current = this.state.current;
+		}
+		console.warn(getParam(slug), states, )
+		console.warn(current);
+		return current;
+	}
+
+	_getPrevState() {
+		const { slug, component, withHistory } = this.props;
+		const { states } = component;
+		const { getParam } = this.context;
+		let current;
+
+		if (withHistory) {
+			current = findIndex(states, function(s) { return s == getParam(slug) });
+		} else {
+			current = this.state.current;
+		}
+
+    return (current - 1) >= 0 ? (current - 1) : states.length - 1;
+	}
+
+	_getNextState() {
+		const { slug, component, withHistory } = this.props;
+		const { states } = component;
+		const { getParam } = this.context;
+		let current;
+
+		if (withHistory) {
+			current = findIndex(states, function(s) { return s == getParam(slug) });
+		} else {
+			current = this.state.current;
+		}
+
+    return (current + 1) < states.length ? (current + 1) : 0;
 	}
 
 	render(){
 		const { component, children, slug } = this.props;
+		let states = component && component.states || [];
 		if (!component) {
 			return <div className={`component__container component__loading`}>{ children }</div>;
 		}
@@ -116,9 +153,13 @@ class ComponentLogic extends React.Component {
 					 (component.needsLoad && <div className="component__loading"></div>) ||
 					 (component.loading && <div className="component__loading"></div>) ||
 					 <ComponentOfType {...this.props}
+					 	toNextState={this.setComponentState.bind(this, this.getNextState())}
+					 	toPrevState={this.setComponentState.bind(this, this.getPrevState())}
 						setComponentState={this.setComponentState}
 						classNames={classNames}
-						componentState={this.getComponentState()}>
+						currentSlug={states[this.getCurrentState()]}
+						nextSlug={states[this.getNextState()]}
+						prevSlug={states[this.getPrevState()]}>
 					{ children }
 					</ComponentOfType>)
 	}

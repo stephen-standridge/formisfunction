@@ -5,15 +5,15 @@ import './line_navigation_site.scss';
 
 class LineNavigationSiteComponent extends React.Component {
 	getLineSlug(){
-		const { component, componentState, setComponentState } = this.props;
+		const { component, currentSlug } = this.props;
 		const { line_navigation } = component;
-    const foundLine = line_navigation && line_navigation.filter(function(line, lineIndex){ return line.slug == componentState });
+    const foundLine = line_navigation && line_navigation.filter(function(line, lineIndex){ return line.slug == currentSlug });
     const line = foundLine.length && foundLine[0];
-    const slug = line && line.slug || "not_found";
+    const slug = line && line.slug;
     return slug;
 	}
-	shouldComponentUpdate({ componentState }, nextState) {
-		return componentState !== this.props.componentState;
+	shouldComponentUpdate({ currentSlug }, nextState) {
+		return currentSlug !== this.props.currentSlug;
 	}
 	renderContact() {
 		const { component } = this.props;
@@ -21,20 +21,13 @@ class LineNavigationSiteComponent extends React.Component {
 		return contact && contact.map(function(c, i){ return <ComponentCreator slug={c.slug} key={i}/> });
 	}
 	renderControls() {
-		const { component, componentState, setComponentState } = this.props;
-		const selectedIndex = component.states.findIndex(function(c){ return c == componentState }) || 0;
-    const prevIndex = (selectedIndex - 1);
-    const prevState = prevIndex >= 0 ? component.states[prevIndex] : component.states[component.states.length - 1];
-
-    const nextIndex = (selectedIndex + 1);
-    const nextState = nextIndex <= component.states.length - 1 ? component.states[nextIndex] : component.states[0];
-
+		const { component, toPrevState, toNextState, currentSlug, nextSlug, prevSlug } = this.props;
     return <div className="line-navigation__controls">
-      { prevState ?
-        <div className="line-navigation__controls--prev clickable" onClick={setComponentState.bind(this, prevState)} >{"<"}</div> :
+      { prevSlug ?
+        <div className="line-navigation__controls--prev clickable" onClick={toPrevState} >{"<"}</div> :
         <div className="line-navigation__controls--prev"/> }
-      { nextState ?
-        <div className="line-navigation__controls--next clickable" onClick={setComponentState.bind(this, nextState)} >{">"}</div> :
+      { nextSlug ?
+        <div className="line-navigation__controls--next clickable" onClick={toNextState} >{">"}</div> :
         <div className="line-navigation__controls--next"/> }
     </div>
 	}
@@ -43,9 +36,9 @@ class LineNavigationSiteComponent extends React.Component {
 		return <div className={`line-navigation__container ${classNames}`}>
 			<div className='line-navigation'>
 				<div className='line-navigation__wrapper'>
-					<ComponentCreator slug={this.getLineSlug()} withHistory={true}>
+					{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}>
             { this.renderControls() }
-          </ComponentCreator>
+          </ComponentCreator> }
 				</div>
 			</div>
 			<div className="line-navigation__contact">

@@ -53,7 +53,7 @@ class ParamProvider extends React.Component {
       return;
     }
     this.indices.splice(atIndex, 1);
-    this.indices.forEach(function (s, i) { this.registered[s] = i });
+    this.indices.forEach(function (s, i) { this.registered[s] = i }.bind(this));
   }
 
   parseParams({ match, location }) {
@@ -74,10 +74,12 @@ class ParamProvider extends React.Component {
 
   _setComponentParam(slug, param) {
     let atIndex = this.registered[slug];
-    if (isNaN(atIndex)) {
-      this.registerComponent(slug);
-      atIndex = this.registered[slug];
-    }
+    // if (isNaN(atIndex)) {
+    //   this.registerComponent(slug);
+    //   atIndex = this.registered[slug];
+    // }
+
+    console.warn(atIndex, param, '/' + this.set.join('/'), this.set);
     this.set[atIndex] = param;
     this.context.router.history.push('/' + this.set.join('/'))
   }

@@ -4,21 +4,15 @@ import './line.scss';
 
 class LineComponent extends React.Component {
   render(){
-    const { slug, component, componentState, classNames, setComponentState, children } = this.props;
-    const selectedIndex = component.states.findIndex(function(c){ return c == componentState }) || 0;
-    const prevIndex = (selectedIndex - 1);
-    const prevState = prevIndex >= 0 ? component.states[prevIndex] : component.states[component.states.length - 1];
-
-    const nextIndex = (selectedIndex + 1);
-    const nextState = nextIndex <= component.states.length - 1 ? component.states[nextIndex] : component.states[0];
+    const { slug, component, classNames, children, nextSlug, prevSlug, currentSlug, toNextState, toPrevState } = this.props;
 
     return <div className={`line__container ${classNames}`}>
       <div className="line__items">
       { component && component.views && component.views.map((c, index) => {
-        let active = c.slug == componentState;
-        let prev = c.slug == prevState;
-        let next = c.slug == nextState;
-        const classNames = makeClassNames("line__item", { active, next, prev })
+        let active = c.slug == currentSlug;
+        let prev = c.slug == prevSlug;
+        let next = c.slug == nextSlug;
+        const classNames = makeClassNames("line__item", { active, next, prev });
         if (active || prev || next) {
           return <div key={index} className={classNames} >
             <ComponentCreator key={index} slug={c.slug} isActive={active} withHistory={false} isPrev={prev} isNext={next} />
@@ -28,11 +22,11 @@ class LineComponent extends React.Component {
       </div>
       <div className="line__controls-wrapper">
         <div className="line__controls">
-          { prevState ?
-            <div className="line__controls--prev clickable" onClick={setComponentState.bind(this, prevState)} >{"<"}</div> :
+          { prevSlug ?
+            <div className="line__controls--prev clickable" onClick={toPrevState} >{"<"}</div> :
             <div className="line__controls--prev"/> }
-          { nextState ?
-            <div className="line__controls--next clickable" onClick={setComponentState.bind(this, nextState)} >{">"}</div> :
+          { nextSlug ?
+            <div className="line__controls--next clickable" onClick={toNextState} >{">"}</div> :
             <div className="line__controls--next"/> }
         </div>
         { children }
