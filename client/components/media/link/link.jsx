@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router'
 import CopyToClipboard from 'react-copy-to-clipboard';
+import * as link_images from '../../../assets/link_images';
 import './link.scss';
 
 class LinkMedia extends React.Component {
@@ -15,6 +16,7 @@ class LinkMedia extends React.Component {
 		return `link__${part} ${(classNames && classNames[part]) || ''}}`
 	}
 	render(){
+		console.error(link_images);
 		const { link } = this.props;
 		if (!link) return <div className={this.classNamesFor('not_found')} />
 		const { url, anchor } = link;

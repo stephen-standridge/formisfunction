@@ -68,6 +68,7 @@
   "devDependencies": {
     "basic-tree": "1.2.1",
     "file-loader": "^0.11.2",
+    "svg-react-loader": "^0.4.5",
     "url-loader": "^0.5.7"
   }
 }
