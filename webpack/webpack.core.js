@@ -17,7 +17,6 @@ module.exports = {
     loaders: [
     { test: /\.scss$/, loader: extractCSS.extract(['css-loader','sass-loader']) },
     { test: /\.css$/, loader: extractCSS.extract(['css-loader']) },
-    // { test: /\.svg$/, loader: 'url-loader?limit=65000&mimetype=image/svg+xml&name=fonts/[name].[ext]' },
     { test: /\.woff$/, loader: 'url-loader?limit=65000&mimetype=application/font-woff&name=fonts/[name].[ext]' },
     { test: /\.woff2$/, loader: 'url-loader?limit=65000&mimetype=application/font-woff2&name=fonts/[name].[ext]' },
     { test: /\.[ot]tf$/, loader: 'url-loader?limit=65000&mimetype=application/octet-stream&name=fonts/[name].[ext]' },
@@ -37,19 +36,7 @@ module.exports = {
       query: {
         presets: ['es2015']
       }
-    },
-   {
-          test: /\.svg$/,
-          exclude: /node_modules/,
-          loader: 'svg-react-loader',
-          query: {
-              classIdPrefix: '[name]-[hash:8]__',
-              propsMap: {
-                  fillRule: 'fill-rule'
-              },
-              xmlnsTest: /^xmlns.*$/
-          }
-      }]
+    }]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss', '.svg']

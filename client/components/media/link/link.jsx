@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router'
 import CopyToClipboard from 'react-copy-to-clipboard';
-import * as link_images from '../../../assets/link_images';
+import * as link_images from './link_images';
 import './link.scss';
 
 class LinkMedia extends React.Component {
@@ -20,6 +20,13 @@ class LinkMedia extends React.Component {
 		const { link } = this.props;
 		if (!link) return <div className={this.classNamesFor('not_found')} />
 		const { url, anchor } = link;
+		const ImageOfType = link_images[anchor];
+		if (ImageOfType) {
+			return <a className="link__media link__media--image clickable" href={link.url} target="_blank">
+				<ImageOfType></ImageOfType>
+			</a>
+		}
+
 		const { copied } = this.state;
 		const isEmail = url.split("@").length > 1;
 		const copiedClass = copied == false ? 'copied_again' : copied == true ? 'copied' : ''
