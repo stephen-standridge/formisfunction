@@ -22,7 +22,7 @@ class LinkMedia extends React.Component {
 		const { url, anchor } = link;
 		const ImageOfType = link_images[anchor];
 		if (ImageOfType) {
-			return <a className="link__media link__media--image clickable" href={link.url} target="_blank">
+			return <a className="link__media link__media--image" href={link.url} target="_blank">
 				<ImageOfType></ImageOfType>
 			</a>
 		}

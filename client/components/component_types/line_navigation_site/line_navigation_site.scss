@@ -1,5 +1,5 @@
 
-.line-navigation__contact, .line-navigation__controls {
+.line-navigation__contact {
   width: 100vw;
   height: 10vh;
   justify-content: flex-start;
@@ -30,20 +30,8 @@
 /* controls */
 //////////////
 
-.line-navigation__controls {
-  margin-bottom: 5px;
-  flex-basis: 60px;
-  flex-shrink: 0;
-  flex-grow: 0;
-  align-self: center;
-  flex-direction: row;
-  align-items: center;
-  user-select: none;
-  justify-content: center;
-  width: 100%;
-}
-
 .line-navigation__controls--prev, .line-navigation__controls--next {
+  align-self: flex-end;
   font-family: 'Arial';
   font-size: 1.3rem;
   flex-direction: row;

@@ -12,18 +12,21 @@
 }
 .app .clickable {
   cursor: pointer;
+}
+
+.app .button {
+  cursor: pointer;
   box-shadow: 4px 4px 2px #282828;
   background-color: #646464;
   -webkit-transition: background-color 0.3s;
   /* Safari */
   transition: background-color 0.3s;
 }
-.app .clickable:hover {
+.app .button:hover {
   background-color: #646464;
   box-shadow: 3px 3px 1px #282828;
 }
 .app .link__media, .app .link {
-  position: relative;
   text-decoration: none;
   color: #282828;
   user-select: none;

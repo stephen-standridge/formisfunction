@@ -1,9 +1,9 @@
 .subscription__wrapper {
-  height: 30px;
+    align-items: center;
 }
 .subscription__wrapper .subscription__button {
   margin-right: 10px;
-  padding: 5px 8px;
+  padding: 10px;
 }
 .subscription__wrapper .subscription__button .subscribed {
   color: rgba(100, 155, 100, 0.5) !important;

@@ -28,8 +28,9 @@
   position: relative;
   flex-basis: 100%;
   flex: 1;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
+  // overflow-x: hidden;
+  // overflow-y: scroll;
   @media (max-width: 600px) {
     height: 100%;
   }
@@ -55,16 +56,8 @@
 //////////////
 
 .line__controls {
-  margin-bottom: 5px;
-  flex-basis: 60px;
-  flex-shrink: 0;
-  flex-grow: 0;
-  align-self: center;
   flex-direction: row;
-  align-items: center;
-  user-select: none;
-  justify-content: center;
-  width: 100%;
+  justify-content: space-between;
 }
 
 .line__controls--prev, .line__controls--next {
@@ -78,6 +71,15 @@
   align-items: center;
   color: #3c3c3c;
 }
+
+.line__controls--prev {
+  align-self: flex-start;
+}
+
+.line__controls--next {
+  align-self: flex-end;
+}
+
 .line__controls--prev:hover, .line__controls--next:hover {
   color: #1e1e1e;
 }

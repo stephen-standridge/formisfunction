@@ -27,12 +27,13 @@
 .contact__links {
   flex-direction: row;
 }
+
 .contact__links .link__media {
+  display: flex;
   font-size: 1.1rem;
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  width: 70px;
   &:after {
     content: 'copied';
     position: absolute;

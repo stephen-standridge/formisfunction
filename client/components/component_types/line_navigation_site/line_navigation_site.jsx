@@ -22,26 +22,19 @@ class LineNavigationSiteComponent extends React.Component {
       return <ComponentCreator slug={c.slug} key={i}/>
     });
 	}
-	renderControls() {
-		const { component, toPrevState, toNextState, currentSlug, nextSlug, prevSlug } = this.props;
-    return <div className="line-navigation__controls">
-      { prevSlug ?
-        <div className="line-navigation__controls--prev clickable" onClick={toPrevState} >{"<"}</div> :
-        <div className="line-navigation__controls--prev"/> }
-      { nextSlug ?
-        <div className="line-navigation__controls--next clickable" onClick={toNextState} >{">"}</div> :
-        <div className="line-navigation__controls--next"/> }
-    </div>
-	}
 	render() {
-		const { component, onPrev, onNext, classNames, slug, param } = this.props;
+		const { component, toPrevState, toNextState, classNames, slug, param, nextSlug, prevSlug } = this.props;
 		return <div className={`line-navigation__container ${classNames}`}>
 			<div className='line-navigation'>
+        { prevSlug ?
+          <div className="line-navigation__controls--prev button" onClick={toPrevState} >{"<"}</div> :
+          <div className="line-navigation__controls--prev"/> }
 				<div className='line-navigation__wrapper'>
-					{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}>
-            { this.renderControls() }
-          </ComponentCreator> }
+					{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}></ComponentCreator> }
 				</div>
+        { nextSlug ?
+          <div className="line-navigation__controls--next button" onClick={toNextState} >{">"}</div> :
+          <div className="line-navigation__controls--next"/> }
 			</div>
 			<div className="line-navigation__contact">
 					{this.renderContact()}

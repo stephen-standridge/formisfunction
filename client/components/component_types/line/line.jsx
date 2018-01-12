@@ -20,16 +20,13 @@ class LineComponent extends React.Component {
         }
       }) }
       </div>
-      <div className="line__controls-wrapper">
-        <div className="line__controls">
-          { prevSlug ?
-            <div className="line__controls--prev clickable" onClick={toPrevState} >{"<"}</div> :
-            <div className="line__controls--prev"/> }
-          { nextSlug ?
-            <div className="line__controls--next clickable" onClick={toNextState} >{">"}</div> :
-            <div className="line__controls--next"/> }
-        </div>
-        { children }
+      <div className="line__controls">
+        { prevSlug ?
+          <div className="line__controls--prev button" onClick={toPrevState} >{"<"}</div> :
+          <div className="line__controls--prev"/> }
+        { nextSlug ?
+          <div className="line__controls--next button" onClick={toNextState} >{">"}</div> :
+          <div className="line__controls--next"/> }
       </div>
     </div>
   }
