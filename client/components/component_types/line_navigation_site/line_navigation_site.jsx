@@ -1,7 +1,7 @@
 import { ComponentCreator } from '../../component';
 import { ContactComponent } from '../contact/contact.jsx';
 import { Link } from '../../media';
-import { orderBy } from 'lodash';
+import { orderBy, capitalize } from 'lodash';
 import './line_navigation_site.scss';
 
 class LineNavigationSiteComponent extends React.Component {
@@ -19,7 +19,7 @@ class LineNavigationSiteComponent extends React.Component {
   renderLineNavigation() {
     const { component, setComponentState, slug, param } = this.props;
     return component && component.line_navigation && orderBy(component.line_navigation, 'order').map((line, i) => {
-      return <div key={i}className={`line-navigation__link ${slug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
+      return <div key={i}className={`line-navigation__link josefin_regular ${slug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
         {line.slug}
       </div>
     });
@@ -37,8 +37,8 @@ class LineNavigationSiteComponent extends React.Component {
     const { title } = options;
 		return <div className={`line-navigation__container ${classNames}`}>
       <div className='line-navigation__header'>
-        <div className='line-navigation__title'>
-          { title }
+        <div className='line-navigation__title lato large wide'>
+          { typeof title == 'string' && title.split(' ').map(function(t){ return capitalize(t)}).join(' ') || null }
         </div>
         <div className='line-navigation__links'>
           { this.renderLineNavigation() }

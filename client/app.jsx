@@ -10,6 +10,13 @@ const [store, history] = configureStore()
 
 var div = document.createElement("div");
 div.id = 'mount'
+
+var link = document.createElement('link');
+    link.id = 'lato';
+    link.rel = 'stylesheet';
+    link.href = "https://fonts.googleapis.com/css?family=Josefin+Sans|Lato"
+
+document.head.appendChild(link);
 document.body.appendChild(div);
 
 ReactDOM.render(

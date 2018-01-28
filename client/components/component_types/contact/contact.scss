@@ -8,9 +8,6 @@
   justify-content: flex-end;
 }
 .contact__wrapper .article__title {
-  font-family: 'clemente';
-  letter-spacing: 1px;
-  font-size: 2.25rem;
   color: rgba(100, 100, 100, 0.5);
 }
 .contact__wrapper .article__body {
@@ -30,7 +27,6 @@
 
 .contact__links .link__media {
   display: flex;
-  font-size: 1.1rem;
   align-items: center;
   justify-content: center;
   margin-right: 10px;

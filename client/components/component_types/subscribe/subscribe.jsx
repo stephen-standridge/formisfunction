@@ -83,7 +83,7 @@ class Subscribe extends React.Component {
     return <div className={`subscription__wrapper subscription__wrapper--${slug} ${classNames && classNames.wrapper || ''}` }>
       <div onClick={subscribed || active ? this.nullFunc : this.toggleActive} className={`subscription__button button ${classNames && classNames.button || ''} ${ active ? 'active' : ''} ${ valid ? '' : 'invalid'}`} >
         { active ? this.renderForm() :
-          <div className={`subscription__text subscription__content ${subscribed ? 'subscribed' : ''}`}>
+          <div className={`subscription__text subscription__content josefin_semibold narrow regular${subscribed ? 'subscribed' : ''}`}>
             {subscribed ? "subscribed!" : "subscribe"}
           </div>
         }

@@ -1,6 +1,47 @@
 * {
   display: flex;
 }
+
+////////////////////////
+//////// Fonts /////////
+////////////////////////
+
+.lato {
+  font-family: 'Lato', sans-serif;
+  font-weight: 'regular';
+  font-weight: 400;
+  font-style: normal;
+}
+
+.josefin_regular {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.josefin_semibold {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.large {
+  font-size: 40px;
+}
+
+.regular {
+  font-size: 15px;
+}
+
+.narrow {
+  letter-spacing: -0.2px;
+}
+
+.wide {
+  letter-spacing: 3px;
+}
+
+
 .app {
   flex-direction: column;
   position: absolute;
@@ -10,6 +51,7 @@
   top: 0;
   bottom: 0;
 }
+
 .app .clickable {
   cursor: pointer;
 }
@@ -22,10 +64,12 @@
   /* Safari */
   transition: background-color 0.3s;
 }
+
 .app .button:hover {
   background-color: #646464;
   box-shadow: 3px 3px 1px #282828;
 }
+
 .app .link__media, .app .link {
   text-decoration: none;
   color: #282828;
@@ -34,6 +78,7 @@
   font-family: 'Arial';
   line-height: 1.2em;
 }
+
 .app .link__media:after, .app .link:after {
     content: 'copied';
     position: absolute;
@@ -47,12 +92,15 @@
     background: #aaaaaa;
     color: #282828;
 }
+
 .app .link__media.copied:after, .app .link.copied:after {
   animation: fadeIn 1s;
 }
+
 .app .link__media.copied_again:after, .app .link.copied_again:after {
   animation: otherFade 1s;
 }
+
 .app .link__media:hover, .app .link:hover {
   color: #141414;
 }
