@@ -126,6 +126,7 @@ class ComponentLogic extends React.Component {
 
 	render(){
 		const { component, children, slug } = this.props;
+		const { getParams, getParam } = this.context;
 		let states = component && component.states || [];
 		if (!component) {
 			return <div className={`component__container component__loading`}>{ children }</div>;
@@ -142,7 +143,6 @@ class ComponentLogic extends React.Component {
 		if (!components[component_type]) {
 			component_type = process.env.NODE_ENV == 'DEVELOPMENT' && 'CreateComponent' || 'NotFoundComponent';
 		}
-
 		const ComponentOfType = components[component_type];
 		return ((component.error && <div className="component__error">{component.error.message}</div>) ||
 					 (component.needsLoad && <div className="component__loading"></div>) ||
@@ -152,6 +152,7 @@ class ComponentLogic extends React.Component {
 					 	toPrevState={this.setComponentState.bind(this, this.getPrevState())}
 						setComponentState={this.setComponentState}
 						classNames={classNames}
+						params={getParams()}
 						currentSlug={states[this.getCurrentState()]}
 						nextSlug={states[this.getNextState()]}
 						prevSlug={states[this.getPrevState()]}>
@@ -161,6 +162,7 @@ class ComponentLogic extends React.Component {
 }
 
 ComponentLogic.contextTypes = {
+	getParams: React.PropTypes.func,
   getParam: React.PropTypes.func,
   setParam: React.PropTypes.func,
   register: React.PropTypes.func,

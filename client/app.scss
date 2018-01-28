@@ -44,6 +44,22 @@
 /////////////////////////
 //////// Colors /////////
 /////////////////////////
+.dark_color, .med_color, .light_color {
+  transition: color .4s;
+}
+.deep {
+  .dark_color {
+    color: #4f258c;
+  }
+
+  .med_color {
+    color: #9d34b7;
+  }
+
+  .light_color {
+    color: #1caaf9;
+  }
+}
 
 .dark {
   color: #333333;

@@ -13,9 +13,9 @@ class LineNavigationSiteComponent extends React.Component {
     const slug = line && line.slug;
     return slug;
 	}
-	shouldComponentUpdate({ currentSlug }, nextState) {
-		return currentSlug !== this.props.currentSlug;
-	}
+	// shouldComponentUpdate({ currentSlug }, nextState) {
+	// 	return currentSlug !== this.props.currentSlug;
+	// }
   renderLineNavigation() {
     const { component, setComponentState, slug, currentSlug, param } = this.props;
     return component && component.line_navigation && component.line_navigation.map((line, i) => {
@@ -32,12 +32,12 @@ class LineNavigationSiteComponent extends React.Component {
     });
 	}
 	render() {
-    const { component, classNames } = this.props;
+    const { component, classNames, params } = this.props;
     const { options } = component;
     const { title } = options;
-		return <div className={`line-navigation__container ${classNames}`}>
+		return <div className={`line-navigation__container ${classNames} ${ params && params.join(' ') || ''}`}>
       <div className='line-navigation__header '>
-        <div className='line-navigation__title lato large wide dark'>
+        <div className='line-navigation__title lato large wide dark dark_color'>
           { typeof title == 'string' && title.split(' ').map(function(t){ return capitalize(t)}).join(' ') || null }
         </div>
         <div className='line-navigation__links med'>

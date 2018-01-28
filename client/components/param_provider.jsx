@@ -15,6 +15,7 @@ class ParamProvider extends React.Component {
     }
     this.set = this.set || [];
     this.getComponentParam = this._getComponentParam.bind(this);
+    this.getComponentParams = this._getComponentParams.bind(this);
     this.setComponentParam = this._setComponentParam.bind(this);
     this.registerComponent = this._registerComponent.bind(this);
     this.unregisterComponent = this._unregisterComponent.bind(this);
@@ -63,13 +64,13 @@ class ParamProvider extends React.Component {
     const oldUrl = oldMatch && oldMatch.url;
     if (oldUrl === url || oldUrl === hash) return;
     if (hash) {
-
       this.set = url && url.split('#!/')[1].split('/');
       this.set.shift();
     } else {
       this.set = url && url.split('/');
       this.set.shift();
     }
+    return this.set;
   }
 
   _setComponentParam(slug, param) {
@@ -85,6 +86,10 @@ class ParamProvider extends React.Component {
     this.context.router.history.push('/' + this.set.join('/'))
   }
 
+  _getComponentParams(slug) {
+    return Object.keys(this.registered).map(function(k){ return this.set[this.registered[k]] }.bind(this));
+  }
+
   _getComponentParam(slug) {
     const atIndex = this.registered[slug];
     if (isNaN(atIndex)) {
@@ -95,6 +100,7 @@ class ParamProvider extends React.Component {
 
   getChildContext() {
     return {
+      getParams: this.getComponentParams,
       getParam: this.getComponentParam,
       setParam: this.setComponentParam,
       register: this.registerComponent,
@@ -109,6 +115,7 @@ class ParamProvider extends React.Component {
 };
 
 ParamProvider.childContextTypes = {
+  getParams: React.PropTypes.func,
   getParam: React.PropTypes.func,
   setParam: React.PropTypes.func,
   register: React.PropTypes.func,
