@@ -3,6 +3,10 @@
     height: 25px;
     display: inline-block;
     fill: #666666;
+    &:hover {
+      cursor: pointer;
+      fill: #333333;
+    }
 }
 
 .link__media--image {

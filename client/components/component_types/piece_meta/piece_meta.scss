@@ -1,12 +1,14 @@
 .piece__meta, .piece__meta * {
-  flex-direction: column; }
+  flex-direction: column;
+  width: 42vw;
+}
 
-  @media (max-width: 600px) {
-    .piece__content canvas {
-      width: 100vw !important;
-      height: 100vw !important;
-      max-width: 100%;
-      max-height: 100%;
+@media (max-width: 600px) {
+  .piece__content canvas {
+    width: 100vw !important;
+    height: 100vw !important;
+    max-width: 100%;
+    max-height: 100%;
   }
   .piece__content svg {
     width: 100vw !important;

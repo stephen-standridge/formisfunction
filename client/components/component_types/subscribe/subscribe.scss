@@ -7,6 +7,14 @@
   border-color: #666666;
   margin-right: 10px;
   padding-right: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.subscription__text {
+  &:hover {
+    color: #aaaaaa;
+  }
 }
 .subscription__wrapper .subscription__button .subscribed {
   color: rgba(100, 155, 100, 0.5) !important;
@@ -24,10 +32,10 @@
   outline: none;
 }
 .subscription__wrapper .error {
-  color: rgba(200, 100, 100, 0.6);
+  color: rgba(200, 100, 100, 1.0);
 }
 .subscription__wrapper .invalid .subscription__input {
-  border-color: rgba(200, 100, 100, 0.6);
+  border-color: rgba(200, 100, 100, 1.0);
 }
 .subscription__wrapper .subscription__error {
   margin-top: 5px;
@@ -39,20 +47,20 @@
   width: 20px;
 }
 .subscription__wrapper .subscription__cancel:hover {
-  color: rgba(200, 100, 100, 0.6) !important;
+  color: rgba(200, 100, 100, 1.0) !important;
 }
 .subscription__wrapper .subscription__cancel.disabled:hover {
-  color: rgba(100, 100, 100, 0.6) !important;
+  color: rgba(100, 100, 100, 1.0) !important;
 }
 .subscription__wrapper .subscription__confirm {
   width: 50px;
   letter-spacing: 0.0px;
 }
 .subscription__wrapper .subscription__confirm:hover {
-  color: rgba(100, 200, 100, 0.6) !important;
+  color: rgba(100, 200, 100, 1.0) !important;
 }
 .subscription__wrapper .subscription__confirm.disabled:hover {
-  color: rgba(100, 100, 100, 0.6) !important;
+  color: rgba(100, 100, 100, 1.0) !important;
 }
 .subscription__wrapper .subscription__option {
   margin: 0px 2px;
