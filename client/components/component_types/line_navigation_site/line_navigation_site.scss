@@ -1,12 +1,20 @@
 
+.line-navigation__container {
+  flex-direction: column;
+}
+
 .line-navigation__contact {
   width: 100vw;
   height: 10vh;
   justify-content: flex-start;
 }
-
-.line-navigation {
+.line-navigation__header {
+  flex-direction: column;
   width: 100vw;
+  flex-grow: 0;
+  z-index: 1;
+}
+.line-navigation__links {
   height: 100%;
   flex-grow: 0;
   z-index: 1;
@@ -14,6 +22,7 @@
 }
 
 .line-navigation__wrapper {
+  width: 100vw;
   width: 100%;
   justify-content: center;
 }

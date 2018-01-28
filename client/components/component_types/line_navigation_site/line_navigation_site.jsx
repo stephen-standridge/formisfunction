@@ -1,6 +1,7 @@
 import { ComponentCreator } from '../../component';
 import { ContactComponent } from '../contact/contact.jsx';
 import { Link } from '../../media';
+import { orderBy } from 'lodash';
 import './line_navigation_site.scss';
 
 class LineNavigationSiteComponent extends React.Component {
@@ -15,6 +16,14 @@ class LineNavigationSiteComponent extends React.Component {
 	shouldComponentUpdate({ currentSlug }, nextState) {
 		return currentSlug !== this.props.currentSlug;
 	}
+  renderLineNavigation() {
+    const { component, setComponentState, slug, param } = this.props;
+    return component && component.line_navigation && orderBy(component.line_navigation, 'order').map((line, i) => {
+      return <div key={i}className={`line-navigation__link ${slug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
+        {line.slug}
+      </div>
+    });
+  }
 	renderContact() {
 		const { component } = this.props;
 		const { contact } = component;
@@ -23,18 +32,20 @@ class LineNavigationSiteComponent extends React.Component {
     });
 	}
 	render() {
-		const { component, toPrevState, toNextState, classNames, slug, param, nextSlug, prevSlug } = this.props;
+    const { component, classNames } = this.props;
+    const { options } = component;
+    const { title } = options;
 		return <div className={`line-navigation__container ${classNames}`}>
-			<div className='line-navigation'>
-        { prevSlug ?
-          <div className="line-navigation__controls--prev button" onClick={toPrevState} >{"<"}</div> :
-          <div className="line-navigation__controls--prev"/> }
-				<div className='line-navigation__wrapper'>
-					{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}></ComponentCreator> }
-				</div>
-        { nextSlug ?
-          <div className="line-navigation__controls--next button" onClick={toNextState} >{">"}</div> :
-          <div className="line-navigation__controls--next"/> }
+      <div className='line-navigation__header'>
+        <div className='line-navigation__title'>
+          { title }
+        </div>
+        <div className='line-navigation__links'>
+          { this.renderLineNavigation() }
+        </div>
+      </div>
+			<div className='line-navigation__wrapper'>
+				{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}></ComponentCreator> }
 			</div>
 			<div className="line-navigation__contact">
 					{this.renderContact()}

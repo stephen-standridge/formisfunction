@@ -76,8 +76,7 @@ class ComponentLogic extends React.Component {
 		const { states } = component;
 		const { setParam } = this.context;
 		if (withHistory) {
-			console.warn(slug)
-			return setParam(slug, states[current])
+			return setParam(slug, typeof current === 'string' ? current : states[current])
 		}
 		return this.setState({ current });
 	}

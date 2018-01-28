@@ -16,7 +16,6 @@ class LinkMedia extends React.Component {
 		return `link__${part} ${(classNames && classNames[part]) || ''}}`
 	}
 	render(){
-		console.error(link_images);
 		const { link } = this.props;
 		if (!link) return <div className={this.classNamesFor('not_found')} />
 		const { url, anchor } = link;
