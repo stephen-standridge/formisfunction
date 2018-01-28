@@ -65,9 +65,9 @@ class Subscribe extends React.Component {
               disabled={subscribing}
               onClick={subscribing ? this.nullFunc : this.removeValidation}
               onKeyPress={subscribing ? this.nullFunc : this.handleKeyPress}/>
-        <div className={`subscription__confirm subscription__option button ${subscribing ? 'disabled' : ''}`}
+        <div className={`subscription__confirm subscription__option dark ${subscribing ? 'disabled' : ''}`}
               onClick={subscribing ? this.nullFunc : this.submitEmailMaybe}> > </div>
-        <div className={`subscription__cancel subscription__option button ${subscribing ? 'disabled' : ''}`}
+        <div className={`subscription__cancel subscription__option dark ${subscribing ? 'disabled' : ''}`}
               onClick={subscribing ? this.nullFunc : this.cancel}> x </div>
       </div>
       { error ? <div className="subscription__error error">
@@ -81,7 +81,7 @@ class Subscribe extends React.Component {
     const { slug } = component;
     const { active, valid } = this.state;
     return <div className={`subscription__wrapper subscription__wrapper--${slug} ${classNames && classNames.wrapper || ''}` }>
-      <div onClick={subscribed || active ? this.nullFunc : this.toggleActive} className={`subscription__button button ${classNames && classNames.button || ''} ${ active ? 'active' : ''} ${ valid ? '' : 'invalid'}`} >
+      <div onClick={subscribed || active ? this.nullFunc : this.toggleActive} className={`subscription__button dark ${classNames && classNames.button || ''} ${ active ? 'active' : ''} ${ valid ? '' : 'invalid'}`} >
         { active ? this.renderForm() :
           <div className={`subscription__text subscription__content josefin_semibold narrow regular${subscribed ? 'subscribed' : ''}`}>
             {subscribed ? "subscribed!" : "subscribe"}

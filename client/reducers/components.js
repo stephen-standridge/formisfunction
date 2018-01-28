@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { COMPONENT_ACTIONS } from '../actions/action_types'
-import { uniq } from 'lodash';
+import { uniq, orderBy } from 'lodash';
 
 const initialState = fromJS({})
 
@@ -23,6 +23,7 @@ export default function update(state = initialState, action) {
 					if (collection) {
 						component[collection] = component[collection] || [];
 						component[collection].push(m);
+						if (!isNaN(Number(m.order))) component[collection] = orderBy(component[collection], 'order')
 						collections.push(collection);
 					}
 					if (state) {

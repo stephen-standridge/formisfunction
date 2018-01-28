@@ -18,8 +18,8 @@ class LineNavigationSiteComponent extends React.Component {
 	}
   renderLineNavigation() {
     const { component, setComponentState, slug, param } = this.props;
-    return component && component.line_navigation && orderBy(component.line_navigation, 'order').map((line, i) => {
-      return <div key={i}className={`line-navigation__link josefin_regular ${slug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
+    return component && component.line_navigation && component.line_navigation.map((line, i) => {
+      return <div key={i}className={`line-navigation__link josefin_regular regular ${slug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
         {line.slug}
       </div>
     });
@@ -36,18 +36,18 @@ class LineNavigationSiteComponent extends React.Component {
     const { options } = component;
     const { title } = options;
 		return <div className={`line-navigation__container ${classNames}`}>
-      <div className='line-navigation__header'>
-        <div className='line-navigation__title lato large wide'>
+      <div className='line-navigation__header '>
+        <div className='line-navigation__title lato large wide dark'>
           { typeof title == 'string' && title.split(' ').map(function(t){ return capitalize(t)}).join(' ') || null }
         </div>
-        <div className='line-navigation__links'>
+        <div className='line-navigation__links med'>
           { this.renderLineNavigation() }
         </div>
       </div>
 			<div className='line-navigation__wrapper'>
 				{ this.getLineSlug() && <ComponentCreator slug={this.getLineSlug()} withHistory={true}></ComponentCreator> }
 			</div>
-			<div className="line-navigation__contact">
+			<div className="line-navigation__contact med">
 					{this.renderContact()}
 			</div>
     </div>

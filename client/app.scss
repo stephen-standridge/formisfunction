@@ -26,11 +26,11 @@
 }
 
 .large {
-  font-size: 40px;
+  font-size: 3em;
 }
 
 .regular {
-  font-size: 15px;
+  font-size: 1.3em;
 }
 
 .narrow {
@@ -41,8 +41,24 @@
   letter-spacing: 3px;
 }
 
+/////////////////////////
+//////// Colors /////////
+/////////////////////////
+
+.dark {
+  color: #333333;
+}
+
+.med {
+  color: #666666;
+}
+
+.light {
+  color: #aaaaaa;
+}
 
 .app {
+  background: #7f7f7f;
   flex-direction: column;
   position: absolute;
   flex: 1;

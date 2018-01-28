@@ -1,4 +1,5 @@
 import { Article, Link } from '../../media';
+import { orderBy } from 'lodash';
 import './contact.scss';
 
 class ContactComponent extends React.Component {
@@ -8,7 +9,6 @@ class ContactComponent extends React.Component {
 	}
 	render() {
 		const { component, classNames, isActive } = this.props;
-
 		const { active } = this.state;
 		return <div className={`contact__wrapper contact__wrapper ${classNames && classNames.wrapper || ''}` }>
 				<div className={`contact__information contact__information ${classNames && classNames.information || ''}`}>
