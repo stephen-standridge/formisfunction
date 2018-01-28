@@ -3,6 +3,14 @@ import makeClassNames from 'classnames';
 import './line.scss';
 
 class LineComponent extends React.Component {
+  renderNavigation() {
+    const { component, setComponentState, slug, currentSlug, param } = this.props;
+    return component && component.views && component.views.map((line, i) => {
+      return <div key={i}
+        className={`line__link josefin_regular regular ${currentSlug == line.slug ? 'active' : ''}`}
+        onClick={function(){setComponentState(line.slug)}} />
+    });
+  }
   render(){
     const { slug, component, classNames, children, nextSlug, prevSlug, currentSlug, toNextState, toPrevState } = this.props;
 
@@ -20,13 +28,8 @@ class LineComponent extends React.Component {
         }
       }) }
       </div>
-      <div className="line__controls">
-        { prevSlug ?
-          <div className="line__controls--prev button" onClick={toPrevState} >{"<"}</div> :
-          <div className="line__controls--prev"/> }
-        { nextSlug ?
-          <div className="line__controls--next button" onClick={toNextState} >{">"}</div> :
-          <div className="line__controls--next"/> }
+      <div className='line__links med'>
+        { this.renderNavigation() }
       </div>
     </div>
   }

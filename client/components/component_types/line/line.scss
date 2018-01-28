@@ -1,6 +1,5 @@
 .line__link {
   justify-content: center;
-  margin: auto;
 }
 
 .line__navigation--back {
@@ -12,6 +11,7 @@
 }
 
 .line__container {
+  padding-left: 30px;
   max-width: 100%;
   flex-direction: column;
   flex: 1;
@@ -45,45 +45,35 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  @media (min-width: 600px) {
-    min-height: 768px;
-    max-height: 800px;
-  }
 }
 
 //////////////
 /* controls */
 //////////////
 
-.line__controls {
+
+.line__links {
   flex-direction: row;
   justify-content: space-between;
+  flex-grow: 0;
+  z-index: 1;
+  justify-content: flex-start;
 }
 
-.line__controls--prev, .line__controls--next {
-  flex-direction: row;
-  width: 100px;
-  height: 50px;
-  margin-left: 5px;
-  justify-content: center;
-  align-items: center;
-  color: #3c3c3c;
-}
+.line__link {
+  height: 15px;
+  width: 15px;
+  background-color: #666666;
+  margin-right: 10px;
+  &.active {
+    background-color: #333333;
 
-.line__controls--prev {
-  align-self: flex-start;
-}
-
-.line__controls--next {
-  align-self: flex-end;
-}
-
-.line__controls--prev:hover, .line__controls--next:hover {
-  color: #1e1e1e;
-}
-
-.line__controls--current {
-  flex-direction: row;
-  min-width: 150px;
-  justify-content: center;
+  }
+  &:last-child{
+    border-right: 0px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #333333;
+  }
 }

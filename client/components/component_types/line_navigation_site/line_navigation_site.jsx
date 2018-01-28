@@ -18,7 +18,6 @@ class LineNavigationSiteComponent extends React.Component {
 	}
   renderLineNavigation() {
     const { component, setComponentState, slug, currentSlug, param } = this.props;
-    console.warn(slug)
     return component && component.line_navigation && component.line_navigation.map((line, i) => {
       return <div key={i}className={`line-navigation__link josefin_regular regular ${currentSlug == line.slug ? 'active' : ''}`} onClick={function(){setComponentState(line.slug)}} >
         {line.slug}
