@@ -5,10 +5,9 @@
 }
 
 .piece__container .piece__collection--wrapper {
-  margin-bottom: 10px;
-  max-width: 400px;
-  padding: 10px;
-  display: block;
+  height: 100%;
+  justify-content: center;
+  display: flex;
   user-select: none;
   -webkit-transition: width 0.3s;
   /* Safari */

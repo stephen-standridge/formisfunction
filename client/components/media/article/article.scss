@@ -1,0 +1,12 @@
+.article__wrapper {
+  .article__title {
+    padding-bottom: 10px;
+  }
+  .article__body {
+    line-height: 1.2em;
+    max-width: 34vw;
+    p {
+      width: auto;
+    }
+  }
+}

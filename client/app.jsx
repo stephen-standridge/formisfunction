@@ -14,7 +14,7 @@ div.id = 'mount'
 var link = document.createElement('link');
     link.id = 'lato';
     link.rel = 'stylesheet';
-    link.href = "https://fonts.googleapis.com/css?family=Josefin+Sans|Lato"
+    link.href = "https://fonts.googleapis.com/css?family=Josefin+Sans:400,300,600|Lato:400"
 
 document.head.appendChild(link);
 document.body.appendChild(div);

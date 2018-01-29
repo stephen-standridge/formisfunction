@@ -46,7 +46,7 @@ function processMedia(media_res, dispatch) {
     });
 
     dispatch({ type: MEDIA_ACTIONS.SUCCESS, payload});
-
+    console.warn(payload)
     const version_res = fetchVersions(vals);
     processVersions(version_res, dispatch);
   }).catch(reportError.bind(null, dispatch, meta));

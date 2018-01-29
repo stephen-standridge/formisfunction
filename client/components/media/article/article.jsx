@@ -25,11 +25,11 @@ class ArticleMedia extends React.Component {
 		if (!article) return <div className={this.classNamesFor('not_found')} />
 		const { title, body } = article;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
-			{ title && <div className={`${this.classNamesFor('title')}`}
+			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}
 											onClick={this.toggleActive.bind(this, 'title')}>
 				{ title }
 			</div> }
-			{ body && <div className={`${this.classNamesFor('body')}`}
+			{ body && <div className={`josefin_light regular med ${this.classNamesFor('body')}`}
 											onClick={this.toggleActive.bind(this, 'body')}
 											dangerouslySetInnerHTML={ { __html: md.render(body) } } >
 			</div> }
@@ -39,10 +39,7 @@ class ArticleMedia extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const article = state.media.getIn(['articles', ownProps.slug]);
-	const [...version_ids] = article && article.get('article_versions').keys();
-	const version = article && state.versions.getIn(['article_versions', version_ids[0]]);
-	const toDisplay = article && version ? article.merge(version).toJS() : article.toJS();
-  return { article: toDisplay };
+  return { article: article && article.toJS() };
 }
 
 const Article = connect(

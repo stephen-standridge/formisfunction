@@ -17,6 +17,7 @@ export default function update(state = initialState, action) {
 				component.states = [];
 				let collections = [];
 
+				console.warn(media)
 				media && media.forEach((m,i)=>{
 					if(!m) return;
 					const { collection, state } = m;
