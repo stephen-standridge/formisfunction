@@ -1,7 +1,16 @@
 .piece__container {
   height: 100%;
-  width: 100%;
   flex-direction: row;
+  @media (max-width: 960px) {
+    flex-direction: column-reverse;
+    overflow: auto;
+  }
+  @media (min-width: 600px) {
+    width: 100vw;
+  }
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
 }
 
 .piece__container .piece__collection--wrapper {
@@ -39,4 +48,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (min-width: 600px) and (max-width: 960px) {
+    flex-basis:70vw;
+    flex-shrink: 0;
+    width: 70vw;
+  }
+  @media (max-width: 600px) {
+    flex-basis:80vw;
+    flex-shrink: 0;
+    width: 80vw;
+  }
 }

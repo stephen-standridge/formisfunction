@@ -33,6 +33,7 @@
   // overflow-y: scroll;
   @media (max-width: 600px) {
     height: 100%;
+    width: 90%;
   }
 }
 
@@ -53,6 +54,7 @@
 
 
 .line__links {
+  margin-top: 10px;
   flex-direction: row;
   justify-content: space-between;
   flex-grow: 0;

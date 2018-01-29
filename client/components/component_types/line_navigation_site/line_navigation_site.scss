@@ -54,7 +54,12 @@
 .line-navigation__wrapper {
   width: 100vw;
   height: 100%;
-  justify-content: center;
+  @media (min-width: 600px) {
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 }
 
 .line-navigation__line {
