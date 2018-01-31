@@ -65,10 +65,10 @@ class Subscribe extends React.Component {
               disabled={subscribing}
               onClick={subscribing ? this.nullFunc : this.removeValidation}
               onKeyPress={subscribing ? this.nullFunc : this.handleKeyPress}/>
-        <div className={`subscription__confirm subscription__option dark ${subscribing ? 'disabled' : ''}`}
+        <div className={`subscription__confirm subscription__option lato_bold ${subscribing ? 'disabled' : ''}`}
               onClick={subscribing ? this.nullFunc : this.submitEmailMaybe}> > </div>
-        <div className={`subscription__cancel subscription__option dark ${subscribing ? 'disabled' : ''}`}
-              onClick={subscribing ? this.nullFunc : this.cancel}> x </div>
+        <div className={`subscription__cancel subscription__option lato_bold ${subscribing ? 'disabled' : ''}`}
+              onClick={subscribing ? this.nullFunc : this.cancel}> X </div>
       </div>
       { error ? <div className="subscription__error error">
         { error }
