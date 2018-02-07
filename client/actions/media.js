@@ -3,6 +3,8 @@ import { database } from '../stores/firebase';
 import { fetchVersions, processVersions } from './versions';
 
 const media_types = {
+  'date' : 'dates',
+  'dates' : 'dates',
   'article' : 'articles',
   'articles' : 'articles',
   'program': 'programs',
@@ -30,6 +32,7 @@ function processMedia(media_res, dispatch) {
     articles: [],
     programs: [],
     links: [],
+    dates: [],
     components: []
   };
 
@@ -46,7 +49,6 @@ function processMedia(media_res, dispatch) {
     });
 
     dispatch({ type: MEDIA_ACTIONS.SUCCESS, payload});
-    console.warn(payload)
     const version_res = fetchVersions(vals);
     processVersions(version_res, dispatch);
   }).catch(reportError.bind(null, dispatch, meta));

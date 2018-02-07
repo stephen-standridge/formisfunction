@@ -6,16 +6,19 @@ const initialState = fromJS({ links: {}, programs: {}, articles: {} })
 export default function update(state = initialState, action) {
 	switch(action.type) {
 		case MEDIA_ACTIONS.SUCCESS:
-			const { articles, links, programs } = action.payload;
+			const { articles, links, programs, dates } = action.payload;
 			articles && articles.forEach((article)=>{
 				state = state.setIn(['articles', article.slug], fromJS(article))
-			})
+			});
 			links && links.forEach((link)=>{
 				state = state.setIn(['links', link.slug], fromJS(link))
-			})
+			});
+			dates && dates.forEach((date)=>{
+				state = state.setIn(['dates', date.slug], fromJS(date))
+			});
 			programs && programs.forEach((program)=>{
 				state = state.setIn(['programs', program.slug], fromJS(program))
-			})
+			});
 		break;
 	}
   return state

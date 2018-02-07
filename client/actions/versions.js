@@ -8,6 +8,10 @@ const version_types = {
 
 function fetchVersions(data_vals) {
   return data_vals.reduce((sum, d_val) => {
+    if (!d_val) {
+      console.warn('component data missing', data_vals)
+      return sum;
+    }
     let data_type = version_types[d_val.type];
     if(data_type && d_val[data_type]) {
       Object.keys(d_val[data_type]).forEach((key) => {
