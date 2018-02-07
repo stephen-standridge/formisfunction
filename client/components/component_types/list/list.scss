@@ -10,7 +10,8 @@
   flex: 1;
 }
 
-.list__contaistr {
+.list__container {
+  width: 100%;
   padding-left: 30px;
   max-width: 100%;
   flex-direction: column;
@@ -22,7 +23,7 @@
   flex: 1;
 }
 
-.list__items {
+.list__entries {
   display: flex;
   width: 100%;
   position: relative;
@@ -37,12 +38,11 @@
   }
 }
 
-.list__item {
+.list__entry {
   display: none;
   &.active {
     display: flex;
   }
-  flex: 1;
   align-items: center;
   justify-content: center;
   flex-direction: column;

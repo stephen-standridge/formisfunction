@@ -15,6 +15,7 @@ class ComponentLogic extends React.Component {
 		this.componentWillReceiveProps = this.handleProps;
 		this.componentDidMount = this.handleProps;
 		this.setComponentState = this._setComponentState.bind(this);
+		this.toggleComponentState = this._toggleComponentState.bind(this);
 		this.getCurrentState = this._getCurrentState.bind(this);
 		this.getNextState = this._getNextState.bind(this);
 		this.getPrevState = this._getPrevState.bind(this);
@@ -81,6 +82,20 @@ class ComponentLogic extends React.Component {
 		return this.setState({ current });
 	}
 
+	_toggleComponentState(current) {
+		const { slug, component, withHistory } = this.props;
+		const { states } = component;
+		const { setParam } = this.context;
+		const currentState = this.getCurrentState();
+		if (withHistory) {
+			const newSlug = typeof current === 'string' ? current : states[current];
+			const oldSlug = states[currentState];
+			return setParam(slug, newSlug == oldSlug ? '' : newSlug)
+		}
+
+		return this.setState({ current: current == currentState ? null : current });
+	}
+
 	_getCurrentState() {
 		const { slug, component, withHistory } = this.props;
 		const { states } = component;
@@ -125,7 +140,7 @@ class ComponentLogic extends React.Component {
 	}
 
 	render(){
-		const { component, children, slug } = this.props;
+		const { component, children, slug, onClick } = this.props;
 		const { getParams, getParam } = this.context;
 		let states = component && component.states || [];
 		if (!component) {
@@ -151,8 +166,10 @@ class ComponentLogic extends React.Component {
 					 	toNextState={this.setComponentState.bind(this, this.getNextState())}
 					 	toPrevState={this.setComponentState.bind(this, this.getPrevState())}
 						setComponentState={this.setComponentState}
+						toggleComponentState={this.toggleComponentState}
 						classNames={classNames}
 						params={getParams()}
+						onClick={onClick}
 						currentSlug={states[this.getCurrentState()]}
 						nextSlug={states[this.getNextState()]}
 						prevSlug={states[this.getPrevState()]}>
