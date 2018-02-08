@@ -19,7 +19,7 @@ class PieceMetaComponent extends React.Component {
 		return `piece__${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
 	}
 	render() {
-		const { component, isActive } = this.props;
+		const { component, isActive, children } = this.props;
 		const { slug } = component;
 
 		// console.warn(component);
@@ -37,6 +37,7 @@ class PieceMetaComponent extends React.Component {
 				  		</div>
 				  	</div>
 				  }.bind(this)) }
+		{children}
 		  </div>
 	}
 }

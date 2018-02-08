@@ -11,21 +11,29 @@ class DateMedia extends React.Component {
 		const { classNames } = this.props;
 		const { active } = this.state;
 
-		return `date__${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
+		return `date__media date__${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
 	}
 	render(){
 		const { date, classNames, children } = this.props;
+		console.warn(this.props)
 		if (!date) return <div className={this.classNamesFor('not_found')} />
-		const { title, body } = date;
+		const { day, month, year } = date;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
-			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}>
-				{ title }
+			{ day && <div className={`josefin_regular med_color med text ${this.classNamesFor('day')}`}>
+				{ day }
 			</div> }
+			{ month && <div className={`josefin_regular med_color med text ${this.classNamesFor('month')}`}>
+			{ month }
+			</div> }
+			{ year && <div className={`josefin_regular med_color med text ${this.classNamesFor('year')}`}>
+			{ year }
+			</div> }						
 		</div>
 	}
 }
 
 const mapStateToProps = (state, ownProps) => {
+	console.warn(state.media.toJS(), ownProps.slug)
 	const date = state.media.getIn(['dates', ownProps.slug]);
   return { date: date && date.toJS() };
 }

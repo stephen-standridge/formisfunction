@@ -1,6 +1,7 @@
 .list-item, .list-item * {
   flex-direction: column;
 }
+
 .list-item {
   @media (min-width: 960px) {
     width: 42vw;

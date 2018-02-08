@@ -117,11 +117,14 @@
 
 .app .link__media, .app .link {
   text-decoration: none;
-  color: #282828;
+  color: #666666;
   user-select: none;
-  letter-spacing: 0.3px;
-  font-family: 'Arial';
-  line-height: 1.2em;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  &:hover {
+    color: #333333;
+  }
 }
 
 .app .link__media:after, .app .link:after {

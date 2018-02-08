@@ -23,13 +23,14 @@ class LineComponent extends React.Component {
         const classNames = makeClassNames("line__item", { active, next, prev });
         if (active || prev || next) {
           return <div key={index} className={classNames} >
-            <ComponentCreator key={index} slug={c.slug} isActive={active} withHistory={false} isPrev={prev} isNext={next} />
+            <ComponentCreator key={index} slug={c.slug} isActive={active} withHistory={false} isPrev={prev} isNext={next}>
+            <div className='line__links med'>
+              { this.renderNavigation() }
+            </div>
+            </ComponentCreator>
           </div>
         }
       }) }
-      </div>
-      <div className='line__links med'>
-        { this.renderNavigation() }
       </div>
     </div>
   }
