@@ -3,7 +3,9 @@ import { database } from '../stores/firebase';
 
 const version_types = {
   'article': 'article_versions',
-  'articles': 'article_versions'
+  'articles': 'article_versions',
+  'program': 'program_versions',
+  'programs': 'program_versions'  
 };
 
 function fetchVersions(data_vals) {
@@ -26,7 +28,8 @@ function fetchVersions(data_vals) {
 
 function processVersions(version_res, dispatch) {
   const payload = {
-    article_versions : {}
+    article_versions : {},
+    program_versions : {}
   };
 
   const [promises, types, slugs ] = version_res;
