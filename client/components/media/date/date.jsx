@@ -15,7 +15,6 @@ class DateMedia extends React.Component {
 	}
 	render(){
 		const { date, classNames, children } = this.props;
-		console.warn(this.props)
 		if (!date) return <div className={this.classNamesFor('not_found')} />
 		const { day, month, year } = date;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
@@ -33,7 +32,6 @@ class DateMedia extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	console.warn(state.media.toJS(), ownProps.slug)
 	const date = state.media.getIn(['dates', ownProps.slug]);
   return { date: date && date.toJS() };
 }

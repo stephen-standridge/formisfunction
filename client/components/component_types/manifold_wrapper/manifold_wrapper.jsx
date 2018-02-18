@@ -12,7 +12,6 @@ class ManifoldWrapperComponent extends React.Component {
 	render() {
 		const { component, onPrev, onNext, classNames, isActive, children } = this.props;
 		const { slug } = component;
-		console.warn(children)
 		return <div className={`piece__container piece__container--${slug} ${ classNames }`}>
 			<PieceMetaComponent component={component} >
 			{children}			

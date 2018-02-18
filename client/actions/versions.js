@@ -37,7 +37,6 @@ function processVersions(version_res, dispatch) {
   const meta = { slugs, types }
 
   dispatch({ type: VERSIONS_ACTIONS.REQUEST, meta });
-
   promises.length && Promise.all(promises).then(function(snaps) {
     const val = snaps.map((snap) => [snap.key, snap.val()]);
 

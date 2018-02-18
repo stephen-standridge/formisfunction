@@ -43,8 +43,10 @@ function processMedia(media_res, dispatch) {
 
   promises.length && Promise.all(promises).then((snaps) => {
     const vals = snaps.map((m_o_t_snap) => m_o_t_snap.val());
-
     types.forEach((type, index) => {
+      if (!payload[type]){
+        reportError(dispatch,meta, new Error(`cannot decipher type of media ${vals[index]}; type:${type}; slug:${slugs[index]}`))
+      }
       payload[type].push(vals[index]);
     });
 
