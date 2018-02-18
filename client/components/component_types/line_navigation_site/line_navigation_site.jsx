@@ -37,7 +37,7 @@ class LineNavigationSiteComponent extends React.Component {
     const { title } = options;
 		return <div className={`line-navigation__container ${classNames} ${ params && params.join(' ') || ''}`}>
       <div className='line-navigation__header '>
-        <div className='line-navigation__title lato large wide dark dark_color'>
+        <div className='line-navigation__title lato large wide dark dark_color header'>
           { typeof title == 'string' && title.split(' ').map(function(t){ return capitalize(t)}).join(' ') || null }
         </div>
         <div className='line-navigation__links med'>

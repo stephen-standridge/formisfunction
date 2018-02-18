@@ -25,8 +25,7 @@ class ArticleMedia extends React.Component {
 		if (!article) return <div className={this.classNamesFor('not_found')} />
 		const { title, body } = article;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
-			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}
-											onClick={this.toggleActive.bind(this, 'title')}>
+			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}>
 				{ title }
 			</div> }
 			{ body && <div className={`josefin_light regular med ${this.classNamesFor('body')}`}

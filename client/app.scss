@@ -61,28 +61,51 @@
   transition: color .4s;
 }
 .depths {
-  .dark_color {
+  .active .dark_color, .header{
     color: #4f258c;
   }
-
-  .med_color {
+  .active .med_color {
     color: #9d34b7;
   }
 
-  .light_color {
+  .active .light_color {
     color: #1caaf9;
   }
 }
 
-.dark {
+.mortality {
+  .active .dark_color, .header {
+    color: #111111;
+  }
+  .dark_color {
+    color: #444444;
+  }
+
+  .active .med_color {
+    color: #444444;
+  }
+  .med_color {
+    color: #777777;
+  }
+  .active .light_color {
+    color: #888888;
+  }
+  .light_color {
+    color: #bbbbbb;
+  }  
+}
+
+
+
+.active .dark_color, .header, .dark {
   color: #333333;
 }
 
-.med {
+.active .med_color, .med {
   color: #666666;
 }
 
-.light {
+.active .light_color, .light {
   color: #aaaaaa;
 }
 
