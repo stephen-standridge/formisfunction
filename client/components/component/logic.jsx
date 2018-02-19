@@ -180,11 +180,11 @@ class ComponentLogic extends React.Component {
 
 ComponentLogic.contextTypes = {
 	getParams: React.PropTypes.func,
-  getParam: React.PropTypes.func,
-  setParam: React.PropTypes.func,
-  register: React.PropTypes.func,
-  unregister: React.PropTypes.func,
-  isRegistered: React.PropTypes.func
+	getParam: React.PropTypes.func,
+	setParam: React.PropTypes.func,
+	register: React.PropTypes.func,
+	unregister: React.PropTypes.func,
+	isRegistered: React.PropTypes.func
 };
 
 ComponentLogic.propTypes = {}

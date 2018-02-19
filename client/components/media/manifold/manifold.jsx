@@ -54,7 +54,13 @@ class ManifoldMedia extends React.Component {
 
     const { urlPrefix, version_id, slug } = manifold;
 
-    if (manifold.slug != prevManifold.slug) return get_versions(manifold);
+    if (manifold.slug != prevManifold.slug) {
+      this._stopManifold();
+      this.clearManifold(prevProps);
+      let { program_versions } = manifold;
+      if (!program_versions) return get_versions(manifold);
+      else return this.initializeManifold();
+    }
     if (loading) return;
     if (versionId !== this.getVersionId(prevProps)) return get_configuration(manifold, this.getVersion());
 
@@ -64,17 +70,17 @@ class ManifoldMedia extends React.Component {
     else { this._stopManifold(); }
   }
 
-  _initializeManifold(prevProps) {
-    const { manifold, isActive } = this.props;
+  _initializeManifold(props=this.props) {
+    const { manifold, isActive } = props;
     const { slug } = manifold;
-    const versionId = this.getVersionId();
+    const versionId = this.getVersionId(props);
 
     let configuration = window[`${slug}_${versionId}`];
     this.Manifold.load(`${slug}_${versionId}`, configuration, {
       locateFile: this.locateFile.bind(this),
       locateSource: this.locateFile.bind(this),
       // onInitialize: this.clearManifold.bind(this, prevProps)
-    }, this.refs[`${slug}_${versionId}`] );
+    }, this.refs[`manifold_container`] );
 
     if (isActive) { this._startManifold(); }
     else { this._stopManifold(); }
@@ -90,6 +96,7 @@ class ManifoldMedia extends React.Component {
 
   clearManifold(props=this.props){
     const { manifold } = props;
+    if (!manifold) return;
     const { slug } = manifold;
     const versionId = this.getVersionId(props);
     if (!versionId || !slug) return;
@@ -107,7 +114,7 @@ class ManifoldMedia extends React.Component {
     const { options, slug } = manifold;
 
     return (<div className={this.classNamesFor('component') + `${this.getSlug()}_${this.getVersionId()} canvas_container`}>
-      <div className={`${slug}_piece manifold`} ref={`${slug}_${this.getVersionId()}`}>
+      <div className={`${slug}_piece manifold`} ref={`manifold_container`}>
           { this.getVersionId() && <ManifoldConfiguration isActive={isActive} slug={this.getSlug()} version_id={this.getVersionId()} onload={this.initializeManifold}/>}
       </div>
     </div>);

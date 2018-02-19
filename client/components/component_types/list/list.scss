@@ -14,9 +14,9 @@
   width: 100%;
   padding-left: 30px;
   max-width: 100%;
-  flex-direction: column;
+  flex-direction: row;
   flex: 1;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .list {
@@ -24,14 +24,14 @@
 }
 
 .list__entries {
-  width: 40%;
+  // width: 40%;
   display: flex;
   position: relative;
   overflow: hidden;
   flex-direction: column;
   @media (max-width: 630px) {
     height: 100%;
-    width: 90%;
+    // width: 90%;
   }
 }
 
@@ -114,7 +114,20 @@
   }
 }
 
-.list__meta {
+.list__content {
+  width: 40%;
+  @media (max-width: 630px) {
+    height: 100%;
+    width: 90%;
+  }
   flex-direction: column;
   margin-bottom: 30px;
+  justify-content: center;
+  flex: 1;
 }
+
+.list__visuals{
+  flex-direction: column;
+  flex: 1;
+}
+
