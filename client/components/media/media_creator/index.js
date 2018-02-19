@@ -1,3 +1,4 @@
+import './media_creator.scss'
 import { connect } from 'react-redux';
 import * as media_component_types from './media_types';
 import { capitalize } from 'lodash';
@@ -7,8 +8,8 @@ class MediaLogic extends React.Component {
         super(props);
     }
     render() {
-        const { slug, media, active } = this.props;
-        return <div>
+        const { slug, media, active, classNames } = this.props;
+        return <div className={`media__wrapper`}>
             { media && media.map((m, i)=>{
                 let MediaOfType = media_component_types[capitalize(m.program_type || m.type)];
                 return <MediaOfType slug={m.slug} key={i} active={active} />                

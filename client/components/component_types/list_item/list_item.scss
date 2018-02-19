@@ -36,24 +36,39 @@
   }
 }
 
-@media (min-width: 600px) and (max-width: 960px) {
+@media (min-width: 600px) {
   .list__container canvas {
-    width: 70vw !important;
-    height: 70vw !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
   }
   .list__container svg {
-    width: 70vw !important;
-    height: 70vw !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+  }
+  
+  .list__container {
+      .media__wrapper {
+        width: 100%;
+        height: 100%;
+        .manifold-media__component, .manifold {
+            width: 100%;
+            height: 100%;
+        }
+      }
   }
 }
 
 @media (max-width: 600px) {
   .list__container canvas {
-    width: 80vw !important;
-    height: 80vw !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
   .list__container svg {
-    width: 80vw !important;
-    height: 80vw !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 }
