@@ -1,14 +1,59 @@
-.link__media svg {
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    fill: #666666;
-    &:hover {
-      cursor: pointer;
-      fill: #333333;
-    }
+.link__media {
+  position: relative;
+  &:after {
+    content: 'copied';
+    position: absolute;
+    opacity: 0;
+    margin: auto;
+    bottom: 0;
+    padding-bottom: 3px;
+    color: #282828;    
+  }  
+  &.copied:after {
+    animation: fadeIn 1s;
+  }
+  &.copied_again:after {
+    animation: otherFade 1s;
+  }  
+}
+
+.link__media svg{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  fill: #666666;
+  transition: fill .3s;
+  &:hover {
+    cursor: pointer;
+    fill: #333333;
+  }     
 }
 
 .link__media--image {
   display: inline-block;
+}
+
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes otherFade {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

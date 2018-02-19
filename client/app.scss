@@ -150,28 +150,6 @@
   }
 }
 
-.app .link__media:after, .app .link:after {
-    content: 'copied';
-    position: absolute;
-    right: 0px;
-    left: 0px;
-    margin: auto;
-    top: -30px;
-    left: 10px;
-    opacity: 0;
-    padding: 5px;
-    background: #aaaaaa;
-    color: #282828;
-}
-
-.app .link__media.copied:after, .app .link.copied:after {
-  animation: fadeIn 1s;
-}
-
-.app .link__media.copied_again:after, .app .link.copied_again:after {
-  animation: otherFade 1s;
-}
-
 .app .link__media:hover, .app .link:hover {
   color: #141414;
 }

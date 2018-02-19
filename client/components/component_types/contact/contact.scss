@@ -30,39 +30,4 @@
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  &:after {
-    content: 'copied';
-    position: absolute;
-    right: -50px;
-    opacity: 0;
-  }
-  &.copied:after {
-    animation: fadeIn 1s;
-  }
-  &.copied_again:after {
-    animation: otherFade 1s;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes otherFade {
-  0% {
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
