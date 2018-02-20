@@ -7,13 +7,11 @@ import './list.scss';
 class ListComponent extends React.Component {
   renderNavigation() {
     const { component, setComponentState, slug, currentSlug, param } = this.props;
-    return <div className="list__links">
-      { component && component.views && component.views.map((list, i) => {
+    return component && component.views && component.views.map((list, i) => {
         return <div key={i}
           className={`list__link  ${currentSlug == list.slug ? 'active' : ''}`}
           onClick={function(){setComponentState(list.slug)}} />
-      }) }
-    </div>
+      }) 
   }
   renderOneView() {
     const { slug, component, children, currentSlug } = this.props;
@@ -49,7 +47,9 @@ class ListComponent extends React.Component {
     const { component, classNames, currentSlug } = this.props;
     const { options } = component;
     return <div className={`list__container ${classNames}`}>
+      <div className="list__links">
       { options.side_navigation && this.renderNavigation() }
+      </div>
       <div className="list__wrapper">
         <div className="list__wrapper--inner">
           <div className="list__content">

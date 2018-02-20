@@ -5,6 +5,10 @@
   height: 100%;
   width: 94.75vw;
   margin-left: 6.25vw;
+  @media (max-width: 650px) {
+    width: 98vw;
+    margin-left: 2vw;
+  }
 }
 
 .line-navigation__contact {
