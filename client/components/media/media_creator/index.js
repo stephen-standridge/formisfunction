@@ -9,12 +9,12 @@ class MediaLogic extends React.Component {
     }
     render() {
         const { slug, media, active, classNames } = this.props;
-        return <div className={`media__wrapper`}>
+        return media && media.length && <div className={`${classNames ? classNames : '' } media__wrapper`}>
             { media && media.map((m, i)=>{
                 let MediaOfType = media_component_types[capitalize(m.program_type || m.type)];
                 return <MediaOfType slug={m.slug} key={i} active={active} />                
             })}
-        </div>
+        </div> || null
     }
 }
 

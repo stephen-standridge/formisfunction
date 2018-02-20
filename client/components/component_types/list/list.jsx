@@ -55,9 +55,7 @@ class ListComponent extends React.Component {
           <div className="list__content">
             { options.side_navigation && this.renderOneView() || this.renderAllViews() }
           </div>
-          <div className="list__visuals"> 
-            <MediaCreator slug={currentSlug} collection={"visuals"} active={true} />
-          </div>
+          <MediaCreator slug={currentSlug} classNames="list__visuals" collection={"visuals"} active={true} />
         </div>
       </div>
     </div>

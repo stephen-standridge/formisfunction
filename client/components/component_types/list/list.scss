@@ -8,12 +8,8 @@
 
 .list__wrapper {
   display: block;
-  // flex: 1;
-  // flex-direction: row;
   @media (max-width: 1080px) {
     overflow: scroll;
-    // justify-content: baseline;
-    // align-items: flex-start;
   }    
 }
 .list__wrapper--inner {
@@ -102,13 +98,14 @@
   flex-grow: 0;
   z-index: 1;
   justify-content: center;
+  margin-right: 15px;
 }
 
 .list__link {
   height: 15px;
   width: 15px;
   background-color: #666666;
-  margin-top: 10px;
+  margin-top: 15px;
   &.active {
     background-color: #333333;
 
@@ -126,8 +123,9 @@
   width: 40.75vw;
   margin-left: 2vw;
   overflow: scroll;
+  margin-right: 30px;
   @media (max-width: 1080px) {
-    max-width: 100%;
+    width: 500px;
     flex-basis: auto;
     flex-shrink: 0;
     margin-top: 30px;
@@ -153,6 +151,8 @@
   align-content: center;
   justify-content: center;
   @media (max-width: 1080px) {
+    width: 500px;
+    height: 500px;
     flex-basis: auto;
     flex-shrink: 0;
   }
