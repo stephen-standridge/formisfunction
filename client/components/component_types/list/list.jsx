@@ -19,7 +19,6 @@ class ListComponent extends React.Component {
     const view = views.filter((v) => v.slug == currentSlug)[0];
     const active = view.slug == currentSlug;
     const classNames = makeClassNames("list__entry", { active });
-    console.warn(view);
     return <div className="list__content--wrapper">
       <div className={classNames}>
         <ComponentCreator slug={view.slug} isActive={active} withHistory={false} />
