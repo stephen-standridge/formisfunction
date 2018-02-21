@@ -49,6 +49,7 @@
   justify-content: center;
   flex-direction: column;
   flex-shrink: 0;
+  margin-bottom: 25px;
 
   .article__body {
     display: none;
@@ -64,8 +65,8 @@
   }
 }
 
-.list__collection {
-  .link__media, .date__media {
+.list__collection--part {
+  .link__media {
     padding-right: 10px;
     border-right: 1px solid #666666;
     padding-left: 10px;
@@ -81,6 +82,10 @@
     }
   }
 
+  .date__media, .link__media {
+    border-right-width: 2px;
+  }
+
   .article__wrapper {
     .large {
       padding-bottom: 30px;
@@ -88,6 +93,11 @@
     }
     flex-direction: column;
   }
+}
+
+.list__collection--info {
+  align-items: center;
+  height: 20px;
 }
 
 //////////////
@@ -181,7 +191,7 @@
   }    
 }
 
-.list__link {
+.list__link{
   height: 15px;
   width: 15px;
   background-color: #666666;
@@ -197,4 +207,6 @@
     cursor: pointer;
     background-color: #333333;
   }
+
+
 }

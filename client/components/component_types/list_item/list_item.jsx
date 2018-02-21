@@ -12,14 +12,15 @@ class ListItemComponent extends React.Component {
 		const { classNames } = this.props;
 		const { active } = this.state;
 
-		return `list__${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
+		return `list__collection--part list__collection--${part} ${classNames && classNames[part] || ''} ${active[part] ? 'active' : ''}`
 	}
 	renderContent() {
 		const { component, isActive } = this.props;
 		const { content } = component;
+
 		let classNames = `list__collection--wrapper list__content--wrapper`;
 		return content && <div className={classNames}>
-			<div className={`${this.classNamesFor('collection')}`} >
+			<div className={`${this.classNamesFor('content')}`} >
 				{ content && content.map(function(m, i) {
 					let MediaOfType = media_component_types[capitalize(m.type)];
 					return <MediaOfType slug={m.slug} key={i} isActive={isActive} />
@@ -27,12 +28,26 @@ class ListItemComponent extends React.Component {
 			</div>
 		</div>
 	}
+	renderInfo() {
+		const { component, isActive } = this.props;
+		const { info } = component;
+		let classNames = `list__collection--wrapper list__info--wrapper`;
+		return info && <div className={classNames}>
+			<div className={`${this.classNamesFor('info')}`} >
+				{ info && info.map(function(m, i) {
+					let MediaOfType = media_component_types[capitalize(m.type)];
+					return <MediaOfType slug={m.slug} key={i} isActive={isActive} />
+				})}
+			</div>
+		</div>
+	}	
 	render() {
 		const { component, isActive } = this.props;
 		const { slug } = component;
 
-		return <div className={`list-item--${slug} ${this.classNamesFor('meta')}` }>
+		return <div className={`list-item--${slug} list-item` }>
 			{this.renderContent()}
+			{this.renderInfo()}
 		  </div>
 	}
 }

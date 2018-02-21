@@ -1,6 +1,11 @@
-.list-item, .list-item * {
+.list-item, .list-item, .list__meta {
   flex-direction: column;
 }
+
+.list__meta {
+  margin-bottom: 30px;
+}
+
 
 .list-item {
   @media (min-width: 960px) {
