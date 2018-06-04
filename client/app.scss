@@ -61,38 +61,27 @@
   transition: color .4s;
 }
 .depths {
-  .active .dark_color, .header{
-    color: #4f258c;
+  .active, .header, .dark_color, .dark{
+    color: #4f258c !important;
   }
-  .active .med_color {
-    color: #9d34b7;
-  }
+}
 
-  .active .light_color {
-    color: #1caaf9;
+.about {
+  .active, .header, .dark_color, .dark{
+    color: rgba(240,0,170,0.7) !important;
+  }
+}
+
+.mondrian {
+  .active, .header, .dark_color, .dark{
+    color: rgba(0,0,255,0.7) !important;
   }
 }
 
 .mortality {
-  .active .dark_color, .header {
-    color: #111111;
+  .active, .header, .dark_color, .dark{
+    color: #111111 !important;
   }
-  .dark_color {
-    color: #444444;
-  }
-
-  .active .med_color {
-    color: #444444;
-  }
-  .med_color {
-    color: #777777;
-  }
-  .active .light_color {
-    color: #888888;
-  }
-  .light_color {
-    color: #bbbbbb;
-  }  
 }
 
 
