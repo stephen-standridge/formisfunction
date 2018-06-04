@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { COMPONENT_ACTIONS } from '../actions/action_types'
+import { COMPONENT_ACTIONS, MEDIA_ACTIONS } from '../actions/action_types'
 import { uniq, orderBy } from 'lodash';
 
 const initialState = fromJS({})
@@ -43,7 +43,14 @@ export default function update(state = initialState, action) {
 				const { slug } = meta;
 				state = state.update(slug, (c=fromJS({}))=> c.merge(fromJS({ loading: true, needsLoad: false })));
 				break;
-			}	
+			}
+		case MEDIA_ACTIONS.SUCCESS:
+			{
+				const { slug } = meta;
+		
+				state = state.update(slug, (c=fromJS({}))=> c.merge(fromJS({ loading: false, needsLoad: false })));
+				break;	
+			}			
 		case COMPONENT_ACTIONS.FAILURE:
 			{
 				const { slug } = meta;
