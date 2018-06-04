@@ -110,7 +110,10 @@ class ManifoldMedia extends React.Component {
 
   render(){
     const { manifold, isActive } = this.props;
-    if (!manifold) return <div className="manifold_media__loading"></div>;
+    if (!manifold) return <div className="manifold_media__not-found"></div>;
+    if (manifold.loading) return <div className="manifold_media__loading"></div>;
+    if (manifold.error) return <div className="manifold_media__error">{manifold.error}></div>;
+
     const { options, slug } = manifold;
 
     return (<div className={this.classNamesFor('component') + `${this.getSlug()}_${this.getVersionId()} canvas_container`}>

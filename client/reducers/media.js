@@ -4,9 +4,11 @@ import { MEDIA_ACTIONS } from '../actions/action_types'
 const initialState = fromJS({ links: {}, programs: {}, articles: {} })
 
 export default function update(state = initialState, action) {
-	switch(action.type) {
+	const { type, meta, payload } = action;
+
+	switch(type) {
 		case MEDIA_ACTIONS.SUCCESS:
-			const { articles, links, programs, dates } = action.payload;
+			const { articles, links, programs, dates } = payload;
 			articles && articles.forEach((article)=>{
 				state = state.setIn(['articles', article.slug], fromJS(article))
 			});

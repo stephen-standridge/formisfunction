@@ -43,16 +43,13 @@ export default function update(state = initialState, action) {
 				const { slug } = meta;
 				state = state.update(slug, (c=fromJS({}))=> c.merge(fromJS({ loading: true, needsLoad: false })));
 				break;
-			}
+			}	
 		case COMPONENT_ACTIONS.FAILURE:
 			{
 				const { slug } = meta;
 				const { error } = payload;
 				state = state.update(slug, (c=fromJS({}))=> c.merge(fromJS({ loading: false, needsLoad: true, error })));
 				break;
-			}
-		case COMPONENT_ACTIONS.CREATE:
-			{
 			}
 	}
   return state

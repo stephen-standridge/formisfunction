@@ -47,7 +47,7 @@ function fetch(slug='index'){
 				dispatch({ type: COMPONENT_ACTIONS.SUCCESS, payload, meta });
 
 				const media_res = fetchMedia(vals);
-				processMedia(media_res, dispatch);
+				processMedia(media_res, meta, dispatch);
 			}).catch(reportError.bind(null, dispatch, meta));
 
 		}).catch(reportError.bind(null, dispatch, meta))

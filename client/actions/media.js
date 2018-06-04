@@ -27,7 +27,7 @@ function fetchMedia(media_vals){
   }, [[], [], []])
 }
 
-function processMedia(media_res, dispatch) {
+function processMedia(media_res, m, dispatch) {
   const payload = {
     articles: [],
     programs: [],
@@ -37,20 +37,21 @@ function processMedia(media_res, dispatch) {
   };
 
   const [promises, types, slugs] = media_res;
-  const meta = { types, slugs };
+  const meta = { types, slugs, slug: m.slug};
 
-  dispatch({ type: MEDIA_ACTIONS.REQUEST, meta });
+  dispatch({ type: MEDIA_ACTIONS.REQUEST, meta, payload: { types, slugs } });
 
   promises.length && Promise.all(promises).then((snaps) => {
     const vals = snaps.map((m_o_t_snap) => m_o_t_snap.val());
     types.forEach((type, index) => {
       if (!payload[type]){
-        reportError(dispatch,meta, new Error(`cannot decipher type of media ${vals[index]}; type:${type}; slug:${slugs[index]}`))
+        return;
+        reportWarning(dispatch,{ type, slug: slugs[index] }, `cannot decipher type of media ${vals[index]}; type:${type}; slug:${slugs[index]}`)
       }
       payload[type].push(vals[index]);
     });
 
-    dispatch({ type: MEDIA_ACTIONS.SUCCESS, payload});
+    dispatch({ type: MEDIA_ACTIONS.SUCCESS, meta, payload});
     const version_res = fetchVersions(vals);
     processVersions(version_res, dispatch);
   }).catch(reportError.bind(null, dispatch, meta));
@@ -58,6 +59,11 @@ function processMedia(media_res, dispatch) {
 
 export function reportError(dispatch, meta, error) {
   console.error(error);
+  const payload = { error };
+  dispatch({ type: MEDIA_ACTIONS.FAILURE, payload, meta });
+}
+export function reportWarning(dispatch, meta, error) {
+  console.warn(error);
   const payload = { error };
   dispatch({ type: MEDIA_ACTIONS.FAILURE, payload, meta });
 }

@@ -16,6 +16,9 @@ class DateMedia extends React.Component {
 	render(){
 		const { date, classNames, children } = this.props;
 		if (!date) return <div className={this.classNamesFor('not_found')} />
+		if (date.loading) return <div className={this.classNamesFor('loading')} />
+		if (date.error) return <div className={this.classNamesFor('error')} >{date.error}</div>
+		
 		const { day, month, year } = date;
 		return <div className={`date__media ${this.classNamesFor('wrapper')}`}>
 			{ day && <div className={`josefin_regular med_color med text ${this.classNamesFor('day')}`}>

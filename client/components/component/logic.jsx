@@ -159,10 +159,9 @@ class ComponentLogic extends React.Component {
 			component_type = process.env.NODE_ENV == 'DEVELOPMENT' && 'CreateComponent' || 'NotFoundComponent';
 		}
 		const ComponentOfType = components[component_type];
-		return ((component.error && <div className="component__error">{component.error.message}</div>) ||
-					 (component.needsLoad && <div className="component__loading"></div>) ||
-					 (component.loading && <div className="component__loading"></div>) ||
-					 <ComponentOfType {...this.props}
+		if (component.error) return <div className="component__error">{component.error.message}</div>
+		if (component.needsLoad || component.loading) return <div className="component__loading"></div>
+		return 	 <ComponentOfType {...this.props}
 					 	toNextState={this.setComponentState.bind(this, this.getNextState())}
 					 	toPrevState={this.setComponentState.bind(this, this.getPrevState())}
 						setComponentState={this.setComponentState}
@@ -174,7 +173,7 @@ class ComponentLogic extends React.Component {
 						nextSlug={states[this.getNextState()]}
 						prevSlug={states[this.getPrevState()]}>
 					{ children }
-					</ComponentOfType>)
+					</ComponentOfType>
 	}
 }
 

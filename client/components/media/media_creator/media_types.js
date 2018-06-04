@@ -4,3 +4,4 @@ export * from '../article/article.jsx';
 export * from '../video/video.jsx';
 export * from '../emscripten/emscripten.jsx';
 export * from '../manifold/manifold.jsx';
+export { default as Mondrian } from '../mondrian/mondrian.js';

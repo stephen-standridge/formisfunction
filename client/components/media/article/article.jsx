@@ -22,7 +22,10 @@ class ArticleMedia extends React.Component {
 	}
 	render(){
 		const { article, classNames, children } = this.props;
-		if (!article) return <div className={this.classNamesFor('not_found')} />
+		if (!article) return <div className={this.classNamesFor('not_found')} ></div>
+		if (article.loading) return <div className={this.classNamesFor('loading')} ></div>
+		if (article.error) return <div className={this.classNamesFor('error')} >{article.error}</div>
+
 		const { title, body } = article;
 		return <div className={`${this.classNamesFor('wrapper')}`}>
 			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}>

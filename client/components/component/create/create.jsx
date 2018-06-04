@@ -22,6 +22,7 @@ const createable = {
 class CreateComponent extends React.Component {
   render() {
     const { component, onPrev, onNext, classNames, create } = this.props;
+    console.warn(component.loading);
     return <div className={`component__container ${classNames}`}>
       <div className="component__center" >
         {`create ${component.component_type}`}

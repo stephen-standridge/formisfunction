@@ -12,6 +12,7 @@ class MediaLogic extends React.Component {
         return media && media.length && <div className={`${classNames ? classNames : '' } media__wrapper`}>
             { media && media.map((m, i)=>{
                 let MediaOfType = media_component_types[capitalize(m.program_type || m.type)];
+                if (!MediaOfType) throw new Error(`cannot find media ${m.type} for ${slug}`);
                 return <MediaOfType slug={m.slug} key={i} active={active} />                
             })}
         </div> || null
@@ -20,7 +21,6 @@ class MediaLogic extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     let { slug, collection } = ownProps;
-
     let component = state.components.get(slug);
     component = component && component.toJS();
     let media = component && component.media;

@@ -45,7 +45,8 @@ class ListComponent extends React.Component {
   render(){
     const { component, classNames, currentSlug } = this.props;
     const { options } = component;
-    return <div className={`list__container ${classNames}`}>
+    if (component.loading !== false) return <div className="list__container component__loading" />
+    return <div className={`list__container ${classNames} list__${component.slug}`}>
       <div className="list__links">
       { options.side_navigation && this.renderNavigation() }
       </div>
