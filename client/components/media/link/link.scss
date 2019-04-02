@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .link__media {
   position: relative;
   &:after {
@@ -22,7 +24,7 @@
     width: 25px;
     height: 25px;
     display: inline-block;
-    fill: #666666;
+    fill: $grayMedium;
     transition: fill .3s;
   }
   &:hover {

@@ -91,7 +91,7 @@
 }
 
 .active .med_color, .med {
-  color: #666666;
+  color: $grayMedium;
 }
 
 .active .light_color, .light {
@@ -99,7 +99,7 @@
 }
 
 .app {
-  background: #888888;
+  background: $grayLight;
   flex-direction: column;
   position: absolute;
   flex: 1;
@@ -129,7 +129,7 @@
 
 .app .link__media, .app .link {
   text-decoration: none;
-  color: #666666;
+  color: $grayMedium;
   user-select: none;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;

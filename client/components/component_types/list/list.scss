@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .list__link {
   justify-content: center;
 }
@@ -16,19 +18,14 @@
 .list__wrapper--inner {
   height: 100%;
   @media (max-width: 1080px) {
-    margin-top: 10px;
     justify-content: flex-end;
     flex-direction: column-reverse;
   }     
 }
 
 .list__container {
-  max-width: 90.75vw;;
   flex-direction: row;
   flex: 1;
-  @media (max-width: 600px) {
-    max-width: 98vw;    
-  }
 }
 
 .list {
@@ -66,7 +63,7 @@
     display: none;
   }
   .article__title {
-    color: #666666;
+    color: $grayMedium;
   }
 
   &.active {
@@ -80,7 +77,7 @@
 .list-item__collection--part {
   .link__media {
     padding-right: 10px;
-    border-right: 1px solid #666666;
+    border-right: 1px solid $grayMedium;
     padding-left: 10px;
     &.text {
       padding-right: 3px;
@@ -140,7 +137,7 @@
 .list__link {
   height: 15px;
   width: 15px;
-  background-color: #666666;
+  background-color: $grayMedium;
   margin-top: 15px;
   &.active {
     background-color: #333333;
@@ -171,7 +168,11 @@
     max-width: 98vw;
     width: 340px;
     margin-right: 0;
-  }  
+  } 
+  @media (min-width: 1080px) {
+    padding-left: $mainLeftPadding;
+  }
+  align-self: center;
   justify-content: center;
   flex: 1;
 }
@@ -191,32 +192,34 @@
 }
 
 .list__visuals{
-  width: 670px;
-  height: 670px;
+  width: 50vw;
+  height: 50vw;
+  // width: 670px;
+  // height: 670px;
   flex-direction: column;
   flex-shrink: 0;
   align-content: center;
   justify-content: center;
   align-self: center;
   @media (max-width: 1080px) {
-    align-self: auto;
-    width: 57vw;
-    height: 57vw;
+    align-self: center;
+    width: 670px;
+    height: 670px;
     flex-basis: auto;
     flex-shrink: 0;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 670px) {
 
     margin-left: 0;
-    width: 340px;
-    height: 340px;
+    width: 100vw;
+    height: 100vw;
   }    
 }
 
 .list__link{
   height: 15px;
   width: 15px;
-  background-color: #666666;
+  background-color: $grayMedium;
   margin-right: 10px;
   &.active {
     background-color: #333333;
