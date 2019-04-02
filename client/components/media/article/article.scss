@@ -1,4 +1,7 @@
 .article__wrapper {
+  .invisible {
+    color: rgba(0,0,0,0);
+  }
   .article__title {
     flex-shrink: 0;
     padding-bottom: 10px;

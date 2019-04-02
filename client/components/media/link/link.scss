@@ -17,15 +17,19 @@
   }  
 }
 
-.link__media svg{
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-  fill: #666666;
-  transition: fill .3s;
+.link__media {
+  svg {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    fill: #666666;
+    transition: fill .3s;
+  }
   &:hover {
-    cursor: pointer;
-    fill: #333333;
+    svg {
+      cursor: pointer;
+      fill: #333333;
+    }
   }     
 }
 

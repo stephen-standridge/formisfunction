@@ -3,7 +3,7 @@ import Remarkable from 'remarkable';
 import './article.scss'
 
 var md = new Remarkable({linkTarget: "_blank"});
-
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 class ArticleMedia extends React.Component {
 	constructor(props){
 		super(props);
@@ -31,9 +31,9 @@ class ArticleMedia extends React.Component {
 			{ title && <div className={`lato large wide dark dark_color ${this.classNamesFor('title')}`}>
 				{ title }
 			</div> }
-			{ body && <div className={`josefin_light regular med ${this.classNamesFor('body')}`}
+			{ <div className={`josefin_light regular med ${this.classNamesFor('body')} ${body ? '' : 'invisible'}`}
 											onClick={this.toggleActive.bind(this, 'body')}
-											dangerouslySetInnerHTML={ { __html: md.render(body) } } >
+											dangerouslySetInnerHTML={ { __html: md.render(body || lorem)} } >
 			</div> }
 		</div>
 	}

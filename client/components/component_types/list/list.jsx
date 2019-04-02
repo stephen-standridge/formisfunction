@@ -47,12 +47,12 @@ class ListComponent extends React.Component {
     const { options } = component;
     if (component.loading !== false) return <div className="list__container component__loading" />
     return <div className={`list__container ${classNames} list__${component.slug}`}>
-      <div className="list__links">
-      { options.side_navigation && this.renderNavigation() }
-      </div>
       <div className="list__wrapper">
         <div className="list__wrapper--inner">
           <div className="list__content">
+            <div className="list__links">
+              { options.side_navigation && this.renderNavigation() }
+            </div>
             { options.side_navigation && this.renderOneView() || this.renderAllViews() }
           </div>
           <MediaCreator slug={currentSlug} classNames="list__visuals" collection={"visuals"} active={true} />

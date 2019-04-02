@@ -25,7 +25,7 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.snakecase": "^4.1.1",
     "moment": "^2.15.2",
-    "node-sass": "^3.7.0",
+    "node-sass": "^4.0.0",
     "normalizr": "^2.2.1",
     "number-to-words": "^1.2.3",
     "react": "^15.6.1",
