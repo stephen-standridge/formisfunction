@@ -1,10 +1,35 @@
 import { ComponentCreator } from '../../component';
+import { throttle } from 'lodash';
 import { ContactComponent } from '../contact/contact.jsx';
 import { Link } from '../../media';
 import { orderBy, capitalize } from 'lodash';
 import './line_navigation_site.scss';
 
 class LineNavigationSiteComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleScroll = throttle(this._handleScroll.bind(this), 5000);
+    this.state = { deltaX:0, deltaY:0 };
+  }
+
+  componentDidMount() {
+    window.addEventListener('wheel', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('wheel', this.handleScroll);
+  }
+
+  _handleScroll(event) {
+    // console.warn(event);
+    const { deltaX, deltaY } = event;
+    // console.warn(deltaX, deltaY);
+    this.setState((prevState) => {
+      prevState.deltaX += deltaX;
+      prevState.deltaY += deltaY;
+    });
+  }
+
 	getLineSlug(){
 		const { component, currentSlug } = this.props;
 		const { line_navigation } = component;
