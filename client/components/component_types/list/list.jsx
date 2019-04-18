@@ -45,28 +45,54 @@ class ListComponent extends React.Component {
     const view = views.filter((v) => v.slug == currentSlug)[0];
     const active = view.slug == currentSlug;
     const classNames = makeClassNames("list__entry", { active });
-    return <CSSTransition key={currentSlug} timeout={100} className="transition__node list__content--wrapper">
-      <div className={classNames}>
-        <ComponentCreator slug={view.slug} isActive={active} withHistory={false} />
-      </div>
-    </CSSTransition>;
+    return (
+      <CSSTransition 
+        key={currentSlug} 
+        timeout={500} 
+        className="transition__node list__content--wrapper"
+      >
+        <div className={classNames}>
+          <ComponentCreator slug={view.slug} isActive={active} withHistory={false} />
+        </div>
+      </CSSTransition>
+    );
   }  
   renderAllViews() {
     const { component, nextSlug, prevSlug, currentSlug, setComponentState } = this.props;
     const { views } = component;
 
-    return <div className="list__content--wrapper">
-      { views && views.map((c, index) => {
-        let active = c.slug == currentSlug;
-        let prev = c.slug == prevSlug;
-        let next = c.slug == nextSlug;
-        const classNames = makeClassNames("list__entry", { active, next, prev });
+    return (
+      <CSSTransition 
+        key={currentSlug} 
+        timeout={500} 
+        className="transition__node list__content--wrapper"
+      >
+        <div className="list__content--wrapper">
+          { views && views.map((c, index) => {
+            let active = c.slug == currentSlug;
+            let prev = c.slug == prevSlug;
+            let next = c.slug == nextSlug;
+            const classNames = makeClassNames("list__entry", { active, next, prev });
 
-          return <div key={index} className={classNames} onClick={function(){ if(active) return; setComponentState(c.slug);}}  >
-              <ComponentCreator key={index} slug={c.slug} isActive={active} withHistory={false} isPrev={prev} isNext={next} />
-            </div>
-      }) }
-    </div>    
+              return (
+                <div 
+                  key={index} 
+                  className={classNames} 
+                  onClick={function(){ if(active) return; setComponentState(c.slug);}}  >
+                  <ComponentCreator 
+                    key={index} 
+                    slug={c.slug} 
+                    isActive={active} 
+                    withHistory={false} 
+                    isPrev={prev} 
+                    isNext={next} />
+                </div>
+              );
+            }) 
+          }
+        </div>    
+      </CSSTransition>
+    );          
   }
   render(){
     const { component, classNames, currentSlug } = this.props;
@@ -76,14 +102,22 @@ class ListComponent extends React.Component {
       <div className="list__wrapper">
         <div className="list__wrapper--inner">
           <div className="list__content">
-            <div className="list__links">
-              { options.side_navigation && this.renderNavigation() }
-            </div>
             <TransitionGroup className="transition__wrapper" exit={true}>
-            { options.side_navigation && 
-              this.renderOneView()|| 
-              this.renderAllViews() 
-            }
+              <CSSTransition 
+                key={'navigation'} 
+                timeout={500} 
+                className="transition__node list__links--wrapper"
+              >
+                <div className="list__links">
+                  { options.side_navigation && this.renderNavigation() }
+                </div>
+              </CSSTransition>
+            <div style={{ position: 'relative '}} >
+              { options.side_navigation && 
+                this.renderOneView()|| 
+                this.renderAllViews() 
+              }            
+            </div>
             </TransitionGroup>
           </div>
           <MediaCreator slug={currentSlug} classNames="list__visuals" collection={"visuals"} active={true} />

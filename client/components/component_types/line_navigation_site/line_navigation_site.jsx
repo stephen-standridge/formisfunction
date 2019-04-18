@@ -49,18 +49,28 @@ class LineNavigationSiteComponent extends React.Component {
       </div>
     });
   }
+
 	renderContact() {
 		const { component } = this.props;
 		const { contact } = component;
 		return contact && contact.map(function(c, i){
       return <ComponentCreator slug={c.slug} key={i}/>
     });
-	}
+  }
+
+  createGradientStyle() {
+    const { deltaX, deltaY } = this.state;
+    // return {
+    //   background: `linear-gradient(rgb(0,0,0) ${50 + deltaY}%, rgb(250,250,250) 100%)`
+    // }
+    return {}
+  }
+
 	render() {
     const { component, classNames, params } = this.props;
     const { options } = component;
     const { title } = options;
-		return <div className={`line-navigation__container ${classNames} ${ params && params.join(' ') || ''}`}>
+		return <div className={`line-navigation__container ${classNames} ${ params && params.join(' ') || ''}`} style={this.createGradientStyle()}>
       <div className='line-navigation__header '>
         <div className='line-navigation__title lato large wide dark dark_color header'>
           { typeof title == 'string' && title.split(' ').map(function(t){ return capitalize(t)}).join(' ') || null }

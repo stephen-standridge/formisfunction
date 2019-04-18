@@ -51,12 +51,7 @@
 }
 
 .transition__node {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  left: 0;
-  right: 0;
+
   &.enter {
     opacity: 0;
   }
@@ -153,8 +148,10 @@
 /* controls */
 //////////////
 
-
 .list__links {
+
+}
+.list__links--wrapper {
   width: 20px;
 
   flex-direction: column;
@@ -215,12 +212,19 @@
   flex: 1;
 }
 
+.list__content--wrapper .transition__node {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;     
+}
 .list__content--wrapper {
   justify-content: center;
   flex-direction: column;
   max-width: 100%;
   width: 100%;
-
   @media (min-width: 600px) and (max-width: 1080px) {
     flex-shrink: none;
     justify-content: flex-start;
@@ -235,7 +239,7 @@
 .list__visuals{
   height: 100%;
   width: auto;
-  flex-direction: column;
+  // flex-direction: column;
   flex-shrink: 0;
   align-content: center;
   justify-content: center;
